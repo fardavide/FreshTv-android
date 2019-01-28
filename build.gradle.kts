@@ -5,6 +5,7 @@ buildscript {
     dependencies( classpathDependencies )
 }
 
+
 allprojects {
     repositories( repos )
 }

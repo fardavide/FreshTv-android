@@ -23,10 +23,13 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
 object Versions {
     val kotlin =                        "1.3.20"
     val coroutines =                    "1.1.1"
+    val serialization =                 "0.10.0"
+
     val koin =                          "1.0.2"
     val mockk =                         "1.9"
-    val serialization =                 "0.10.0"
-    val sqldelight =                    "1.0.0"
+    val sqldelight =                    "1.0.2"
+    val threeten_android_bp =           "1.1.1"
+    val threeten_bp =                   "1.3.2"
 
     val android_arch =                  "2.0.0-beta01"
     val android_constraint_layout =     "2.0.0-alpha1"
@@ -45,15 +48,19 @@ object Libs {
 
     /* Kotlin */
     val kotlin =                        "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val test =                          "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
-    val test_junit =                    "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
     val coroutines =                    "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     val coroutines_android =            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     val serialization =                 "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.serialization}"
+    val reflect =                       "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+    val test =                          "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
+    val test_junit =                    "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
 
     val mockk =                         "io.mockk:mockk:${Versions.mockk}"
+    val sqldelight =                    "com.squareup.sqldelight:runtime-jvm:${Versions.sqldelight}"
     val sqldelight_android_driver =     "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
     val sqldelight_android_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
+    val threeten_android_bp =           "com.jakewharton.threetenabp:threetenabp:${Versions.threeten_android_bp}"
+    val threeten_bp =                   "org.threeten:threetenbp:${Versions.threeten_bp}"
 
     /* Android */
     object Android {

@@ -3,7 +3,6 @@ plugins {
     id("kotlin-android" )
     id("kotlin-android-extensions" )
     id("kotlinx-serialization" )
-    id("com.squareup.sqldelight" )
 }
 
 android {

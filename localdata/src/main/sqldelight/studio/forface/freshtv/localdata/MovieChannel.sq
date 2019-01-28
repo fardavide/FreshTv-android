@@ -1,0 +1,54 @@
+import kotlin.collections.List;
+import kotlin.collections.Map;
+
+CREATE TABLE movieChannelPojo (
+  id TEXT NOT NULL PRIMARY KEY,
+  name TEXT NOT NULL,
+  groupName TEXT NOT NULL,
+  imageUrl TEXT,
+  mediaUrls TEXT AS Map<String, Int> NOT NULL,
+  playlistPaths TEXT AS List<String> NOT NULL,
+  tmdbId INTEGER AS Int
+);
+
+CREATE INDEX movieChannel_name ON movieChannelPojo(name);
+
+insert:
+  INSERT INTO movieChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths, tmdbId )
+  VALUES ( ?, ?, ?, ?, ?, ?, ? );
+
+update:
+  UPDATE movieChannelPojo
+  SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?, tmdbId = ?
+  WHERE id = :id;
+
+deleteAll:
+  DELETE FROM movieChannelPojo;
+
+count:
+  SELECT count(*) FROM movieChannelPojo;
+
+selectAll:
+  SELECT *
+  FROM movieChannelPojo;
+
+select:
+  SELECT *
+  FROM movieChannelPojo
+  LIMIT :limit OFFSET :offset;
+
+selectById:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE id = ?
+  LIMIT 1;
+
+selectByName:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE name LIKE ?;
+
+selectByGroup:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE groupName = ?;

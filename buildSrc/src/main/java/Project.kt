@@ -1,6 +1,7 @@
 @file:Suppress("MayBeConstant", "unused", "ConstantConditionIf", "MemberVisibilityCanBePrivate")
 
 import Project.Channel.*
+import org.gradle.api.JavaVersion
 
 /**
  * @author Davide Giuseppe Farella.
@@ -14,6 +15,8 @@ object Project {
     val targetSdk = 28
     /** The Android API level required for run the App */
     val minSdk = 21
+    /** The version of the JDK  */
+    val jdkVersion = JavaVersion.VERSION_1_8
 
     private val major:      Int =       2
     private val minor:      Int =       0

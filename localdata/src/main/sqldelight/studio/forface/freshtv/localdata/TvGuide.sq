@@ -1,0 +1,64 @@
+import org.threeten.bp.LocalDateTime;
+
+CREATE TABLE tvGuidePojo (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  channelId TEXT NOT NULL,
+  programName TEXT NOT NULL,
+  programDescription TEXT NOT NULL,
+  startTime INTEGER AS LocalDateTime NOT NULL,
+  endTime INTEGER AS LocalDateTime NOT NULL
+);
+
+CREATE INDEX tv_guide_program_name ON tvGuidePojo(programName);
+
+insert:
+  INSERT INTO tvGuidePojo(id, channelId, programName, programDescription, startTime, endTime)
+  VALUES (?, ?, ?, ?, ?, ?);
+
+update:
+  UPDATE tvGuidePojo
+  SET id = :id, channelId = ?, programName = ?, programDescription = ?, startTime = ?, endTime = ?
+  WHERE id = :id;
+
+deleteAll:
+  DELETE FROM tvGuidePojo;
+
+count:
+  SELECT count(*) FROM tvGuidePojo;
+
+selectAll:
+  SELECT *
+  FROM tvGuidePojo;
+
+select:
+  SELECT *
+  FROM tvGuidePojo
+  LIMIT :limit OFFSET :offset;
+
+selectById:
+  SELECT  *
+  FROM tvGuidePojo
+  WHERE id = ?
+  LIMIT 1;
+
+selectByChannelId:
+  SELECT *
+  FROM tvGuidePojo
+  WHERE channelId = ?
+  AND (
+    ( startTime = :from AND endTime = :to ) -- Workaround for infer type of :from and :to
+    OR (
+      startTime BETWEEN :from AND :to
+      OR
+      endTime BETWEEN :from AND :to
+      OR
+      :from BETWEEN startTime AND endTime
+      OR
+      :to BETWEEN startTime AND endTime
+    )
+  );
+
+selectByProgramName:
+  SELECT *
+  FROM tvGuidePojo
+  WHERE programName LIKE ?;
