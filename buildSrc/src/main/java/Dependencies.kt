@@ -1,4 +1,4 @@
-@file:Suppress("MayBeConstant", "ConstantConditionIf", "unused")
+@file:Suppress("MayBeConstant", "unused")
 
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.DependencyHandlerScope
@@ -18,72 +18,6 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
     classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}" )
     classpath("com.android.tools.build:gradle:3.3.0" )
     classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}" )
-}
-
-object Project {
-    val id =                "studio.forface.freshtv"
-    val targetSdk =         28
-    val minSdk =            21
-
-    private val major =     2
-    private val minor =     0
-    private val channel =   0 // 0: build, 1: alpha, 2: beta, 3: RC, 4: stable
-    private val patch =     0
-    private val build =     1
-
-    val versionName: String get() {
-        val baseName = "$major.$minor"
-        val suffixName = suffixVersionName()
-
-        return "$baseName$suffixName"
-    }
-
-    private fun suffixVersionName(): String {
-        val ch = channel
-        if ( build > 0 || ch == 0 ) return versionBuildName()
-
-        var vChannel = ""
-        when (ch) {
-            1 -> vChannel = "-alpha"
-            2 -> vChannel = "-beta"
-            3 -> vChannel = "-RC"
-            //else if ( ch == 4 ) vChannel = "" // stable
-        }
-
-        val pt = patch
-        if ( pt > 0 ) vChannel = "$vChannel-$pt"
-
-        return vChannel
-    }
-
-    private fun versionBuildName(): String {
-        var vBuild = ""
-        val bv = build
-
-        if ( bv > 0 ) {
-            vBuild = "-build$channel$patch$bv"
-
-            val ch = channel
-            if ( ch == 3 )
-                throw IllegalArgumentException( "build is $bv, but channel is $ch ( stable )" )
-        }
-
-        return vBuild
-    }
-
-    val versionCode: Int get() {
-        // pattern:
-        // major minor channel patch build
-        // 00    00    0      00     00
-
-        val build   = build   *            1
-        val patch   = patch   *         1_00
-        val channel = channel *      1_00_00
-        val minor   = minor   *    1_0_00_00
-        val major   = major   * 1_00_0_00_00
-
-        return major + minor + patch + channel + build
-    }
 }
 
 object Versions {
