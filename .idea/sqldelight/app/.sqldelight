@@ -1,1 +1,0 @@
-{"packageName":"studio.forface.freshtv","sourceSets":[["src/main/sqldelight","src/debug/sqldelight"],["src/main/sqldelight","src/release/sqldelight"]],"outputDirectory":"build/generated/source/sqldelight","className":"Database"}
