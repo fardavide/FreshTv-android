@@ -1,4 +1,4 @@
-@file:Suppress("MayBeConstant")
+@file:Suppress("MayBeConstant", "ConstantConditionIf", "unused")
 
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.DependencyHandlerScope
@@ -18,6 +18,72 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
     classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}" )
     classpath("com.android.tools.build:gradle:3.3.0" )
     classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}" )
+}
+
+object Project {
+    val id =                "studio.forface.freshtv"
+    val targetSdk =         28
+    val minSdk =            21
+
+    private val major =     2
+    private val minor =     0
+    private val channel =   0 // 0: build, 1: alpha, 2: beta, 3: RC, 4: stable
+    private val patch =     0
+    private val build =     1
+
+    val versionName: String get() {
+        val baseName = "$major.$minor"
+        val suffixName = suffixVersionName()
+
+        return "$baseName$suffixName"
+    }
+
+    private fun suffixVersionName(): String {
+        val ch = channel
+        if ( build > 0 || ch == 0 ) return versionBuildName()
+
+        var vChannel = ""
+        when (ch) {
+            1 -> vChannel = "-alpha"
+            2 -> vChannel = "-beta"
+            3 -> vChannel = "-RC"
+            //else if ( ch == 4 ) vChannel = "" // stable
+        }
+
+        val pt = patch
+        if ( pt > 0 ) vChannel = "$vChannel-$pt"
+
+        return vChannel
+    }
+
+    private fun versionBuildName(): String {
+        var vBuild = ""
+        val bv = build
+
+        if ( bv > 0 ) {
+            vBuild = "-build$channel$patch$bv"
+
+            val ch = channel
+            if ( ch == 3 )
+                throw IllegalArgumentException( "build is $bv, but channel is $ch ( stable )" )
+        }
+
+        return vBuild
+    }
+
+    val versionCode: Int get() {
+        // pattern:
+        // major minor channel patch build
+        // 00    00    0      00     00
+
+        val build   = build   *            1
+        val patch   = patch   *         1_00
+        val channel = channel *      1_00_00
+        val minor   = minor   *    1_0_00_00
+        val major   = major   * 1_00_0_00_00
+
+        return major + minor + patch + channel + build
+    }
 }
 
 object Versions {
@@ -43,22 +109,6 @@ object Versions {
 
 object Libs {
 
-    object Android {
-        val appcompat =                 "androidx.appcompat:appcompat:${Versions.android_support}"
-        val constraint_layout =     "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
-        val design =                "com.android.support:design:${Versions.android_support}"
-        val espresso =              "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
-        val ktx =                   "androidx.core:core-ktx:${Versions.android_ktx}"
-        val lifecycle_runtime =     "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
-        val lifecycle_compiler =    "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
-        val lifecycle_extensions =  "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
-        val lifecycle_jdk8 =        "androidx.lifecycle:lifecycle-common-java8:${Versions.android_lifecycle}"
-        val material =              "com.google.android.material:material:${Versions.android_material}"
-        val support_annotations =   "com.android.support:support-annotations:28.0.0"
-        val sqldelight_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
-        val test_runner =           "com.android.support.test:runner:${Versions.android_test_runner}"
-    }
-
     /* Kotlin */
     val kotlin =                        "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     val test =                          "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
@@ -69,7 +119,21 @@ object Libs {
 
     val mockk =                         "io.mockk:mockk:${Versions.mockk}"
     val sqldelight_android_driver =     "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
+    val sqldelight_android_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
 
     /* Android */
-    val android_appcompat =             "androidx.appcompat:appcompat:${Versions.android_support}"
+    object Android {
+        val appcompat =                 "androidx.appcompat:appcompat:${Versions.android_support}"
+        val constraint_layout =         "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
+        val design =                    "com.android.support:design:${Versions.android_support}"
+        val espresso =                  "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
+        val ktx =                       "androidx.core:core-ktx:${Versions.android_ktx}"
+        val lifecycle_runtime =         "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
+        val lifecycle_compiler =        "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
+        val lifecycle_extensions =      "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
+        val lifecycle_jdk8 =            "androidx.lifecycle:lifecycle-common-java8:${Versions.android_lifecycle}"
+        val material =                  "com.google.android.material:material:${Versions.android_material}"
+        val support_annotations =       "com.android.support:support-annotations:28.0.0"
+        val test_runner =               "com.android.support.test:runner:${Versions.android_test_runner}"
+    }
 }

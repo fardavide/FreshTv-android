@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion( 28 )
+    compileSdkVersion( Project.targetSdk )
     defaultConfig {
-        applicationId = "studio.forface.freshtv"
-        minSdkVersion( 21 )
-        targetSdkVersion( 28 )
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Project.id
+        minSdkVersion( Project.minSdk )
+        targetSdkVersion( Project.targetSdk )
+        versionCode = Project.versionCode
+        versionName = Project.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
