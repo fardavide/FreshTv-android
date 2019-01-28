@@ -6,13 +6,7 @@ import org.gradle.kotlin.dsl.ScriptHandlerScope
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.maven
 
-object Repositories {
-    val all: RepositoryHandler.() -> Unit = {
-
-    }
-}
-
-val ScriptHandlerScope.repos: RepositoryHandler.() -> Unit get() = {
+val repos: RepositoryHandler.() -> Unit get() = {
     google()
     jcenter()
     mavenCentral()
@@ -49,6 +43,22 @@ object Versions {
 
 object Libs {
 
+    object Android {
+        val appcompat =                 "androidx.appcompat:appcompat:${Versions.android_support}"
+        val constraint_layout =     "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
+        val design =                "com.android.support:design:${Versions.android_support}"
+        val espresso =              "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
+        val ktx =                   "androidx.core:core-ktx:${Versions.android_ktx}"
+        val lifecycle_runtime =     "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
+        val lifecycle_compiler =    "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
+        val lifecycle_extensions =  "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
+        val lifecycle_jdk8 =        "androidx.lifecycle:lifecycle-common-java8:${Versions.android_lifecycle}"
+        val material =              "com.google.android.material:material:${Versions.android_material}"
+        val support_annotations =   "com.android.support:support-annotations:28.0.0"
+        val sqldelight_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
+        val test_runner =           "com.android.support.test:runner:${Versions.android_test_runner}"
+    }
+
     /* Kotlin */
     val kotlin =                        "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     val test =                          "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
@@ -62,16 +72,4 @@ object Libs {
 
     /* Android */
     val android_appcompat =             "androidx.appcompat:appcompat:${Versions.android_support}"
-    val android_constraint_layout =     "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
-    val android_design =                "com.android.support:design:${Versions.android_support}"
-    val android_espresso =              "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
-    val android_ktx =                   "androidx.core:core-ktx:${Versions.android_ktx}"
-    val android_lifecycle_runtime =     "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
-    val android_lifecycle_compiler =    "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
-    val android_lifecycle_extensions =  "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
-    val android_lifecycle_jdk8 =        "androidx.lifecycle:lifecycle-common-java8:${Versions.android_lifecycle}"
-    val android_material =              "com.google.android.material:material:${Versions.android_material}"
-    val android_support_annotations =   "com.android.support:support-annotations:28.0.0"
-    val android_sqldelight_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
-    val android_test_runner =           "com.android.support.test:runner:${Versions.android_test_runner}"
 }

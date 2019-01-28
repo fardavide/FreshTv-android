@@ -39,10 +39,10 @@ dependencies {
     testImplementation( Libs.mockk )
 
     /* Android */
-    implementation( Libs.android_appcompat )
-    implementation( Libs.android_ktx )
+    implementation( Libs.Android.appcompat )
+    implementation( Libs.Android.ktx )
 
     /* Android Test */
-    androidTestImplementation( Libs.android_test_runner )
-    androidTestImplementation( Libs.android_espresso )
+    androidTestImplementation( Libs.Android.test_runner )
+    androidTestImplementation( Libs.Android.espresso )
 }
