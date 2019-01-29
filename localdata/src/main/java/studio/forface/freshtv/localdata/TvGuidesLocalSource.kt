@@ -1,7 +1,7 @@
 package studio.forface.freshtv.localdata
 
 import org.threeten.bp.LocalDateTime
-import studio.forface.freshtv.domain.utils.LocalDateTime as LocalDateTimeHelper
+import studio.forface.freshtv.domain.utils.LocalDateTimeHelper
 
 /**
  * @author Davide Giuseppe Farella.
