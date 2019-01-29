@@ -1,6 +1,6 @@
 package studio.forface.freshtv.localdata.mappers
 
-import studio.forface.freshtv.entities.TvGuide
+import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.localdata.TvGuidePojo
 
 /**

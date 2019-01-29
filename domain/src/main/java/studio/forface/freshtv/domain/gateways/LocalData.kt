@@ -1,20 +1,16 @@
-package studio.forface.freshtv.domain
+package studio.forface.freshtv.domain.gateways
 
 import org.threeten.bp.LocalDateTime
-import studio.forface.freshtv.domain.entities.ChannelGroup
-import studio.forface.freshtv.domain.entities.IChannel
-import studio.forface.freshtv.domain.entities.MovieChannel
-import studio.forface.freshtv.domain.entities.TvChannel
+import studio.forface.freshtv.domain.entities.*
 import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.domain.utils.or
-import studio.forface.freshtv.entities.Playlist
-import studio.forface.freshtv.entities.TvGuide
+import studio.forface.freshtv.domain.entities.Playlist
 
 /**
  * @author Davide Giuseppe Farella.
  * A repository for retrieve and store [IChannel]s and EPG info locally.
  */
-interface Repository {
+interface LocalData {
 
     /** @return the [IChannel] with the given [channelId] */
     fun channel( channelId: String ): IChannel =
@@ -78,7 +74,7 @@ interface Repository {
     fun updateTvGuide( guide: TvGuide )
 
 
-    /** An enum for results of some [Repository] operations */
+    /** An enum for results of some [LocalData] operations */
     enum class Result {
         FAILURE, SUCCESS;
 
@@ -88,7 +84,7 @@ interface Repository {
 }
 
 /**
- * An invoke function for execute a [block] within a [Repository]
+ * An invoke function for execute a [block] within a [LocalData]
  * @return [T]
  */
-operator fun <T> Repository.invoke( block: Repository.() -> T ) = block()
+operator fun <T> LocalData.invoke(block: LocalData.() -> T ) = block()

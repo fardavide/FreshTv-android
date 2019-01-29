@@ -4,7 +4,8 @@ package studio.forface.freshtv.domain.entities
  * @author Davide Giuseppe Farella.
  * An inline class for [String] url.
  */
-inline class Url( val s: String ): Validable {
+@Suppress("EXPERIMENTAL_FEATURE_WARNING")
+inline class Url(val s: String ): Validable {
 
     /** A constructor that accepts a [CharSequence] */
     constructor( c: CharSequence ): this( c.toString() )

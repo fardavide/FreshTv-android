@@ -1,23 +1,18 @@
 package studio.forface.freshtv.localdata
 
 import org.threeten.bp.LocalDateTime
-import studio.forface.freshtv.domain.Repository
-import studio.forface.freshtv.domain.Repository.Result
-import studio.forface.freshtv.domain.entities.ChannelGroup
-import studio.forface.freshtv.domain.entities.IChannel
-import studio.forface.freshtv.domain.entities.MovieChannel
-import studio.forface.freshtv.domain.entities.TvChannel
+import studio.forface.freshtv.domain.entities.*
 import studio.forface.freshtv.domain.exceptions.ChannelNotImplementedError
+import studio.forface.freshtv.domain.gateways.LocalData
+import studio.forface.freshtv.domain.gateways.LocalData.Result
 import studio.forface.freshtv.domain.utils.handle
-import studio.forface.freshtv.entities.Playlist
-import studio.forface.freshtv.entities.TvGuide
 import studio.forface.freshtv.localdata.mappers.*
 
 /**
  * @author Davide Giuseppe Farella.
  * A repository for retrieve and store [IChannel]s and EPG info locally.
  */
-private class RepositoryImpl(
+private class LocalDataImpl(
     private val channelGroups: ChannelGroupsLocalSource,
     private val movieChannels: MovieChannelsLocalSource,
     private val playlists: PlaylistsLocalSource,
@@ -28,7 +23,7 @@ private class RepositoryImpl(
     private val playlistMapper: PlaylistPojoMapper,
     private val tvChannelMapper: TvChannelPojoMapper,
     private val tvGuideMapper: TvGuidePojoMapper
-) : Repository {
+) : LocalData {
 
     /** Store a [IChannel] in the appropriate [ChannelsLocalSource] */
     private fun createChannel( channel: IChannel) {
@@ -45,12 +40,12 @@ private class RepositoryImpl(
     }
 
     /** Store a [Playlist] in [PlaylistsLocalSource] */
-    private fun createPlaylist( playlist: Playlist ) {
+    private fun createPlaylist( playlist: Playlist) {
         playlists.createPlaylist( playlistMapper { playlist.toPojo() } )
     }
 
     /** Store a [TvGuide] in [TvGuidesLocalSource] */
-    private fun createTvGuide( guide: TvGuide ) {
+    private fun createTvGuide( guide: TvGuide) {
         tvGuides.createGuide( tvGuideMapper { guide.toPojo() } )
     }
 
@@ -192,8 +187,8 @@ private class RepositoryImpl(
 }
 
 /**
- * A constructor-function for [RepositoryImpl]
- * @return [Repository]
+ * A constructor-function for [LocalDataImpl]
+ * @return [LocalData]
  */
 @Suppress("FunctionName")
 fun Repository(
@@ -207,7 +202,7 @@ fun Repository(
     playlistMapper: PlaylistPojoMapper,
     tvChannelMapper: TvChannelPojoMapper,
     tvGuideMapper: TvGuidePojoMapper
-): Repository = RepositoryImpl(
+): LocalData = LocalDataImpl(
     channelGroups,
     movieChannels,
     playlists,

@@ -1,5 +1,6 @@
 @file:Suppress("MayBeConstant", "unused")
 
+import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.ScriptHandlerScope
@@ -18,6 +19,16 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
     classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}" )
     classpath("com.android.tools.build:gradle:3.3.0" )
     classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}" )
+}
+
+fun DependencyHandler.applyTests() = Libs.run {
+    listOf( test, test_junit, mockk )
+            .forEach { add("testImplementation", it ) }
+}
+
+fun DependencyHandler.applyAndroidTests() = Libs.Android.run {
+    listOf( espresso, test_runner )
+            .forEach { add( "androidTestImplementation", it ) }
 }
 
 object Versions {

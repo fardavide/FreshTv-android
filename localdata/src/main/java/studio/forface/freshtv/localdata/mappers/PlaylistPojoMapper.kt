@@ -1,6 +1,6 @@
 package studio.forface.freshtv.localdata.mappers
 
-import studio.forface.freshtv.entities.Playlist
+import studio.forface.freshtv.domain.entities.Playlist
 import studio.forface.freshtv.localdata.PlaylistPojo
 
 /**

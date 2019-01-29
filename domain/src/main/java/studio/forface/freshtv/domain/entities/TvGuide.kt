@@ -1,6 +1,6 @@
-package studio.forface.freshtv.entities
+package studio.forface.freshtv.domain.entities
 
-import com.soywiz.klock.DateTime
+import org.threeten.bp.LocalDateTime
 
 /**
  * @author Davide Giuseppe Farella
@@ -8,23 +8,23 @@ import com.soywiz.klock.DateTime
  */
 data class TvGuide (
 
-    /** The [String] id of the Channel */
+        /** The [String] id of the Channel */
     val id: Long,
 
-    /** The [String] id of the related Tv Channel */
+        /** The [String] id of the related Tv Channel */
     val channelId: String,
 
-    /** The [String] name of the Tv Program */
+        /** The [String] name of the Tv Program */
     val programName: String,
 
-    /** The [String] description of the Tv Program */
+        /** The [String] description of the Tv Program */
     val programDescription: String,
 
-    /** A [DateTime] representing the start time of the Tv Program */
-    val startTime: DateTime,
+        /** A [LocalDateTime] representing the start time of the Tv Program */
+    val startTime: LocalDateTime,
 
-    /** A [DateTime] representing the end time of the Tv Program */
-    val endTime: DateTime
+        /** A [LocalDateTime] representing the end time of the Tv Program */
+    val endTime: LocalDateTime
 
 ) {
 
