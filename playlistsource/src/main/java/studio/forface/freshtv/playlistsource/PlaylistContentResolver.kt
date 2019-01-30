@@ -1,6 +1,9 @@
 package studio.forface.freshtv.playlistsource
 
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
 import studio.forface.freshtv.domain.entities.Playlist
+import studio.forface.freshtv.playlistsource.PlaylistContentResolver.Source
 import java.io.File
 
 /**
@@ -9,7 +12,7 @@ import java.io.File
  */
 internal class PlaylistContentResolver(
         private val local: PlaylistContentResolver.Local = Local,
-        private val remote: PlaylistContentResolver.Remote = Remote
+        private val remote: PlaylistContentResolver.Remote = Remote( HttpClient() )
 ) {
 
     /** @return the [String] content of the given [Playlist] */
@@ -36,9 +39,7 @@ internal class PlaylistContentResolver(
     }
 
     /** A [Source] for retrieve the content of a Remote file. */
-    object Remote : Source {
-        override suspend fun invoke( path: String ): String {
-            TODO("not implemented")
-        }
+    class Remote( private val client: HttpClient ): Source {
+        override suspend fun invoke( path: String ) = client.get<String>( path )
     }
 }

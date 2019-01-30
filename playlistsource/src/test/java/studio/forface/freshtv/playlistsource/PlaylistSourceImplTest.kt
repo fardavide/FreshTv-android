@@ -30,7 +30,7 @@ internal class PlaylistSourceImplTest {
     )
 
     @Test
-    fun `readFrom`() {
+    fun `readFrom executeCorrectly`() {
         var channelCalled = false
         var groupCalled = false
         var errorCalled = false
@@ -54,13 +54,31 @@ internal class PlaylistSourceImplTest {
     @Test
     fun `readFrom remotePlaylist fromRemoteSource`() {
         runBlocking {
-            source { readFrom(
-                    Playlist("", Playlist.Type.REMOTE ),
-                    {}, {}, {}
-            ) }
+            source {
+                readFrom(
+                        Playlist("", Playlist.Type.REMOTE ),
+                        {}, {}, {}
+                )
+            }
         }
 
         coVerify( exactly = 0 ) { mockLocal.invoke( any() ) }
         coVerify( exactly = 1 ) { mockRemote.invoke( any() ) }
+    }
+
+    // @Test // TODO test only manually due to http call
+    fun realTest() {
+        val source = PlaylistSourceImpl()
+
+        runBlocking {
+            source {
+                readFrom(
+                        Playlist("https://sourcetv.info/dl/01/it29.m3u", Playlist.Type.REMOTE ),
+                        { println( it ) },
+                        { println( it ) },
+                        { println( "${it.reason.name} - ${it.rawChannel}" ) }
+                )
+            }
+        }
     }
 }

@@ -16,8 +16,8 @@ import studio.forface.freshtv.playlistsource.parser.invoke
  * Implementation of [PlaylistSource]
  */
 internal class PlaylistSourceImpl(
-        private val contentResolver: PlaylistContentResolver,
-        private val parser: PlaylistParser
+        private val contentResolver: PlaylistContentResolver = PlaylistContentResolver(),
+        private val parser: PlaylistParser = PlaylistParser()
 ): PlaylistSource {
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */

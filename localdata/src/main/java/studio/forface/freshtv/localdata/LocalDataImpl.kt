@@ -12,17 +12,17 @@ import studio.forface.freshtv.localdata.mappers.*
  * @author Davide Giuseppe Farella.
  * A repository for retrieve and store [IChannel]s and EPG info locally.
  */
-private class LocalDataImpl(
-    private val channelGroups: ChannelGroupsLocalSource,
-    private val movieChannels: MovieChannelsLocalSource,
-    private val playlists: PlaylistsLocalSource,
-    private val tvChannels: TvChannelsLocalSource,
-    private val tvGuides: TvGuidesLocalSource,
-    private val channelGroupMapper: ChannelGroupPojoMapper,
-    private val movieChannelMapper: MovieChannelPojoMapper,
-    private val playlistMapper: PlaylistPojoMapper,
-    private val tvChannelMapper: TvChannelPojoMapper,
-    private val tvGuideMapper: TvGuidePojoMapper
+internal class LocalDataImpl(
+        private val channelGroups: ChannelGroupsLocalSource,
+        private val movieChannels: MovieChannelsLocalSource,
+        private val playlists: PlaylistsLocalSource,
+        private val tvChannels: TvChannelsLocalSource,
+        private val tvGuides: TvGuidesLocalSource,
+        private val channelGroupMapper: ChannelGroupPojoMapper = ChannelGroupPojoMapper(),
+        private val movieChannelMapper: MovieChannelPojoMapper = MovieChannelPojoMapper(),
+        private val playlistMapper: PlaylistPojoMapper = PlaylistPojoMapper(),
+        private val tvChannelMapper: TvChannelPojoMapper = TvChannelPojoMapper(),
+        private val tvGuideMapper: TvGuidePojoMapper = TvGuidePojoMapper()
 ) : LocalData {
 
     /** Store a [IChannel] in the appropriate [ChannelsLocalSource] */
@@ -185,32 +185,3 @@ private class LocalDataImpl(
         tvGuides.updateGuide( tvGuideMapper { guide.toPojo() } )
     }
 }
-
-/**
- * A constructor-function for [LocalDataImpl]
- * @return [LocalData]
- */
-@Suppress("FunctionName")
-fun Repository(
-    channelGroups: ChannelGroupsLocalSource,
-    movieChannels: MovieChannelsLocalSource,
-    playlists: PlaylistsLocalSource,
-    tvChannels: TvChannelsLocalSource,
-    tvGuides: TvGuidesLocalSource,
-    channelGroupMapper: ChannelGroupPojoMapper,
-    movieChannelMapper: MovieChannelPojoMapper,
-    playlistMapper: PlaylistPojoMapper,
-    tvChannelMapper: TvChannelPojoMapper,
-    tvGuideMapper: TvGuidePojoMapper
-): LocalData = LocalDataImpl(
-    channelGroups,
-    movieChannels,
-    playlists,
-    tvChannels,
-    tvGuides,
-    channelGroupMapper,
-    movieChannelMapper,
-    playlistMapper,
-    tvChannelMapper,
-    tvGuideMapper
-)

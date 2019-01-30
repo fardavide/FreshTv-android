@@ -5,11 +5,8 @@ plugins {
 
 dependencies {
     implementation( project(":domain") )
-
     applyTests()
 
-    /* Test */
-    testImplementation( Libs.test )
-    testImplementation( Libs.test_junit )
-    testImplementation( Libs.mockk )
+    implementation( Libs.ktor )
+    implementation( Libs.ktor_apache )
 }

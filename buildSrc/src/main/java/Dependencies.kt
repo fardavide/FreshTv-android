@@ -37,6 +37,7 @@ object Versions {
     val serialization =                 "0.10.0"
 
     val koin =                          "1.0.2"
+    val ktor =                          "1.1.2"
     val mockk =                         "1.9"
     val sqldelight =                    "1.0.2"
     val threeten_android_bp =           "1.1.1"
@@ -69,6 +70,8 @@ object Libs {
     val koin =                          "org.koin:koin-core:${Versions.koin}"
     val koin_android =                  "org.koin:koin-android:${Versions.koin}"
     val koin_android_viewmodel =        "org.koin:koin-android-viewmodel:${Versions.koin}"
+    val ktor =                          "io.ktor:ktor-client-core:${Versions.ktor}"
+    val ktor_apache =                   "io.ktor:ktor-client-apache:${Versions.ktor}"
     val mockk =                         "io.mockk:mockk:${Versions.mockk}"
     val sqldelight =                    "com.squareup.sqldelight:runtime-jvm:${Versions.sqldelight}"
     val sqldelight_android_driver =     "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"

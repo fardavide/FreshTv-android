@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation( project(":domain") )
-    implementation( Libs.sqldelight )
+    api( project(":domain") )
+    api( Libs.sqldelight )
 }
 
 sqldelight.packageName = "${Project.id}.localdata"
