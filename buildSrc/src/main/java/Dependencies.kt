@@ -66,6 +66,9 @@ object Libs {
     val test =                          "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     val test_junit =                    "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
 
+    val koin =                          "org.koin:koin-core:${Versions.koin}"
+    val koin_android =                  "org.koin:koin-android:${Versions.koin}"
+    val koin_android_viewmodel =        "org.koin:koin-android-viewmodel:${Versions.koin}"
     val mockk =                         "io.mockk:mockk:${Versions.mockk}"
     val sqldelight =                    "com.squareup.sqldelight:runtime-jvm:${Versions.sqldelight}"
     val sqldelight_android_driver =     "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"

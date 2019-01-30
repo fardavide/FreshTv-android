@@ -13,5 +13,6 @@ dependencies {
     implementation( Libs.reflect )
 
     /* Other */
+    api( Libs.koin )
     api( Libs.threeten_bp )
 }

@@ -1,4 +1,4 @@
-package studio.forface.freshtv.domain.exceptions
+package studio.forface.freshtv.domain.errors
 
 import studio.forface.freshtv.domain.entities.Validable
 import kotlin.reflect.KClass

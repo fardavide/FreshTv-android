@@ -2,7 +2,7 @@ package studio.forface.freshtv.localdata
 
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
-import studio.forface.freshtv.domain.exceptions.ChannelNotImplementedError
+import studio.forface.freshtv.domain.errors.ChannelNotImplementedException
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.gateways.LocalData.Result
 import studio.forface.freshtv.domain.utils.handle
@@ -30,7 +30,7 @@ private class LocalDataImpl(
         when( channel ) {
             is MovieChannel -> movieChannels.createChannel( movieChannelMapper { channel.toPojo() } )
             is TvChannel -> tvChannels.createChannel( tvChannelMapper { channel.toPojo() } )
-            else -> throw ChannelNotImplementedError( this::class, this::storeChannels, channel::class )
+            else -> throw ChannelNotImplementedException( this::class, this::storeChannels, channel::class )
         }
     }
 
@@ -69,7 +69,7 @@ private class LocalDataImpl(
         val oldChannel = when( newChannel ) {
             is MovieChannel -> handle { movieChannelMapper { movieChannels.channel( newChannel.id ).toEntity() } }
             is TvChannel -> handle { tvChannelMapper { tvChannels.channel( newChannel.id ).toEntity() } }
-            else -> throw ChannelNotImplementedError( this::class, this::storeChannels, newChannel::class )
+            else -> throw ChannelNotImplementedException( this::class, this::storeChannels, newChannel::class )
         }
         oldChannel ?: return Result.FAILURE
         updateChannel(oldChannel + newChannel )
@@ -171,7 +171,7 @@ private class LocalDataImpl(
         when ( channel ) {
             is MovieChannel -> movieChannels.updateChannel( movieChannelMapper { channel.toPojo() } )
             is TvChannel -> tvChannels.updateChannel( tvChannelMapper { channel.toPojo() } )
-            else -> throw ChannelNotImplementedError( this::class, this::storeChannels, channel::class )
+            else -> throw ChannelNotImplementedException( this::class, this::storeChannels, channel::class )
         }
     }
 

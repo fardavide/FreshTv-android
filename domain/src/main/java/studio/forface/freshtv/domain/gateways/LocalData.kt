@@ -87,4 +87,4 @@ interface LocalData {
  * An invoke function for execute a [block] within a [LocalData]
  * @return [T]
  */
-operator fun <T> LocalData.invoke(block: LocalData.() -> T ) = block()
+operator fun <T> LocalData.invoke( block: LocalData.() -> T ) = block()

@@ -1,14 +1,13 @@
 package studio.forface.freshtv.playlistsource.parser
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.entities.MovieChannel
 import studio.forface.freshtv.domain.entities.TvChannel
+import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.utils.forEachAsync
 import studio.forface.freshtv.playlistsource.parser.ParsableItem.Result
 
@@ -16,14 +15,16 @@ import studio.forface.freshtv.playlistsource.parser.ParsableItem.Result
  * @author Davide Giuseppe Farella.
  * A class that parse a [String] playlist
  */
-class PlaylistParser( private val playlistPath: String, private val playlistContent: String ) {
+internal class PlaylistParser {
 
     /** Parse the [playlistContent] and submit items via the given [SendChannel]s */
     @Synchronized
-    operator fun CoroutineScope.invoke(
+    fun CoroutineScope.parse(
+            playlistPath: String,
+            playlistContent: String,
             channels: SendChannel<IChannel>,
             groups: SendChannel<ChannelGroup>,
-            errors: SendChannel<ChannelError>
+            errors: SendChannel<ParsingChannelError>
     ) = launch {
 
         val cachedGroups = mutableListOf<ChannelGroup>()
@@ -79,19 +80,10 @@ class PlaylistParser( private val playlistPath: String, private val playlistCont
             else -> false
         }
     }
-
-    /**
-     * A class representing an error of a channel parsing
-     * @see ParsableItem.invoke
-     */
-    data class ChannelError( val string: String, val reason: Reason) {
-
-        /** An enum class of reasons for [ChannelError] */
-        enum class Reason {
-            ExternalPlayerRequired,
-            MissingLink,
-            NoNameAndId,
-            PluginSchema
-        }
-    }
 }
+
+/**
+ * An invoke function for execute a [block] within a [PlaylistParser]
+ * @return [T]
+ */
+internal suspend operator fun <T> PlaylistParser.invoke( block: suspend PlaylistParser.() -> T ) = block()

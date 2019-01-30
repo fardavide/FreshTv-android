@@ -1,4 +1,4 @@
-package studio.forface.freshtv.domain.exceptions
+package studio.forface.freshtv.domain.errors
 
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
@@ -14,5 +14,5 @@ import studio.forface.freshtv.domain.entities.IChannel
  * @param method the [KFunction] throwing the Exception
  * @param type the subtype of [IChannel] not implemented
  */
-class ChannelNotImplementedError( klass: KClass<*>, method: KFunction<*>, type: KClass<*> ) :
+class ChannelNotImplementedException( klass: KClass<*>, method: KFunction<*>, type: KClass<*> ) :
         Error( "${type.simpleName} not implemented for ${klass.qualifiedName}.${method.name}" )

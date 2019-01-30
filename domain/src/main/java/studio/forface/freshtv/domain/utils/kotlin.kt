@@ -31,3 +31,8 @@ infix fun <T: Any> T?.or( other: T ) : T = this ?: other
  * @return NOT NULL [T].
  */
 infix fun <T: Any> T?.or( block: () -> T ) : T = this ?: block()
+
+/** Wait until [evaluation] is true */
+fun wait( evaluation: () -> Boolean ) {
+    while( ! evaluation() ) { /* await */ }
+}

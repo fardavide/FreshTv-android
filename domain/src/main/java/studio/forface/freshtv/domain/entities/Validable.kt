@@ -1,6 +1,6 @@
 package studio.forface.freshtv.domain.entities
 
-import studio.forface.freshtv.domain.exceptions.ValidationException
+import studio.forface.freshtv.domain.errors.ValidationException
 
 /**
  * @author Davide Giuseppe Farella.

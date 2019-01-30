@@ -1,6 +1,6 @@
 package studio.forface.freshtv.domain.entities
 
-import studio.forface.freshtv.domain.exceptions.ChannelNotImplementedError
+import studio.forface.freshtv.domain.errors.ChannelNotImplementedException
 import studio.forface.freshtv.domain.utils.increment
 import studio.forface.freshtv.domain.utils.reset
 
@@ -81,7 +81,7 @@ interface IChannel {
                 mediaUrls = mediaUrls,
                 playlistPaths = playlistPaths
             )
-            else -> throw ChannelNotImplementedError( IChannel::class, this::copyObj, this::class )
+            else -> throw ChannelNotImplementedException( IChannel::class, this::copyObj, this::class )
         }
     }
 
@@ -90,7 +90,7 @@ interface IChannel {
         return when( this ) {
             is MovieChannel ->  this + ( newChannel as MovieChannel )
             is TvChannel ->     this + ( newChannel as TvChannel )
-            else -> throw ChannelNotImplementedError( IChannel::class, this::plus, this::class )
+            else -> throw ChannelNotImplementedException( IChannel::class, this::plus, this::class )
         }
     }
 }

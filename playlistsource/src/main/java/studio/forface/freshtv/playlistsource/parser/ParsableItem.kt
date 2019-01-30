@@ -3,9 +3,9 @@
 package studio.forface.freshtv.playlistsource.parser
 
 import studio.forface.freshtv.domain.entities.*
+import studio.forface.freshtv.domain.errors.ParsingChannelError
+import studio.forface.freshtv.domain.errors.ParsingChannelError.Reason
 import studio.forface.freshtv.domain.utils.notBlankOrNull
-import studio.forface.freshtv.playlistsource.parser.PlaylistParser.ChannelError
-import studio.forface.freshtv.playlistsource.parser.PlaylistParser.ChannelError.Reason
 
 /**
  * @author Davide Giuseppe Farella.
@@ -30,7 +30,7 @@ internal inline class ParsableItem( private val s: String ) {
     private fun channelType() = ChannelType.Tv
 
     /** @return a [Result.Error] with [s] and the given [Reason] */
-    private fun e( reason: Reason ) = Result( ChannelError( s, reason ) )
+    private fun e( reason: Reason ) = Result( ParsingChannelError( s, reason ) )
 
     /** @return a [ParsableItem.Result] containing the entity just created if success or the error */
     operator fun invoke( playlistPath: String ): Result {
@@ -92,7 +92,7 @@ internal inline class ParsableItem( private val s: String ) {
             operator fun invoke( content: Any ) = when ( content ) {
                 is IChannel -> Channel( content )
                 is ChannelGroup -> Group( content )
-                is ChannelError -> Error( content )
+                is ParsingChannelError -> Error( content )
                 else -> throw AssertionError( "${content::class.qualifiedName} not implemented" )
             }
         }
@@ -103,7 +103,7 @@ internal inline class ParsableItem( private val s: String ) {
         /** A subclass for [Result] containing an [ChannelGroup] */
         class Group( val content: ChannelGroup ): Result()
 
-        /** A subclass of [Result] containing a [ChannelError] */
-        class Error( val error: ChannelError): Result()
+        /** A subclass of [Result] containing a [ParsingChannelError] */
+        class Error( val error: ParsingChannelError): Result()
     }
 }
