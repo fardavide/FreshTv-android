@@ -26,7 +26,7 @@ internal inline class ParsableItem( private val s: String ) {
         const val PARAM_LOGO = "tvg-logo"
     }
 
-    /** TODO */
+    /** TODO: return real channel type */
     private fun channelType() = ChannelType.Tv
 
     /** @return a [Result.Error] with [s] and the given [Reason] */
@@ -47,7 +47,7 @@ internal inline class ParsableItem( private val s: String ) {
         if ( link.startsWith("plugin" ) )
             return e( Reason.PluginSchema )
         // Return if link has parameters
-        if ( link.split( " " ).size > 1 )
+        if ( link.split(" " ).size > 1 )
             return e( Reason.ExternalPlayerRequired )
 
         val tempId = s.extract( PARAM_ID )
@@ -62,7 +62,6 @@ internal inline class ParsableItem( private val s: String ) {
         val id = ( tempId ?: tempName )!!.toLowerCase()
         val name = ( tempName ?: tempId )!!
 
-        // TODO playlistPath
         val content = when( channelType() ) {
             ChannelType.Movie -> MovieChannel( id, name, groupName, imageUrl, link, playlistPath )
             ChannelType.Tv -> TvChannel( id, name, groupName, imageUrl, link, playlistPath )
