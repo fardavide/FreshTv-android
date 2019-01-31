@@ -1,4 +1,4 @@
-package studio.forface.freshtv.localdata
+package studio.forface.freshtv.localdata.sources
 
 import studio.forface.freshtv.domain.entities.IChannel
 

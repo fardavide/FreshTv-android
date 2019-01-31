@@ -1,4 +1,7 @@
-package studio.forface.freshtv.localdata
+package studio.forface.freshtv.localdata.sources
+
+import studio.forface.freshtv.localdata.TvChannelPojo
+import studio.forface.freshtv.localdata.TvChannelQueries
 
 /**
  * @author Davide Giuseppe Farella.
@@ -6,7 +9,8 @@ package studio.forface.freshtv.localdata
  *
  * Inherit from [ChannelsLocalSource]
  */
-class TvChannelsLocalSource( private val queries: TvChannelQueries): ChannelsLocalSource<TvChannelPojo> {
+class TvChannelsLocalSource( private val queries: TvChannelQueries):
+    ChannelsLocalSource<TvChannelPojo> {
 
     /** @return all the stored channels [TvChannelPojo] */
     override fun all(): List<TvChannelPojo> = queries.selectAll()

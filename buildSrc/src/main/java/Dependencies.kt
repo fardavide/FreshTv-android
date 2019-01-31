@@ -39,7 +39,7 @@ object Versions {
     val koin =                          "1.0.2"
     val ktor =                          "1.1.2"
     val mockk =                         "1.9"
-    val sqldelight =                    "1.0.2"
+    val sqldelight =                    "1.0.3"
     val threeten_android_bp =           "1.1.1"
     val threeten_bp =                   "1.3.2"
 

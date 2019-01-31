@@ -1,7 +1,9 @@
-package studio.forface.freshtv.localdata
+package studio.forface.freshtv.localdata.sources
 
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.utils.LocalDateTimeHelper
+import studio.forface.freshtv.localdata.TvGuidePojo
+import studio.forface.freshtv.localdata.TvGuideQueries
 
 /**
  * @author Davide Giuseppe Farella.
@@ -46,7 +48,7 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
     }
 
     /** Update an already stored guide [TvGuidePojo] */
-    fun updateGuide( guide: TvGuidePojo ) {
+    fun updateGuide( guide: TvGuidePojo) {
         with( guide ) {
             queries.update( id, channelId, programName, programDescription, startTime, endTime )
         }

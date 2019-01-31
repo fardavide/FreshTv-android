@@ -7,22 +7,23 @@ import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.gateways.LocalData.Result
 import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.localdata.mappers.*
+import studio.forface.freshtv.localdata.sources.*
 
 /**
  * @author Davide Giuseppe Farella.
  * A repository for retrieve and store [IChannel]s and EPG info locally.
  */
 internal class LocalDataImpl(
-        private val channelGroups: ChannelGroupsLocalSource,
-        private val movieChannels: MovieChannelsLocalSource,
-        private val playlists: PlaylistsLocalSource,
-        private val tvChannels: TvChannelsLocalSource,
-        private val tvGuides: TvGuidesLocalSource,
-        private val channelGroupMapper: ChannelGroupPojoMapper = ChannelGroupPojoMapper(),
-        private val movieChannelMapper: MovieChannelPojoMapper = MovieChannelPojoMapper(),
-        private val playlistMapper: PlaylistPojoMapper = PlaylistPojoMapper(),
-        private val tvChannelMapper: TvChannelPojoMapper = TvChannelPojoMapper(),
-        private val tvGuideMapper: TvGuidePojoMapper = TvGuidePojoMapper()
+    private val channelGroups: ChannelGroupsLocalSource,
+    private val movieChannels: MovieChannelsLocalSource,
+    private val playlists: PlaylistsLocalSource,
+    private val tvChannels: TvChannelsLocalSource,
+    private val tvGuides: TvGuidesLocalSource,
+    private val channelGroupMapper: ChannelGroupPojoMapper = ChannelGroupPojoMapper(),
+    private val movieChannelMapper: MovieChannelPojoMapper = MovieChannelPojoMapper(),
+    private val playlistMapper: PlaylistPojoMapper = PlaylistPojoMapper(),
+    private val tvChannelMapper: TvChannelPojoMapper = TvChannelPojoMapper(),
+    private val tvGuideMapper: TvGuidePojoMapper = TvGuidePojoMapper()
 ) : LocalData {
 
     /** Store a [IChannel] in the appropriate [ChannelsLocalSource] */

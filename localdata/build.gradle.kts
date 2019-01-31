@@ -6,6 +6,9 @@ plugins {
 
 dependencies {
     api( project(":domain") )
+
+    applyTests()
+
     api( Libs.sqldelight )
 }
 

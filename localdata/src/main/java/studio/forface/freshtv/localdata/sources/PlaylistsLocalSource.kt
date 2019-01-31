@@ -1,4 +1,7 @@
-package studio.forface.freshtv.localdata
+package studio.forface.freshtv.localdata.sources
+
+import studio.forface.freshtv.localdata.PlaylistPojo
+import studio.forface.freshtv.localdata.PlaylistQueries
 
 /**
  * @author Davide Giuseppe Farella.
@@ -25,7 +28,7 @@ class PlaylistsLocalSource( private val queries: PlaylistQueries) {
     fun playlist( path: String ) = queries.selectByPath( path ).executeAsOne()
 
     /** Update an already stored playlist [PlaylistPojo] */
-    fun updatePlaylist( playlist: PlaylistPojo ) {
+    fun updatePlaylist( playlist: PlaylistPojo) {
         with( playlist ) {
             queries.update( path, name )
         }

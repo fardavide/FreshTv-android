@@ -1,4 +1,7 @@
-package studio.forface.freshtv.localdata
+package studio.forface.freshtv.localdata.sources
+
+import studio.forface.freshtv.localdata.MovieChannelPojo
+import studio.forface.freshtv.localdata.MovieChannelQueries
 
 /**
  * @author Davide Giuseppe Farella.
@@ -6,7 +9,8 @@ package studio.forface.freshtv.localdata
  *
  * Inherit from [ChannelsLocalSource]
  */
-class MovieChannelsLocalSource( private val queries: MovieChannelQueries ): ChannelsLocalSource<MovieChannelPojo> {
+class MovieChannelsLocalSource( private val queries: MovieChannelQueries):
+    ChannelsLocalSource<MovieChannelPojo> {
 
     /** @return all the stored channels [MovieChannelPojo] */
     override fun all(): List<MovieChannelPojo> = queries.selectAll()
@@ -21,7 +25,7 @@ class MovieChannelsLocalSource( private val queries: MovieChannelQueries ): Chan
         queries.selectByGroup( groupName ).executeAsList()
 
     /** Create a new channel [MovieChannelPojo] */
-    override fun createChannel( channel: MovieChannelPojo ) = with( channel ) {
+    override fun createChannel( channel: MovieChannelPojo) = with( channel ) {
         queries.insert(
             id =            id,
             name =          name,
@@ -39,7 +43,7 @@ class MovieChannelsLocalSource( private val queries: MovieChannelQueries ): Chan
     }
 
     /** Update an already stored channel [MovieChannelPojo] */
-    override fun updateChannel( channel: MovieChannelPojo ) {
+    override fun updateChannel( channel: MovieChannelPojo) {
         with( channel ) {
             queries.update( id, name, groupName, imageUrl, mediaUrls, playlistPaths, tmdbId )
         }
