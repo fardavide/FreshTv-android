@@ -3,6 +3,7 @@ package studio.forface.freshtv.localdata
 import com.squareup.sqldelight.ColumnAdapter
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.utils.LocalDateTimeHelper
+import studio.forface.freshtv.domain.utils.toEpochMillis
 import studio.forface.freshtv.domain.utils.toEpochSecond
 
 /** A [String] separator for divide items while encoding/decoding to/from [String] */
@@ -13,8 +14,8 @@ private const val KEY_VALUE_DIVIDER = "-%-"
 
 /** A [ColumnAdapter] for [LocalDateTime] */
 object DateTimeColumnAdapter : ColumnAdapter<LocalDateTime, Long> {
-    override fun encode( value: LocalDateTime ) = value.toEpochSecond()
-    override fun decode( databaseValue: Long ) = LocalDateTimeHelper.ofEpochSecond( databaseValue )
+    override fun encode( value: LocalDateTime ) = value.toEpochMillis()
+    override fun decode( databaseValue: Long ) = LocalDateTimeHelper.ofEpochMillis( databaseValue )
 }
 
 /** A [ColumnAdapter] for [Map] of [String] and [Int] */ // TODO test
