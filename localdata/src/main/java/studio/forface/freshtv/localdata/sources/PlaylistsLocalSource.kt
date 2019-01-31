@@ -12,7 +12,7 @@ class PlaylistsLocalSource( private val queries: PlaylistQueries) {
     /** @return all the stored playlists [PlaylistPojo] */
     fun all() = queries.selectAll().executeAsList()
 
-    /** Create a new guide [TvGuidePojo] */
+    /** Create a new guide [PlaylistPojo] */
     fun createPlaylist( playlist: PlaylistPojo) {
         with( playlist ) {
             queries.insert( path, type, name )
@@ -24,11 +24,16 @@ class PlaylistsLocalSource( private val queries: PlaylistQueries) {
         queries.deleteAll()
     }
 
+    /** Delete the stored playlist [PlaylistPojo] with the given [PlaylistPojo.path] */
+    fun delete( path: String ) {
+        queries.delete( path )
+    }
+
     /** @return the [PlaylistPojo] with the given [path] */
     fun playlist( path: String ) = queries.selectByPath( path ).executeAsOne()
 
     /** Update an already stored playlist [PlaylistPojo] */
-    fun updatePlaylist( playlist: PlaylistPojo) {
+    fun updatePlaylist( playlist: PlaylistPojo ) {
         with( playlist ) {
             queries.update( path, name )
         }

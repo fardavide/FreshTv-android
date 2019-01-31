@@ -36,12 +36,12 @@ internal class PlaylistSourceImplTest {
         var errorCalled = false
 
         runBlocking {
-            source { readFrom(
+            source.readFrom(
                     Playlist("", Playlist.Type.LOCAL ),
                     { channelCalled = true },
                     { groupCalled = true },
                     { errorCalled = true }
-            ) }
+            )
         }
 
         coVerify( exactly = 1 ) { mockLocal.invoke( any() ) }
@@ -54,12 +54,10 @@ internal class PlaylistSourceImplTest {
     @Test
     fun `readFrom remotePlaylist fromRemoteSource`() {
         runBlocking {
-            source {
-                readFrom(
-                        Playlist("", Playlist.Type.REMOTE ),
-                        {}, {}, {}
-                )
-            }
+            source.readFrom(
+                Playlist("", Playlist.Type.REMOTE ),
+                {}, {}, {}
+            )
         }
 
         coVerify( exactly = 0 ) { mockLocal.invoke( any() ) }
@@ -71,14 +69,12 @@ internal class PlaylistSourceImplTest {
         val source = PlaylistSourceImpl()
 
         runBlocking {
-            source {
-                readFrom(
-                        Playlist("https://sourcetv.info/dl/01/it29.m3u", Playlist.Type.REMOTE ),
-                        { println( it ) },
-                        { println( it ) },
-                        { println( "${it.reason.name} - ${it.rawChannel}" ) }
-                )
-            }
+            source.readFrom(
+                Playlist("https://sourcetv.info/dl/01/it29.m3u", Playlist.Type.REMOTE ),
+                { println( it ) },
+                { println( it ) },
+                { println( "${it.reason.name} - ${it.rawChannel}" ) }
+            )
         }
     }
 }

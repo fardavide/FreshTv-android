@@ -21,6 +21,10 @@ update:
 deleteAll:
   DELETE FROM playlistPojo;
 
+delete:
+  DELETE FROM playlistPojo
+  WHERE path = ?;
+
 count:
   SELECT count(*) FROM playlistPojo;
 

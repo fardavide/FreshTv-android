@@ -8,6 +8,7 @@ import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.playlistsource.mockPlaylistContent
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 /**
  * @author Davide Giuseppe Farella.
@@ -31,12 +32,12 @@ class PlaylistParserTest {
         launch { for( group in groupsChannel ) groups += group }
         launch { for( error in errorsChannel ) errors += error }
 
-        runBlocking {
-            parser { parse("", mockPlaylistContent, channelsChannel, groupsChannel, errorsChannel) }
-        }
+        parser.parse("", mockPlaylistContent, channelsChannel, groupsChannel, errorsChannel )
 
         assert( channels.isNotEmpty() )
         assert( groups.isNotEmpty() )
         assert( errors.isNotEmpty() )
+
+        assertEquals( channels.size + groups.size + errors.size, 64 )
     }
 }

@@ -2,6 +2,7 @@ package studio.forface.freshtv.playlistsource
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
@@ -21,12 +22,12 @@ internal class PlaylistSourceImpl(
 ): PlaylistSource {
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */
-    override fun CoroutineScope.readFrom(
+    override suspend fun readFrom(
             playlist: Playlist,
             onChannel: suspend (IChannel) -> Unit,
             onGroup: suspend (ChannelGroup) -> Unit,
             onError: suspend (ParsingChannelError) -> Unit
-    ) = launch {
+    ) = coroutineScope {
         val channelsChannel = Channel<IChannel>()
         val groupsChannel = Channel<ChannelGroup>()
         val errorsChannel = Channel<ParsingChannelError>()

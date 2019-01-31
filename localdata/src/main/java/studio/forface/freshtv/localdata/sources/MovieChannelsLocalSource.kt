@@ -1,5 +1,6 @@
 package studio.forface.freshtv.localdata.sources
 
+import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.localdata.MovieChannelPojo
 import studio.forface.freshtv.localdata.MovieChannelQueries
 
@@ -20,9 +21,13 @@ class MovieChannelsLocalSource( private val queries: MovieChannelQueries):
     override fun channel( channelId: String ): MovieChannelPojo = queries.selectById( channelId )
         .executeAsOne()
 
-    /** @return the stored channels [MovieChannelPojo] with the given [groupName] */
-    override fun channels( groupName: String ): List<MovieChannelPojo> =
+    /** @return the stored channels [MovieChannelPojo] with the given [IChannel.groupName] */
+    override fun channelsWithGroup( groupName: String ): List<MovieChannelPojo> =
         queries.selectByGroup( groupName ).executeAsList()
+
+    /** @return the stored channels [MovieChannelPojo] with the given [playlistPath] in [IChannel.playlistPaths] */
+    override fun channelsWithPlaylist( playlistPath: String ): List<MovieChannelPojo> =
+        queries.selectByPlaylistPath( playlistPath ).executeAsList()
 
     /** Create a new channel [MovieChannelPojo] */
     override fun createChannel( channel: MovieChannelPojo) = with( channel ) {
@@ -35,6 +40,11 @@ class MovieChannelsLocalSource( private val queries: MovieChannelQueries):
             playlistPaths = playlistPaths,
             tmdbId =        tmdbId
         )
+    }
+
+    /** Delete the [MovieChannelPojo] with the given [MovieChannelPojo.id] */
+    override fun delete( channelId: String ) {
+        queries.delete( channelId )
     }
 
     /** Delete all the stored channels [MovieChannelPojo] */

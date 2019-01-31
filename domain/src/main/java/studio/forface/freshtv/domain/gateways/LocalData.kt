@@ -16,11 +16,20 @@ interface LocalData {
     fun channel( channelId: String ): IChannel =
         handle { tvChannel( channelId ) } or { movieChannel( channelId ) }
 
+    /** @return all the [IChannel] with the given [playlistPath] in [IChannel.playlistPaths] */
+    suspend fun channelsWithPlaylist( playlistPath: String ): List<IChannel>
+
     /** Delete all the stored [IChannel]s */
     fun deleteAllChannels()
 
     /** Delete all the stored [TvGuide]s */
     fun deleteAllTvGuides()
+
+    /** Delete the store [IChannel] with the given [IChannel.id] */
+    fun deleteChannel( channelId: String )
+
+    /** Delete the stored [Playlist] with the given [Playlist.path] */
+    fun deletePlaylist( playlistPath: String )
 
     /** @return the [MovieChannel] with the given [channelId] */
     fun movieChannel( channelId: String ): MovieChannel
@@ -37,14 +46,29 @@ interface LocalData {
     /** @return all the stored [Playlist]s */
     fun playlists() : List<Playlist>
 
+    /** Store the given [IChannel] in the appropriate Local Sources */
+    fun storeChannel( channel: IChannel )
+
     /** Store the given [IChannel]s in the appropriate Local Sources */
-    fun storeChannels( channels: List<IChannel> )
+    fun storeChannels( channels: List<IChannel> ) {
+        channels.forEach( ::storeChannel )
+    }
+
+    /** Store the given [ChannelGroup] in Local Source */
+    fun storeGroup( group: ChannelGroup )
 
     /** Store the given [ChannelGroup]s in Local Source */
-    fun storeGroup( groups: List<ChannelGroup> )
+    fun storeGroups( groups: List<ChannelGroup> ) {
+        groups.forEach( ::storeGroup )
+    }
 
     /** Store the given [Playlist] in Local Source */
-    fun storePlaylists( playlists: List<Playlist> )
+    fun storePlaylist( playlist: Playlist )
+
+    /** Store the given [Playlist]s in Local Source */
+    fun storePlaylists( playlists: List<Playlist> ) {
+        playlists.forEach( ::storePlaylist )
+    }
 
     /** Store the given [TvGuide]s in Local Sources */
     fun storeTvGuides( guides: List<TvGuide> )
@@ -69,6 +93,9 @@ interface LocalData {
 
     /** Update a [ChannelGroup] in Local Source */
     fun updateGroup( group: ChannelGroup )
+
+    /** Update a [Playlist] in Local Source */
+    fun updatePlaylist( playlist: Playlist )
 
     /** Update a [TvGuide] in Local Source */
     fun updateTvGuide( guide: TvGuide )

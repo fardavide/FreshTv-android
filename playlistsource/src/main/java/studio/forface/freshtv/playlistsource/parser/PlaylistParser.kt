@@ -1,8 +1,7 @@
 package studio.forface.freshtv.playlistsource.parser
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.coroutineScope
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.entities.MovieChannel
@@ -19,13 +18,13 @@ internal class PlaylistParser {
 
     /** Parse the [playlistContent] and submit items via the given [SendChannel]s */
     @Synchronized
-    fun CoroutineScope.parse(
+    suspend fun parse(
             playlistPath: String,
             playlistContent: String,
             channels: SendChannel<IChannel>,
             groups: SendChannel<ChannelGroup>,
             errors: SendChannel<ParsingChannelError>
-    ) = launch {
+    ) = coroutineScope<Unit> {
 
         val cachedGroups = mutableListOf<ChannelGroup>()
 

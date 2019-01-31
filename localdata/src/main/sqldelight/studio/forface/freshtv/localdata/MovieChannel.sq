@@ -22,6 +22,10 @@ update:
   SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?, tmdbId = ?
   WHERE id = :id;
 
+delete:
+  DELETE FROM movieChannelPojo
+  WHERE id = ?;
+
 deleteAll:
   DELETE FROM movieChannelPojo;
 
@@ -52,3 +56,8 @@ selectByGroup:
   SELECT *
   FROM movieChannelPojo
   WHERE groupName = ?;
+
+selectByPlaylistPath:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE playlistPaths LIKE :path;

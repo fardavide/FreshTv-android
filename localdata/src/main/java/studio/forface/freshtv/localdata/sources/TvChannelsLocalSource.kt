@@ -1,5 +1,6 @@
 package studio.forface.freshtv.localdata.sources
 
+import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.localdata.TvChannelPojo
 import studio.forface.freshtv.localdata.TvChannelQueries
 
@@ -21,8 +22,12 @@ class TvChannelsLocalSource( private val queries: TvChannelQueries):
         .executeAsOne()
 
     /** @return the stored channels [TvChannelPojo] with the given [groupName] */
-    override fun channels( groupName: String ): List<TvChannelPojo> =
+    override fun channelsWithGroup(groupName: String ): List<TvChannelPojo> =
         queries.selectByGroup( groupName ).executeAsList()
+
+    /** @return the stored channels [TvChannelPojo] with the given [playlistPath] in [IChannel.playlistPaths] */
+    override fun channelsWithPlaylist( playlistPath: String ): List<TvChannelPojo> =
+        queries.selectByPlaylistPath( playlistPath ).executeAsList()
 
     /** Create a new channel [TvChannelPojo] */
     override fun createChannel( channel: TvChannelPojo) = with( channel ) {
@@ -34,6 +39,11 @@ class TvChannelsLocalSource( private val queries: TvChannelQueries):
             mediaUrls =     mediaUrls,
             playlistPaths = playlistPaths
         )
+    }
+
+    /** Delete the [TvChannelPojo] with the given [TvChannelPojo.id] */
+    override fun delete( channelId: String ) {
+        queries.delete( channelId )
     }
 
     /** Delete all the stored channels [TvChannelPojo] */

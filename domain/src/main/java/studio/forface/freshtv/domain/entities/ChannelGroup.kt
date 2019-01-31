@@ -24,7 +24,6 @@ data class ChannelGroup (
      * @return this [ChannelGroup] merged with the given [newGroup]
      */
     operator fun plus( newGroup: ChannelGroup ) = copy(
-        name =      name,
         imageUrl =  imageUrl?.validOrNull() ?: newGroup.imageUrl
     )
 

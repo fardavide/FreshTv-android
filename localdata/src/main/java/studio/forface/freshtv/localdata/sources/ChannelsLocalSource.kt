@@ -14,11 +14,17 @@ interface ChannelsLocalSource<T> {
     /** @return the channel [T] with the given [channelId] */
     fun channel( channelId: String ): T
 
-    /** @return the stored channels [T] with the given [groupName] */
-    fun channels( groupName: String ): List<T>
+    /** @return the stored channels [T] with the given [IChannel.groupName] */
+    fun channelsWithGroup( groupName: String ): List<T>
+
+    /** @return the stored channels [T] with the given [playlistPath] in [IChannel.playlistPaths] */
+    fun channelsWithPlaylist( playlistPath: String ): List<T>
 
     /** Create a new channel [T] */
     fun createChannel( channel: T )
+
+    /** Delete the [IChannel] with the given [IChannel.id] */
+    fun delete( channelId: String )
 
     /** Delete all the stored channels [T] */
     fun deleteAll()
