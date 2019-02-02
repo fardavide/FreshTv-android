@@ -12,7 +12,7 @@ import studio.forface.freshtv.domain.utils.notBlankOrNull
  * An inline class that represents the content of a single item in Playlist and that will result a [ParsablePlaylistItem.Result]
  * containing the entity if success, or error.
  */
-internal inline class ParsablePlaylistItem(private val s: String ) {
+internal inline class ParsablePlaylistItem( private val s: String ) {
 
     private companion object {
 

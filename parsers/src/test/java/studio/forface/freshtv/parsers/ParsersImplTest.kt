@@ -64,7 +64,7 @@ internal class ParsersImplTest {
         coVerify( exactly = 1 ) { mockRemote.invoke( any() ) }
     }
 
-    // @Test // TODO test only manually due to http call
+    // @Test // test only manually due to http call
     fun realTest() {
         val source = ParsersImpl()
 

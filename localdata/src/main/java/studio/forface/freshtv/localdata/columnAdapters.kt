@@ -18,7 +18,7 @@ object DateTimeColumnAdapter : ColumnAdapter<LocalDateTime, Long> {
     override fun decode( databaseValue: Long ) = LocalDateTimeHelper.ofEpochMillis( databaseValue )
 }
 
-/** A [ColumnAdapter] for [Map] of [String] and [Int] */ // TODO test
+/** A [ColumnAdapter] for [Map] of [String] and [Int] */
 object StringIntMapColumnAdapter : ColumnAdapter<Map<String, Int>, String> {
     override fun encode( value: Map<String, Int> ) =
         value.toList().joinToString( separator = SEPARATOR ) { "${it.first}$KEY_VALUE_DIVIDER${it.second}" }
