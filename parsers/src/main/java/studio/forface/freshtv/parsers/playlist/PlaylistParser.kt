@@ -17,8 +17,7 @@ import studio.forface.freshtv.parsers.playlist.ParsablePlaylistItem.Result
 internal class PlaylistParser {
 
     /** Parse the [playlistContent] and submit items via the given [SendChannel]s */
-    @Synchronized
-    suspend fun parse(
+    suspend operator fun invoke(
             playlistPath: String,
             playlistContent: String,
             channels: SendChannel<IChannel>,
@@ -80,9 +79,3 @@ internal class PlaylistParser {
         }
     }
 }
-
-/**
- * An invoke function for execute a [block] within a [PlaylistParser]
- * @return [T]
- */
-internal suspend operator fun <T> PlaylistParser.invoke( block: suspend PlaylistParser.() -> T ) = block()

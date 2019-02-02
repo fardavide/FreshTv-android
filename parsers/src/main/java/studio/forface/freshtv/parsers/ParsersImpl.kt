@@ -12,8 +12,8 @@ import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.errors.ParsingTvGuideError
 import studio.forface.freshtv.domain.gateways.Parsers
+import studio.forface.freshtv.parsers.epg.EpgParser
 import studio.forface.freshtv.parsers.playlist.PlaylistParser
-import studio.forface.freshtv.parsers.playlist.invoke
 
 /**
  * @author Davide Giuseppe Farella.
@@ -21,7 +21,8 @@ import studio.forface.freshtv.parsers.playlist.invoke
  */
 internal class ParsersImpl(
     private val contentResolver: FileContentResolver = FileContentResolver(),
-    private val parser: PlaylistParser = PlaylistParser()
+    private val epgParser: EpgParser = EpgParser(),
+    private val playlistParser: PlaylistParser = PlaylistParser()
 ): Parsers {
 
     /** Obtain [TvGuide]s and eventual [ParsingTvGuideError]s from the given [Epg] */
@@ -36,7 +37,7 @@ internal class ParsersImpl(
         launch { for ( guide in guidesChannel ) onTvGuide( guide ) }
         launch { for( error in errorsChannel ) onError( error ) }
 
-        TODO( "Parser not implemented" )
+        epgParser( epg.path, contentResolver( epg ), guidesChannel, errorsChannel )
     }
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */
@@ -54,12 +55,6 @@ internal class ParsersImpl(
         launch { for( group in groupsChannel ) onGroup( group ) }
         launch { for( error in errorsChannel ) onError( error ) }
 
-        parser { parse(
-                playlist.path,
-                contentResolver( playlist ),
-                channelsChannel,
-                groupsChannel,
-                errorsChannel
-        ) }
+        playlistParser( playlist.path, contentResolver( playlist ), channelsChannel, groupsChannel, errorsChannel )
     }
 }

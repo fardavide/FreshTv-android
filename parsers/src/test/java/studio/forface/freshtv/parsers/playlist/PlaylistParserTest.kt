@@ -32,7 +32,7 @@ class PlaylistParserTest {
         launch { for( group in groupsChannel ) groups += group }
         launch { for( error in errorsChannel ) errors += error }
 
-        parser.parse("", mockPlaylistContent, channelsChannel, groupsChannel, errorsChannel  )
+        parser("", mockPlaylistContent, channelsChannel, groupsChannel, errorsChannel  )
 
         println( channels )
 

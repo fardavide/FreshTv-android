@@ -2,8 +2,6 @@
 
 package studio.forface.freshtv.parsers.playlist
 
-import kotlinx.coroutines.coroutineScope
-
 /**
  * @author Davide Giuseppe Farella.
  * An inline class that represents the content of a Playlist and expose [extractItems] for make a first parsing on the
@@ -24,10 +22,9 @@ internal inline class ParsablePlaylist( private val s: String ) {
     }
 
     /** @return a [List] of [ParsablePlaylistItem] extracted from the content of [ParsablePlaylist] */
-    suspend fun extractItems() : List<ParsablePlaylistItem> = coroutineScope {
-        s.removePrefix( HEADER ).removeSuffix( FOOTER )
-            .split( CHANNEL_HEAD )
-            .map { ParsablePlaylistItem( it.trim() ) }
-            .toList()
-    }
+    fun extractItems() : List<ParsablePlaylistItem> = s
+        .removePrefix( HEADER ).removeSuffix( FOOTER )
+        .split( CHANNEL_HEAD )
+        .map { ParsablePlaylistItem( it.trim() ) }
+        .toList()
 }
