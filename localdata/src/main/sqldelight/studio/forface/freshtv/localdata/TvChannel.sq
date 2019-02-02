@@ -59,4 +59,4 @@ selectByGroup:
 selectByPlaylistPath:
   SELECT *
   FROM tvChannelPojo
-  WHERE playlistPaths LIKE :path;
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)";

@@ -7,10 +7,10 @@ import studio.forface.freshtv.domain.utils.toEpochMillis
 import studio.forface.freshtv.domain.utils.toEpochSecond
 
 /** A [String] separator for divide items while encoding/decoding to/from [String] */
-private const val SEPARATOR = "-$-"
+private const val SEPARATOR = ", "
 
 /** A [String] separator for divide key and value while encoding/decoding to/from [String] */
-private const val KEY_VALUE_DIVIDER = "-%-"
+private const val KEY_VALUE_DIVIDER = " : "
 
 /** A [ColumnAdapter] for [LocalDateTime] */
 object DateTimeColumnAdapter : ColumnAdapter<LocalDateTime, Long> {
