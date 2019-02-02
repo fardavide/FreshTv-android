@@ -4,6 +4,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
+import studio.forface.freshtv.domain.entities.SourceFile.*
 import studio.forface.freshtv.domain.errors.ChannelNotImplementedException
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.gateways.LocalData.Result
@@ -18,12 +19,12 @@ import studio.forface.freshtv.localdata.sources.*
 internal class LocalDataImpl(
     private val channelGroups: ChannelGroupsLocalSource,
     private val movieChannels: MovieChannelsLocalSource,
-    private val playlists: PlaylistsLocalSource,
+    private val sourceFiles: SourceFilesLocalSource,
     private val tvChannels: TvChannelsLocalSource,
     private val tvGuides: TvGuidesLocalSource,
     private val channelGroupMapper: ChannelGroupPojoMapper = ChannelGroupPojoMapper(),
     private val movieChannelMapper: MovieChannelPojoMapper = MovieChannelPojoMapper(),
-    private val playlistMapper: PlaylistPojoMapper = PlaylistPojoMapper(),
+    private val sourceFileMapper: SourceFilePojoMapper = SourceFilePojoMapper(),
     private val tvChannelMapper: TvChannelPojoMapper = TvChannelPojoMapper(),
     private val tvGuideMapper: TvGuidePojoMapper = TvGuidePojoMapper()
 ) : LocalData {
@@ -53,9 +54,9 @@ internal class LocalDataImpl(
         channelGroups.createChannelGroup( channelGroupMapper { group.toPojo() } )
     }
 
-    /** Store a [Playlist] in [PlaylistsLocalSource] */
+    /** Store a [Playlist] in [SourceFilesLocalSource] */
     private fun createPlaylist( playlist: Playlist) {
-        playlists.createPlaylist( playlistMapper { playlist.toPojo() } )
+        sourceFiles.create( sourceFileMapper { playlist.toPojo() } )
     }
 
     /** Store a [TvGuide] in [TvGuidesLocalSource] */
@@ -82,11 +83,15 @@ internal class LocalDataImpl(
 
     /** Delete the stored [Playlist] with the given [Playlist.path] */
     override fun deletePlaylist( playlistPath: String ) {
-        playlists.delete( playlistPath )
+        sourceFiles.delete( playlistPath )
     }
 
     /** Delete all the [TvGuide]s from Local Source with [TvGuide.endTime] less that the given [dateTime] */
     override fun deleteTvGuidesBefore( dateTime: LocalDateTime ) = tvGuides.deleteGuidesBefore( dateTime )
+
+    /** @return all the stored [Epg]s */
+    override fun epgs(): List<Epg> =
+        sourceFiles.allEpgs().map { sourceFileMapper { it.toEntity() } as Epg }
 
     /**
      * Merge the given [newChannel] with the already existing [IChannel] with the same [IChannel.id]
@@ -134,8 +139,8 @@ internal class LocalDataImpl(
      * @return [Result.SUCCESS] if the operation is succeed, else [Result.FAILURE] if some exception occurs while
      * retrieving the old [ChannelGroup]
      */
-    private fun mergePlaylist( newPlaylist: Playlist ): Result {
-        val oldPlaylist = handle { playlistMapper { playlists.playlist( newPlaylist.path ).toEntity() } }
+    private fun mergePlaylist( newPlaylist: Playlist): Result {
+        val oldPlaylist = handle { sourceFileMapper { sourceFiles.playlist( newPlaylist.path ).toEntity() as Playlist } }
         oldPlaylist ?: return Result.FAILURE
         updatePlaylist(oldPlaylist + newPlaylist )
         return Result.SUCCESS
@@ -160,7 +165,7 @@ internal class LocalDataImpl(
 
     /** @return all the stored [Playlist]s */
     override fun playlists(): List<Playlist> =
-        playlists.all().map { playlistMapper { it.toEntity() } }
+        sourceFiles.allPlaylists().map { sourceFileMapper { it.toEntity() } as Playlist }
 
     /** Store the given [IChannel] in [ChannelsLocalSource]s */
     override fun storeChannel( channel: IChannel ) {
@@ -222,7 +227,7 @@ internal class LocalDataImpl(
 
     /** Update a [Playlist] in Local Source */
     override fun updatePlaylist( playlist: Playlist ) {
-        playlists.updatePlaylist( playlistMapper { playlist.toPojo() } )
+        sourceFiles.update( sourceFileMapper { playlist.toPojo() } )
     }
 
     /** Update a [TvGuide] in [TvGuidesLocalSource] */

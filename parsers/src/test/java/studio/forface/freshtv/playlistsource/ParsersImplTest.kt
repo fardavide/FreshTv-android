@@ -6,14 +6,15 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import studio.forface.freshtv.domain.entities.Playlist
-import studio.forface.freshtv.playlistsource.parser.PlaylistParser
+import studio.forface.freshtv.domain.entities.SourceFile
+import studio.forface.freshtv.domain.entities.SourceFile.Playlist
+import studio.forface.freshtv.playlistsource.playlist.PlaylistParser
 
 /**
  * @author Davide Giuseppe Farella
- * Test class for [PlaylistSourceImpl]
+ * Test class for [ParsersImpl]
  */
-internal class PlaylistSourceImplTest {
+internal class ParsersImplTest {
 
     private val mockLocal = mockk<FileContentResolver.Local> {
         coEvery { this@mockk(any()) } answers { mockPlaylistContent }
@@ -23,7 +24,7 @@ internal class PlaylistSourceImplTest {
         coEvery { this@mockk(any()) } answers { mockPlaylistContent }
     }
 
-    private val source = PlaylistSourceImpl(
+    private val source = ParsersImpl(
             FileContentResolver( mockLocal, mockRemote ),
             PlaylistParser()
     )
@@ -36,7 +37,7 @@ internal class PlaylistSourceImplTest {
 
         runBlocking {
             source.readFrom(
-                    Playlist("", Playlist.Type.LOCAL ),
+                    Playlist("", SourceFile.Type.LOCAL ),
                     { channelCalled = true },
                     { groupCalled = true },
                     { errorCalled = true }
@@ -54,7 +55,7 @@ internal class PlaylistSourceImplTest {
     fun `readFrom remotePlaylist fromRemoteSource`() {
         runBlocking {
             source.readFrom(
-                Playlist("", Playlist.Type.REMOTE ),
+                Playlist("", SourceFile.Type.REMOTE ),
                 {}, {}, {}
             )
         }
@@ -65,11 +66,11 @@ internal class PlaylistSourceImplTest {
 
     // @Test // TODO test only manually due to http call
     fun realTest() {
-        val source = PlaylistSourceImpl()
+        val source = ParsersImpl()
 
         runBlocking {
             source.readFrom(
-                Playlist("https://sourcetv.info/dl/01/it29.m3u", Playlist.Type.REMOTE ),
+                Playlist("https://sourcetv.info/dl/01/it29.m3u", SourceFile.Type.REMOTE ),
                 { println( it ) },
                 { println( it ) },
                 { println( "${it.reason.name} - ${it.rawChannel}" ) }

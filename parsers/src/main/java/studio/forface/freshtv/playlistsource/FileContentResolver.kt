@@ -2,32 +2,36 @@ package studio.forface.freshtv.playlistsource
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import studio.forface.freshtv.domain.entities.Playlist
+import studio.forface.freshtv.domain.entities.SourceFile
+import studio.forface.freshtv.domain.entities.SourceFile.Epg
+import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.playlistsource.FileContentResolver.Source
 import java.io.File
 
 /**
  * @author Davide Giuseppe Farella
- * A class for retrieve the content of a given file [Playlist] of [X] from the appropriate [Source] TODO EPG
+ * A class for retrieve the content of a given [SourceFile] from the appropriate [Source]
  */
 internal class FileContentResolver(
     private val local: FileContentResolver.Local = Local,
     private val remote: FileContentResolver.Remote = Remote( HttpClient() )
 ) {
 
-    /** @return the [String] content of the given [Playlist] */
-    suspend operator fun invoke( playlist: Playlist ): String {
-        val source = when( playlist.type ) {
-            Playlist.Type.LOCAL -> local
-            Playlist.Type.REMOTE -> remote
+    /** @return the [String] content of the given [path] with the given [type] */
+    private suspend operator fun invoke( type: SourceFile.Type, path: String ): String {
+        val source = when( type ) {
+            SourceFile.Type.LOCAL -> local
+            SourceFile.Type.REMOTE -> remote
         }
-        return source( playlist.path )
+        return source( path )
     }
 
-    /** @return the [String] content of the given TODO */
-    suspend operator fun invoke( epg: Nothing ): String {
-        return TODO()
-    }
+    /** @return the [String] content of the given [Playlist] */
+    suspend operator fun invoke( playlist: Playlist ) = this ( playlist.type, playlist.path )
+
+    /** @return the [String] content of the given [Epg] */
+    suspend operator fun invoke( epg: Epg ) =  this ( epg.type, epg.path )
+
 
     /** An interface for retrieve the content of a given [String] path */
     interface Source {

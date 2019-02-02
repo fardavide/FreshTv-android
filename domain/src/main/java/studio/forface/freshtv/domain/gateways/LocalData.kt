@@ -4,7 +4,8 @@ import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
 import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.domain.utils.or
-import studio.forface.freshtv.domain.entities.Playlist
+import studio.forface.freshtv.domain.entities.SourceFile.Epg
+import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 
 /**
  * @author Davide Giuseppe Farella.
@@ -33,6 +34,9 @@ interface LocalData {
 
     /** Delete all the [TvGuide]s from Local Source with [TvGuide.endTime] less that the given [dateTime] */
     fun deleteTvGuidesBefore( dateTime: LocalDateTime )
+
+    /** @return all the stored [Epg]s */
+    fun epgs(): List<Epg>
 
     /** @return the [MovieChannel] with the given [channelId] */
     fun movieChannel( channelId: String ): MovieChannel

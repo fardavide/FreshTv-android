@@ -4,7 +4,7 @@ include(":buildSrc")
 
 include(":domain")
 include(":localdata")
-include(":playlistsource" )
+include(":parsers" )
 include(":androiddatabase" )
 
 include(":app" )

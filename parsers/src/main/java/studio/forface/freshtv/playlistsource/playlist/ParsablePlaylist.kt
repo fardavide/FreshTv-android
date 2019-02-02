@@ -1,6 +1,6 @@
 @file:Suppress("EXPERIMENTAL_FEATURE_WARNING")
 
-package studio.forface.freshtv.playlistsource.parser
+package studio.forface.freshtv.playlistsource.playlist
 
 import kotlinx.coroutines.coroutineScope
 

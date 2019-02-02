@@ -1,7 +1,7 @@
 package studio.forface.freshtv.domain.usecases
 
 import studio.forface.freshtv.domain.entities.IChannel
-import studio.forface.freshtv.domain.entities.Playlist
+import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.gateways.LocalData
 
 /**

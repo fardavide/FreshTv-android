@@ -1,4 +1,4 @@
-package studio.forface.freshtv.playlistsource.parser
+package studio.forface.freshtv.playlistsource.playlist
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -7,7 +7,6 @@ import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.playlistsource.mockPlaylistContent
-import kotlin.system.measureTimeMillis
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

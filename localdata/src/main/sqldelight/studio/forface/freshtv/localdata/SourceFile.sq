@@ -1,0 +1,58 @@
+import java.lang.Boolean;
+
+-- noinspection SqlIdentifierForFile
+-- noinspection SqlWithoutWhereForFile
+
+CREATE TABLE sourceFilePojo (
+  path TEXT NOT NULL PRIMARY KEY,
+  type TEXT NOT NULL,
+  name TEXT NOT NULL,
+  souceType TEXT NOT NULL
+);
+
+CREATE INDEX sourcefile_name ON sourceFilePojo( name );
+
+insert:
+  INSERT INTO sourceFilePojo( path, type, name, souceType )
+  VALUES ( ?, ?, ?, ? );
+
+update:
+  UPDATE sourceFilePojo
+  SET path = :path, name = ?
+  WHERE path = :path;
+
+deleteAll:
+  DELETE FROM sourceFilePojo;
+
+delete:
+  DELETE FROM sourceFilePojo
+  WHERE path = ?;
+
+count:
+  SELECT count(*) FROM sourceFilePojo;
+
+selectAll:
+  SELECT *
+  FROM sourceFilePojo;
+
+selectAllByType:
+  SELECT *
+  FROM sourceFilePojo
+  WHERE type = ?;
+
+select:
+  SELECT *
+  FROM sourceFilePojo
+  LIMIT :limit OFFSET :offset;
+
+selectByType:
+  SELECT *
+  FROM sourceFilePojo
+  WHERE type = ?;
+
+selectByPath:
+  SELECT  *
+  FROM sourceFilePojo
+  WHERE type = ?
+  AND path = ?
+  LIMIT 1;

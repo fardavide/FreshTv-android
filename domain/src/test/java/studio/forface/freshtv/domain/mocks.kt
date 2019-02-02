@@ -3,14 +3,12 @@ package studio.forface.freshtv.domain
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.slot
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
+import studio.forface.freshtv.domain.entities.SourceFile.*
 import studio.forface.freshtv.domain.errors.ChannelNotImplementedException
 import studio.forface.freshtv.domain.gateways.LocalData
-import studio.forface.freshtv.domain.gateways.PlaylistSource
+import studio.forface.freshtv.domain.gateways.Parsers
 import studio.forface.freshtv.domain.utils.set
 
 private val mockNow = LocalDateTime.now()
@@ -38,7 +36,7 @@ val mockMovieChannel = MovieChannel(
 
 val mockPlaylist = Playlist (
     path = "path/to/playlist",
-    type = Playlist.Type.LOCAL,
+    type = SourceFile.Type.LOCAL,
     name = "My Playlist"
 )
 
@@ -60,7 +58,7 @@ val mockTvGuide = TvGuide(
     endTime = mockNow
 )
 
-val mockPlaylistSource = mockk<PlaylistSource> {
+val mockPlaylistSource = mockk<Parsers> {
     coEvery { readFrom( any(), any(), any(), any() ) } answers {
         this.fieldValue
     }

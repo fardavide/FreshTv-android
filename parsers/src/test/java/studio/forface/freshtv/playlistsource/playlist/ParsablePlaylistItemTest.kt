@@ -1,4 +1,4 @@
-package studio.forface.freshtv.playlistsource.parser
+package studio.forface.freshtv.playlistsource.playlist
 
 import org.junit.Test
 import kotlin.system.measureNanoTime

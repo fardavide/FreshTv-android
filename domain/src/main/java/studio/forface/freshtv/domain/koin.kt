@@ -24,7 +24,7 @@ val useCases = module {
     factory { IncrementChannelMediaFailure( localData = get() ) }
 
     /* Refresh */
-    factory { RefreshPlaylists( localData = get(), playlistSource = get() ) }
+    factory { RefreshPlaylists( localData = get(), parsers = get() ) }
 
     /* Remove */
     factory { RemoveChannelMediaUrl( localData = get() ) }

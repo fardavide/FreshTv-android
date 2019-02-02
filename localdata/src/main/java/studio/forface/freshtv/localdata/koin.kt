@@ -12,7 +12,7 @@ val localData = module {
     factory<LocalData> { LocalDataImpl(
             channelGroups = get(),
             movieChannels = get(),
-            playlists = get(),
+            sourceFiles = get(),
             tvChannels = get(),
             tvGuides = get()
     ) }
@@ -20,7 +20,7 @@ val localData = module {
     /* Sources */
     factory { ChannelGroupsLocalSource(get()) }
     factory { MovieChannelsLocalSource(get()) }
-    factory { PlaylistsLocalSource(get()) }
+    factory { SourceFilesLocalSource(get()) }
     factory { TvChannelsLocalSource(get()) }
     factory { TvGuidesLocalSource(get()) }
 
@@ -28,7 +28,7 @@ val localData = module {
     val database: Database = get()
     factory { database.channelGroupQueries }
     factory { database.movieChannelQueries }
-    factory { database.playlistQueries }
+    factory { database.sourceFileQueries }
     factory { database.tvChannelQueries }
     factory { database.tvGuideQueries }
 

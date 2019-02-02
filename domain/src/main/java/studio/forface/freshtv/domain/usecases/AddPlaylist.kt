@@ -1,6 +1,7 @@
 package studio.forface.freshtv.domain.usecases
 
-import studio.forface.freshtv.domain.entities.Playlist
+import studio.forface.freshtv.domain.entities.SourceFile
+import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.gateways.LocalData
 
 /**
@@ -12,7 +13,7 @@ class AddPlaylist(
 ) {
 
     /** Add [Playlist] with the given [path], [type] and optional [name] */
-    operator fun invoke( path: String, type: Playlist.Type, name: String = path ) {
+    operator fun invoke( path: String, type: SourceFile.Type, name: String = path ) {
         val playList = Playlist( path, type, name)
         localData.storePlaylist( playList )
     }
