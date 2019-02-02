@@ -7,7 +7,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import studio.forface.freshtv.domain.entities.Playlist
-import studio.forface.freshtv.domain.gateways.invoke
 import studio.forface.freshtv.playlistsource.parser.PlaylistParser
 
 /**
@@ -16,16 +15,16 @@ import studio.forface.freshtv.playlistsource.parser.PlaylistParser
  */
 internal class PlaylistSourceImplTest {
 
-    private val mockLocal = mockk<PlaylistContentResolver.Local> {
+    private val mockLocal = mockk<FileContentResolver.Local> {
         coEvery { this@mockk(any()) } answers { mockPlaylistContent }
     }
 
-    private val mockRemote = mockk<PlaylistContentResolver.Remote> {
+    private val mockRemote = mockk<FileContentResolver.Remote> {
         coEvery { this@mockk(any()) } answers { mockPlaylistContent }
     }
 
     private val source = PlaylistSourceImpl(
-            PlaylistContentResolver( mockLocal, mockRemote ),
+            FileContentResolver( mockLocal, mockRemote ),
             PlaylistParser()
     )
 

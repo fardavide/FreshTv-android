@@ -8,22 +8,22 @@ import org.threeten.bp.LocalDateTime
  */
 data class TvGuide (
 
-        /** The [String] id of the Channel */
+    /** The [String] id of the Channel */
     val id: Long,
 
-        /** The [String] id of the related Tv Channel */
+    /** The [String] id of the related Tv Channel */
     val channelId: String,
 
-        /** The [String] name of the Tv Program */
+    /** The [String] name of the Tv Program */
     val programName: String,
 
-        /** The [String] description of the Tv Program */
+    /** The [String] description of the Tv Program */
     val programDescription: String,
 
-        /** A [LocalDateTime] representing the start time of the Tv Program */
+    /** A [LocalDateTime] representing the start time of the Tv Program */
     val startTime: LocalDateTime,
 
-        /** A [LocalDateTime] representing the end time of the Tv Program */
+    /** A [LocalDateTime] representing the end time of the Tv Program */
     val endTime: LocalDateTime
 
 ) {

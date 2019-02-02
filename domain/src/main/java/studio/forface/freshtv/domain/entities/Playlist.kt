@@ -5,9 +5,9 @@ package studio.forface.freshtv.domain.entities
  * An entity for a Playlist of Channels
  */
 data class Playlist (
-        val path: String,
-        val type: Type,
-        val name: String = path
+    val path: String,
+    val type: Type,
+    val name: String = path
 ) {
 
     /**

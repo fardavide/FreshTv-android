@@ -23,6 +23,9 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
         queries.deleteAll()
     }
 
+    /** Delete all the stored Guides [TvGuidePojo] with [TvGuidePojo.endTime] less than the given [dateTime] */
+    fun deleteGuidesBefore( dateTime: LocalDateTime ) = queries.deleteWithEndTimeLessThan( dateTime )
+
     /** @return the [TvGuidePojo] with the given [id] */
     fun guide( id: Long ): TvGuidePojo = queries.selectById( id ).executeAsOne()
 
@@ -39,7 +42,7 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
      * in range of [from] and [to], or which [from] or [to] is in range of [TvGuidePojo.startTime] and
      * [TvGuidePojo.endTime]
      */
-    fun guidesForChannel(channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<TvGuidePojo> {
+    fun guidesForChannel( channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<TvGuidePojo> {
         return queries.selectByChannelId(
             channelId,
             from = from ?: LocalDateTimeHelper.ofEpochSecond( Long.MIN_VALUE ),

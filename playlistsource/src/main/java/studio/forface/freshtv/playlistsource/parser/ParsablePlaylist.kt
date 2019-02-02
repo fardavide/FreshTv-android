@@ -7,7 +7,7 @@ import kotlinx.coroutines.coroutineScope
 /**
  * @author Davide Giuseppe Farella.
  * An inline class that represents the content of a Playlist and expose [extractItems] for make a first parsing on the
- * content and split it in [ParsableItem]s.
+ * content and split it in [ParsablePlaylistItem]s.
  */
 internal inline class ParsablePlaylist( private val s: String ) {
 
@@ -23,11 +23,11 @@ internal inline class ParsablePlaylist( private val s: String ) {
         const val CHANNEL_HEAD = "#EXTINF:-1"
     }
 
-    /** @return a [List] of [ParsableItem] extracted from the content of [ParsablePlaylist] */
-    suspend fun extractItems() : List<ParsableItem> = coroutineScope {
+    /** @return a [List] of [ParsablePlaylistItem] extracted from the content of [ParsablePlaylist] */
+    suspend fun extractItems() : List<ParsablePlaylistItem> = coroutineScope {
         s.removePrefix( HEADER ).removeSuffix( FOOTER )
             .split( CHANNEL_HEAD )
-            .map { ParsableItem( it.trim() ) }
+            .map { ParsablePlaylistItem( it.trim() ) }
             .toList()
     }
 }

@@ -8,7 +8,7 @@ import studio.forface.freshtv.domain.entities.MovieChannel
 import studio.forface.freshtv.domain.entities.TvChannel
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.utils.forEachAsync
-import studio.forface.freshtv.playlistsource.parser.ParsableItem.Result
+import studio.forface.freshtv.playlistsource.parser.ParsablePlaylistItem.Result
 
 /**
  * @author Davide Giuseppe Farella.

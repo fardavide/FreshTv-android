@@ -3,16 +3,16 @@ package studio.forface.freshtv.playlistsource
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import studio.forface.freshtv.domain.entities.Playlist
-import studio.forface.freshtv.playlistsource.PlaylistContentResolver.Source
+import studio.forface.freshtv.playlistsource.FileContentResolver.Source
 import java.io.File
 
 /**
  * @author Davide Giuseppe Farella
- * A class for retrieve the content of a given [Playlist] from the appropriate [Source]
+ * A class for retrieve the content of a given file [Playlist] of [X] from the appropriate [Source] TODO EPG
  */
-internal class PlaylistContentResolver(
-        private val local: PlaylistContentResolver.Local = Local,
-        private val remote: PlaylistContentResolver.Remote = Remote( HttpClient() )
+internal class FileContentResolver(
+    private val local: FileContentResolver.Local = Local,
+    private val remote: FileContentResolver.Remote = Remote( HttpClient() )
 ) {
 
     /** @return the [String] content of the given [Playlist] */
@@ -24,6 +24,10 @@ internal class PlaylistContentResolver(
         return source( playlist.path )
     }
 
+    /** @return the [String] content of the given TODO */
+    suspend operator fun invoke( epg: Nothing ): String {
+        return TODO()
+    }
 
     /** An interface for retrieve the content of a given [String] path */
     interface Source {

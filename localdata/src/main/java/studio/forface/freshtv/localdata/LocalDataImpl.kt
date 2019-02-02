@@ -85,6 +85,9 @@ internal class LocalDataImpl(
         playlists.delete( playlistPath )
     }
 
+    /** Delete all the [TvGuide]s from Local Source with [TvGuide.endTime] less that the given [dateTime] */
+    override fun deleteTvGuidesBefore( dateTime: LocalDateTime ) = tvGuides.deleteGuidesBefore( dateTime )
+
     /**
      * Merge the given [newChannel] with the already existing [IChannel] with the same [IChannel.id]
      * @return [Result.SUCCESS] if the operation is succeed, else [Result.FAILURE] if some exception occurs while

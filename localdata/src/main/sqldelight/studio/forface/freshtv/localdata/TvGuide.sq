@@ -23,6 +23,10 @@ update:
 deleteAll:
   DELETE FROM tvGuidePojo;
 
+deleteWithEndTimeLessThan:
+  DELETE FROM tvGuidePojo
+  WHERE endTime < ?;
+
 count:
   SELECT count(*) FROM tvGuidePojo;
 

@@ -1,6 +1,5 @@
 package studio.forface.freshtv.playlistsource
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -17,8 +16,8 @@ import studio.forface.freshtv.playlistsource.parser.invoke
  * Implementation of [PlaylistSource]
  */
 internal class PlaylistSourceImpl(
-        private val contentResolver: PlaylistContentResolver = PlaylistContentResolver(),
-        private val parser: PlaylistParser = PlaylistParser()
+    private val contentResolver: FileContentResolver = FileContentResolver(),
+    private val parser: PlaylistParser = PlaylistParser()
 ): PlaylistSource {
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */

@@ -9,10 +9,10 @@ import studio.forface.freshtv.domain.utils.notBlankOrNull
 
 /**
  * @author Davide Giuseppe Farella.
- * An inline class that represents the content of a single item in Playlist and that will result a [ParsableItem.Result]
+ * An inline class that represents the content of a single item in Playlist and that will result a [ParsablePlaylistItem.Result]
  * containing the entity if success, or error.
  */
-internal inline class ParsableItem( private val s: String ) {
+internal inline class ParsablePlaylistItem(private val s: String ) {
 
     private companion object {
 
@@ -32,7 +32,7 @@ internal inline class ParsableItem( private val s: String ) {
     /** @return a [Result.Error] with [s] and the given [Reason] */
     private fun e( reason: Reason ) = Result( ParsingChannelError( s, reason ) )
 
-    /** @return a [ParsableItem.Result] containing the entity just created if success or the error */
+    /** @return a [ParsablePlaylistItem.Result] containing the entity just created if success or the error */
     operator fun invoke( playlistPath: String ): Result {
 
         val lines = s.lines()
@@ -51,13 +51,25 @@ internal inline class ParsableItem( private val s: String ) {
             return e( Reason.ExternalPlayerRequired )
 
         val tempId = s.extract( PARAM_ID )
-        val tempName = params.substringAfterLast(',' ).notBlankOrNull()
         val groupName = s.extract( PARAM_GROUP ) ?: IChannel.NO_GROUP_NAME
         val imageUrl = s.extract( PARAM_LOGO )?.let { Url( it ).validOrNull<Url>() }
+        val tempName = params.substringAfterLast(',' ).notBlankOrNull()?.trim()
+
+        // Commented due to worst regex performance
+        //val regexMatch =
+        //    """$PARAM_ID="([^\\"]*)".*$PARAM_GROUP="([^\\"]*)".*$PARAM_LOGO="([^\\"]*)",(.*)""".toRegex()
+        //        .find( s ) ?: return e( Reason.WrongFormat )
+        //
+        //val ( tempId, tempGroupName, tempImageUrl, tempName ) = regexMatch
+        //    .groupValues.drop(1 ).map { it.notBlankOrNull() }
 
         // Return if both tempId and tempName are null
         if ( tempId == null && tempName == null )
             return e( Reason.NoNameAndId )
+
+        // Commented due to worst regex performance
+        //val groupName = tempGroupName ?: IChannel.NO_GROUP_NAME
+        //val imageUrl = tempImageUrl?.let { Url( it ).validOrNull<Url>() }
 
         val id = ( tempId ?: tempName )!!.toLowerCase()
         val name = ( tempName ?: tempId )!!
@@ -74,13 +86,13 @@ internal inline class ParsableItem( private val s: String ) {
         if ( ! this.contains( paramName ) ) return null
         val indexOfParam = indexOf( paramName )
         val param = substring( indexOfParam ).split('"' )[1]
-        return if ( param.isBlank() ) null else param
+        return param.notBlankOrNull()?.trim()
     }
 
     /** An enum for the type of [IChannel] */
     private enum class ChannelType { Movie, Tv }
 
-    /** A sealed class for the result of [ParsableItem] */
+    /** A sealed class for the result of [ParsablePlaylistItem] */
     internal sealed class Result {
 
         companion object {

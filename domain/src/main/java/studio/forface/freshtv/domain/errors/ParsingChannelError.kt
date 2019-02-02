@@ -8,9 +8,20 @@ data class ParsingChannelError( val rawChannel: String, val reason: Reason ) {
 
     /** An enum class of reasons for [ParsingChannelError] */
     enum class Reason {
+
+        /** The channel requires an external player */
         ExternalPlayerRequired,
+
+        /** The channel doesn't have a link */
         MissingLink,
+
+        /** Both name and id are missing in the channel */
         NoNameAndId,
-        PluginSchema
+
+        /** The link of the channel has a "plugin://" schema */
+        PluginSchema,
+
+        /** The channel has a wrong format */
+        WrongFormat
     }
 }

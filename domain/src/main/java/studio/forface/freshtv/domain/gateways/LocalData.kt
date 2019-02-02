@@ -31,6 +31,9 @@ interface LocalData {
     /** Delete the stored [Playlist] with the given [Playlist.path] */
     fun deletePlaylist( playlistPath: String )
 
+    /** Delete all the [TvGuide]s from Local Source with [TvGuide.endTime] less that the given [dateTime] */
+    fun deleteTvGuidesBefore( dateTime: LocalDateTime )
+
     /** @return the [MovieChannel] with the given [channelId] */
     fun movieChannel( channelId: String ): MovieChannel
 

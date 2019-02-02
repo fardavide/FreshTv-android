@@ -11,6 +11,9 @@ val useCases = module {
     factory { AddChannelMediaUrl( localData = get() ) }
     factory { AddPlaylist( localData = get() ) }
 
+    /* Delete */
+    factory { DeleteOldGuides( localData = get() ) }
+
     /* Get */
     factory { GetMovieChannelGroups( localData = get() ) }
     factory { GetMovieChannels( localData = get() ) }
