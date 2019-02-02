@@ -1,4 +1,4 @@
-package studio.forface.freshtv.playlistsource
+package studio.forface.freshtv.parsers
 
 import org.koin.dsl.module.module
 import org.koin.dsl.module.Module

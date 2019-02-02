@@ -1,11 +1,11 @@
-package studio.forface.freshtv.playlistsource
+package studio.forface.freshtv.parsers
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
-import studio.forface.freshtv.playlistsource.FileContentResolver.Source
+import studio.forface.freshtv.parsers.FileContentResolver.Source
 import java.io.File
 
 /**

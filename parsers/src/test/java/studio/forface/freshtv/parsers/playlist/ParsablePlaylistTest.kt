@@ -1,7 +1,7 @@
-package studio.forface.freshtv.playlistsource.playlist
+package studio.forface.freshtv.parsers.playlist
 
 import kotlinx.coroutines.runBlocking
-import studio.forface.freshtv.playlistsource.mockPlaylistContent
+import studio.forface.freshtv.parsers.mockPlaylistContent
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 

@@ -1,6 +1,6 @@
 @file:Suppress("EXPERIMENTAL_FEATURE_WARNING")
 
-package studio.forface.freshtv.playlistsource.playlist
+package studio.forface.freshtv.parsers.playlist
 
 import studio.forface.freshtv.domain.entities.*
 import studio.forface.freshtv.domain.errors.ParsingChannelError

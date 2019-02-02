@@ -1,4 +1,4 @@
-package studio.forface.freshtv.playlistsource
+package studio.forface.freshtv.parsers
 
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -8,7 +8,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
-import studio.forface.freshtv.playlistsource.playlist.PlaylistParser
+import studio.forface.freshtv.parsers.playlist.PlaylistParser
 
 /**
  * @author Davide Giuseppe Farella

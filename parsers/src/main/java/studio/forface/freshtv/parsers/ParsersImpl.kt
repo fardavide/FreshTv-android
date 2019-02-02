@@ -1,4 +1,4 @@
-package studio.forface.freshtv.playlistsource
+package studio.forface.freshtv.parsers
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
@@ -12,8 +12,8 @@ import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.errors.ParsingTvGuideError
 import studio.forface.freshtv.domain.gateways.Parsers
-import studio.forface.freshtv.playlistsource.playlist.PlaylistParser
-import studio.forface.freshtv.playlistsource.playlist.invoke
+import studio.forface.freshtv.parsers.playlist.PlaylistParser
+import studio.forface.freshtv.parsers.playlist.invoke
 
 /**
  * @author Davide Giuseppe Farella.

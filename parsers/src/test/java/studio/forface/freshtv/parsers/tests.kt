@@ -1,4 +1,4 @@
-package studio.forface.freshtv.playlistsource
+package studio.forface.freshtv.parsers
 
 val mockPlaylistContent = """
     #EXTM3U
