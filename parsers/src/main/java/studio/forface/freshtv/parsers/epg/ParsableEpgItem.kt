@@ -7,6 +7,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.errors.ParsingEpgError.Reason
+import studio.forface.freshtv.domain.utils.optWith
 import studio.forface.freshtv.parsers.utils.*
 
 /**
@@ -78,7 +79,7 @@ internal inline class ParsableEpgItem( private val s: String ) {
         val category =      root childValue PARAM_CATEGORY
         val year =          ( root optChildValue PARAM_YEAR )?.toInt()
         val country =       root optChildValue PARAM_COUNTRY
-        val credits =       ( root optChild PARAM_CREDITS )?.invoke {
+        val credits =       optWith( root optChild PARAM_CREDITS ) {
             TvGuide.Credits(
                     it childValue PARAM_DIRECTOR,
                     it childValue PARAM_ACTOR

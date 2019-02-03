@@ -10,13 +10,17 @@ package studio.forface.freshtv.domain.utils
  *
  * @return OPTIONAL [T]
  */
-fun <T: Any?> handle( default: T? = null, block: () -> T ) : T? {
+inline fun <T: Any?> handle( default: T? = null, block: () -> T ) : T? {
     return  try {
         block()
     } catch ( t: Throwable ) {
         default
     }
 }
+
+/** Same as `with`, but execute [block] only if [receiver] is not null */
+inline fun <T: Any, V> optWith( receiver: T?, block: (T) -> V ) =
+        receiver?.let { block( receiver ) }
 
 /**
  * An infix function for use `or` instead of the elvis operator ( `?:` ).
@@ -30,7 +34,7 @@ infix fun <T: Any> T?.or( other: T ) : T = this ?: other
  * An infix function for use `or` instead of the elvis operator ( `?:` ) with a lambda.
  * @return NOT NULL [T].
  */
-infix fun <T: Any> T?.or( block: () -> T ) : T = this ?: block()
+inline infix fun <T: Any> T?.or( block: () -> T ) : T = this ?: block()
 
 /** Wait until [evaluation] is true */
 fun wait( evaluation: () -> Boolean ) {

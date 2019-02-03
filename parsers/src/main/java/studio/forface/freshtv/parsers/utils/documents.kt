@@ -6,8 +6,6 @@ import org.w3c.dom.Node
 import java.nio.charset.Charset
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
-import kotlin.reflect.KFunction1
-import kotlin.reflect.KFunction
 
 /** An instance of [DocumentBuilder] for read xml */
 private val documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
@@ -58,12 +56,9 @@ internal infix fun Node.optChildValue( nodeName: String ) =
         findChild { it.nodeName == nodeName }?.firstChild?.nodeValue
 
 /** @return a [Node] child if [matcher] is true, return null if no [Node] if found for [matcher] */
-internal fun Node.findChild( matcher: (Node) -> Boolean ): Node? {
+internal inline fun Node.findChild( matcher: (Node) -> Boolean ): Node? {
     val children = childNodes
     for ( index in 0..children.length )
         children.item( index )?.let { if ( matcher( it ) ) return it }
     return null
 }
-
-/** A function that runs a [block] with [Node] as parameter */
-internal operator fun <T> Node.invoke( block: (child: Node) -> T ) = block(this )
