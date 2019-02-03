@@ -52,8 +52,8 @@ val mockTvChannel = TvChannel(
 val mockTvGuide = TvGuide(
     id = 123,
     channelId = "tvChannelId",
-    programName = "program name",
-    programDescription = "Description",
+    title = "program name",
+    description = "Description",
     startTime = mockNow,
     endTime = mockNow
 )

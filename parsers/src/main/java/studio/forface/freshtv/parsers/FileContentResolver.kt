@@ -18,7 +18,7 @@ internal class FileContentResolver(
 ) {
 
     /** @return the [String] content of the given [path] with the given [type] */
-    private suspend operator fun invoke( type: SourceFile.Type, path: String ): String {
+    internal suspend operator fun invoke( type: SourceFile.Type, path: String ): String {
         val source = when( type ) {
             SourceFile.Type.LOCAL -> local
             SourceFile.Type.REMOTE -> remote

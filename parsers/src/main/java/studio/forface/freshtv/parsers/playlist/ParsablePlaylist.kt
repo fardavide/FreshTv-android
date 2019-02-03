@@ -4,8 +4,8 @@ package studio.forface.freshtv.parsers.playlist
 
 /**
  * @author Davide Giuseppe Farella.
- * An inline class that represents the content of a Playlist and expose [extractItems] for make a first parsing on the
- * content and split it in [ParsablePlaylistItem]s.
+ * An inline class that represents the content of a Playlist and expose [extractItems] for make a
+ * first parsing on the content and split it in [ParsablePlaylistItem]s.
  */
 internal inline class ParsablePlaylist( private val s: String ) {
 
@@ -21,7 +21,9 @@ internal inline class ParsablePlaylist( private val s: String ) {
         const val CHANNEL_HEAD = "#EXTINF:-1"
     }
 
-    /** @return a [List] of [ParsablePlaylistItem] extracted from the content of [ParsablePlaylist] */
+    /**
+     * @return a [List] of [ParsablePlaylistItem] extracted from the content of [ParsablePlaylist]
+     */
     fun extractItems() : List<ParsablePlaylistItem> = s
         .removePrefix( HEADER ).removeSuffix( FOOTER )
         .split( CHANNEL_HEAD )

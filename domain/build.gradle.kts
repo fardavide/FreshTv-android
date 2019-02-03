@@ -10,7 +10,7 @@ dependencies {
     /* Kotlin */
     api( Libs.kotlin )
     api( Libs.coroutines )
-    implementation( Libs.reflect )
+    api( Libs.reflect )
 
     /* Other */
     api( Libs.koin )

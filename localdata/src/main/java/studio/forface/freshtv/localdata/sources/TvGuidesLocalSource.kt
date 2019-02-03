@@ -14,7 +14,21 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
     /** Create a new guide [TvGuidePojo] */
     fun createGuide( guide: TvGuidePojo) {
         with( guide ) {
-            queries.insert( id, channelId, programName, programDescription, startTime, endTime )
+            queries.insert(
+                    id =                id,
+                    channelId =         channelId,
+                    title =             title,
+                    description =       description,
+                    imageUrl =          imageUrl,
+                    category =          category,
+                    year =              year,
+                    country =           country,
+                    credits_director =  credits_director,
+                    credits_actor =     credits_actor,
+                    rating =            rating,
+                    startTime =         startTime,
+                    endTime =           endTime
+            )
         }
     }
 
@@ -27,7 +41,7 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
     fun deleteGuidesBefore( dateTime: LocalDateTime ) = queries.deleteWithEndTimeLessThan( dateTime )
 
     /** @return the [TvGuidePojo] with the given [id] */
-    fun guide( id: Long ): TvGuidePojo = queries.selectById( id ).executeAsOne()
+    fun guide( id: String ): TvGuidePojo = queries.selectById( id ).executeAsOne()
 
     /**
      * @return all the stored Guides [TvGuidePojo] with [TvGuidePojo.channelId] as the given [channelId]
@@ -53,7 +67,21 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
     /** Update an already stored guide [TvGuidePojo] */
     fun updateGuide( guide: TvGuidePojo) {
         with( guide ) {
-            queries.update( id, channelId, programName, programDescription, startTime, endTime )
+            queries.update(
+                    id =                id,
+                    channelId =         channelId,
+                    title =             title,
+                    description =       description,
+                    imageUrl =          imageUrl,
+                    category =          category,
+                    year =              year,
+                    country =           country,
+                    credits_director =  credits_director,
+                    credits_actor =     credits_actor,
+                    rating =            rating,
+                    startTime =         startTime,
+                    endTime =           endTime
+            )
         }
     }
 }

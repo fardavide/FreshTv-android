@@ -9,15 +9,45 @@ import studio.forface.freshtv.localdata.TvGuidePojo
  *
  * Inherit from [PojoMapper].
  */
-class TvGuidePojoMapper(): PojoMapper<TvGuide, TvGuidePojo>() {
+class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
 
     /** @see PojoMapper.toPojo */
     override fun TvGuide.toPojo() = with(this ) {
-        TvGuidePojo.Impl( id, channelId, programName, programDescription, startTime, endTime )
+        TvGuidePojo.Impl(
+                id =                id,
+                channelId =         channelId,
+                title =             title,
+                description =       description,
+                imageUrl =          imageUrl,
+                category =          category,
+                year =              year,
+                country =           country,
+                credits_director =  credits?.director,
+                credits_actor =     credits?.actor,
+                rating =            rating,
+                startTime =         startTime,
+                endTime =           endTime
+        )
     }
 
     /** @see PojoMapper.toEntity */
     override fun TvGuidePojo.toEntity() = with(this ) {
-        TvGuide( id, channelId, programName, programDescription, startTime, endTime )
+        val credits = if ( credits_director != null && credits_actor != null )
+            TvGuide.Credits( credits_director!!, credits_actor!! ) else null
+
+        TvGuide(
+                id =            id,
+                channelId =     channelId,
+                title =         title,
+                description =   description,
+                imageUrl =      imageUrl,
+                category =      category,
+                year =          year,
+                country =       country,
+                credits =       credits,
+                rating =        rating,
+                startTime =     startTime,
+                endTime =       endTime
+        )
     }
 }

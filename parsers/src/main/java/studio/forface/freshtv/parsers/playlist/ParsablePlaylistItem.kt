@@ -9,8 +9,8 @@ import studio.forface.freshtv.domain.utils.notBlankOrNull
 
 /**
  * @author Davide Giuseppe Farella.
- * An inline class that represents the content of a single item in Playlist and that will result a [ParsablePlaylistItem.Result]
- * containing the entity if success, or error.
+ * An inline class that represents the content of a single item in Playlist and that will return a
+ * [ParsablePlaylistItem.Result] containing the entity if success, or error.
  */
 internal inline class ParsablePlaylistItem( private val s: String ) {
 
@@ -32,7 +32,10 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
     /** @return a [Result.Error] with [s] and the given [Reason] */
     private fun e( reason: Reason ) = Result( ParsingChannelError( s, reason ) )
 
-    /** @return a [ParsablePlaylistItem.Result] containing the entity just created if success or the error */
+    /**
+     * @return a [ParsablePlaylistItem.Result] containing the entity just created if success or
+     * the error
+     */
     operator fun invoke( playlistPath: String ): Result {
 
         val lines = s.lines()
@@ -81,7 +84,9 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
         return Result( content )
     }
 
-    /** @return an OPTIONAL [String] extracted from the receiver [String] with the given [paramName] */
+    /**
+     * @return an OPTIONAL [String] extracted from the receiver [String] with the given [paramName]
+     */
     private fun String.extract( paramName: String ): String? {
         if ( ! this.contains( paramName ) ) return null
         val indexOfParam = indexOf( paramName )
@@ -95,10 +100,19 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
     /** A sealed class for the result of [ParsablePlaylistItem] */
     internal sealed class Result {
 
+        /** A subclass for [Result] containing an [IChannel] */
+        class Channel( val content: IChannel ): Result()
+
+        /** A subclass for [Result] containing an [ChannelGroup] */
+        class Group( val content: ChannelGroup ): Result()
+
+        /** A subclass of [Result] containing a [ParsingChannelError] */
+        class Error( val error: ParsingChannelError): Result()
+
         companion object {
             /**
              * A constructor for [Result]
-             * @return [Result.Channel] or [Result.Group]
+             * @return [Result]
              */
             operator fun invoke( content: Any ) = when ( content ) {
                 is IChannel -> Channel( content )
@@ -108,13 +122,5 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
             }
         }
 
-        /** A subclass for [Result] containing an [IChannel] */
-        class Channel( val content: IChannel ): Result()
-
-        /** A subclass for [Result] containing an [ChannelGroup] */
-        class Group( val content: ChannelGroup ): Result()
-
-        /** A subclass of [Result] containing a [ParsingChannelError] */
-        class Error( val error: ParsingChannelError): Result()
     }
 }

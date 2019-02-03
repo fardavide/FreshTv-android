@@ -1,23 +1,46 @@
 import org.threeten.bp.LocalDateTime;
 
 CREATE TABLE tvGuidePojo (
-  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  id TEXT NOT NULL PRIMARY KEY,
   channelId TEXT NOT NULL,
-  programName TEXT NOT NULL,
-  programDescription TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  imageUrl TEXT,
+  category TEXT NOT NULL,
+  year INTEGER As Int,
+  country TEXT,
+  credits_director TEXT,
+  credits_actor TEXT,
+  rating TEXT NOT NULL,
   startTime INTEGER AS LocalDateTime NOT NULL,
   endTime INTEGER AS LocalDateTime NOT NULL
 );
 
-CREATE INDEX tv_guide_program_name ON tvGuidePojo(programName);
+CREATE INDEX tv_guide_program_name ON tvGuidePojo(title);
 
 insert:
-  INSERT INTO tvGuidePojo(id, channelId, programName, programDescription, startTime, endTime)
-  VALUES (?, ?, ?, ?, ?, ?);
+  INSERT INTO tvGuidePojo(
+    id, channelId, title, description, imageUrl, category, year, country,
+    credits_director, credits_actor, rating, startTime, endTime
+  )
+  VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
 
 update:
   UPDATE tvGuidePojo
-  SET id = :id, channelId = ?, programName = ?, programDescription = ?, startTime = ?, endTime = ?
+  SET
+    id = :id,
+    channelId = ?,
+    title = ?,
+    description = ?,
+    imageUrl = ?,
+    category = ?,
+    year = ?,
+    country = ?,
+    credits_director = ?,
+    credits_actor = ?,
+    rating = ?,
+    startTime = ?,
+    endTime = ?
   WHERE id = :id;
 
 deleteAll:
@@ -62,7 +85,7 @@ selectByChannelId:
     )
   );
 
-selectByProgramName:
+selectByTitle:
   SELECT *
   FROM tvGuidePojo
-  WHERE programName LIKE ?;
+  WHERE title LIKE ?;

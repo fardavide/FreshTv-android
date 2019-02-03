@@ -6,7 +6,7 @@ import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingChannelError
-import studio.forface.freshtv.domain.errors.ParsingTvGuideError
+import studio.forface.freshtv.domain.errors.ParsingEpgError
 
 /**
  * @author Davide Giuseppe Farella
@@ -14,11 +14,11 @@ import studio.forface.freshtv.domain.errors.ParsingTvGuideError
  */
 interface Parsers {
 
-    /** Obtain [TvGuide]s and eventual [ParsingTvGuideError]s from the given [Epg] */
+    /** Obtain [TvGuide]s and eventual [ParsingEpgError]s from the given [Epg] */
     suspend fun readFrom(
         epg: Epg,
         onTvGuide: suspend (TvGuide) -> Unit,
-        onError: suspend (ParsingTvGuideError) -> Unit
+        onError: suspend (ParsingEpgError) -> Unit
     )
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */

@@ -8,24 +8,41 @@ import org.threeten.bp.LocalDateTime
  */
 data class TvGuide (
 
-    /** The [String] id of the Channel */
-    val id: Long,
+        /** The [String] id of the Tv Guide */
+        val id: String,
 
-    /** The [String] id of the related Tv Channel */
-    val channelId: String,
+        /** The [String] id of the related Channel */
+        val channelId: String,
 
-    /** The [String] name of the Tv Program */
-    val programName: String,
+        /** The [String] title of the Program */
+        val title: String,
 
-    /** The [String] description of the Tv Program */
-    val programDescription: String,
+        /** The [String] description of the Program */
+        val description: String,
 
-    /** A [LocalDateTime] representing the start time of the Tv Program */
-    val startTime: LocalDateTime,
+        /** An OPTIONAL [String] url for the image of the Program */
+        val imageUrl: String?,
 
-    /** A [LocalDateTime] representing the end time of the Tv Program */
-    val endTime: LocalDateTime
+        /** A [String] category for the image of the Program */
+        val category: String,
 
+        /** An OPTIONAL [Int] year of the Program */
+        val year: Int?,
+
+        /** An OPTIONAL [String] country of the Program */
+        val country: String?,
+
+        /** An OPTIONAL [Credits] for the Program */
+        val credits: Credits?,
+
+        /** A [String] rating for the Program */
+        val rating: String,
+
+        /** A [LocalDateTime] representing the start time of the Program */
+        val startTime: LocalDateTime,
+
+        /** A [LocalDateTime] representing the end time of the Program */
+        val endTime: LocalDateTime
 ) {
 
     /**
@@ -33,9 +50,21 @@ data class TvGuide (
      * @return this [TvGuide] merged with the given [newGuide]
      */
     operator fun plus( newGuide: TvGuide ) = copy(
-        programName =           newGuide.programName,
-        programDescription =    newGuide.programDescription,
-        startTime =             newGuide.startTime,
-        endTime =               newGuide.endTime
+            title =         newGuide.title,
+            description =   newGuide.description,
+            imageUrl =      newGuide.imageUrl ?: imageUrl,
+            category =      newGuide.category,
+            year =          newGuide.year ?: year,
+            country =       newGuide.country ?: country,
+            credits =       newGuide.credits ?: credits,
+            rating =        newGuide.rating,
+            startTime =     newGuide.startTime,
+            endTime =       newGuide.endTime
+    )
+
+    /** A class containing credits for the [TvGuide] */
+    data class Credits(
+            val director: String,
+            val actor: String
     )
 }

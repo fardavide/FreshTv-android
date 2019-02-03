@@ -10,7 +10,7 @@ import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingChannelError
-import studio.forface.freshtv.domain.errors.ParsingTvGuideError
+import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.gateways.Parsers
 import studio.forface.freshtv.parsers.epg.EpgParser
 import studio.forface.freshtv.parsers.playlist.PlaylistParser
@@ -25,19 +25,19 @@ internal class ParsersImpl(
     private val playlistParser: PlaylistParser = PlaylistParser()
 ): Parsers {
 
-    /** Obtain [TvGuide]s and eventual [ParsingTvGuideError]s from the given [Epg] */
+    /** Obtain [TvGuide]s and eventual [ParsingEpgError]s from the given [Epg] */
     override suspend fun readFrom(
         epg: SourceFile.Epg,
         onTvGuide: suspend (TvGuide) -> Unit,
-        onError: suspend (ParsingTvGuideError) -> Unit
+        onError: suspend (ParsingEpgError) -> Unit
     ) = coroutineScope {
         val guidesChannel = Channel<TvGuide>()
-        val errorsChannel = Channel<ParsingTvGuideError>()
+        val errorsChannel = Channel<ParsingEpgError>()
 
         launch { for ( guide in guidesChannel ) onTvGuide( guide ) }
         launch { for( error in errorsChannel ) onError( error ) }
 
-        epgParser( epg.path, contentResolver( epg ), guidesChannel, errorsChannel )
+        epgParser( contentResolver( epg ), guidesChannel, errorsChannel )
     }
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */
@@ -55,6 +55,12 @@ internal class ParsersImpl(
         launch { for( group in groupsChannel ) onGroup( group ) }
         launch { for( error in errorsChannel ) onError( error ) }
 
-        playlistParser( playlist.path, contentResolver( playlist ), channelsChannel, groupsChannel, errorsChannel )
+        playlistParser(
+                playlist.path,
+                contentResolver( playlist ),
+                channelsChannel,
+                groupsChannel,
+                errorsChannel
+        )
     }
 }

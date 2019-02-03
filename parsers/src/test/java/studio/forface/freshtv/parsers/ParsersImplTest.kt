@@ -3,12 +3,13 @@ package studio.forface.freshtv.parsers
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import studio.forface.freshtv.domain.entities.SourceFile
+import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
-import studio.forface.freshtv.parsers.playlist.PlaylistParser
 
 /**
  * @author Davide Giuseppe Farella
@@ -17,26 +18,51 @@ import studio.forface.freshtv.parsers.playlist.PlaylistParser
 internal class ParsersImplTest {
 
     private val mockLocal = mockk<FileContentResolver.Local> {
-        coEvery { this@mockk(any()) } answers { mockPlaylistContent }
+        coEvery { this@mockk( any() ) } answers { firstArg() }
     }
 
     private val mockRemote = mockk<FileContentResolver.Remote> {
-        coEvery { this@mockk(any()) } answers { mockPlaylistContent }
+        coEvery { this@mockk( any() ) } answers { firstArg() }
     }
 
-    private val source = ParsersImpl(
-            FileContentResolver( mockLocal, mockRemote ),
-            PlaylistParser()
-    )
+    private val mockResolver = spyk( FileContentResolver( mockLocal, mockRemote ) ) {
+
+        coEvery { this@spyk( any<Playlist>() ) } coAnswers
+                { this@spyk( firstArg<Playlist>().type, mockPlaylistContent ) }
+
+        coEvery { this@spyk( any<Epg>() ) } coAnswers
+                { this@spyk( firstArg<Epg>().type, mockEpgContent ) }
+    }
+
+    private val parsers = ParsersImpl( mockResolver )
 
     @Test
-    fun `readFrom executeCorrectly`() {
+    fun `readFrom epg executeCorrectly`() {
+        var guideCalled = false
+        var errorCalled = false
+
+        runBlocking {
+            parsers.readFrom(
+                    Epg("", SourceFile.Type.LOCAL ),
+                    { guideCalled = true },
+                    { errorCalled = true }
+            )
+        }
+
+        coVerify( exactly = 1 ) { mockLocal.invoke( any() ) }
+        coVerify( exactly = 0 ) { mockRemote.invoke( any() ) }
+        assertTrue( guideCalled )
+        assertTrue( errorCalled )
+    }
+
+    @Test
+    fun `readFrom playlist executeCorrectly`() {
         var channelCalled = false
         var groupCalled = false
         var errorCalled = false
 
         runBlocking {
-            source.readFrom(
+            parsers.readFrom(
                     Playlist("", SourceFile.Type.LOCAL ),
                     { channelCalled = true },
                     { groupCalled = true },
@@ -52,9 +78,9 @@ internal class ParsersImplTest {
     }
 
     @Test
-    fun `readFrom remotePlaylist fromRemoteSource`() {
+    fun `readFrom remote fromRemoteSource`() {
         runBlocking {
-            source.readFrom(
+            parsers.readFrom(
                 Playlist("", SourceFile.Type.REMOTE ),
                 {}, {}, {}
             )
@@ -65,7 +91,7 @@ internal class ParsersImplTest {
     }
 
     // @Test // test only manually due to http call
-    fun realTest() {
+    fun `playlist realTest`() {
         val source = ParsersImpl()
 
         runBlocking {

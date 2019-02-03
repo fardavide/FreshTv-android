@@ -29,7 +29,7 @@ internal class PlaylistParser {
 
         val playlist = ParsablePlaylist( playlistContent )
         playlist.extractItems().forEachAsync {
-            when( val result = it( playlistPath ) ) {
+            when ( val result = it( playlistPath ) ) {
                 is Result.Channel -> {
                     channels.send( result.content )
                     result.content.group { group ->
@@ -39,7 +39,8 @@ internal class PlaylistParser {
                 }
                 is Result.Group -> groups.send( result.content )
                 is Result.Error -> errors.send( result.error )
-                // Explicit else branch needed for avoid to forget smtng, since result is sealed but when is statement
+                // Explicit else branch needed for avoid to forget smtng, since result is sealed
+                // but when is statement
                 else -> throw AssertionError("${result::class.qualifiedName} not implemented" )
             }
         }

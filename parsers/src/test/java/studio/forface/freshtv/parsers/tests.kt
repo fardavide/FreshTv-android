@@ -1,7 +1,57 @@
 package studio.forface.freshtv.parsers
 
+val mockEpgContent = """
+<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="WebGrab+Plus/w MDB &amp; REX Postprocess -- version V2.1.5 -- Jan van Straaten" generator-info-url="http://www.webgrabplus.com">
+  <channel id="IT PRIMAFILA 19">
+    <display-name lang="it">IT PRIMAFILA 19</display-name>
+    <url>http://www.guidatv.sky.it</url>
+  </channel>
+  <channel id="PRIMAFILA 19HD">
+    <display-name lang="it">PRIMAFILA 19HD</display-name>
+    <url>http://www.guidatv.sky.it</url>
+  </channel>
+  <channel id="PrimaFila 19">
+    <display-name lang="it">PrimaFila 19</display-name>
+    <url>http://www.guidatv.sky.it</url>
+  </channel>
+  <channel id="Rai Italia">
+    <display-name lang="it">Rai Italia</display-name>
+    <url>http://www.raitalia.it</url>
+  </channel>
+  <channel id="RAI ITALIA">
+    <display-name lang="it">RAI ITALIA</display-name>
+    <url>http://www.raitalia.it</url>
+  </channel>
+  <programme start="20190202060000 +0100" stop="20190202065500 +0100" channel="Rai Uno">
+    <title lang="it">Il caffe' di Raiuno</title>
+    <desc lang="it">Cinzia Tani e Guido Barlozzetti, con la partecipazione di Gemma Favia, mettono al centro della narrazione la curiosita' per i fenomeni sociali e culturali meno indagati dal racconto televisivo.(n)</desc>
+    <category lang="it">Magazine Cultura</category>
+    <rating>
+      <value>per tutti</value>
+    </rating>
+  </programme>
+  <programme start="20190202065500 +0100" stop="20190202070000 +0100" channel="Rai Uno">
+    <title lang="it">Gli imperdibili</title>
+    <desc lang="it">Backstage, anteprime, eventi e curiosita' dentro lo schermo nel programma che offre informazione e approfondimento sulla programmazione dei canali che compongono il bouquet Rai.(n)</desc>
+    <category lang="it">Mondi e culture</category>
+    <rating>
+      <value>per tutti</value>
+    </rating>
+  </programme>
+  <programme start="20190202070000 +0100" stop="20190202070500 +0100" channel="Rai Uno">
+    <title lang="it">Tg1</title>
+    <desc lang="it">Le notizie del giorno e gli approfondimenti su temi di stretta attualita' nel telegiornale di RaiUno.(n)</desc>
+    <category lang="it">Notiziario</category>
+    <rating>
+      <value>per tutti</value>
+    </rating>
+  </programme>
+</tv>
+"""".trimIndent()
+
 val mockPlaylistContent = """
-    #EXTM3U
+#EXTM3U
 
 #EXTINF:-1 tvg-id="" group-title="RAI HD" tvg-logo="http://www.rai.it/dl/img/2016/09/1473429803381logo-rai1-2016.png",Rai 1 HD
 http://bit.ly/rai1qdr
