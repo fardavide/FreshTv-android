@@ -7,8 +7,5 @@ package studio.forface.freshtv.domain.errors
 data class ParsingEpgError(val rawChannel: String, val reason: Reason ) {
 
     /** An enum class of reasons for [ParsingEpgError] */
-    enum class Reason {
-
-        // TODO
-    }
+    enum class Reason
 }

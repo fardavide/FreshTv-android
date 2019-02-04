@@ -5,8 +5,9 @@ include(":buildSrc")
 include(":domain")
 include(":localdata")
 include(":parsers" )
-include(":androiddatabase" )
 
+include(":androiddatabase" )
 include(":dimodules")
+include(":commonandroid" )
 
 include(":app" )
