@@ -49,7 +49,9 @@ internal class FileContentResolver(
 
         /** @return a [String] from [ByteArray], also decompress if needed */
         private fun ByteArray.readDecompressedContent(): String {
-            val needToDecompress = true // Check if need to decompress
+            val needToDecompress =
+                    this[0] == GZIPInputStream.GZIP_MAGIC.toByte() &&
+                    this[1] == ( GZIPInputStream.GZIP_MAGIC ushr 8 ).toByte()
 
             return if ( needToDecompress )
                 GZIPInputStream( inputStream() ).reader().readText()

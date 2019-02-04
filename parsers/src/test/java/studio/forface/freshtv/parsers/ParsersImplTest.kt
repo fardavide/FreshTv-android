@@ -39,20 +39,18 @@ internal class ParsersImplTest {
     @Test
     fun `readFrom epg executeCorrectly`() {
         var guideCalled = false
-        var errorCalled = false
 
         runBlocking {
             parsers.readFrom(
                     Epg("", SourceFile.Type.LOCAL ),
                     { guideCalled = true },
-                    { errorCalled = true }
+                    {  }
             )
         }
 
         coVerify( exactly = 1 ) { mockLocal.invoke( any() ) }
         coVerify( exactly = 0 ) { mockRemote.invoke( any() ) }
         assertTrue( guideCalled )
-        assertTrue( errorCalled )
     }
 
     @Test
@@ -90,7 +88,7 @@ internal class ParsersImplTest {
         coVerify( exactly = 1 ) { mockRemote.invoke( any() ) }
     }
 
-    @Test // test only manually due to http call
+    // @Test // test only manually due to http call
     fun `epg realTest`() {
         val source = ParsersImpl()
 

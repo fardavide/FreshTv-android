@@ -7,4 +7,6 @@ include(":localdata")
 include(":parsers" )
 include(":androiddatabase" )
 
+include(":dimodules")
+
 include(":app" )

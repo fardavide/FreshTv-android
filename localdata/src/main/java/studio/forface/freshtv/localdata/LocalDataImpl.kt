@@ -49,6 +49,11 @@ internal class LocalDataImpl(
         }
     }
 
+    /** Store a [ChannelGroup] in [SourceFilesLocalSource] */
+    private fun createEpg( epg: Epg) {
+        sourceFiles.create( sourceFileMapper { epg.toPojo() } )
+    }
+
     /** Store a [ChannelGroup] in [ChannelGroupsLocalSource] */
     private fun createGroup( group: ChannelGroup) {
         channelGroups.createChannelGroup( channelGroupMapper { group.toPojo() } )
@@ -81,6 +86,11 @@ internal class LocalDataImpl(
         handle { movieChannels.delete( channelId ) }
     }
 
+    /** Delete the stored [Epg] with the given [Epg.path] */
+    override fun deleteEpg( epgPath: String ) {
+        sourceFiles.delete( epgPath )
+    }
+
     /** Delete the stored [Playlist] with the given [Playlist.path] */
     override fun deletePlaylist( playlistPath: String ) {
         sourceFiles.delete( playlistPath )
@@ -106,6 +116,18 @@ internal class LocalDataImpl(
         }
         oldChannel ?: return Result.FAILURE
         updateChannel(oldChannel + newChannel )
+        return Result.SUCCESS
+    }
+
+    /**
+     * Merge the given [newEpg] with the already existing [Epg] with the same [Epg.path]
+     * @return [Result.SUCCESS] if the operation is succeed, else [Result.FAILURE] if some exception occurs while
+     * retrieving the old [Epg]
+     */
+    private fun mergeEpg( newEpg: Epg ): Result {
+        val oldEpg = handle { sourceFileMapper { sourceFiles.epg( newEpg.path ).toEntity() as Epg } }
+        oldEpg ?: return Result.FAILURE
+        updateEpg(oldEpg + newEpg )
         return Result.SUCCESS
     }
 
@@ -140,7 +162,9 @@ internal class LocalDataImpl(
      * retrieving the old [ChannelGroup]
      */
     private fun mergePlaylist( newPlaylist: Playlist): Result {
-        val oldPlaylist = handle { sourceFileMapper { sourceFiles.playlist( newPlaylist.path ).toEntity() as Playlist } }
+        val oldPlaylist = handle { sourceFileMapper {
+            sourceFiles.playlist( newPlaylist.path ).toEntity() as Playlist
+        } }
         oldPlaylist ?: return Result.FAILURE
         updatePlaylist(oldPlaylist + newPlaylist )
         return Result.SUCCESS
@@ -172,6 +196,11 @@ internal class LocalDataImpl(
         if ( mergeChannel( channel ).isFailed ) createChannel( channel )
     }
 
+    /** Store the given [Epg] in Local Source */
+    override fun storeEpg( epg: Epg ) {
+        if ( mergeEpg( epg ).isFailed ) createEpg( epg )
+    }
+
     /** Store the given [ChannelGroup] in Local Source */
     override fun storeGroup( group: ChannelGroup ) {
         if ( mergeGroup( group ).isFailed ) createGroup( group )
@@ -182,9 +211,9 @@ internal class LocalDataImpl(
         if ( mergePlaylist( playlist ).isFailed ) createPlaylist( playlist )
     }
 
-    /** Store the given [TvGuide]s in [TvGuidesLocalSource]s */
-    override fun storeTvGuides( guides: List<TvGuide> ) {
-        guides.forEach { if ( mergeGuide( it ).isFailed ) createTvGuide( it ) }
+    /** Store the given [TvGuide] in [TvGuidesLocalSource]s */
+    override fun storeTvGuide( guide: TvGuide ) {
+        if ( mergeGuide( guide ).isFailed ) createTvGuide( guide )
     }
 
     /** @return the [TvChannel] with the given [channelId] */
@@ -220,12 +249,17 @@ internal class LocalDataImpl(
         }
     }
 
+    /** Update an [Epg] in [SourceFilesLocalSource] */
+    override fun updateEpg( epg: Epg ) {
+        sourceFiles.update( sourceFileMapper { epg.toPojo() } )
+    }
+
     /** Update a [ChannelGroup] in [ChannelGroupsLocalSource] */
     override fun updateGroup( group: ChannelGroup ) {
         channelGroups.updateGroup( channelGroupMapper { group.toPojo() } )
     }
 
-    /** Update a [Playlist] in Local Source */
+    /** Update a [Playlist] in [SourceFilesLocalSource] */
     override fun updatePlaylist( playlist: Playlist ) {
         sourceFiles.update( sourceFileMapper { playlist.toPojo() } )
     }

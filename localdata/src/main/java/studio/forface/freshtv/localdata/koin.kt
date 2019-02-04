@@ -1,12 +1,12 @@
 package studio.forface.freshtv.localdata
 
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.module
+import org.koin.core.module.Module
+import org.koin.dsl.module
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.localdata.sources.*
 
 /** A [Module] that handles dependencies for `localData` module */
-val localData = module {
+val localDataModule = module {
 
     /* Main */
     factory<LocalData> { LocalDataImpl(
@@ -18,19 +18,18 @@ val localData = module {
     ) }
 
     /* Sources */
-    factory { ChannelGroupsLocalSource(get()) }
-    factory { MovieChannelsLocalSource(get()) }
-    factory { SourceFilesLocalSource(get()) }
-    factory { TvChannelsLocalSource(get()) }
-    factory { TvGuidesLocalSource(get()) }
+    factory { ChannelGroupsLocalSource( get() ) }
+    factory { MovieChannelsLocalSource( get() ) }
+    factory { SourceFilesLocalSource( get() ) }
+    factory { TvChannelsLocalSource( get() ) }
+    factory { TvGuidesLocalSource( get() ) }
 
     /* Queries */
-    val database: Database = get()
-    factory { database.channelGroupQueries }
-    factory { database.movieChannelQueries }
-    factory { database.sourceFileQueries }
-    factory { database.tvChannelQueries }
-    factory { database.tvGuideQueries }
+    factory { get<Database>().channelGroupQueries }
+    factory { get<Database>().movieChannelQueries }
+    factory { get<Database>().sourceFileQueries }
+    factory { get<Database>().tvChannelQueries }
+    factory { get<Database>().tvGuideQueries }
 
     /* Pojo adapters */
     factory { MovieChannelPojo.Adapter( get(), get() ) }

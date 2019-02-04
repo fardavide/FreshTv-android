@@ -1,14 +1,15 @@
 package studio.forface.freshtv.domain
 
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.module
+import org.koin.core.module.Module
+import org.koin.dsl.module
 import studio.forface.freshtv.domain.usecases.*
 
 /** A [Module] that handles dependencies for use cases of `domain` module */
-val useCases = module {
+val useCasesModule = module {
 
     /* Add */
     factory { AddChannelMediaUrl( localData = get() ) }
+    factory { AddEpg( localData = get() ) }
     factory { AddPlaylist( localData = get() ) }
 
     /* Delete */
@@ -24,10 +25,12 @@ val useCases = module {
     factory { IncrementChannelMediaFailure( localData = get() ) }
 
     /* Refresh */
-    factory { RefreshPlaylists( localData = get(), parsers = get() ) }
+    factory { RefreshChannels( localData = get(), parsers = get() ) }
+    factory { RefreshTvGuides( localData = get(), parsers = get() ) }
 
     /* Remove */
     factory { RemoveChannelMediaUrl( localData = get() ) }
+    factory { RemoveEpg( localData = get() ) }
     factory { RemovePlaylist( localData = get() ) }
 
     /* Rename */

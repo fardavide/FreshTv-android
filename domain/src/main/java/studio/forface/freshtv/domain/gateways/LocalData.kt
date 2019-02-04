@@ -29,6 +29,9 @@ interface LocalData {
     /** Delete the store [IChannel] with the given [IChannel.id] */
     fun deleteChannel( channelId: String )
 
+    /** Delete the stored [Epg] with the given [Epg.path] */
+    fun deleteEpg( epgPath: String )
+
     /** Delete the stored [Playlist] with the given [Playlist.path] */
     fun deletePlaylist( playlistPath: String )
 
@@ -61,6 +64,14 @@ interface LocalData {
         channels.forEach( ::storeChannel )
     }
 
+    /** Store the given [Epg] in Local Source */
+    fun storeEpg( epg: Epg )
+
+    /** Store the given [Epg]s in Local Source */
+    fun storeEpgs( epgs: List<Epg> ) {
+        epgs.forEach( ::storeEpg )
+    }
+
     /** Store the given [ChannelGroup] in Local Source */
     fun storeGroup( group: ChannelGroup )
 
@@ -77,8 +88,13 @@ interface LocalData {
         playlists.forEach( ::storePlaylist )
     }
 
+    /** Store the given [TvGuide] in Local Sources */
+    fun storeTvGuide( guide: TvGuide )
+
     /** Store the given [TvGuide]s in Local Sources */
-    fun storeTvGuides( guides: List<TvGuide> )
+    fun storeTvGuides( guides: List<TvGuide> ) {
+        guides.forEach( ::storeTvGuide )
+    }
 
     /** @return the [TvChannel] with the given [channelId] */
     fun tvChannel( channelId: String ): TvChannel
@@ -97,6 +113,9 @@ interface LocalData {
 
     /** Update a [IChannel] in the appropriate Local Source */
     fun updateChannel( channel: IChannel )
+
+    /** Update an [Epg] in the appropriate Local Source */
+    fun updateEpg( epg: Epg )
 
     /** Update a [ChannelGroup] in Local Source */
     fun updateGroup( group: ChannelGroup )

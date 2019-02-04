@@ -1,14 +1,12 @@
 plugins {
-    id("com.android.application" )
+    id("com.android.library" )
     id("kotlin-android" )
     id("kotlin-android-extensions" )
-    id("kotlinx-serialization" )
 }
 
 android {
     compileSdkVersion( Project.targetSdk )
     defaultConfig {
-        applicationId = Project.id
         minSdkVersion( Project.minSdk )
         targetSdkVersion( Project.targetSdk )
         versionCode = Project.versionCode
@@ -25,17 +23,10 @@ android {
 }
 
 dependencies {
-    implementation( project(":dimodules" ) )
+    api( project(":domain") )
+    implementation( project(":androiddatabase" ) )
+    implementation( project(":localdata" ) )
+    implementation( project(":parsers" ) )
 
     applyTests()
-    applyAndroidTests()
-
-    /* Kotlin */
-    implementation( Libs.coroutines_android )
-    implementation( Libs.koin_android )
-    implementation( Libs.koin_android_viewmodel )
-
-    /* Android */
-    implementation( Libs.Android.appcompat )
-    implementation( Libs.Android.ktx )
 }

@@ -53,11 +53,6 @@ class UseCasesTest {
         assertEquals( mockLocalData.tvChannels().first().mediaUrls["url"],6 )
     }
 
-    // @Test
-    // fun refreshPlaylists() {
-    //     TODO("not implemented" )
-    // }
-
     @Test
     fun removeChannelMediaUrl() {
         val tv = TvChannel("tv","tvName", mediaUrls = mutableMapOf( "url" to 5 ) )

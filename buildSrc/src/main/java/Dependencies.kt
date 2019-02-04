@@ -36,7 +36,7 @@ object Versions {
     val coroutines =                    "1.1.1"
     val serialization =                 "0.10.0"
 
-    val koin =                          "1.0.2"
+    val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.2"
     val mockk =                         "1.9"
     val sqldelight =                    "1.0.3"
