@@ -9,5 +9,14 @@ package studio.forface.freshtv.parsers.epg
  */
 internal inline class ParsableEpg( private val s: String ) {
 
-    fun extractItems() : List<ParsableEpgItem> = TODO("Not implemented" )
+    private companion object {
+        const val PROGRAM = "programme"
+        const val TV = "tv"
+    }
+
+    /** @return a [List] of [ParsableEpgItem] extracted from the content of [ParsableEpg] */
+    fun extractItems() : List<ParsableEpgItem> = s.removeSuffix("</$TV>" )
+            .split("<$PROGRAM" )
+            .filter { it.contains("</$PROGRAM>" ) }
+            .map { ParsableEpgItem("<$PROGRAM$it" ) }
 }

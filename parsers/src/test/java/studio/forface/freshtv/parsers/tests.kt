@@ -48,7 +48,7 @@ val mockEpgContent = """
     </rating>
   </programme>
 </tv>
-"""".trimIndent()
+""".trimIndent()
 
 val mockPlaylistContent = """
 #EXTM3U

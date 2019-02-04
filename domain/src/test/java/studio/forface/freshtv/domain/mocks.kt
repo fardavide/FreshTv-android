@@ -50,12 +50,18 @@ val mockTvChannel = TvChannel(
 )
 
 val mockTvGuide = TvGuide(
-    id = 123,
-    channelId = "tvChannelId",
-    title = "program name",
-    description = "Description",
-    startTime = mockNow,
-    endTime = mockNow
+        id = "abc",
+        channelId = "tvChannelId",
+        title = "program name",
+        description = "Description",
+        imageUrl = null,
+        category = "cat1",
+        year = 2018,
+        country = null,
+        credits = null,
+        rating = "For everyone",
+        startTime = mockNow,
+        endTime = mockNow
 )
 
 val mockPlaylistSource = mockk<Parsers> {

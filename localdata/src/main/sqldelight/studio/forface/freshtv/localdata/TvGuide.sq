@@ -1,3 +1,4 @@
+import kotlin.collections.List;
 import org.threeten.bp.LocalDateTime;
 
 CREATE TABLE tvGuidePojo (
@@ -6,12 +7,12 @@ CREATE TABLE tvGuidePojo (
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   imageUrl TEXT,
-  category TEXT NOT NULL,
+  category TEXT,
   year INTEGER As Int,
   country TEXT,
   credits_director TEXT,
-  credits_actor TEXT,
-  rating TEXT NOT NULL,
+  credits_actors TEXT as List<String>,
+  rating TEXT,
   startTime INTEGER AS LocalDateTime NOT NULL,
   endTime INTEGER AS LocalDateTime NOT NULL
 );
@@ -21,7 +22,7 @@ CREATE INDEX tv_guide_program_name ON tvGuidePojo(title);
 insert:
   INSERT INTO tvGuidePojo(
     id, channelId, title, description, imageUrl, category, year, country,
-    credits_director, credits_actor, rating, startTime, endTime
+    credits_director, credits_actors, rating, startTime, endTime
   )
   VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
 
@@ -37,7 +38,7 @@ update:
     year = ?,
     country = ?,
     credits_director = ?,
-    credits_actor = ?,
+    credits_actors = ?,
     rating = ?,
     startTime = ?,
     endTime = ?

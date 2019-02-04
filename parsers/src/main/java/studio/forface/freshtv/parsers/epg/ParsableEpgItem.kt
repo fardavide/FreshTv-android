@@ -4,9 +4,11 @@ package studio.forface.freshtv.parsers.epg
 
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import org.w3c.dom.Node
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.errors.ParsingEpgError.Reason
+import studio.forface.freshtv.domain.utils.EMPTY_STRING
 import studio.forface.freshtv.domain.utils.optWith
 import studio.forface.freshtv.parsers.utils.*
 
@@ -36,6 +38,9 @@ internal inline class ParsableEpgItem( private val s: String ) {
 
         /** A [String] representing the param name of the year of release */
         const val PARAM_YEAR = "year"
+
+        /** A [String] representing the param name of the year of release */
+        const val PARAM_DATE = "date"
 
         /** A [String] representing the param name of the country of release */
         const val PARAM_COUNTRY = "country"
@@ -73,24 +78,20 @@ internal inline class ParsableEpgItem( private val s: String ) {
         val root = readDocument( s )
 
         val channelId =     root attr PARAM_CHANNEL_ID
-        val title =         root childValue PARAM_TITLE
-        val description =   root childValue PARAM_DESCRIPTION
-        val imageUrl =      root optChildValue PARAM_IMAGE_URL
-        val category =      root childValue PARAM_CATEGORY
-        val year =          ( root optChildValue PARAM_YEAR )?.toInt()
-        val country =       root optChildValue PARAM_COUNTRY
-        val credits =       optWith( root optChild PARAM_CREDITS ) {
+        val credits = optWith(root optChild PARAM_CREDITS ) {
             TvGuide.Credits(
-                    it childValue PARAM_DIRECTOR,
-                    it childValue PARAM_ACTOR
+                    it optChildValue PARAM_DIRECTOR,
+                    it childListValues PARAM_ACTOR
             )
         }
-        val rating =        ( root child PARAM_RATING ) childValue PARAM_RATING_VALUE
+        val rating = optWith<Node, String>( root optChild PARAM_RATING ) {
+            it childValue PARAM_RATING_VALUE
+        }
 
-        val rawStartTime =     root attr PARAM_START_TIME
-        val rawEndTime =       root attr PARAM_END_TIME
+        val rawStartTime = root attr PARAM_START_TIME
+        val rawEndTime = root attr PARAM_END_TIME
 
-        val startTime = LocalDateTime.parse(rawStartTime, dtFormatter )
+        val startTime = LocalDateTime.parse( rawStartTime, dtFormatter )
         val endTime = LocalDateTime.parse( rawEndTime, dtFormatter )
 
         val id = channelId + rawStartTime
@@ -98,12 +99,12 @@ internal inline class ParsableEpgItem( private val s: String ) {
         return Result( TvGuide(
                 id =            id,
                 channelId =     channelId,
-                title =         title,
-                description =   description,
-                imageUrl =      imageUrl,
-                category =      category,
-                year =          year,
-                country =       country,
+                title =         root childValue PARAM_TITLE,
+                description =   root optChildValue PARAM_DESCRIPTION ?: EMPTY_STRING,
+                imageUrl =      root optChildValue PARAM_IMAGE_URL,
+                category =      root optChildValue PARAM_CATEGORY,
+                year =          root optChildValue PARAM_YEAR ?: root optChildValue PARAM_DATE,
+                country =       root optChildValue PARAM_COUNTRY,
                 credits =       credits,
                 rating =        rating,
                 startTime =     startTime,

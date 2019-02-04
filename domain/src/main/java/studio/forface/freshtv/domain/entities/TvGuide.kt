@@ -24,7 +24,7 @@ data class TvGuide (
         val imageUrl: String?,
 
         /** A [String] category for the image of the Program */
-        val category: String,
+        val category: String?,
 
         /** An OPTIONAL [Int] year of the Program */
         val year: Int?,
@@ -36,7 +36,7 @@ data class TvGuide (
         val credits: Credits?,
 
         /** A [String] rating for the Program */
-        val rating: String,
+        val rating: String?,
 
         /** A [LocalDateTime] representing the start time of the Program */
         val startTime: LocalDateTime,
@@ -64,7 +64,7 @@ data class TvGuide (
 
     /** A class containing credits for the [TvGuide] */
     data class Credits(
-            val director: String,
-            val actor: String
+            val director: String?,
+            val actors: List<String>
     )
 }

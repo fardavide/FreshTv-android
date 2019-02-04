@@ -35,7 +35,7 @@ val localData = module {
     /* Pojo adapters */
     factory { MovieChannelPojo.Adapter( get(), get() ) }
     factory { TvChannelPojo.Adapter( get(), get() ) }
-    factory { TvGuidePojo.Adapter( get(), get() ) }
+    factory { TvGuidePojo.Adapter( get(), get(), get() ) }
 
     /* Column adapters */
     factory { DateTimeColumnAdapter }

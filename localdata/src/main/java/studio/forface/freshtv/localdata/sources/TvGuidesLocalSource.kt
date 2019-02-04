@@ -24,7 +24,7 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
                     year =              year,
                     country =           country,
                     credits_director =  credits_director,
-                    credits_actor =     credits_actor,
+                    credits_actors =     credits_actors,
                     rating =            rating,
                     startTime =         startTime,
                     endTime =           endTime
@@ -77,7 +77,7 @@ class TvGuidesLocalSource( private val queries: TvGuideQueries) {
                     year =              year,
                     country =           country,
                     credits_director =  credits_director,
-                    credits_actor =     credits_actor,
+                    credits_actors =    credits_actors,
                     rating =            rating,
                     startTime =         startTime,
                     endTime =           endTime

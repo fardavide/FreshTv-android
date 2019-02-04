@@ -23,7 +23,7 @@ class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
                 year =              year,
                 country =           country,
                 credits_director =  credits?.director,
-                credits_actor =     credits?.actor,
+                credits_actors =     credits?.actors,
                 rating =            rating,
                 startTime =         startTime,
                 endTime =           endTime
@@ -32,8 +32,8 @@ class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
 
     /** @see PojoMapper.toEntity */
     override fun TvGuidePojo.toEntity() = with(this ) {
-        val credits = if ( credits_director != null && credits_actor != null )
-            TvGuide.Credits( credits_director!!, credits_actor!! ) else null
+        val credits = if ( credits_director != null && credits_actors != null )
+            TvGuide.Credits( credits_director!!, credits_actors!! ) else null
 
         TvGuide(
                 id =            id,

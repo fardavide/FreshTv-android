@@ -90,16 +90,29 @@ internal class ParsersImplTest {
         coVerify( exactly = 1 ) { mockRemote.invoke( any() ) }
     }
 
+    @Test // test only manually due to http call
+    fun `epg realTest`() {
+        val source = ParsersImpl()
+
+        runBlocking {
+            source.readFrom(
+                    Epg("http://www.epgitalia.tv/xml/guide.gzip", SourceFile.Type.REMOTE ),
+                    { println( it ) },
+                    { println( "${it.reason.name} - ${it.rawChannel}" ) }
+            )
+        }
+    }
+
     // @Test // test only manually due to http call
     fun `playlist realTest`() {
         val source = ParsersImpl()
 
         runBlocking {
             source.readFrom(
-                Playlist("https://sourcetv.info/dl/01/it29.m3u", SourceFile.Type.REMOTE ),
-                { println( it ) },
-                { println( it ) },
-                { println( "${it.reason.name} - ${it.rawChannel}" ) }
+                    Playlist("https://sourcetv.info/dl/01/it29.m3u", SourceFile.Type.REMOTE ),
+                    { println( it ) },
+                    { println( it ) },
+                    { println( "${it.reason.name} - ${it.rawChannel}" ) }
             )
         }
     }
