@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid
+package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import androidx.fragment.app.Fragment
 

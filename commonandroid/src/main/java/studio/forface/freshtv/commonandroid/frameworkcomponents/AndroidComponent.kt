@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid
+package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import org.koin.core.KoinComponent
 import org.koin.core.get

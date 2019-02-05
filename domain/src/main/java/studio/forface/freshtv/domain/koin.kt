@@ -38,4 +38,9 @@ val useCasesModule = module {
 
     /* Reset */
     factory { ResetChannelMediaFailure( localData = get() ) }
+
+    /* Update */
+    factory { UpdateChannelFavoriteState( localData = get() ) }
+    factory { UpdateEpg( localData = get() ) }
+    factory { UpdatePlaylist( localData = get() ) }
 }

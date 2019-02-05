@@ -38,6 +38,9 @@ interface LocalData {
     /** Delete all the [TvGuide]s from Local Source with [TvGuide.endTime] less that the given [dateTime] */
     fun deleteTvGuidesBefore( dateTime: LocalDateTime )
 
+    /** @return the stored [Epg] with the given [epgPath] */
+    fun epg( epgPath: String ): Epg
+
     /** @return all the stored [Epg]s */
     fun epgs(): List<Epg>
 
@@ -52,6 +55,9 @@ interface LocalData {
 
     /** @return the [ChannelGroup] with [ChannelGroup.Type.MOVIE] */
     fun movieGroups() : List<ChannelGroup>
+
+    /** @return the stored [Playlist] with the given [playlistPath] */
+    fun playlist( playlistPath: String ) : Playlist
 
     /** @return all the stored [Playlist]s */
     fun playlists() : List<Playlist>
@@ -141,3 +147,40 @@ interface LocalData {
  * @return [T]
  */
 operator fun <T> LocalData.invoke( block: LocalData.() -> T ) = block()
+
+/** Update a [IChannel] in the appropriate Local Source, by its [IChannel.id] and a lambda [block] */
+inline fun LocalData.updateChannel( channelId: String, block: (IChannel) -> IChannel ) {
+    updateChannel( block( channel( channelId ) ) )
+}
+
+/**
+ * Update a [Epg] in the appropriate Local Source, by its [Epg.path] and a lambda [block]
+ * If the new [Epg.path] is different from the old [Epg.path], just [LocalData.updateEpg]
+ * else, [LocalData.deleteEpg] the old [Epg] and [LocalData.storeEpg] with the new [Epg]
+ */
+inline fun LocalData.updateEpg( epgPath: String, block: (Epg) -> Epg ) {
+    val oldEpg = epg( epgPath )
+    val newEpg = block( oldEpg )
+    if ( oldEpg.path == newEpg.path )
+        updateEpg( newEpg )
+    else {
+        deleteEpg( oldEpg.path )
+        storeEpg( newEpg )
+    }
+}
+
+/**
+ * Update a [Playlist] in the appropriate Local Source, by its [Playlist.path] and a lambda [block]
+ * If the new [Playlist.path] is different from the old [Playlist.path], just [LocalData.updatePlaylist]
+ * else, [LocalData.deletePlaylist] the old [Playlist] and [LocalData.storePlaylist] with the new [Playlist]
+ */
+inline fun LocalData.updatePlaylist( playlistPath: String, block: (Playlist) -> Playlist ) {
+    val oldPlaylist = playlist( playlistPath )
+    val newPlaylist = block( oldPlaylist )
+    if ( oldPlaylist.path == newPlaylist.path )
+        updatePlaylist( newPlaylist )
+    else {
+        deletePlaylist( oldPlaylist.path )
+        storePlaylist( newPlaylist )
+    }
+}

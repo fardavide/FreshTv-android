@@ -8,12 +8,12 @@ sealed class SourceFile {
 
     abstract val path: String
     abstract val type: Type
-    abstract val name: String
+    abstract val name: String?
 
     data class Epg(
         override val path: String,
         override val type: Type,
-        override val name: String = path
+        override val name: String?
     ): SourceFile() {
 
         companion object { val TYPE_NAME = Epg::class.simpleName!! }
@@ -29,7 +29,7 @@ sealed class SourceFile {
     data class Playlist(
         override val path: String,
         override val type: Type,
-        override val name: String = path
+        override val name: String?
     ): SourceFile() {
 
         companion object { val TYPE_NAME = Playlist::class.simpleName!! }

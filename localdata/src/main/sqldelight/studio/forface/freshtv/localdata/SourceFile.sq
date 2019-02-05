@@ -6,7 +6,7 @@ import java.lang.Boolean;
 CREATE TABLE sourceFilePojo (
   path TEXT NOT NULL PRIMARY KEY,
   type TEXT NOT NULL,
-  name TEXT NOT NULL,
+  name TEXT,
   souceType TEXT NOT NULL
 );
 

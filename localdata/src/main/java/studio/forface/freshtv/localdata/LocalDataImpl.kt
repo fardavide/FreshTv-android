@@ -99,6 +99,10 @@ internal class LocalDataImpl(
     /** Delete all the [TvGuide]s from Local Source with [TvGuide.endTime] less that the given [dateTime] */
     override fun deleteTvGuidesBefore( dateTime: LocalDateTime ) = tvGuides.deleteGuidesBefore( dateTime )
 
+    /** @return the stored [Epg] with the given [epgPath] */
+    override fun epg( epgPath: String ): Epg =
+        sourceFileMapper { sourceFiles.epg( epgPath ).toEntity() as Epg }
+
     /** @return all the stored [Epg]s */
     override fun epgs(): List<Epg> =
         sourceFiles.allEpgs().map { sourceFileMapper { it.toEntity() } as Epg }
@@ -186,6 +190,10 @@ internal class LocalDataImpl(
     /** @return the [ChannelGroup] with [ChannelGroup.Type.MOVIE] */
     override fun movieGroups(): List<ChannelGroup> =
         channelGroups.allMovie().map { channelGroupMapper { it.toEntity() } }
+
+    /** @return [Playlist] with the given [playlistPath] */
+    override fun playlist( playlistPath: String ) : Playlist =
+        sourceFileMapper { sourceFiles.playlist( playlistPath ).toEntity() as Playlist }
 
     /** @return all the stored [Playlist]s */
     override fun playlists(): List<Playlist> =

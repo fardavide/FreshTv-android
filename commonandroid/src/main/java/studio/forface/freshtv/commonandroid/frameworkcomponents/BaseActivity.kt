@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid
+package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import androidx.appcompat.app.AppCompatActivity
 
@@ -8,4 +8,5 @@ import androidx.appcompat.app.AppCompatActivity
  *
  * Inherit from [AppCompatActivity].
  */
-abstract class BaseActivity: AppCompatActivity(), AndroidComponent
+abstract class BaseActivity: AppCompatActivity(),
+    AndroidComponent

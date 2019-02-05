@@ -63,26 +63,29 @@ interface IChannel {
 
     /** A functions for copy an [IChannel] using the copy method of data class */
     fun copyObj(
-        name: String = this.name,
-        groupName: String = this.groupName,
-        imageUrl: Url? = this.imageUrl,
-        mediaUrls: Map<String, Int> = this.mediaUrls,
-        playlistPaths: List<String> = this.playlistPaths
+        name:           String =            this.name,
+        groupName:      String =            this.groupName,
+        imageUrl:       Url? =              this.imageUrl,
+        mediaUrls:      Map<String, Int> =  this.mediaUrls,
+        playlistPaths:  List<String> =      this.playlistPaths,
+        favorite:       Boolean =           this.favorite
     ): IChannel {
         return when( this ) {
             is MovieChannel -> this.copy(
-                name = name,
-                groupName = groupName,
-                imageUrl = imageUrl,
-                mediaUrls = mediaUrls,
-                playlistPaths = playlistPaths
+                name =          name,
+                groupName =     groupName,
+                imageUrl =      imageUrl,
+                mediaUrls =     mediaUrls,
+                playlistPaths = playlistPaths,
+                favorite =      favorite
             )
             is TvChannel -> this.copy(
-                name = name,
-                groupName = groupName,
-                imageUrl = imageUrl,
-                mediaUrls = mediaUrls,
-                playlistPaths = playlistPaths
+                name =          name,
+                groupName =     groupName,
+                imageUrl =      imageUrl,
+                mediaUrls =     mediaUrls,
+                playlistPaths = playlistPaths,
+                favorite =      favorite
             )
             else -> throw ChannelNotImplementedException( IChannel::class, this::copyObj, this::class )
         }
