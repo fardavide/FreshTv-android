@@ -1,3 +1,4 @@
+import java.lang.Boolean;
 import kotlin.collections.List;
 import kotlin.collections.Map;
 
@@ -8,18 +9,19 @@ CREATE TABLE movieChannelPojo (
   imageUrl TEXT,
   mediaUrls TEXT AS Map<String, Int> NOT NULL,
   playlistPaths TEXT AS List<String> NOT NULL,
+  favorite INTEGER AS Boolean NOT NULL,
   tmdbId INTEGER AS Int
 );
 
 CREATE INDEX movieChannel_name ON movieChannelPojo(name);
 
 insert:
-  INSERT INTO movieChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths, tmdbId )
-  VALUES ( ?, ?, ?, ?, ?, ?, ? );
+  INSERT INTO movieChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths, favorite, tmdbId )
+  VALUES ( ?, ?, ?, ?, ?, ?, ?, ? );
 
 update:
   UPDATE movieChannelPojo
-  SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?, tmdbId = ?
+  SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?, favorite = ?, tmdbId = ?
   WHERE id = :id;
 
 delete:
@@ -34,11 +36,17 @@ count:
 
 selectAll:
   SELECT *
-  FROM movieChannelPojo;
+  FROM movieChannelPojo
+  ORDER BY
+    favorite ASC,
+    name ASC;
 
 select:
   SELECT *
   FROM movieChannelPojo
+  ORDER BY
+    favorite ASC,
+    name ASC
   LIMIT :limit OFFSET :offset;
 
 selectById:
@@ -50,14 +58,23 @@ selectById:
 selectByName:
   SELECT *
   FROM movieChannelPojo
-  WHERE name LIKE ?;
+  WHERE name LIKE ?
+  ORDER BY
+    favorite ASC,
+    name ASC;
 
 selectByGroup:
   SELECT *
   FROM movieChannelPojo
-  WHERE groupName = ?;
+  WHERE groupName = ?
+  ORDER BY
+    favorite ASC,
+    name ASC;
 
 selectByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)";
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  ORDER BY
+    favorite ASC,
+    name ASC;

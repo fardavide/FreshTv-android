@@ -30,9 +30,13 @@ dependencies {
 
     /* Kotlin */
     api( Libs.coroutines_android )
+    api( Libs.koin_android )
+    api( Libs.koin_android_viewmodel )
 
     /* Android */
     api( Libs.Android.appcompat )
     api( Libs.Android.constraint_layout )
+    implementation( Libs.Android.cue )
     api( Libs.Android.ktx )
+    implementation( Libs.Android.picasso )
 }

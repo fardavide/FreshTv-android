@@ -8,4 +8,4 @@ import androidx.appcompat.app.AppCompatActivity
  *
  * Inherit from [AppCompatActivity].
  */
-abstract class BaseActivity: AppCompatActivity()
+abstract class BaseActivity: AppCompatActivity(), AndroidComponent

@@ -13,6 +13,7 @@ data class MovieChannel(
     override val imageUrl: Url? = null,
     override val mediaUrls: Map<String, Int> = mutableMapOf(),
     override val playlistPaths: List<String> = mutableListOf(),
+    override val favorite: Boolean = false,
 
     /** The OPTIONAL [Int] id of the movie on TheMovieDb.org */
     val tmdbId: Int? = null

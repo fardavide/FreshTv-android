@@ -14,11 +14,11 @@ class TvChannelPojoMapper(): PojoMapper<TvChannel, TvChannelPojo>() {
 
     /** @see PojoMapper.toPojo */
     override fun TvChannel.toPojo() = with(this ) {
-        TvChannelPojo.Impl( id, name, groupName, imageUrl?.s, mediaUrls, playlistPaths )
+        TvChannelPojo.Impl( id, name, groupName, imageUrl?.s, mediaUrls, playlistPaths, favorite )
     }
 
     /** @see PojoMapper.toEntity */
     override fun TvChannelPojo.toEntity() = with(this ) {
-        TvChannel( id, name, groupName, imageUrl?.let { Url( it ) }, mediaUrls, playlistPaths )
+        TvChannel( id, name, groupName, imageUrl?.let { Url( it ) }, mediaUrls, playlistPaths, favorite )
     }
 }

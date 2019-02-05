@@ -38,6 +38,7 @@ class MovieChannelsLocalSource( private val queries: MovieChannelQueries):
             imageUrl =      imageUrl,
             mediaUrls =     mediaUrls,
             playlistPaths = playlistPaths,
+            favorite =      favorite,
             tmdbId =        tmdbId
         )
     }
@@ -55,7 +56,7 @@ class MovieChannelsLocalSource( private val queries: MovieChannelQueries):
     /** Update an already stored channel [MovieChannelPojo] */
     override fun updateChannel( channel: MovieChannelPojo) {
         with( channel ) {
-            queries.update( id, name, groupName, imageUrl, mediaUrls, playlistPaths, tmdbId )
+            queries.update( id, name, groupName, imageUrl, mediaUrls, playlistPaths, favorite, tmdbId )
         }
     }
 }

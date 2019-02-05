@@ -42,18 +42,21 @@ object Versions {
     val sqldelight =                    "1.0.3"
     val threeten_android_bp =           "1.1.1"
     val threeten_bp =                   "1.3.2"
+    val timber =                        "4.7.1"
 
     val android_arch =                  "2.0.0-beta01"
     val android_constraint_layout =     "2.0.0-alpha1"
+    val android_cue =                   "1.1"
     val android_espresso =              "3.1.1"
     val android_gradlePlugin =          "3.3.0-rc02"
     val android_ktx =                   "1.1.0-alpha03"
-    val android_lifecycle =             "2.0.0"
+    val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
     val android_navigation =            "1.0.0-alpha06"
+    val android_picasso =               "2.71828"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
-    val android_work =                  "1.0.0-alpha12"
+    val android_work =                  "1.0.0-beta04"
 }
 
 object Libs {
@@ -78,20 +81,26 @@ object Libs {
     val sqldelight_android_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
     val threeten_android_bp =           "com.jakewharton.threetenabp:threetenabp:${Versions.threeten_android_bp}"
     val threeten_bp =                   "org.threeten:threetenbp:${Versions.threeten_bp}"
+    val timber_android =                "com.jakewharton.timber:timber:${Versions.timber}"
 
     /* Android */
     object Android {
         val appcompat =                 "androidx.appcompat:appcompat:${Versions.android_support}"
         val constraint_layout =         "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
+        val cue =                       "com.fxn769:cue:${Versions.android_cue}"
         val design =                    "com.android.support:design:${Versions.android_support}"
         val espresso =                  "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
         val ktx =                       "androidx.core:core-ktx:${Versions.android_ktx}"
-        val lifecycle_runtime =         "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
         val lifecycle_compiler =        "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
         val lifecycle_extensions =      "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
         val lifecycle_jdk8 =            "androidx.lifecycle:lifecycle-common-java8:${Versions.android_lifecycle}"
+        val lifecycle_runtime =         "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
+        val lifecycle_viewmodel_ktx =   "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.android_lifecycle}"
         val material =                  "com.google.android.material:material:${Versions.android_material}"
+        val picasso =                   "com.squareup.picasso:picasso:${Versions.android_picasso}"
         val support_annotations =       "com.android.support:support-annotations:28.0.0"
         val test_runner =               "com.android.support.test:runner:${Versions.android_test_runner}"
+        val work =                      "android.arch.work:work-runtime:${Versions.android_work}"
+        val work_ktx =                  "android.arch.work:work-runtime-ktx:${Versions.android_work}"
     }
 }

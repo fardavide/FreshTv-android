@@ -14,11 +14,11 @@ class MovieChannelPojoMapper(): PojoMapper<MovieChannel, MovieChannelPojo>() {
 
     /** @see PojoMapper.toPojo */
     override fun MovieChannel.toPojo() = with(this ) {
-        MovieChannelPojo.Impl( id, name, groupName, imageUrl?.s, mediaUrls, playlistPaths, tmdbId )
+        MovieChannelPojo.Impl( id, name, groupName, imageUrl?.s, mediaUrls, playlistPaths, favorite, tmdbId )
     }
 
     /** @see PojoMapper.toEntity */
     override fun MovieChannelPojo.toEntity() = with(this ) {
-        MovieChannel( id, name, groupName, imageUrl?.let { Url( it ) }, mediaUrls, playlistPaths, tmdbId )
+        MovieChannel( id, name, groupName, imageUrl?.let { Url( it ) }, mediaUrls, playlistPaths, favorite, tmdbId )
     }
 }

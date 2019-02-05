@@ -1,3 +1,4 @@
+import java.lang.Boolean;
 import kotlin.collections.List;
 import kotlin.collections.Map;
 
@@ -7,18 +8,19 @@ CREATE TABLE tvChannelPojo (
   groupName TEXT NOT NULL,
   imageUrl TEXT,
   mediaUrls TEXT AS Map<String, Int> NOT NULL,
-  playlistPaths TEXT AS List<String> NOT NULL
+  playlistPaths TEXT AS List<String> NOT NULL,
+  favorite INTEGER AS Boolean NOT NULL
 );
 
 CREATE INDEX tvChannel_name ON tvChannelPojo( name );
 
 insert:
-  INSERT INTO tvChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths )
-  VALUES ( ?, ?, ?, ?, ?, ? );
+  INSERT INTO tvChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths, favorite )
+  VALUES ( ?, ?, ?, ?, ?, ?, ? );
 
 update:
   UPDATE tvChannelPojo
-  SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?
+  SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?, favorite = ?
   WHERE id = :id;
 
 delete:
@@ -33,11 +35,17 @@ count:
 
 selectAll:
   SELECT *
-  FROM tvChannelPojo;
+  FROM tvChannelPojo
+  ORDER BY
+    favorite ASC,
+    name ASC;
 
 select:
   SELECT *
   FROM tvChannelPojo
+  ORDER BY
+    favorite ASC,
+    name ASC
   LIMIT :limit OFFSET :offset;
 
 selectById:
@@ -49,14 +57,23 @@ selectById:
 selectByName:
   SELECT *
   FROM tvChannelPojo
-  WHERE name LIKE ?;
+  WHERE name LIKE ?
+  ORDER BY
+    favorite ASC,
+    name ASC;
 
 selectByGroup:
   SELECT *
   FROM tvChannelPojo
-  WHERE groupName = ?;
+  WHERE groupName = ?
+  ORDER BY
+    favorite ASC,
+    name ASC;
 
 selectByPlaylistPath:
   SELECT *
   FROM tvChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)";
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  ORDER BY
+    favorite ASC,
+    name ASC;

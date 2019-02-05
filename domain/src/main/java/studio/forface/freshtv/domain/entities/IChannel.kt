@@ -58,6 +58,9 @@ interface IChannel {
      */
     val playlistPaths: List<String>
 
+    /** A [Boolean] representing whether the user set the element as favorite */
+    val favorite: Boolean
+
     /** A functions for copy an [IChannel] using the copy method of data class */
     fun copyObj(
         name: String = this.name,

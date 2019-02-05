@@ -12,7 +12,8 @@ data class TvChannel(
     override val groupName: String = IChannel.NO_GROUP_NAME,
     override val imageUrl: Url? = null,
     override val mediaUrls: Map<String, Int> = mutableMapOf(),
-    override val playlistPaths: List<String> = mutableListOf()
+    override val playlistPaths: List<String> = mutableListOf(),
+    override val favorite: Boolean = false
 ): IChannel {
 
     constructor(

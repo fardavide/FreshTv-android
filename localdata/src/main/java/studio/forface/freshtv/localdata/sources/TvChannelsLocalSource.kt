@@ -37,7 +37,8 @@ class TvChannelsLocalSource( private val queries: TvChannelQueries):
             groupName =     groupName,
             imageUrl =      imageUrl,
             mediaUrls =     mediaUrls,
-            playlistPaths = playlistPaths
+            playlistPaths = playlistPaths,
+            favorite =      favorite
         )
     }
 
@@ -54,7 +55,7 @@ class TvChannelsLocalSource( private val queries: TvChannelQueries):
     /** Update an already stored channel [TvChannelPojo] */
     override fun updateChannel( channel: TvChannelPojo) {
         with( channel ) {
-            queries.update( id, name, groupName, imageUrl, mediaUrls, playlistPaths )
+            queries.update( id, name, groupName, imageUrl, mediaUrls, playlistPaths, favorite )
         }
     }
 }

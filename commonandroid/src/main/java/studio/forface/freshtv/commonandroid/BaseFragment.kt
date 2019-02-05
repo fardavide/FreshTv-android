@@ -9,4 +9,4 @@ import androidx.fragment.app.Fragment
  *
  * Inherit from [Fragment].
  */
-abstract class BaseFragment: Fragment()
+abstract class BaseFragment: Fragment(), AndroidComponent

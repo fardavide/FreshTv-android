@@ -31,9 +31,9 @@ dependencies {
     applyTests()
     applyAndroidTests()
 
-    implementation( Libs.koin_android )
-    implementation( Libs.koin_android_viewmodel )
-
     /* Android */
     implementation( Libs.Android.lifecycle_runtime )
+    implementation( Libs.Android.lifecycle_viewmodel_ktx )
+    implementation( Libs.Android.work )
+    implementation( Libs.Android.work_ktx )
 }

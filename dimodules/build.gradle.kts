@@ -25,6 +25,7 @@ android {
 dependencies {
     api( project(":domain") )
     implementation( project(":androiddatabase" ) )
+    implementation( project(":commonandroid" ) )
     implementation( project(":localdata" ) )
     implementation( project(":parsers" ) )
 
