@@ -1,24 +1,25 @@
 @file:Suppress("MayBeConstant", "unused")
 
+import com.android.build.gradle.TestedExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
-import org.gradle.kotlin.dsl.DependencyHandlerScope
-import org.gradle.kotlin.dsl.ScriptHandlerScope
-import org.gradle.kotlin.dsl.kotlin
-import org.gradle.kotlin.dsl.maven
+import org.gradle.kotlin.dsl.*
 
 val repos: RepositoryHandler.() -> Unit get() = {
     google()
     jcenter()
     mavenCentral()
-    maven("https://kotlin.bintray.com/kotlinx"  )
+    maven("https://kotlin.bintray.com/kotlinx" )
+    maven("https://maven.fabric.io/public" )
 }
 
 val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit get() = {
     classpath( kotlin("gradle-plugin", Versions.kotlin) )
     classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}" )
-    classpath("com.android.tools.build:gradle:3.3.0" )
+    classpath("com.android.tools.build:gradle:${Versions.android_gradle_plugin}" )
+    classpath("io.fabric.tools:gradle:${Versions.fabric}")
     classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}" )
+    classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.android_navigation}" )
 }
 
 fun DependencyHandler.applyTests() = Libs.run {
@@ -26,9 +27,51 @@ fun DependencyHandler.applyTests() = Libs.run {
             .forEach { add("testImplementation", it ) }
 }
 
-fun DependencyHandler.applyAndroidTests() = Libs.Android.run {
-    listOf( espresso, test_runner )
+fun DependencyHandler.applyAndroidTests() {
+    // Libs.run {
+    //     listOf( threeten_bp ).forEach { add( "testImplementation", it ) }
+    // }
+    Libs.Android.run {
+        listOf( espresso, test_runner )
             .forEach { add( "androidTestImplementation", it ) }
+    }
+}
+
+fun TestedExtension.applyAndroidConfig( applicationId: String? = null ) {
+    compileSdkVersion( Project.targetSdk )
+    defaultConfig {
+        applicationId?.let { this.applicationId = it }
+        minSdkVersion( Project.minSdk )
+        targetSdkVersion( Project.targetSdk )
+        versionCode = Project.versionCode
+        versionName = Project.versionName
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        getByName("release" ) {
+            isMinifyEnabled = false
+            proguardFiles( getDefaultProguardFile("proguard-android.txt" ), "proguard-rules.pro" )
+        }
+    }
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES" )
+        exclude("META-INF/LICENSE" )
+        exclude("META-INF/LICENSE.txt" )
+        exclude("META-INF/license.txt" )
+        exclude("META-INF/NOTICE" )
+        exclude("META-INF/NOTICE.txt" )
+        exclude("META-INF/notice.txt" )
+        exclude("META-INF/ASL2.0" )
+        exclude("META-INF/ktor-http.kotlin_module" )
+        exclude("META-INF/kotlinx-io.kotlin_module" )
+        exclude("META-INF/atomicfu.kotlin_module" )
+        exclude("META-INF/ktor-utils.kotlin_module" )
+        exclude("META-INF/kotlinx-coroutines-io.kotlin_module" )
+        exclude("META-INF/ktor-client-json.kotlin_module" )
+        exclude("META-INF/ktor-client-logging.kotlin_module" )
+        exclude("META-INF/ktor-client-core.kotlin_module" )
+        exclude("org/threeten/bp/format/ChronologyText.properties" )
+    }
 }
 
 object Versions {
@@ -36,6 +79,8 @@ object Versions {
     val coroutines =                    "1.1.1"
     val serialization =                 "0.10.0"
 
+    val fabric =                        "1.25.4"
+    val firebase_crashlytics_android =  "2.9.5"
     val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.2"
     val mockk =                         "1.9"
@@ -48,11 +93,11 @@ object Versions {
     val android_constraint_layout =     "2.0.0-alpha1"
     val android_cue =                   "1.1"
     val android_espresso =              "3.1.1"
-    val android_gradlePlugin =          "3.3.0-rc02"
+    val android_gradle_plugin =         "3.3.0"
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_navigation =            "1.0.0-alpha06"
+    val android_navigation =            "1.0.0-beta01"
     val android_picasso =               "2.71828"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
@@ -70,6 +115,7 @@ object Libs {
     val test =                          "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     val test_junit =                    "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
 
+    val firebase_crashlytics_android =  "com.crashlytics.sdk.android:crashlytics:${Versions.firebase_crashlytics_android}"
     val koin =                          "org.koin:koin-core:${Versions.koin}"
     val koin_android =                  "org.koin:koin-android:${Versions.koin}"
     val koin_android_viewmodel =        "org.koin:koin-android-viewmodel:${Versions.koin}"

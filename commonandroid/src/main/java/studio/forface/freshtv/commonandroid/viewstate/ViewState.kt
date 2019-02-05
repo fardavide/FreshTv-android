@@ -61,6 +61,7 @@ sealed class ViewState<out T> {
              * [throwable].
              * @return [ViewState.Error].
              */
+            @Suppress("WhenWithOnlyElse")
             fun fromThrowable( throwable: Throwable ) = when ( throwable ) {
                 else -> ViewState.Error( throwable )
             }

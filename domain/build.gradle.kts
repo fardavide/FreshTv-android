@@ -14,5 +14,5 @@ dependencies {
 
     /* Other */
     api( Libs.koin )
-    api( Libs.threeten_bp )
+    api( Libs.threeten_android_bp )
 }

@@ -2,36 +2,27 @@ plugins {
     id("com.android.library" )
     id("kotlin-android" )
     id("kotlin-android-extensions" )
+    id("io.fabric" )
 }
 
-android {
-    compileSdkVersion( Project.targetSdk )
-    defaultConfig {
-        minSdkVersion( Project.minSdk )
-        targetSdkVersion( Project.targetSdk )
-        versionCode = Project.versionCode
-        versionName = Project.versionName
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        getByName("release" ) {
-            isMinifyEnabled = false
-            proguardFiles( getDefaultProguardFile( "proguard-android.txt" ), "proguard-rules.pro" )
-        }
-    }
-    packagingOptions.exclude("META-INF/main.kotlin_module" )
-}
+android { applyAndroidConfig() }
 
 dependencies {
     api( project(":domain") )
 
     applyTests()
     applyAndroidTests()
+    //testImplementation( Libs.threeten_bp ) { exclude("com.jakewharton.threetenabp","threetenabp" ) }
 
     /* Kotlin */
     api( Libs.coroutines_android )
+
+    /* Other */
+    api( Libs.firebase_crashlytics_android )
     api( Libs.koin_android )
     api( Libs.koin_android_viewmodel )
+    api( Libs.timber_android )
+    //api( Libs.threeten_android_bp ) { exclude("org.threeten","threeten" ) }
 
     /* Android */
     api( Libs.Android.appcompat )
