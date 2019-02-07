@@ -3,6 +3,7 @@ package studio.forface.freshtv.commonandroid.frameworkcomponents
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
@@ -19,7 +20,7 @@ abstract class ScopedViewModel: ViewModel(), CoroutineScope {
     private val job = Job()
 
     /** An instance of [CoroutineContext] for [CoroutineScope] */
-    override val coroutineContext: CoroutineContext = job + Dispatchers.IO
+    override val coroutineContext = job + Main
 
     /** When the [ViewModel] is cleared, call [Job.cancel] on [job] and stop any suspended function */
     override fun onCleared() {

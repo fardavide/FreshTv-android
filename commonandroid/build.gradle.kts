@@ -28,6 +28,7 @@ dependencies {
     api( Libs.Android.appcompat )
     api( Libs.Android.constraint_layout )
     implementation( Libs.Android.cue )
+    api( Libs.Android.design )
     api( Libs.Android.ktx )
     implementation( Libs.Android.picasso )
 }

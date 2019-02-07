@@ -10,40 +10,28 @@ import studio.forface.freshtv.domain.utils.nonNullMessage
  */
 sealed class ViewState<out T> {
 
-    /**
-     * An instance of [T] that will be available in case of [Success], else it will be null.
-     */
+    /** An instance of [T] that will be available in case of [Success], else it will be null */
     open val data: T? = null
 
-    /**
-     * A function for map the current [data].
-     */
+    /** A function for map the current [data] */
     abstract fun <R> map( mapper: (T) -> R ): ViewState<R>
 
-    /**
-     * Execute an [action] in case of [Success].
-     */
+    /** Execute an [action] in case of [Success] */
     inline fun doOnData( action: (T) -> Unit ) {
         if ( this is Success) action( data )
     }
 
-    /**
-     * Execute an [action] in case of [Error].
-     */
+    /** Execute an [action] in case of [Error] */
     inline fun doOnError( action: (Error) -> Unit ) {
         if ( this is Error) action( this )
     }
 
-    /**
-     * Execute an [action] whether is [Loading] or not.
-     */
+    /** Execute an [action] whether is [Loading] or not */
     inline fun doOnLoadingChange( action: (isLoading: Boolean) -> Unit ) {
         action( this is Loading)
     }
 
-    /**
-     * A class that represents the success and will contains the [data] [T].
-     */
+    /** A class that represents the success and will contains the [data] [T] */
     data class Success<out T>( override val data: T ) : ViewState<T>() {
         override fun <R> map( mapper: (T) -> R ): ViewState<R> =
             Success( mapper( data ) )
@@ -67,35 +55,25 @@ sealed class ViewState<out T> {
             }
         }
 
-        /**
-         * GET a [Throwable.nonNullMessage] from [throwable].
-         */
+        /** @return a [String] from [Throwable.nonNullMessage] from [throwable] */
         val baseMessage: String get() = throwable.nonNullMessage
 
-        /**
-         * The [StringRes] for a custom message to show to the user.
-         */
+        /** The [StringRes] for a custom message to show to the user */
         @get:StringRes
         open val customMessageRes: Int? = null
 
-        /**
-         * [Throwable.printStackTrace] from [throwable].
-         */
+        /** [Throwable.printStackTrace] from [throwable] */
         fun printStackTrace() = throwable.printStackTrace()
 
         override fun <R> map( mapper: (Nothing) -> R ): ViewState<R> = this
     }
 
-    /**
-     * A class that represents the loading state and will contains [Nothing].
-     */
+    /** A class that represents the loading state and will contains [Nothing] */
     object Loading : ViewState<Nothing>() {
         override fun <R> map( mapper: (Nothing) -> R ): ViewState<R> = this
     }
 
-    /**
-     * A class that represents the unknown state and will contains [Nothing].
-     */
+    /** A class that represents the unknown state and will contains [Nothing] */
     object None : ViewState<Nothing>() {
         override fun <R> map( mapper: (Nothing) -> R ): ViewState<R> = this
     }

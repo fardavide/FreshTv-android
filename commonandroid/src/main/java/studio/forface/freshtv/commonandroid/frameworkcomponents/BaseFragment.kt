@@ -8,5 +8,6 @@ import androidx.fragment.app.Fragment
  * from the main Activity, like Toolbar title or FloatingActionButton.
  *
  * Inherit from [Fragment].
+ * Implements [AndroidUiComponent]
  */
-abstract class BaseFragment: Fragment(), AndroidComponent
+abstract class BaseFragment: Fragment(), AndroidUiComponent
