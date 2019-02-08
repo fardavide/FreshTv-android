@@ -7,12 +7,11 @@ plugins {
 android { applyAndroidConfig() }
 
 dependencies {
-    api( project(":domain") )
-    implementation( project(":androiddatabase" ) )
     implementation( project(":commonandroid" ) )
-    implementation( project(":localdata" ) )
-    implementation( project(":parsers" ) )
-    implementation( project(":settings" ) )
 
     applyTests()
+    applyAndroidTests()
+
+    /* Other */
+    implementation( Libs.settings )
 }

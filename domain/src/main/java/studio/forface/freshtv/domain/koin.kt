@@ -13,7 +13,7 @@ val useCasesModule = module {
     factory { AddPlaylist( localData = get() ) }
 
     /* Delete */
-    factory { DeleteOldGuides( localData = get() ) }
+    factory { DeleteOldGuides( localData = get(), settings = get() ) }
 
     /* Get */
     factory { GetMovieChannelGroups( localData = get() ) }

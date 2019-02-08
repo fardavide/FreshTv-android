@@ -11,6 +11,8 @@ val repos: RepositoryHandler.() -> Unit get() = {
     mavenCentral()
     maven("https://kotlin.bintray.com/kotlinx" )
     maven("https://maven.fabric.io/public" )
+    maven("https://dl.bintray.com/russhwolf/multiplatform-settings" )
+    // mavenLocal()
 }
 
 val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit get() = {
@@ -52,6 +54,9 @@ fun TestedExtension.applyAndroidConfig( applicationId: String? = null ) {
             isMinifyEnabled = false
             proguardFiles( getDefaultProguardFile("proguard-android.txt" ), "proguard-rules.pro" )
         }
+        getByName("debug" ) {
+            matchingFallbacks = listOf( "release" ) // TODO https://github.com/russhwolf/multiplatform-settings/issues/16
+        }
     }
     packagingOptions {
         exclude("META-INF/DEPENDENCIES" )
@@ -84,6 +89,7 @@ object Versions {
     val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.2"
     val mockk =                         "1.9"
+    val settings =                      "0.2"
     val sqldelight =                    "1.0.3"
     val threeten_android_bp =           "1.1.1"
     val threeten_bp =                   "1.3.2"
@@ -123,6 +129,7 @@ object Libs {
     val ktor =                          "io.ktor:ktor-client-core:${Versions.ktor}"
     val ktor_apache =                   "io.ktor:ktor-client-apache:${Versions.ktor}"
     val mockk =                         "io.mockk:mockk:${Versions.mockk}"
+    val settings =                      "com.russhwolf:multiplatform-settings:${Versions.settings}"
     val sqldelight =                    "com.squareup.sqldelight:runtime-jvm:${Versions.sqldelight}"
     val sqldelight_android_driver =     "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
     val sqldelight_android_paging =     "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"
