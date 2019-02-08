@@ -18,6 +18,7 @@ dependencies {
     /* Android */
     implementation( Libs.Android.lifecycle_runtime )
     implementation( Libs.Android.lifecycle_viewmodel_ktx )
+    implementation( Libs.Android.material_bottom_bar )
     implementation( Libs.Android.work )
     implementation( Libs.Android.work_ktx )
 }

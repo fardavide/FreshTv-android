@@ -4,7 +4,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
-import studio.forface.freshtv.commonandroid.notifier.SnackBarType
+import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.domain.gateways.Notifier
 
 /**
@@ -34,13 +34,13 @@ abstract class BaseActivity: AppCompatActivity(), AndroidUiComponent, SnackbarMa
 
     /**
      * Show a [Snackbar] with the given params
-     * @param type the [SnackBarType], e.g. [SnackBarType.Error]
+     * @param type the [SnackbarType], e.g. [SnackbarType.Error]
      * @param message the [CharSequence]main message of the [Snackbar]
      * @param action an OPTIONAL [Notifier.Action] for the [Snackbar]
      */
-    override fun showSnackBar( type: SnackBarType, message: CharSequence, action: Notifier.Action? ) {
+    override fun showSnackbar( type: SnackbarType, message: CharSequence, action: Notifier.Action? ) {
         val snackBar = Snackbar.make( rootView, message, Snackbar.LENGTH_LONG )
         action?.let { snackBar.setAction( action.name ) { action.block() } }
-        snackBar.show()
+        snackBar.show( type )
     }
 }

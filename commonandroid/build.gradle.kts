@@ -22,7 +22,6 @@ dependencies {
     api( Libs.koin_android )
     api( Libs.koin_android_viewmodel )
     api( Libs.timber_android )
-    //api( Libs.threeten_android_bp ) { exclude("org.threeten","threeten" ) }
 
     /* Android */
     api( Libs.Android.appcompat )

@@ -1,5 +1,6 @@
 package studio.forface.freshtv.commonandroid.notifier
 
+import android.app.Activity
 import android.content.res.Resources
 import android.util.Log
 import androidx.annotation.StringRes
@@ -20,7 +21,10 @@ class AndroidNotifier(
     private val toast: Toast
 ): Notifier<AndroidNotifier.ActionBuilder> {
 
-    /** A reference to [SnackbarManager] for show a [Snackbar] if app is in foreground */
+    /**
+     * A reference to [SnackbarManager] for show a [Snackbar] if app is in foreground
+     * The value will be set on [Activity.onStart] and removed ( null ) on [Activity.onStart]
+     */
     internal var snackbarManager: SnackbarManager? = null
 
 
@@ -142,19 +146,19 @@ class AndroidNotifier(
             builder.build()
         }
 
-        snackbarManager?.showSnackBar( type.snackBarType, message, action ) ?: toast.show( type.toastType, message )
+        snackbarManager?.showSnackbar( type.snackbarType, message, action ) ?: toast.show( type.toastType, message )
     }
 
 
     /** An enum class for the types of events to log */
     private enum class Type(
         internal val logLevel: Int,
-        internal val snackBarType: SnackBarType,
+        internal val snackbarType: SnackbarType,
         internal val toastType: Toast.Type
     ) {
-        Error ( Log.ERROR, SnackBarType.Error, Toast.Type.Error ),
-        Info ( Log.INFO, SnackBarType.Info, Toast.Type.Info ),
-        Warn ( Log.WARN, SnackBarType.Warn, Toast.Type.Warn )
+        Error ( Log.ERROR, SnackbarType.Error, Toast.Type.Error ),
+        Info ( Log.INFO, SnackbarType.Info, Toast.Type.Info ),
+        Warn ( Log.WARN, SnackbarType.Warn, Toast.Type.Warn )
     }
 
     /**

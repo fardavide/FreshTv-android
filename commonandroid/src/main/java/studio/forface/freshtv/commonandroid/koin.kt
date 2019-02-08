@@ -16,8 +16,8 @@ import timber.log.Timber
 val commonAndroidModule = module {
     factory<Resources> { androidContext().resources }
 
-    single<ImageLoader> { PicassoImageLoader( androidContext() ) }
     single { AndroidNotifier( resources = get(), toast = get() ) }
+    single<ImageLoader> { PicassoImageLoader( androidContext() ) }
     factory<Timber.Tree> { TimberTree() }
     factory { Toast( androidContext() ) }
 }

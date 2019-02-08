@@ -18,7 +18,7 @@ class Toast( private val context: Context ) {
      * @param type [Type] of the [Toast].
      * @param message [CharSequence] message to show.
      */
-    fun show(type: Type, message: CharSequence ) {
+    fun show( type: Type, message: CharSequence ) {
         val cue = Cue().with( context )
                 .setCornerRadius( 20 )
                 .setGravity( Gravity.CENTER )
