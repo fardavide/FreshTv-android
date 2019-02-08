@@ -1,9 +1,6 @@
 package studio.forface.freshtv.domain.utils
 
-import org.threeten.bp.Instant
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneOffset
+import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatter
 
 /**
@@ -27,6 +24,9 @@ object LocalDateTimeHelper {
         return LocalDateTime.ofEpochSecond( epochSecond, nanoOfSecond, offset )
     }
 }
+
+/** @return a [Duration] equivalent to the given [Int] of days */
+val Int.days: Duration get() = Duration.ofDays( toLong() )
 
 /**
  * Serialize a [LocalDate] into a [String].

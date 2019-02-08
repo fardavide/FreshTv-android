@@ -30,4 +30,6 @@ dependencies {
     api( Libs.Android.design )
     api( Libs.Android.ktx )
     implementation( Libs.Android.picasso )
+    api( Libs.Android.work )
+    api( Libs.Android.work_ktx )
 }
