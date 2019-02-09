@@ -7,6 +7,5 @@ package studio.forface.freshtv.domain.gateways
 interface AppSettings {
 
     /** The day before an old Guide will be deleted */
-    var oldGuidesLifespanDays: Int
-
+    var oldGuidesLifespanDays: Long
 }

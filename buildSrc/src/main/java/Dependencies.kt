@@ -33,6 +33,10 @@ fun DependencyHandler.applyAndroidTests() {
     // Libs.run {
     //     listOf( threeten_bp ).forEach { add( "testImplementation", it ) }
     // }
+    Libs.run {
+        listOf( test, test_junit, mockk_android )
+            .forEach { add("androidTestImplementation", it ) }
+    }
     Libs.Android.run {
         listOf( espresso, test_runner )
             .forEach { add( "androidTestImplementation", it ) }
@@ -129,6 +133,7 @@ object Libs {
     val ktor =                          "io.ktor:ktor-client-core:${Versions.ktor}"
     val ktor_apache =                   "io.ktor:ktor-client-apache:${Versions.ktor}"
     val mockk =                         "io.mockk:mockk:${Versions.mockk}"
+    val mockk_android =                 "io.mockk:mockk-android:${Versions.mockk}"
     val settings =                      "com.russhwolf:multiplatform-settings:${Versions.settings}"
     val sqldelight =                    "com.squareup.sqldelight:runtime-jvm:${Versions.sqldelight}"
     val sqldelight_android_driver =     "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"

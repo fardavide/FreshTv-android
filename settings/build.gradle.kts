@@ -13,5 +13,5 @@ dependencies {
     applyAndroidTests()
 
     /* Other */
-    implementation( Libs.settings )
+    //implementation( Libs.settings )
 }

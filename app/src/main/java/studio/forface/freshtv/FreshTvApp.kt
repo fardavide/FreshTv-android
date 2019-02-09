@@ -10,6 +10,7 @@ import org.koin.core.context.startKoin
 import studio.forface.freshtv.commonandroid.notifier.TimberTree
 import studio.forface.freshtv.dimodules.businessModules
 import studio.forface.freshtv.domain.utils.days
+import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
 import timber.log.Timber
 
@@ -41,6 +42,6 @@ class FreshTvApp: Application() {
         Timber.plant( get<TimberTree>() )
 
         // Enqueue Works
-        DeleteOldGuidesWorker.enqueue( 3.days, 1.days )
+        DeleteOldGuidesWorker.enqueue( 1.days, 10.hours )
     }
 }

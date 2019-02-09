@@ -16,7 +16,7 @@ class DeleteOldGuides( private val localData: LocalData, private val settings: A
      * @param before default is a week ago.
      */
     operator fun invoke(
-        before: LocalDateTime = LocalDateTime.now().minusDays( settings.oldGuidesLifespanDays.toLong() )
+        before: LocalDateTime = LocalDateTime.now().minusDays( settings.oldGuidesLifespanDays )
     ) {
         localData.deleteTvGuidesBefore( before )
     }
