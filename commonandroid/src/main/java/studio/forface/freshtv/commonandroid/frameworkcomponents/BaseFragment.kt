@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
@@ -24,12 +23,15 @@ import studio.forface.freshtv.commonandroid.utils.getThemeColor
  * Inherit from [Fragment].
  * Implements [AndroidUiComponent]
  */
-sealed class BaseFragment( @LayoutRes val layoutRes: Int ): Fragment(), AndroidUiComponent {
+sealed class BaseFragment( @LayoutRes private val layoutRes: Int ): Fragment(), AndroidUiComponent {
 
     /** On [onCreateView] we inflate the [layoutRes] into the [container] */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? = inflater.inflate( layoutRes, container,false )
+
+    /** The [Fragment]'s [NavController] */
+    val navController: NavController by lazy { findNavController() }
 }
 
 /**
@@ -51,6 +53,9 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
      * DO NOT CALL IT DIRECTLY, SINCE [backgroundColor] CAN OVERRIDE IT!
      */
     @get:ColorRes open val backgroundColorRes: Int? get() = null
+
+    /** The OPTIONAL [MenuRes] of the Options Menu for our [Fragment] */
+    @get: MenuRes open val menuRes: Int? = null
 
     /**
      * This value will contains a [String] for the title we will set to the Toolbar in our `Activity`.

@@ -20,6 +20,4 @@ dependencies {
     implementation( Libs.Android.lifecycle_runtime )
     implementation( Libs.Android.lifecycle_viewmodel )
     implementation( Libs.Android.material_bottom_bar )
-    implementation( Libs.Android.navigation_fragment )
-    implementation( Libs.Android.navigation_ui )
 }

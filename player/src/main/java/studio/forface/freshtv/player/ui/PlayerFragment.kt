@@ -18,5 +18,4 @@ class PlayerFragment: RootFragment( R.layout.fragment_player ) {
 
     /** A [NestedFragment] for the info */
     class InfoFragment: NestedFragment( R.layout.fragment_player_info )
-
 }
