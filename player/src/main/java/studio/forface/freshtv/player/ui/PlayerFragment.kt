@@ -11,12 +11,12 @@ import studio.forface.freshtv.player.R
  *
  * Inherit from [RootFragment]
  */
-class PlayerFragment: RootFragment(R.layout.fragment_player) {
+class PlayerFragment: RootFragment( R.layout.fragment_player ) {
 
     /** A [NestedFragment] for the player */
-    class VideoFragment: NestedFragment(R.layout.fragment_player_video)
+    class VideoFragment: NestedFragment( R.layout.fragment_player_video )
 
     /** A [NestedFragment] for the info */
-    class InfoFragment: NestedFragment(R.layout.fragment_player_info)
+    class InfoFragment: NestedFragment( R.layout.fragment_player_info )
 
 }

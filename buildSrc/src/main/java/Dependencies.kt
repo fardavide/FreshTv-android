@@ -11,7 +11,7 @@ val repos: RepositoryHandler.() -> Unit get() = {
     mavenCentral()
     maven("https://kotlin.bintray.com/kotlinx" )
     maven("https://maven.fabric.io/public" )
-    maven("https://dl.bintray.com/russhwolf/multiplatform-settings" )
+    // maven("https://dl.bintray.com/russhwolf/multiplatform-settings" )
     // mavenLocal()
 }
 
@@ -62,6 +62,10 @@ fun TestedExtension.applyAndroidConfig( applicationId: String? = null ) {
             matchingFallbacks = listOf( "release" ) // TODO https://github.com/russhwolf/multiplatform-settings/issues/16
         }
     }
+    compileOptions {
+        sourceCompatibility = Project.jdkVersion
+        targetCompatibility = Project.jdkVersion
+    }
     packagingOptions {
         exclude("META-INF/DEPENDENCIES" )
         exclude("META-INF/LICENSE" )
@@ -89,7 +93,7 @@ object Versions {
     val serialization =                 "0.10.0"
 
     val fabric =                        "1.25.4"
-    val firebase_crashlytics_android =  "2.9.5"
+    val firebase_crashlytics_android =  "2.9.8"
     val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.2"
     val mockk =                         "1.9"
@@ -159,8 +163,8 @@ object Libs {
         val lifecycle_viewmodel =       "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.android_lifecycle}"
         val material =                  "com.google.android.material:material:${Versions.android_material}"
         val material_bottom_bar =       "studio.forface.materialbottombar:materialbottombar:${Versions.android_material_bottom_bar}"
-        val navigation_fragment =       ""
-        val navigation_iu =             ""
+        val navigation_fragment =       "android.arch.navigation:navigation-fragment:${Versions.android_navigation}"
+        val navigation_ui =             "android.arch.navigation:navigation-ui:${Versions.android_navigation}"
         val picasso =                   "com.squareup.picasso:picasso:${Versions.android_picasso}"
         val support_annotations =       "com.android.support:support-annotations:28.0.0"
         val test_runner =               "com.android.support.test:runner:${Versions.android_test_runner}"

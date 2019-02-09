@@ -3,7 +3,7 @@ plugins {
     id("kotlin-android" )
     id("kotlin-android-extensions" )
     id("kotlinx-serialization" )
-    id("androidx.navigation.safeargs" )
+    id("androidx.navigation.safeargs.kotlin" )
 }
 
 android { applyAndroidConfig( Project.id ) }
@@ -18,6 +18,8 @@ dependencies {
 
     /* Android */
     implementation( Libs.Android.lifecycle_runtime )
-    implementation( Libs.Android.lifecycle_viewmodel_ktx )
+    implementation( Libs.Android.lifecycle_viewmodel )
     implementation( Libs.Android.material_bottom_bar )
+    implementation( Libs.Android.navigation_fragment )
+    implementation( Libs.Android.navigation_ui )
 }

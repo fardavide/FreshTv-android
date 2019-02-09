@@ -5,6 +5,10 @@ plugins {
     id("io.fabric" )
 }
 
+crashlytics {
+    manifestPath = "$buildDir/intermediates/library_manifest/debug/AndroidManifest.xml"
+}
+
 android { applyAndroidConfig() }
 
 dependencies {
@@ -31,5 +35,4 @@ dependencies {
     api( Libs.Android.ktx )
     implementation( Libs.Android.picasso )
     api( Libs.Android.work )
-    api( Libs.Android.work_ktx )
 }

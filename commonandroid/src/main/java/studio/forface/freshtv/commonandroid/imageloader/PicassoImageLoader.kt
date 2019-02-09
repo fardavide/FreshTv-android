@@ -9,7 +9,7 @@ import androidx.core.graphics.drawable.toBitmap
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Transformation
-import studio.forface.freshtv.BuildConfig
+import studio.forface.freshtv.commonandroid.BuildConfig
 import java.io.File
 
 /**
