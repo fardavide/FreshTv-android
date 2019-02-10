@@ -16,6 +16,8 @@ import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentResumed
 import studio.forface.freshtv.domain.gateways.Notifier
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 /**
  * @author Davide Giuseppe Farella.
@@ -49,6 +51,7 @@ abstract class BaseActivity(
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
         super.onCreate( savedInstanceState )
+        setFragmentLifecycleListener()
         setContentView( layoutRes )
     }
 
@@ -56,15 +59,19 @@ abstract class BaseActivity(
     override fun onStart() {
         super.onStart()
         notifier.snackbarManager = this
+        setFragmentLifecycleListener()
     }
 
     /** When the `Activity` is Stopped */
     override fun onStop() {
         notifier.snackbarManager = null
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks( fragmentLifecycleListener!! )
+        fragmentLifecycleListener = null
         super.onStop()
     }
 
     /** Called when a [BaseFragment] is resumed */
+    @Suppress("MemberVisibilityCanBePrivate", "UNUSED_PARAMETER")
     protected fun onFragmentResumed( fragment: BaseFragment ) {  }
 
     /** If [navController] can't [NavController.navigateUp] call [onBackPressed] */
@@ -94,8 +101,7 @@ abstract class BaseActivity(
     private fun setFragmentLifecycleListener() {
         if ( fragmentLifecycleListener != null ) return
         fragmentLifecycleListener = supportFragmentManager.onFragmentResumed { fragment ->
-
-            if ( fragment !is BaseFragment ) return@onFragmentResumed
+            fragment.assertIsBaseFragment()
             onFragmentResumed( fragment )
 
             if ( fragment !is RootFragment ) return@onFragmentResumed
@@ -117,5 +123,17 @@ abstract class BaseActivity(
         val snackBar = Snackbar.make( rootView, message, Snackbar.LENGTH_LONG )
         action?.let { snackBar.setAction( action.name ) { action.block() } }
         snackBar.show( type )
+    }
+}
+
+/** Assert that the given [Fragment] is a [BaseFragment] */
+@UseExperimental( ExperimentalContracts::class )
+private fun Fragment.assertIsBaseFragment() {
+    contract { returns() implies ( this@assertIsBaseFragment is BaseFragment ) }
+    val fragment = this
+    if ( fragment !is BaseFragment ) {
+        val fragmentName = fragment::class.qualifiedName
+        val baseFragmentName = BaseFragment::class.qualifiedName
+        throw AssertionError("'$fragmentName' does not inherit from '$baseFragmentName'")
     }
 }

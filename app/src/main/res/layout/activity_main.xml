@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -38,4 +38,13 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <studio.forface.materialbottombar.appbar.MaterialBottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@android:color/white"
+        app:leftCornerRadius="24dp"
+        app:rightCornerRadius="24dp"/>
+
+</studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout>

@@ -10,6 +10,12 @@ allprojects {
     repositories( repos )
 }
 
-tasks.register( "clean", Delete::class.java ) {
+subprojects {
+    tasks.withType( org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile::class ).forEach { task ->
+        task.setProperty( "task.kotlinOptions.freeCompilerArgs", true )
+    }
+}
+
+tasks.register("clean", Delete::class.java ) {
     delete( rootProject.buildDir )
 }
