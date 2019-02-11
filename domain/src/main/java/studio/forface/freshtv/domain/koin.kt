@@ -21,6 +21,10 @@ val useCasesModule = module {
     factory { GetTvChannelGroups( localData = get() ) }
     factory { GetTvChannels( localData = get() ) }
 
+    /* Has */
+    factory { HasMovieChannels( localData = get() ) }
+    factory { HasTvChannels( localData = get() ) }
+
     /* Increment */
     factory { IncrementChannelMediaFailure( localData = get() ) }
 

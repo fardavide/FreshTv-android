@@ -6,6 +6,8 @@ import androidx.work.ListenableWorker
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import org.threeten.bp.Duration
+import studio.forface.freshtv.domain.utils.days
+import studio.forface.freshtv.domain.utils.seconds
 import java.util.concurrent.TimeUnit
 
 /*
@@ -22,8 +24,8 @@ inline fun <reified W: ListenableWorker> WorkManager.enqueueUniquePeriodicWork(
     repeatInterval: Duration,
     flexTimeInterval: Duration? = null,
     replace: Boolean = false,
-    exponentialBackoff: Boolean = false,
-    backoffDelay: Duration = repeatInterval.dividedBy( if ( exponentialBackoff ) 1000 else 100 )
+    exponentialBackoff: Boolean = true,
+    backoffDelay: Duration = 30.seconds
 ) {
     val timeUnit = TimeUnit.MINUTES
     val repeatMin = repeatInterval.toMinutes()

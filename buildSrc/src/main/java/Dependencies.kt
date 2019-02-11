@@ -11,7 +11,7 @@ val repos: RepositoryHandler.() -> Unit get() = {
     mavenCentral()
     maven("https://kotlin.bintray.com/kotlinx" )
     maven("https://maven.fabric.io/public" )
-    // maven("https://dl.bintray.com/russhwolf/multiplatform-settings" )
+    maven("https://dl.bintray.com/4face/MaterialBottomBar" ) // TODO link `navigation` to jCenter
     // mavenLocal()
 }
 
@@ -52,6 +52,7 @@ fun TestedExtension.applyAndroidConfig( applicationId: String? = null ) {
         versionCode = Project.versionCode
         versionName = Project.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         getByName("release" ) {
@@ -112,7 +113,7 @@ object Versions {
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_material_bottom_bar =   "1.0-alpha-21"
+    val android_material_bottom_bar =   "1.0-alpha-22"
     val android_navigation =            "1.0.0-beta01"
     val android_picasso =               "2.71828"
     val android_support =               "1.0.0-beta01"
@@ -134,7 +135,7 @@ object Libs {
     val firebase_crashlytics_android =          "com.crashlytics.sdk.android:crashlytics:${Versions.firebase_crashlytics_android}"
     val koin =                                  "org.koin:koin-core:${Versions.koin}"
     val koin_android =                          "org.koin:koin-android:${Versions.koin}"
-    val koin_android_viewmodel =                "org.koin:koin-android-viewmodel:${Versions.koin}"
+    val koin_android_viewmodel =                "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     val ktor =                                  "io.ktor:ktor-client-core:${Versions.ktor}"
     val ktor_apache =                           "io.ktor:ktor-client-apache:${Versions.ktor}"
     val mockk =                                 "io.mockk:mockk:${Versions.mockk}"

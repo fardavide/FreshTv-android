@@ -40,6 +40,12 @@ internal class LocalDataImpl(
         movies.await() + tvs.await()
     }
 
+    /** @return the [Int] count of the stored [MovieChannel]s */
+    override fun countMovieChannels(): Int = movieChannels.count()
+
+    /** @return the [Int] count of the stored [TvChannel]s */
+    override fun countTvChannels(): Int = tvChannels.count()
+
     /** Store a [IChannel] in the appropriate [ChannelsLocalSource] */
     private fun createChannel( channel: IChannel) {
         when( channel ) {

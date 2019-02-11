@@ -1,7 +1,7 @@
 package studio.forface.freshtv.domain.utils
 
 /**
- * A shortcut for a try/catch block with an optional return value.
+ * A shortcut for a try/catch block, as expression or statement, with an optional return value.
  * @param default the value that will be returned if an exception is thrown. Default is null.
  *
  * Examples:
@@ -11,11 +11,8 @@ package studio.forface.freshtv.domain.utils
  * @return OPTIONAL [T]
  */
 inline fun <T: Any?> handle( default: T? = null, block: () -> T ) : T? {
-    return  try {
-        block()
-    } catch ( t: Throwable ) {
-        default
-    }
+    return try { block() }
+    catch ( t: Throwable ) { default }
 }
 
 /** Same as `with`, but execute [block] only if [receiver] is not null */
@@ -37,6 +34,6 @@ infix fun <T: Any> T?.or( other: T ) : T = this ?: other
 inline infix fun <T: Any> T?.or( block: () -> T ) : T = this ?: block()
 
 /** Wait until [evaluation] is true */
-fun wait( evaluation: () -> Boolean ) {
+inline fun wait( evaluation: () -> Boolean ) {
     while( ! evaluation() ) { /* await */ }
 }

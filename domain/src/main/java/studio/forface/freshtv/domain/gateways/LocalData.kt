@@ -20,6 +20,15 @@ interface LocalData {
     /** @return all the [IChannel] with the given [playlistPath] in [IChannel.playlistPaths] */
     suspend fun channelsWithPlaylist( playlistPath: String ): List<IChannel>
 
+    /** @return the [Int] count of the stored [IChannel] */
+    fun countChannels(): Int = countMovieChannels() + countTvChannels()
+
+    /** @return the [Int] count of the stored [MovieChannel]s */
+    fun countMovieChannels(): Int
+
+    /** @return the [Int] count of the stored [TvChannel]s */
+    fun countTvChannels(): Int
+
     /** Delete all the stored [IChannel]s */
     fun deleteAllChannels()
 

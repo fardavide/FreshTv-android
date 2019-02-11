@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.google.android.material.snackbar.Snackbar
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
@@ -31,7 +32,7 @@ import kotlin.contracts.contract
  */
 abstract class BaseActivity(
     @LayoutRes private val layoutRes: Int
-): AppCompatActivity(), AndroidUiComponent, SnackbarManager {
+): AppCompatActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager {
 
     /**
      * The [FragmentManager.FragmentLifecycleCallbacks], here we will listen to [Fragment.onResume]

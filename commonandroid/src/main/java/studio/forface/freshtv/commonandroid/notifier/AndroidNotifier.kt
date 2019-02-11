@@ -29,7 +29,7 @@ class AndroidNotifier(
 
 
     /** Show an error event though a [ViewState.Error] */
-    fun error( error: ViewState.Error, optionalAction: AndroidOptionalAction /* = null */ ) {
+    fun error( error: ViewState.Error, optionalAction: AndroidOptionalAction = null ) {
         this( Type.Error, error, optionalAction )
     }
 
@@ -43,7 +43,7 @@ class AndroidNotifier(
     }
 
     /** Show an error event though a [Throwable] and a [StringRes] */
-    fun error( throwable: Throwable, @StringRes messageRes: Int?, optionalAction: AndroidOptionalAction /* = null */ ) {
+    fun error( throwable: Throwable, @StringRes messageRes: Int?, optionalAction: AndroidOptionalAction = null ) {
         this( Type.Error, throwable, messageRes, optionalAction )
     }
 
@@ -54,7 +54,7 @@ class AndroidNotifier(
 
 
     /** Show an info event though a [ViewState.Error] */
-    fun info( error: ViewState.Error, optionalAction: AndroidOptionalAction /* = null */ ) {
+    fun info( error: ViewState.Error, optionalAction: AndroidOptionalAction = null ) {
         this( Type.Info, error, optionalAction )
     }
 
@@ -68,7 +68,7 @@ class AndroidNotifier(
     }
 
     /** Show an info event though a [Throwable] and a [StringRes] */
-    fun info( throwable: Throwable, @StringRes messageRes: Int?, optionalAction: AndroidOptionalAction /* = null */ ) {
+    fun info( throwable: Throwable, @StringRes messageRes: Int?, optionalAction: AndroidOptionalAction = null ) {
         this( Type.Info, throwable, messageRes, optionalAction )
     }
 
@@ -79,7 +79,7 @@ class AndroidNotifier(
 
 
     /** Show a warn event though a [ViewState.Error] */
-    fun warn( error: ViewState.Error, optionalAction: AndroidOptionalAction /* = null */ ) {
+    fun warn( error: ViewState.Error, optionalAction: AndroidOptionalAction = null ) {
         this( Type.Warn, error, optionalAction )
     }
 
@@ -93,7 +93,7 @@ class AndroidNotifier(
     }
 
     /** Show a warn event though a [Throwable] and a [StringRes] */
-    fun warn( throwable: Throwable, @StringRes messageRes: Int?, optionalAction: AndroidOptionalAction /* = null */ ) {
+    fun warn( throwable: Throwable, @StringRes messageRes: Int?, optionalAction: AndroidOptionalAction = null ) {
         this( Type.Warn, throwable, messageRes, optionalAction )
     }
 

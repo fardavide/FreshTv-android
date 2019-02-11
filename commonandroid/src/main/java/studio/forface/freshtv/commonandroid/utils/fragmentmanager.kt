@@ -2,6 +2,7 @@ package studio.forface.freshtv.commonandroid.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.NavHostFragment
 
 /*
  * Author: Davide Giuseppe Farella.
@@ -23,7 +24,7 @@ inline fun FragmentManager.onFragmentResumed( crossinline action: (Fragment) -> 
 
         override fun onFragmentResumed( fragmentManager: FragmentManager, fragment: Fragment ) {
             super.onFragmentResumed( fragmentManager, fragment )
-            action( fragment )
+            if ( fragment !is NavHostFragment ) action( fragment )
         }
     }
     registerFragmentLifecycleCallbacks( listener,true )

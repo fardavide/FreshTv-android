@@ -20,6 +20,9 @@ interface ChannelsLocalSource<T> {
     /** @return the stored channels [T] with the given [playlistPath] in [IChannel.playlistPaths] */
     fun channelsWithPlaylist( playlistPath: String ): List<T>
 
+    /** @return the [Int] count of the stored channels [T] */
+    fun count(): Int
+
     /** Create a new channel [T] */
     fun createChannel( channel: T )
 

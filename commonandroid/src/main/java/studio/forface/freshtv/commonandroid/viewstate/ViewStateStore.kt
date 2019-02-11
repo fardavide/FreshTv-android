@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate", "unused")
+
 package studio.forface.freshtv.commonandroid.viewstate
 
 import androidx.lifecycle.LifecycleOwner
@@ -10,7 +12,7 @@ import androidx.lifecycle.Observer
  * By an idea of Fabio Collini at
  * https://proandroiddev.com/how-to-unit-test-livedata-and-lifecycle-components-8a0af41c90d9
  */
-class ViewStateStore<V>( initialState: ViewState<V> = ViewState.None) {
+class ViewStateStore<V>( initialState: ViewState<V> = ViewState.None ) {
 
     /** A secondary constructor for implicitly create a [ViewState.Success] passing the [V] data */
     constructor( data: V ): this( ViewState.Success( data ) )
@@ -29,31 +31,21 @@ class ViewStateStore<V>( initialState: ViewState<V> = ViewState.None) {
      */
     private var lastError: ViewState.Error? = null
 
-    /**
-     * An instance of [MutableLiveData] of [ViewState] of [V] for dispatch [ViewState]'s.
-     */
+    /** An instance of [MutableLiveData] of [ViewState] of [V] for dispatch [ViewState]'s */
     private val liveData = MutableLiveData<ViewState<V>>().apply {
         value = initialState
     }
 
-    /**
-     * A callback that will be triggered on [ViewState.doOnData].
-     */
+    /** A callback that will be triggered on [ViewState.doOnData] */
     private var onData: ( (V) -> Unit ) = {}
 
-    /**
-     * A callback that will be triggered on each [ViewState].
-     */
+    /** A callback that will be triggered on each [ViewState] */
     private var onEach: ( (ViewState<V>) -> Unit ) = {}
 
-    /**
-     * A callback that will be triggered on [ViewState.doOnError].
-     */
+    /** A callback that will be triggered on [ViewState.doOnError] */
     private var onError: ( (ViewState.Error) -> Unit ) = {}
 
-    /**
-     * A callback that will be triggered on [ViewState.doOnLoadingChange].
-     */
+    /** A callback that will be triggered on [ViewState.doOnLoadingChange] */
     private var onLoadingChange: ( (Boolean) -> Unit ) = {}
 
     /**
@@ -85,68 +77,82 @@ class ViewStateStore<V>( initialState: ViewState<V> = ViewState.None) {
         it.doOnLoadingChange( onLoadingChange )
     }
 
-    /**
-     * Run [action] for every event.
-     */
+    /** Run [action] for every event */
     fun doOnEach( action: (ViewState<V>) -> Unit ) = apply { onEach = action }
 
-    /**
-     * Run [action] when data is received correctly.
-     */
+    /** Run [action] when data is received correctly */
     fun doOnData( action: (V) -> Unit ) = apply { onData = action }
 
-    /**
-     * Run [action] when an error occurs.
-     */
+    /** Run [action] when an error occurs */
     fun doOnError( action: (ViewState.Error) -> Unit ) = apply { onError = action }
 
-    /**
-     * Run [action] when the loading state changes.
-     */
+    /** Run [action] when the loading state changes */
     fun doOnLoadingChange( action: (Boolean) -> Unit ) = apply { onLoadingChange = action }
 
-    /**
-     * @see LiveData.observe with our [observer].
-     */
+    /** @see LiveData.observe with our [observer] */
     fun observe( owner: LifecycleOwner) = liveData.observe( owner, observer )
 
-    /**
-     * @see LiveData.observeForever with our [observer].
-     */
+    /** @see LiveData.observeForever with our [observer] */
     fun observeForever() = liveData.observeForever( observer )
 
-    /**
-     * Post a [ViewState.Success] with the given [data].
-     * @see postState
-     */
-    fun postData( data: V) {
-        postState(ViewState.Success(data))
-    }
-
-    /**
-     * @see MutableLiveData.postValue on [liveData].
-     */
-    fun postState( state: ViewState<V>) {
+    /** @see MutableLiveData.postValue on [liveData] */
+    fun postState( state: ViewState<V> ) {
         liveData.postValue( state )
     }
 
-    /**
-     * Set a [ViewState.Success] with the given [data].
-     * @see setState
-     */
-    fun setData( data: V) {
-        setState(ViewState.Success(data))
-    }
-
-    /**
-     * @see MutableLiveData.setValue of [liveData].
-     */
-    fun setState( state: ViewState<V>) {
+    /** @see MutableLiveData.setValue of [liveData] */
+    fun setState( state: ViewState<V> ) {
         liveData.value = state
     }
 
-    /**
-     * @see LiveData.getValue on [liveData].
-     */
+    /** @see LiveData.getValue on [liveData] */
     fun state() = liveData.value!!
+}
+
+/**
+ * Post a [ViewState.Success] with the given [data].
+ * @see ViewStateStore.postState
+ */
+fun <V> ViewStateStore<V>.postData( data: V ) {
+    postState( ViewState.Success( data ) )
+}
+
+/**
+ * Post a [ViewState.Error] created from the given [errorThrowable].
+ * @see ViewStateStore.postState
+ */
+fun ViewStateStore<*>.postError( errorThrowable: Throwable ) {
+    postState( ViewState.Error.fromThrowable( errorThrowable ) )
+}
+
+/**
+ * Post a [ViewState.Loading].
+ * @see ViewStateStore.postState
+ */
+fun ViewStateStore<*>.postLoading() {
+    postState( ViewState.Loading )
+}
+
+/**
+ * Set a [ViewState.Success] with the given [data].
+ * @see ViewStateStore.setState
+ */
+fun <V> ViewStateStore<V>.setData( data: V ) {
+    setState( ViewState.Success( data ) )
+}
+
+/**
+ * Set a [ViewState.Error] created from the given [errorThrowable].
+ * @see ViewStateStore.setState
+ */
+fun ViewStateStore<*>.setError( errorThrowable: Throwable ) {
+    setState( ViewState.Error.fromThrowable( errorThrowable ) )
+}
+
+/**
+ * Set a [ViewState.Loading].
+ * @see ViewStateStore.postState
+ */
+fun ViewStateStore<*>.setLoading() {
+    setState( ViewState.Loading )
 }

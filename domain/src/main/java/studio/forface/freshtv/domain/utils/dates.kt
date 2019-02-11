@@ -31,6 +31,9 @@ val Int.days: Duration get() = Duration.ofDays( toLong() )
 /** @return a [Duration] equivalent to the given [Int] of hours */
 val Int.hours: Duration get() = Duration.ofHours( toLong() )
 
+/** @return a [Duration] equivalent to the given [Int] of seconds */
+val Int.seconds: Duration get() = Duration.ofSeconds( toLong() )
+
 /**
  * Serialize a [LocalDate] into a [String].
  * @return [String].

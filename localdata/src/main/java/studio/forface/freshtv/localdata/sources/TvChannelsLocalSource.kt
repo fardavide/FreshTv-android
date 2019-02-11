@@ -29,6 +29,9 @@ class TvChannelsLocalSource( private val queries: TvChannelQueries):
     override fun channelsWithPlaylist( playlistPath: String ): List<TvChannelPojo> =
         queries.selectByPlaylistPath( playlistPath ).executeAsList()
 
+    /** @return the [Int] count of the stored channels [TvChannelPojo] */
+    override fun count(): Int = queries.count().executeAsOne().toInt()
+
     /** Create a new channel [TvChannelPojo] */
     override fun createChannel( channel: TvChannelPojo) = with( channel ) {
         queries.insert(
