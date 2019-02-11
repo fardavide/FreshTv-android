@@ -11,6 +11,7 @@ val repos: RepositoryHandler.() -> Unit get() = {
     mavenCentral()
     maven("https://kotlin.bintray.com/kotlinx" )
     maven("https://maven.fabric.io/public" )
+    maven("https://dl.bintray.com/4face/MaterialBottomBar" ) // TODO link `navigation` to jCenter
     // mavenLocal()
 }
 
