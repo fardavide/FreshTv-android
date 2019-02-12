@@ -46,9 +46,10 @@ class MainActivity: BaseActivity( R.layout.activity_main ) {
         setSupportActionBar( bottomAppBar )
         // bottomAppBar.setupWithNavController( navController ) TODO: navigationIcon not showing
 
-        channelsAvailabilityViewModel.channelsAvailability
-            .doOnError { notifier.error( it ) }
-            .doOnData( ::setDrawer )
+        channelsAvailabilityViewModel.channelsAvailability.observe {
+            doOnError { notifier.error( it ) }
+            doOnData( ::setDrawer )
+        }
     }
 
     /**

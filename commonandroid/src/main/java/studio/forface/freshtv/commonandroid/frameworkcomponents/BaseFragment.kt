@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
+import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
+import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
 
 /**
  * @author Davide Giuseppe Farella.
@@ -78,6 +81,10 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
      * DO NOT CALL IT DIRECTLY, SINCE [title] CAN OVERRIDE IT!
      */
     @get: StringRes open val titleRes: Int? get() = R.string.empty
+
+    /** Call [ViewStateStore.observe] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
+    inline fun <V> ViewStateStore<V>.observe(block: ViewStateObserver<V>.() -> Unit  ) =
+        observe( viewLifecycleOwner, block )
 }
 
 /**

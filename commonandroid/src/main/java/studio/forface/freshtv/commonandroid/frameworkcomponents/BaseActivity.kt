@@ -16,6 +16,8 @@ import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentResumed
+import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
+import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
 import studio.forface.freshtv.domain.gateways.Notifier
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
@@ -125,6 +127,10 @@ abstract class BaseActivity(
         action?.let { snackBar.setAction( action.name ) { action.block() } }
         snackBar.show( type )
     }
+
+    /** Call [ViewStateStore.observe] with `this` `Activity` as [LifecycleOwner] */
+    inline fun <V> ViewStateStore<V>.observe( block: ViewStateObserver<V>.() -> Unit  ) =
+            observe(this@BaseActivity, block )
 }
 
 /** Assert that the given [Fragment] is a [BaseFragment] */
