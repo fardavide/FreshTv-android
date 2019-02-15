@@ -33,7 +33,6 @@
         <argument
             android:name="playlistPath"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null" />
+            app:nullable="true" />
     </fragment>
 </navigation>

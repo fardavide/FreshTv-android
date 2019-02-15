@@ -82,12 +82,34 @@ class ViewStateStore<V>( initialState: ViewState<V> = ViewState.None ) {
     }
 
     /**
+     * Observe the [ViewStateStore] and trigger [block] only on [ViewStateObserver.onData]
+     * @see LiveData.observe with an [Observer] created with an instance of [ViewStateObserver]
+     * @param block a lambda with [ViewStateObserver] as receiver that properly sets callbacks on it.
+     */
+    inline fun observeData( owner: LifecycleOwner, crossinline block: V.() -> Unit ) {
+        val observer = ViewStateObserver<V>()
+        observer.onData = { it.block() }
+        liveData.observe( owner, observerWith( observer ) )
+    }
+
+    /**
      * @see LiveData.observeForever with an [Observer] created with an instance of [ViewStateObserver]
      * @param block a lambda with [ViewStateObserver] as receiver that properly sets callbacks on it.
      */
     inline fun observeForever( block: ViewStateObserver<V>.() -> Unit ) {
         val observer = ViewStateObserver<V>()
         observer.block()
+        liveData.observeForever( observerWith( observer ) )
+    }
+
+    /**
+     * Observe the [ViewStateStore] and trigger [block] only on [ViewStateObserver.onData]
+     * @see LiveData.observeForever with an [Observer] created with an instance of [ViewStateObserver]
+     * @param block a lambda with [ViewStateObserver] as receiver that properly sets callbacks on it.
+     */
+    inline fun observeDataForever( crossinline block: V.() -> Unit ) {
+        val observer = ViewStateObserver<V>()
+        observer.onData = { it.block() }
         liveData.observeForever( observerWith( observer ) )
     }
 

@@ -93,12 +93,17 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
     data class FabParams(
             @DrawableRes internal val drawableRes: Int,
             @StringRes internal val textRes: Int,
+            internal val showOnStart: Boolean = true,
             internal val action: (View) -> Unit
     )
 
     /** Call [ViewStateStore.observe] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
-    inline fun <V> ViewStateStore<V>.observe(block: ViewStateObserver<V>.() -> Unit  ) =
-        observe( viewLifecycleOwner, block )
+    inline fun <V> ViewStateStore<V>.observe( block: ViewStateObserver<V>.() -> Unit  ) =
+            observe( viewLifecycleOwner, block )
+
+    /** Call [ViewStateStore.observeData] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
+    inline fun <V> ViewStateStore<V>.observeData( crossinline block: (V) -> Unit  ) =
+            observeData( viewLifecycleOwner, block )
 }
 
 /**

@@ -12,11 +12,11 @@ class UpdatePlaylist( private val localData: LocalData ) {
 
     /** Change the [Playlist.path] and [Playlist.name] of the given [Playlist] */
     operator fun invoke( playlist: Playlist, path: String, name: String? ) {
-        this( playlist.path, path, name )
+        this(playlist.path, name)
     }
 
     /** Change the [Playlist.path] and [Playlist.name] of the [Playlist] with the given [playlistPath] */
-    operator fun invoke( playlistPath: String, path: String, name: String? ) {
-        localData.updatePlaylist( playlistPath ) { it.copy( path = path, name = name ) }
+    operator fun invoke( playlistPath: String, name: String? ) {
+        localData.updatePlaylist( playlistPath ) { it.copy( path = playlistPath, name = name ) }
     }
 }

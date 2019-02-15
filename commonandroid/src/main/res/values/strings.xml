@@ -1,3 +1,21 @@
 <resources>
     <string name="empty"/>
+
+    <!-- Actions -->
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_save">Save</string>
+
+    <!-- Images description -->
+    <string name="image_load_from_file">Load from file</string>
+    <string name="image_load_from_web">Load from web</string>
+
+    <!-- Titles -->
+    <string name="title_add_playlist">Add Playlist</string>
+    <string name="title_edit_playlist">Edit Playlist</string>
+
+    <!-- Others -->
+    <string name="load_epg_from">Load EPG from…</string>
+    <string name="load_playlist_from">Load Playlist from…</string>
 </resources>

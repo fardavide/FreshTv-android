@@ -88,7 +88,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasNothing )
                 primaryItem( R.string.action_add_playlist ) {
                     iconResource = R.drawable.ic_playlist
-                    navDirections = actionToEditPlaylistFragment()
+                    navDirections = actionToEditPlaylistFragment(null )
                 }
 
             // Tv Channels

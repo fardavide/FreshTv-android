@@ -6,7 +6,7 @@ package studio.forface.freshtv.commonandroid.viewstate
 class ViewStateObserver<V> {
 
     /** A callback that will be triggered on [ViewState.doOnData] */
-    internal var onData: ( (V) -> Unit ) = {}
+    @PublishedApi internal var onData: ( (V) -> Unit ) = {}
 
     /** A callback that will be triggered on each [ViewState] */
     internal var onEach: ( (ViewState<V>) -> Unit ) = {}

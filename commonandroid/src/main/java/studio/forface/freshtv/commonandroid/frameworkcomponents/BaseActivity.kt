@@ -136,7 +136,7 @@ abstract class BaseActivity(
                     fab.setImageResource( fabParams.drawableRes )
                     // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text
                     fab.setOnClickListener( fabParams.action )
-                    fab.show()
+                    if ( fabParams.showOnStart ) fab.show() else fab.hide()
                 }
             }
         }
