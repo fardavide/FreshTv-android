@@ -2,22 +2,31 @@ package studio.forface.freshtv.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.postDelayed
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
+import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditPlaylistFragment
+import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEpgsFragment
 import studio.forface.freshtv.uimodels.*
 import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
-import studio.forface.materialbottombar.drawer.MaterialDrawer
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
+import studio.forface.materialbottombar.navigation.dsl.MaterialNavDrawer
 import studio.forface.materialbottombar.navigation.dsl.navDrawer
-import studio.forface.materialbottombar.panels.params.*
-import kotlinx.android.synthetic.main.activity_main.toolbar as syntheticToolbar
+import studio.forface.materialbottombar.panels.params.iconDpSize
+import studio.forface.materialbottombar.panels.params.titleBold
+import studio.forface.materialbottombar.panels.params.iconResource
+import studio.forface.materialbottombar.panels.params.titleSpSize
+import studio.forface.materialbottombar.panels.params.titleTextRes
+import kotlinx.android.synthetic.main.activity_main.fab as syntheticFab
+import kotlinx.android.synthetic.main.activity_main.titleTextView as syntheticTitleTextView
 
 /**
  * @author Davide Giuseppe Farella
@@ -25,19 +34,22 @@ import kotlinx.android.synthetic.main.activity_main.toolbar as syntheticToolbar
  *
  * Inherit from [BaseActivity]
  */
-class MainActivity: BaseActivity( R.layout.activity_main ) {
+internal class MainActivity: BaseActivity( R.layout.activity_main ) {
 
     /** A `ViewModel` for check the availability of Channels */
     private val channelsAvailabilityViewModel by viewModel<ChannelsAvailabilityViewModel>()
+
+    /** @see BaseActivity.fab */
+    override val fab: FloatingActionButton get() = syntheticFab
 
     /** @see BaseActivity.navController */
     override val navController: NavController get() = findNavController( R.id.nav_host )
 
     /** @see BaseActivity.rootView */
-    override val rootView: View get() = root
+    override val rootView: CoordinatorLayout get() = root
 
-    /** @see BaseActivity.toolbar */
-    override val toolbar: Toolbar get() = syntheticToolbar
+    /** @see BaseActivity.titleTextView */
+    override val titleTextView: TextView get() = syntheticTitleTextView
 
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
@@ -48,19 +60,19 @@ class MainActivity: BaseActivity( R.layout.activity_main ) {
 
         channelsAvailabilityViewModel.channelsAvailability.observe {
             doOnError { notifier.error( it ) }
-            doOnData( ::setDrawer )
+            doOnData( ::onChannelsAvailability )
         }
     }
 
     /**
-     * @return a [MaterialDrawer], build with the given [ChannelsAvailabilityUiModel] for our
+     * @return a [MaterialNavDrawer], build with the given [ChannelsAvailabilityUiModel] for our
      * [MaterialBottomDrawerLayout]
      *
      * If [ChannelsAvailabilityUiModel.hasMovies] is true the corresponding item will be shown.
      * If [ChannelsAvailabilityUiModel.hasTvs] is true the corresponding item will be shown.
      * If both of them are false, or [channelsAvailability] is null, an item for add a `Playlist` will be shown
      */
-    private fun buildDrawer( channelsAvailability: ChannelsAvailabilityUiModel? ) = navDrawer {
+    private fun buildDrawer( channelsAvailability: ChannelsAvailabilityUiModel? ) = navDrawer( navController ) {
         header {
             titleTextRes = R.string.app_name
             titleBold = true
@@ -76,6 +88,7 @@ class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasNothing )
                 primaryItem( R.string.action_add_playlist ) {
                     iconResource = R.drawable.ic_playlist
+                    navDirections = actionToEditPlaylistFragment()
                 }
 
             // Tv Channels
@@ -102,6 +115,7 @@ class MainActivity: BaseActivity( R.layout.activity_main ) {
             // My EPGs
             primaryItem( R.string.menu_my_epgs ) {
                 iconResource = R.drawable.ic_epg
+                navDirections = actionToEpgsFragment()
             }
 
             // Divider
@@ -114,16 +128,21 @@ class MainActivity: BaseActivity( R.layout.activity_main ) {
         }
     }
 
+    /** When [ChannelsAvailabilityUiModel] is received from [ChannelsAvailabilityViewModel] */
+    private fun onChannelsAvailability( channelsAvailability: ChannelsAvailabilityUiModel ) {
+        setDrawer( channelsAvailability )
+        // TODO navigate
+    }
+
     /** [buildDrawer] and set as [MaterialBottomDrawerLayout.drawer] of [root] [View] */
     private fun setDrawer( channelsAvailability: ChannelsAvailabilityUiModel? = null ) {
         runCatching { root.drawer = buildDrawer( channelsAvailability ) }
-            .onSuccess { root.postDelayed(100 ) { root.openDrawer() } }
             .onFailure { notifier.error( it ) }
     }
 }
 
 /**
- * @return OPTIONAL [MainActivity] from a [BaseFragment] ( optional since the [BaseFragment.getActivity] is also
- * nullable ).
+ * @return OPTIONAL [MainActivity] from a [BaseFragment] ( optional since the
+ * [BaseFragment.getActivity] is also nullable ).
  */
-val BaseFragment.mainActivity get() = activity as? MainActivity
+internal val BaseFragment.mainActivity get() = activity as? MainActivity

@@ -6,5 +6,34 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="studio.forface.freshtv.ui.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+    </fragment>
+
+    <action
+        android:id="@+id/action_to_editPlaylistFragment"
+        app:destination="@id/editPlaylistFragment" />
+
+    <action
+        android:id="@+id/action_to_epgsFragment"
+        app:destination="@id/epgsFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <fragment
+        android:id="@+id/epgsFragment"
+        android:name="studio.forface.freshtv.ui.EpgsFragment"
+        android:label="EpgsFragment" />
+
+    <fragment
+        android:id="@+id/editPlaylistFragment"
+        android:name="studio.forface.freshtv.ui.EditPlaylistFragment"
+        android:label="EditPlaylistFragment" >
+        <argument
+            android:name="playlistPath"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+    </fragment>
 </navigation>

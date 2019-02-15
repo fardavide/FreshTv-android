@@ -2,16 +2,20 @@ package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.SnackbarContentLayout
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
@@ -42,14 +46,17 @@ abstract class BaseActivity(
      */
     private var fragmentLifecycleListener: FragmentManager.FragmentLifecycleCallbacks? = null
 
+    /** @return an OPTIONAL `Activity`s [FloatingActionButton] */
+    open val fab: FloatingActionButton? = null
+
     /** @return the `Activity`s [NavController] */
     protected abstract val navController: NavController
 
     /** @return the `Activity`s root [View] */
-    protected abstract val rootView: View
+    protected abstract val rootView: CoordinatorLayout
 
-    /** @return the `Activity`s [Toolbar] */
-    protected abstract val toolbar: Toolbar
+    /** @return the `Activity`s [TextView] for the title */
+    protected abstract val titleTextView: TextView
 
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
@@ -109,10 +116,29 @@ abstract class BaseActivity(
 
             if ( fragment !is RootFragment ) return@onFragmentResumed
 
-            fragment.title?.let { title = it }
-            toolbar.setTitleTextColor( fragment.titleColor )
+            // Title
+            fragment.title?.let { titleTextView.text = it }
+            titleTextView.setTextColor( fragment.titleColor )
+
+            // Options Menu
             fragment.setHasOptionsMenu( fragment.menuRes != null )
-            setBackgroundColor( fragment.backgroundColor ?: getThemeColor( android.R.attr.colorBackground ) )
+
+            // Background
+            setBackgroundColor(
+                    fragment.backgroundColor ?: getThemeColor( android.R.attr.colorBackground )
+            )
+
+            // Fab
+            fab?.let { fab ->
+                val fabParams = fragment.fabParams
+                if ( fabParams == null ) fab.hide()
+                else {
+                    fab.setImageResource( fabParams.drawableRes )
+                    // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text
+                    fab.setOnClickListener( fabParams.action )
+                    fab.show()
+                }
+            }
         }
     }
 
@@ -144,3 +170,9 @@ private fun Fragment.assertIsBaseFragment() {
         throw AssertionError("'$fragmentName' does not inherit from '$baseFragmentName'")
     }
 }
+
+/**
+ * @return OPTIONAL [BaseActivity] from a [BaseFragment] ( optional since the
+ * [BaseFragment.getActivity] is also nullable ).
+ */
+internal val BaseFragment.baseActivity get() = activity as? BaseActivity

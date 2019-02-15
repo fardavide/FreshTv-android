@@ -18,6 +18,7 @@ val useCasesModule = module {
     /* Get */
     factory { GetMovieChannelGroups( localData = get() ) }
     factory { GetMovieChannels( localData = get() ) }
+    factory { GetPlaylist( localData = get() ) }
     factory { GetTvChannelGroups( localData = get() ) }
     factory { GetTvChannels( localData = get() ) }
 

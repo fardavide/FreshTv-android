@@ -25,7 +25,7 @@ class TimberTree: Timber.DebugTree() {
     override fun log( priority: Int, tag: String?, message: String, t: Throwable? ) {
         super.log( priority, tag, message, t )
 
-        t?.let { Crashlytics.logException( it ) }
-            ?: Crashlytics.log( priority, tag, message )
+        // t?.let { Crashlytics.logException( it ) } TODO enable Crashlytics
+        //     ?: Crashlytics.log( priority, tag, message )
     }
 }

@@ -13,5 +13,8 @@ internal class ChannelsAvailabilityPresenter(
     private val hasTvChannels: HasTvChannels
 ) {
     /** @return [ChannelsAvailabilityUiModel] */
-    operator fun invoke() = ChannelsAvailabilityUiModel( hasMovies = hasMovieChannels(), hasTvs = hasTvChannels() )
+    operator fun invoke() = ChannelsAvailabilityUiModel(
+            hasMovies = hasMovieChannels(),
+            hasTvs = hasTvChannels()
+    )
 }

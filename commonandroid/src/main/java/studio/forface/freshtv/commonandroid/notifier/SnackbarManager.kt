@@ -29,7 +29,7 @@ internal interface SnackbarManager {
         val contentLayout = viewGroup[0] as SnackbarContentLayout
         with ( contentLayout.javaClass.getDeclaredField("messageView" ) ) {
             isAccessible = true
-            val messageView = get( this@messageView ) as TextView
+            val messageView = get( contentLayout ) as TextView
             isAccessible = false
             return messageView
         }

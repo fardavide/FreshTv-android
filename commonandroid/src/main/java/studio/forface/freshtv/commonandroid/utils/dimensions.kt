@@ -2,7 +2,6 @@ package studio.forface.freshtv.commonandroid.utils
 
 import android.content.res.Resources
 
-
 /*
  * Author: Davide Giuseppe Farella.
  * Utilities for Android Dimensions

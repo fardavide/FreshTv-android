@@ -33,6 +33,7 @@ dependencies {
     implementation( Libs.Android.cue )
     api( Libs.Android.design )
     api( Libs.Android.ktx )
+    api( Libs.Android.material )
     api( Libs.Android.navigation_fragment )
     api( Libs.Android.navigation_ui )
     implementation( Libs.Android.picasso )
