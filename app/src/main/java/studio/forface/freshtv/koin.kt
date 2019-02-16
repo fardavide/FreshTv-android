@@ -14,7 +14,10 @@ import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
 val appModule = module {
 
     /* Interactors */
-    factory { EditPlaylistInteractor( addPlaylist = get(), updatePlaylist = get() ) }
+    factory { EditPlaylistInteractor(
+            addPlaylist = get(),
+            updatePlaylist = get()
+    ) }
 
     /* Mappers */
     factory { SourceFileUiModelMapper() }

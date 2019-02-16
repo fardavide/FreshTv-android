@@ -27,7 +27,9 @@ class DeleteOldGuidesWorker(
 
         /** Enqueue [DeleteOldGuidesWorker] as [PeriodicWorkRequest] for upload a large batch */
         fun enqueue( repeatInterval: Duration, flexInterval: Duration? = null ) {
-            workManager.enqueueUniquePeriodicWork<DeleteOldGuidesWorker>( WORKER_NAME, repeatInterval, flexInterval )
+            workManager.enqueueUniquePeriodicWork<DeleteOldGuidesWorker>(
+                    WORKER_NAME, repeatInterval, flexInterval
+            )
         }
     }
 

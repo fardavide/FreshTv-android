@@ -112,7 +112,7 @@ object Versions {
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_material_bottom_bar =   "1.1-beta-1"
+    val android_material_bottom_bar =   "1.1-beta-2"
     val android_navigation =            "1.0.0-beta01"
     val android_picasso =               "2.71828"
     val android_support =               "1.0.0-beta01"

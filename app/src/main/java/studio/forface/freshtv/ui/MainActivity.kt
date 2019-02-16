@@ -3,7 +3,6 @@ package studio.forface.freshtv.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -35,6 +34,9 @@ import kotlinx.android.synthetic.main.activity_main.titleTextView as syntheticTi
  * Inherit from [BaseActivity]
  */
 internal class MainActivity: BaseActivity( R.layout.activity_main ) {
+
+    /** @see BaseActivity.drawerLayout */
+    override val drawerLayout: MaterialBottomDrawerLayout get() = root
 
     /** A `ViewModel` for check the availability of Channels */
     private val channelsAvailabilityViewModel by viewModel<ChannelsAvailabilityViewModel>()

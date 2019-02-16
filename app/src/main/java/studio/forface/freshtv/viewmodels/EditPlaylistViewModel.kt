@@ -13,10 +13,12 @@ import studio.forface.freshtv.commonandroid.viewstate.setLoading
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.Url
 import studio.forface.freshtv.domain.entities.Validable
+import studio.forface.freshtv.domain.usecases.RefreshChannels
 import studio.forface.freshtv.domain.utils.EMPTY_STRING
 import studio.forface.freshtv.entities.SourceFilePath
 import studio.forface.freshtv.interactors.EditPlaylistInteractor
 import studio.forface.freshtv.presenters.PlaylistPresenter
+import studio.forface.freshtv.services.RefreshChannelsWorker
 import studio.forface.freshtv.ui.EditPlaylistFragment
 import studio.forface.freshtv.ui.EditPlaylistFragment.State.*
 import studio.forface.freshtv.uimodels.SourceFileEditFormUiModel
@@ -82,9 +84,10 @@ internal class EditPlaylistViewModel(
         interactor.add( path.toString(), type!!, name.toString() )
     }
 
-    /** Save the edited `Playlist` */
+    /** Save the edited `Playlist` and [RefreshChannelsWorker.enqueue] */
     fun save() {
         interactor.update( path.toString(), name.toString() )
+        RefreshChannelsWorker.enqueue( path.toString() )
     }
 
     /** When [SourceFileUiModel] is received from [PlaylistPresenter] */

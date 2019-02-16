@@ -19,6 +19,5 @@ dependencies {
     /* Android */
     implementation( Libs.Android.lifecycle_runtime )
     implementation( Libs.Android.lifecycle_viewmodel )
-    implementation( Libs.Android.material_bottom_bar )
     implementation( Libs.Android.material_bottom_bar_navigation )
 }

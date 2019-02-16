@@ -16,8 +16,7 @@ inline class SourceFilePath( private val s: String ): Validable {
     override fun validate(): Validable.Result {
         return when {
             s.isBlank() -> Failure.Empty
-            s.contains("://" ) && s.filter { it == '/' }.length > 3 ->
-                Validable.Result.Success
+            s.contains('/' ) -> Validable.Result.Success
             else -> Failure.BadFormat
         }
     }

@@ -16,6 +16,8 @@ import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
 import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
+import studio.forface.materialbottombar.dsl.MaterialPanel
+import studio.forface.materialbottombar.set
 
 /**
  * @author Davide Giuseppe Farella.
@@ -36,6 +38,21 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ): Fragment(), 
 
     /** The [Fragment]'s [NavController] */
     val navController: NavController by lazy { findNavController() }
+
+    /** Close a [MaterialPanel] and remove it */
+    fun dismissAndRemovePanel( panelId: Int ) {
+        baseActivity?.dismissAndRemovePanel( panelId )
+    }
+
+    /** Close a [MaterialPanel] */
+    fun dismissPanel() {
+        baseActivity?.dismissPanel()
+    }
+
+    /** Add the given [MaterialPanel] and open it. */
+    fun showPanel( panelId: Int, panel: MaterialPanel ) {
+        baseActivity?.showPanel( panelId, panel )
+    }
 }
 
 /**

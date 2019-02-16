@@ -23,6 +23,9 @@ import studio.forface.freshtv.commonandroid.utils.onFragmentResumed
 import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
 import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
 import studio.forface.freshtv.domain.gateways.Notifier
+import studio.forface.materialbottombar.dsl.MaterialPanel
+import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
+import studio.forface.materialbottombar.set
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
@@ -39,6 +42,9 @@ import kotlin.contracts.contract
 abstract class BaseActivity(
     @LayoutRes private val layoutRes: Int
 ): AppCompatActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager {
+
+    /** @return the `Activity`s [MaterialBottomDrawerLayout] */
+    protected abstract val drawerLayout: MaterialBottomDrawerLayout
 
     /**
      * The [FragmentManager.FragmentLifecycleCallbacks], here we will listen to [Fragment.onResume]
@@ -87,6 +93,17 @@ abstract class BaseActivity(
     /** If [navController] can't [NavController.navigateUp] call [onBackPressed] */
     override fun onNavigateUp() =
         navController.navigateUp() || false.also { onBackPressed() }
+
+    /** Close a [MaterialPanel] and remove it from [drawerLayout] */
+    fun dismissAndRemovePanel( panelId: Int ) {
+        drawerLayout.closePanel()
+        drawerLayout.removePanel( panelId )
+    }
+
+    /** Close a [MaterialPanel] */
+    fun dismissPanel() {
+        drawerLayout.closePanel()
+    }
 
     /**
      * Set a background color to `Activity`.
@@ -140,6 +157,12 @@ abstract class BaseActivity(
                 }
             }
         }
+    }
+
+    /** Add the given [MaterialPanel] to [drawerLayout] and open it. */
+    fun showPanel( panelId: Int, panel: MaterialPanel ) {
+        drawerLayout[panelId] = panel
+        drawerLayout.openPanel( panelId )
     }
 
     /**

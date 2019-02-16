@@ -132,14 +132,21 @@ class AndroidNotifier(
     }
 
     /** Handle an event of the given [Type] though [Timber] and [SnackbarManager] or [Toast] */
-    private operator fun invoke( type: Type, message: CharSequence, optionalAction: AndroidOptionalAction ) {
+    private operator fun invoke(
+            type: Type,
+            message: CharSequence,
+            optionalAction: AndroidOptionalAction
+    ) {
         Timber.log( type.logLevel, message.toString() )
         snackBarOrToast( type, message, optionalAction )
     }
 
-
     /** Create a [Snackbar] if possible, else a [Toast] */
-    private fun snackBarOrToast( type: Type, message: CharSequence, optionalAction: AndroidOptionalAction ) {
+    private fun snackBarOrToast(
+            type: Type,
+            message: CharSequence,
+            optionalAction: AndroidOptionalAction
+    ) {
         val action = optionalAction?.let {
             val builder = ActionBuilder( resources )
             it( builder )

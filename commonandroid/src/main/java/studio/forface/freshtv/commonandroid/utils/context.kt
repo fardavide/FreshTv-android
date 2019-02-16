@@ -1,10 +1,12 @@
 package studio.forface.freshtv.commonandroid.utils
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.os.Handler
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 
 /*
  * Author: Davide Giuseppe Farella.

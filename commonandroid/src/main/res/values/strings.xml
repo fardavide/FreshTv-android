@@ -5,6 +5,7 @@
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>
     <string name="action_filter">Filter</string>
+    <string name="action_grant">Grant</string>
     <string name="action_save">Save</string>
 
     <!-- Errors -->
@@ -24,7 +25,8 @@
     <string name="title_add_playlist">Add Playlist</string>
     <string name="title_edit_playlist">Edit Playlist</string>
 
-    <!-- Others -->
+    <!-- Messages -->
     <string name="load_epg_from">Load EPG from…</string>
     <string name="load_playlist_from">Load Playlist from…</string>
+    <string name="permission_denied">Permission denied</string>
 </resources>

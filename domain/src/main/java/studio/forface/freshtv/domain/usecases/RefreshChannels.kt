@@ -19,20 +19,27 @@ class RefreshChannels(
      * Refresh the playlists previously added
      * @return a [List] of [ParsingChannelError]
      */
-    suspend operator fun invoke() = localData.playlists().flatMap { refreshOne( it ) }
+    suspend operator fun invoke() = localData.playlists().flatMap { invoke( it ) }
 
     /**
      * Refresh the given [Playlist]
      * @return a [List] of [ParsingChannelError]
      */
-    suspend fun refreshOne( playlist: Playlist ) = coroutineScope {
+    suspend operator fun invoke( playlist: Playlist ) = coroutineScope {
         val errors = mutableListOf<ParsingChannelError>()
         parsers.readFrom(
-            playlist = playlist,
-            onChannel = { localData.storeChannel( it ) },
-            onGroup = { localData.storeGroup( it ) },
-            onError = { errors += it }
+                playlist = playlist,
+                onChannel = { localData.storeChannel( it ) },
+                onGroup = { localData.storeGroup( it ) },
+                onError = { errors += it }
         )
         errors
     }
+
+    /**
+     * Refresh the [Playlist] with the given [playlistPath]
+     * @return a [List] of [ParsingChannelError]
+     */
+    suspend operator fun invoke( playlistPath: String ) =
+            this( localData.playlist( playlistPath ) )
 }
