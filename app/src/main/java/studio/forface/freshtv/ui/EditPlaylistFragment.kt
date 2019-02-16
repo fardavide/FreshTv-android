@@ -1,17 +1,25 @@
 package studio.forface.freshtv.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.navArgs
+import kotlinx.android.synthetic.main.fragment_source_file_edit.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
 import studio.forface.freshtv.commonandroid.utils.applyWithTransition
-import studio.forface.freshtv.uimodels.SourceFileUiModel
-import studio.forface.freshtv.ui.EditPlaylistFragment.Mode.*
+import studio.forface.freshtv.commonandroid.utils.errorRes
+import studio.forface.freshtv.commonandroid.utils.onTextChange
+import studio.forface.freshtv.domain.entities.SourceFile
+import studio.forface.freshtv.domain.entities.SourceFile.Type.LOCAL
+import studio.forface.freshtv.domain.entities.SourceFile.Type.REMOTE
+import studio.forface.freshtv.ui.EditPlaylistFragment.Mode.CREATE
+import studio.forface.freshtv.ui.EditPlaylistFragment.Mode.EDIT
 import studio.forface.freshtv.ui.EditPlaylistFragment.State.*
+import studio.forface.freshtv.uimodels.SourceFileUiModel
 import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
 
 /**
@@ -31,7 +39,7 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     override val fabParams: FabParams get() = FabParams(
             R.drawable.ic_save_black,
             R.string.action_save,
-            showOnStart = false
+            showOnStart = editPlaylistViewModel.state.state().data is ReadyToSave
     ) {
         when ( mode ) {
             CREATE -> editPlaylistViewModel.create()
@@ -55,29 +63,62 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     override fun onActivityCreated( savedInstanceState: Bundle? ) {
         super.onActivityCreated( savedInstanceState )
 
-        editPlaylistViewModel.state.observeData {
-            when ( it ) {
+        // Observe to a State for the Fragment
+        editPlaylistViewModel.state.observeData { state ->
+            if ( state is ReadyToSave ) fab?.show()
+            else fab?.hide()
 
-                CHOOSE_TYPE -> {
-                    fab?.hide()
-                    layout?.applyWithTransition( R.layout.fragment_source_file_edit_state_choose_type )
+            val layoutRes = when ( state ) {
+                is ChooseType -> R.layout.fragment_source_file_edit_state_choose_type
+                is Editing -> when( state.type ) {
+                    LOCAL -> R.layout.fragment_source_file_edit_state_editing_file
+                    REMOTE -> R.layout.fragment_source_file_edit_state_editing_web
                 }
-                EDITING -> {
-                    fab?.hide()
-                    layout?.applyWithTransition( R.layout.fragment_source_file_edit_state_editing )
-                }
-                READY_TO_SAVE -> fab?.show()
+                else -> null
             }
+            layoutRes?.let { layout?.applyWithTransition( it ) }
         }
 
+        // Observe to Form for the Fragment
+        editPlaylistViewModel.form.observeData {
+            editSourceFileUrlLayout.errorRes = it.urlError
+            it.path?.let { path -> editSourceFilePathEditText.setText( path ) }
+        }
+
+        // Observe to a previously store `Playlist`
         editPlaylistViewModel.playlist.observe {
             doOnData( ::onPlaylist )
             doOnError { notifier.error( it ) }
         }
     }
 
+    /** When the [EditPlaylistFragment]s [View] is created */
+    override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
+        super.onViewCreated( view, savedInstanceState )
+        editSourceFilePathLayout.isEnabled = false
+        with( editPlaylistViewModel ) {
+            editSourceFileNameEditText.onTextChange { name = it }
+            editSourceFileUrlEditText.onTextChange { path = it }
+            editSourceFileFromFileButton.setOnClickListener { type = LOCAL }
+            editSourceFileFromWebButton.setOnClickListener { type = REMOTE }
+            editSourceFilePickFileButton.setOnClickListener { pickFile() }
+        }
+    }
+
+    /** When a File is selected as Source path */
+    private fun onFileSelected( uri: Uri ) {
+        editPlaylistViewModel.path = uri.encodedPath!!
+    }
+
     /** When the [SourceFileUiModel] Playlist is received from [EditPlaylistViewModel] */
     private fun onPlaylist( playlist: SourceFileUiModel ) {
+        editSourceFileNameEditText.setText( playlist.shownName )
+        editSourceFilePathEditText.setText( playlist.fullPath )
+        editSourceFileUrlEditText.setText( playlist.fullPath )
+    }
+
+    /** Pick a File to be used as `Playlist`s path */
+    private fun pickFile() {
         // TODO
     }
 
@@ -85,5 +126,9 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     enum class Mode { CREATE, EDIT }
 
     /** An enum for the current state of the [EditPlaylistFragment] */
-    enum class State { CHOOSE_TYPE, EDITING, READY_TO_SAVE }
+    sealed class State {
+        object ChooseType : State()
+        class Editing( val type: SourceFile.Type ) : State()
+        object ReadyToSave : State()
+    }
 }

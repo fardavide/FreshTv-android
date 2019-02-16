@@ -19,38 +19,19 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
-    <ImageButton
-        android:id="@+id/editSourceFileFromWebImageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="16dp"
-        android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/image_load_from_web"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/editSourceFileFromFileImageView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/editSourceFileGuideStart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_web_outline" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/editSourceFileGuideTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
 
-    <ImageButton
-        android:id="@+id/editSourceFileFromFileImageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="16dp"
-        android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/image_load_from_file"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editSourceFileGuideEnd"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editSourceFileFromWebImageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_file_outline" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/editSourceFileGuideBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
     <TextView
         android:id="@+id/textView"
@@ -61,9 +42,123 @@
         android:layout_marginEnd="8dp"
         android:text="@string/load_playlist_from"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editSourceFileFromWebImageView"
-        app:layout_constraintEnd_toStartOf="@+id/editSourceFileGuideEnd"
-        app:layout_constraintStart_toStartOf="@+id/editSourceFileGuideStart"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/editSourceFileFromWebButton"
+        app:layout_constraintEnd_toEndOf="@+id/editSourceFileFromFileButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.74" />
+
+    <ImageButton
+        android:id="@+id/editSourceFileFromWebButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_load_from_web"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/editSourceFileFromFileButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/editSourceFileGuideStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_web_outline" />
+
+    <ImageButton
+        android:id="@+id/editSourceFileFromFileButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_load_from_file"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/editSourceFileGuideStart"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editSourceFileFromWebButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_file_outline" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editSourceFileNameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/prompt_playlist_name"
+        app:helperText="@string/hint_optional"
+        app:layout_constraintBottom_toTopOf="@+id/editSourceFileUrlLayout"
+        app:layout_constraintEnd_toStartOf="@+id/editSourceFileGuideStart"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/editSourceFileGuideStart"
+        app:layout_constraintTop_toTopOf="@+id/editSourceFileGuideTop">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSourceFileNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editSourceFileUrlLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/prompt_playlist_url"
+        app:helperText="@string/hint_required"
+        app:layout_constraintBottom_toTopOf="@+id/editSourceFileGuideBottom"
+        app:layout_constraintEnd_toEndOf="@+id/editSourceFileNameLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/editSourceFileNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editSourceFileNameLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSourceFileUrlEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editSourceFilePathLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_playlist_path"
+        app:layout_constraintBottom_toTopOf="@+id/editSourceFileGuideBottom"
+        app:layout_constraintEnd_toStartOf="@+id/editSourceFilePickFileButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/editSourceFileNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editSourceFileNameLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSourceFilePathEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/editSourceFilePickFileButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_load_from_web"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/editSourceFilePathLayout"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@+id/editSourceFileNameLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editSourceFilePathLayout"
+        app:layout_constraintTop_toTopOf="@+id/editSourceFilePathLayout"
+        app:srcCompat="@drawable/ic_file_outline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

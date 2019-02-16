@@ -14,7 +14,9 @@ inline class Url(val s: String ): Validable {
     override fun validate(): Validable.Result {
         return when {
             s.isBlank() -> Failure.Empty
-            s.startsWith("http" ) && s.contains('.' ) -> Validable.Result.Success
+            ! s.startsWith("http" ) -> Failure.NoSchema
+            s.contains(" " ) -> Failure.BadFormat
+            s.contains('.' ) -> Validable.Result.Success
             else -> Failure.BadFormat
         }
     }
@@ -23,5 +25,6 @@ inline class Url(val s: String ): Validable {
     sealed class Failure : Validable.Result.Failure() {
         object Empty :      Url.Failure()
         object BadFormat :  Url.Failure()
+        object NoSchema:    Url.Failure()
     }
 }

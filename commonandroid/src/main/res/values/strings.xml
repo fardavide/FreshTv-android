@@ -7,6 +7,15 @@
     <string name="action_filter">Filter</string>
     <string name="action_save">Save</string>
 
+    <!-- Errors -->
+    <string name="url_bad_format">Url has a bad format</string>
+    <string name="url_empty">Url is required</string>
+    <string name="url_no_schema">"Http://" or "Https://" is required before the url</string>
+
+    <!-- Hints -->
+    <string name="hint_optional">Optional</string>
+    <string name="hint_required">Required</string>
+
     <!-- Images description -->
     <string name="image_load_from_file">Load from file</string>
     <string name="image_load_from_web">Load from web</string>

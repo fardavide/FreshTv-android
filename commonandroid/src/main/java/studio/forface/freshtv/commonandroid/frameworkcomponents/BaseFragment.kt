@@ -59,7 +59,7 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
     @get:ColorRes open val backgroundColorRes: Int? get() = null
 
     /** @return OPTIONAL [BaseActivity.fab] */
-    protected val fab = baseActivity?.fab
+    protected val fab get() = baseActivity?.fab
 
     /** The OPTIONAL [FabParams] for setup a `FloatingActionButton` in the `Activity` */
     open val fabParams: FabParams? = null

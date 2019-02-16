@@ -7,7 +7,7 @@ import studio.forface.freshtv.domain.entities.Validable
  * An inline class for [String] path on `SourceFile`.
  */
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
-inline class SourceFilePath( val s: String ): Validable {
+inline class SourceFilePath( private val s: String ): Validable {
 
     /** A constructor that accepts a [CharSequence] */
     constructor( c: CharSequence ): this( c.toString() )

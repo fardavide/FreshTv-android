@@ -4,6 +4,9 @@ import android.text.Editable
 import android.text.Spannable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.annotation.StringRes
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 /*
  * Author: Davide Giuseppe Farella.
@@ -59,3 +62,8 @@ inline fun EditText.onTextChange( crossinline action: (CharSequence) -> Unit ): 
     addTextChangedListener( textWatcher )
     return textWatcher
 }
+
+/** Set a [StringRes] as [TextInputLayout.setError] */
+var TextInputLayout.errorRes: Int?
+    get() = throw IllegalAccessError("Get method not supported" )
+    set( value ) { error = value?.let { context.getText( it ) } }
