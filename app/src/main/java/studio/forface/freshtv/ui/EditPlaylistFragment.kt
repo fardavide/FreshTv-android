@@ -68,8 +68,11 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
 
         // Observe to a State for the Fragment
         editPlaylistViewModel.state.observeData { state ->
-            if ( state is ReadyToSave ) fab?.show()
-            else fab?.hide()
+            when ( state ) {
+                is SaveCompleted -> navController.popBackStack()
+                is ReadyToSave -> fab?.show()
+                else -> fab?.hide()
+            }
 
             val layoutRes = when ( state ) {
                 is ChooseType -> R.layout.fragment_source_file_edit_state_choose_type
@@ -196,6 +199,7 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
         object ChooseType : State()
         class Editing( val type: SourceFile.Type ) : State()
         object ReadyToSave : State()
+        object SaveCompleted : State()
     }
 }
 

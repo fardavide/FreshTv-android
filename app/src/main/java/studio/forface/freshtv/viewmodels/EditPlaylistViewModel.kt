@@ -6,10 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
-import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
-import studio.forface.freshtv.commonandroid.viewstate.setData
-import studio.forface.freshtv.commonandroid.viewstate.setError
-import studio.forface.freshtv.commonandroid.viewstate.setLoading
+import studio.forface.freshtv.commonandroid.viewstate.*
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.Url
 import studio.forface.freshtv.domain.entities.Validable
@@ -88,6 +85,7 @@ internal class EditPlaylistViewModel(
     fun save() {
         interactor.update( path.toString(), name.toString() )
         RefreshChannelsWorker.enqueue( path.toString() )
+        state.postData( SaveCompleted )
     }
 
     /** When [SourceFileUiModel] is received from [PlaylistPresenter] */
