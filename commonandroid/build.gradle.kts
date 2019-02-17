@@ -37,6 +37,7 @@ dependencies {
     api( Libs.Android.material_bottom_bar )
     api( Libs.Android.navigation_fragment )
     api( Libs.Android.navigation_ui )
+    api( Libs.Android.paging )
     implementation( Libs.Android.picasso )
     api( Libs.Android.work )
 }

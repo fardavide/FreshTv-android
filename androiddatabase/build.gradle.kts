@@ -15,4 +15,5 @@ dependencies {
 
     implementation( Libs.koin_android )
     implementation( Libs.sqldelight_android_driver )
+    implementation( Libs.sqldelight_android_paging )
 }

@@ -1,5 +1,10 @@
 package studio.forface.freshtv.localdata.sources
 
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.*
 import studio.forface.freshtv.localdata.SourceFilePojo
@@ -23,7 +28,7 @@ class SourceFilesLocalSource( private val queries: SourceFileQueries ) {
     /** Create a new Source File [SourceFilePojo] */
     fun create( sourceFile: SourceFilePojo ) {
         with( sourceFile ) {
-            queries.insert( path, type, name, souceType )
+            queries.insert( path, type, name, sourceType )
         }
     }
 
@@ -43,7 +48,7 @@ class SourceFilesLocalSource( private val queries: SourceFileQueries ) {
 
     /** @return the Playlist [SourceFilePojo] with the given [path] */
     fun playlist( path: String ) =
-        queries.selectByPath( Playlist.TYPE_NAME, path ).executeAsOne()
+            queries.selectByPath( Playlist.TYPE_NAME, path ).executeAsOne()
 
     /** Update an already stored Source File [SourceFilePojo] */
     fun update( sourceFile: SourceFilePojo ) {

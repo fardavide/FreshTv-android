@@ -28,6 +28,8 @@ import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
 /**
  * @author Davide Giuseppe Farella
  * A `Fragment` for Edit or Create a `Playlist`
+ *
+ * Inherit from [RootFragment]
  */
 internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file_edit ) {
 

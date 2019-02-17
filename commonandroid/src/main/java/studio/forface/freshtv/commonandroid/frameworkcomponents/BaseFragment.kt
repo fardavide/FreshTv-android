@@ -10,14 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
+import studio.forface.freshtv.commonandroid.viewstate.AbsViewStateStore
 import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
 import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
 import studio.forface.materialbottombar.dsl.MaterialPanel
-import studio.forface.materialbottombar.set
 
 /**
  * @author Davide Giuseppe Farella.
@@ -115,11 +114,11 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
     )
 
     /** Call [ViewStateStore.observe] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
-    inline fun <V> ViewStateStore<V>.observe( block: ViewStateObserver<V>.() -> Unit  ) =
+    inline fun <V> AbsViewStateStore<V>.observe( block: ViewStateObserver<V>.() -> Unit  ) =
             observe( viewLifecycleOwner, block )
 
     /** Call [ViewStateStore.observeData] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
-    inline fun <V> ViewStateStore<V>.observeData( crossinline block: (V) -> Unit  ) =
+    inline fun <V> AbsViewStateStore<V>.observeData(crossinline block: (V) -> Unit  ) =
             observeData( viewLifecycleOwner, block )
 }
 

@@ -2,6 +2,7 @@ package studio.forface.freshtv.viewmodels
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
@@ -28,7 +29,7 @@ internal class ChannelsAvailabilityViewModel(
     init {
         channelsAvailability.setLoading()
         launch {
-            withContext( IO ) { runCatching { presenter() } }
+            withContext( Main ) { runCatching { presenter() } }
                 .onSuccess { channelsAvailability.setData( it ) }
                 .onFailure { channelsAvailability.setError( it ) }
         }

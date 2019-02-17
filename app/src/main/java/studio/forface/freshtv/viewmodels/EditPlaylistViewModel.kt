@@ -79,11 +79,17 @@ internal class EditPlaylistViewModel(
     /** Create a `Playlist` */
     fun create() {
         interactor.add( path.toString(), type!!, name.toString() )
+        onSuccess()
     }
 
     /** Save the edited `Playlist` and [RefreshChannelsWorker.enqueue] */
     fun save() {
         interactor.update( path.toString(), name.toString() )
+        onSuccess()
+    }
+
+    /** Called when [create] or [save] has succeed */
+    private fun onSuccess() {
         RefreshChannelsWorker.enqueue( path.toString() )
         state.postData( SaveCompleted )
     }

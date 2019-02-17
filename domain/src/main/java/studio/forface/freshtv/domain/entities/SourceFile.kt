@@ -16,7 +16,7 @@ sealed class SourceFile {
         override val name: String?
     ): SourceFile() {
 
-        companion object { val TYPE_NAME = Epg::class.simpleName!! }
+        companion object { const val TYPE_NAME = "Epg" }
         /**
          * An operator function for merge 2 [Epg] entities. e.g. `guide1 + guide2`
          * @return this [Epg] merged with the given [newEpg]
@@ -32,7 +32,7 @@ sealed class SourceFile {
         override val name: String?
     ): SourceFile() {
 
-        companion object { val TYPE_NAME = Playlist::class.simpleName!! }
+        companion object { const val TYPE_NAME = "Playlist" }
         /**
          * An operator function for merge 2 [Playlist] entities. e.g. `playlist1 + playlist2`
          * @return this [Playlist] merged with the given [newPlaylist]

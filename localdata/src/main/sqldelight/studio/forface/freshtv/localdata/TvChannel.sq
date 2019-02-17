@@ -33,6 +33,11 @@ deleteAll:
 count:
   SELECT count(*) FROM tvChannelPojo;
 
+countByGroup:
+  SELECT count(*)
+  FROM tvChannelPojo
+  WHERE groupName = ?;
+
 selectAll:
   SELECT *
   FROM tvChannelPojo
@@ -40,7 +45,7 @@ selectAll:
     favorite ASC,
     name ASC;
 
-select:
+selectPaged:
   SELECT *
   FROM tvChannelPojo
   ORDER BY
@@ -69,6 +74,15 @@ selectByGroup:
   ORDER BY
     favorite ASC,
     name ASC;
+
+selectPagedByGroup:
+  SELECT *
+  FROM tvChannelPojo
+  WHERE groupName = ?
+  ORDER BY
+    favorite ASC,
+    name ASC
+  LIMIT :limit OFFSET :offset;
 
 selectByPlaylistPath:
   SELECT *

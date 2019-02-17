@@ -10,7 +10,7 @@ import studio.forface.freshtv.localdata.TvChannelQueries
  *
  * Inherit from [ChannelsLocalSource]
  */
-class TvChannelsLocalSource( private val queries: TvChannelQueries):
+class TvChannelsLocalSource( private val queries: TvChannelQueries ):
     ChannelsLocalSource<TvChannelPojo> {
 
     /** @return all the stored channels [TvChannelPojo] */

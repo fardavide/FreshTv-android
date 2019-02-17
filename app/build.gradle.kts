@@ -11,6 +11,7 @@ android { applyAndroidConfig( Project.id ) }
 dependencies {
     implementation( project(":dimodules" ) )
     implementation( project(":commonandroid" ) )
+    implementation( project(":androiddatabase" ) )
     implementation( project(":player" ) )
 
     applyTests()

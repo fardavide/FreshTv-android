@@ -9,7 +9,7 @@ import studio.forface.freshtv.uimodels.SourceFileUiModel
  *
  * Inherit from [UiModelMapper]
  */
-internal class SourceFileUiModelMapper: UiModelMapper<SourceFile, SourceFileUiModel>() {
+internal class SourceFileUiModelMapper: UiModelMapper<SourceFile, SourceFileUiModel, SourceFile>() {
 
     /** @see UiModelMapper.toUiModel */
     override fun SourceFile.toUiModel(): SourceFileUiModel {

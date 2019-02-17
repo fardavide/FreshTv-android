@@ -12,6 +12,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
+import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditPlaylistFragment
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEpgsFragment
 import studio.forface.freshtv.uimodels.*
@@ -19,11 +20,7 @@ import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.navigation.dsl.MaterialNavDrawer
 import studio.forface.materialbottombar.navigation.dsl.navDrawer
-import studio.forface.materialbottombar.panels.params.iconDpSize
-import studio.forface.materialbottombar.panels.params.titleBold
-import studio.forface.materialbottombar.panels.params.iconResource
-import studio.forface.materialbottombar.panels.params.titleSpSize
-import studio.forface.materialbottombar.panels.params.titleTextRes
+import studio.forface.materialbottombar.panels.params.*
 import kotlinx.android.synthetic.main.activity_main.fab as syntheticFab
 import kotlinx.android.synthetic.main.activity_main.titleTextView as syntheticTitleTextView
 
@@ -139,7 +136,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
     /** [buildDrawer] and set as [MaterialBottomDrawerLayout.drawer] of [root] [View] */
     private fun setDrawer( channelsAvailability: ChannelsAvailabilityUiModel? = null ) {
         runCatching { root.drawer = buildDrawer( channelsAvailability ) }
-            .onFailure { notifier.error( it ) }
+                .onFailure { notifier.error( it ) }
     }
 }
 

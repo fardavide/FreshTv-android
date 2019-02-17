@@ -1,6 +1,7 @@
 package studio.forface.freshtv.services
 
 import android.content.Context
+import android.util.Log
 import androidx.work.*
 import androidx.work.ListenableWorker.Result.retry
 import androidx.work.ListenableWorker.Result.success
@@ -59,11 +60,14 @@ class RefreshChannelsWorker(
      */
     override fun doWork(): Result {
         val playlistPath = inputData.getString( ARG_PLAYLIST_PATH )
-        runCatching {
+        val catching = runCatching {
             runBlocking {
                 playlistPath?.let { refreshChannels( it ) } ?: refreshChannels()
             }
-        }.onFailure { notifier.error( it ); return retry() }
+        }
+
+        catching.onSuccess { notifier.error( it.joinToString { error -> error.reason.name } )  }
+                .onFailure { notifier.error( it ); return retry() }
 
         return success()
     }

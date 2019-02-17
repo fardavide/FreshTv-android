@@ -1,8 +1,8 @@
 package studio.forface.freshtv.commonandroid.adapter
 
-import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter.ViewHolder
 
 /**
  * @author Davide Giuseppe Farella.
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseAdapter<T>(
         private val itemsComparator: ItemsComparator<T>
-): RecyclerView.Adapter<BaseAdapter.ViewHolder<T>>() {
+): RecyclerView.Adapter<ClickableAdapter.ViewHolder<T>>(), ClickableAdapter<T> {
 
     /**
      * A [List] of items [T].
@@ -30,27 +30,11 @@ abstract class BaseAdapter<T>(
             diffResult.dispatchUpdatesTo(this )
         }
 
-    /**
-     * A callback that will be triggered when an item is clicked.
-     */
-    var onItemClick: (T) -> Unit = {}
+    /** A callback that will be triggered when an item is clicked */
+    override var onItemClick: (T) -> Unit = {}
 
-    /**
-     * An invoker for [onItemClick], we use it so the [ViewHolder] will always use the updated
-     * [onItemClick] even if it changes after the [ViewHolder] is created.
-     */
-    private val clickListenerInvoker: (T) -> Unit get() = { onItemClick( it ) }
-
-    /**
-     * A callback that will be triggered when an item is long clicked.
-     */
-    var onItemLongClick: (T) -> Unit = {}
-
-    /**
-     * An invoker for [onItemLongClick], we use it so the [ViewHolder] will always use the updated
-     * [onItemLongClick] even if it changes after the [ViewHolder] is created.
-     */
-    private val longClickListenerInvoker: (T) -> Unit get() = { onItemLongClick( it ) }
+    /** A callback that will be triggered when an item is long clicked */
+    override var onItemLongClick: (T) -> Unit = {}
 
     /**
      * GET the size of all the Items in the Adapter.
@@ -66,8 +50,7 @@ abstract class BaseAdapter<T>(
     override fun onBindViewHolder( holder: ViewHolder<T>, position: Int ) {
         val item = items[position]
         holder.onBind( item )
-        holder.clickListenerInvoker = this.clickListenerInvoker
-        holder.longClickListenerInvoker = this.longClickListenerInvoker
+        holder.prepareClickListeners()
     }
 
     /**
@@ -159,25 +142,5 @@ abstract class BaseAdapter<T>(
          * @return A payload object that represents the change between the two items.
          */
         open fun getChangePayload( oldItem: T, newItem: T ): Any? = null
-    }
-
-    /**
-     * A base [RecyclerView.ViewHolder] for [BaseAdapter] implementations.
-     */
-    abstract class ViewHolder<T>( itemView: View ): RecyclerView.ViewHolder( itemView ) {
-
-        internal var clickListenerInvoker: (T) -> Unit = {}
-        internal var longClickListenerInvoker: (T) -> Unit = {}
-
-        /**
-         * Populate the [View] with the given [item] [T].
-         */
-        open fun onBind( item: T ) {
-            itemView.setOnClickListener { clickListenerInvoker( item ) }
-            itemView.setOnLongClickListener {
-                longClickListenerInvoker( item )
-                true
-            }
-        }
     }
 }

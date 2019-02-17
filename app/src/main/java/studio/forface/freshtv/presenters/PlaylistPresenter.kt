@@ -6,7 +6,7 @@ import studio.forface.freshtv.mappers.SourceFileUiModelMapper
 
 /**
  * @author Davide Giuseppe Farella
- * A Presenter for check get a Playlist
+ * A Presenter for get a `Playlist`
  */
 internal class PlaylistPresenter(
         private val getPlaylist: GetPlaylist,

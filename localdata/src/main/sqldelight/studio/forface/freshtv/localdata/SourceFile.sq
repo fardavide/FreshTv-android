@@ -1,19 +1,16 @@
 import java.lang.Boolean;
 
--- noinspection SqlIdentifierForFile
--- noinspection SqlWithoutWhereForFile
-
 CREATE TABLE sourceFilePojo (
   path TEXT NOT NULL PRIMARY KEY,
   type TEXT NOT NULL,
   name TEXT,
-  souceType TEXT NOT NULL
+  sourceType TEXT NOT NULL
 );
 
 CREATE INDEX sourcefile_name ON sourceFilePojo( name );
 
 insert:
-  INSERT INTO sourceFilePojo( path, type, name, souceType )
+  INSERT INTO sourceFilePojo( path, type, name, sourceType )
   VALUES ( ?, ?, ?, ? );
 
 update:

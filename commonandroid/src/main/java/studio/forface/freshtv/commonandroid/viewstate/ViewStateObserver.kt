@@ -2,8 +2,9 @@ package studio.forface.freshtv.commonandroid.viewstate
 
 /**
  * @author Davide Giuseppe Farella.
+ * An observer for [ViewState]
  */
-class ViewStateObserver<V> {
+open class ViewStateObserver<V> {
 
     /** A callback that will be triggered on [ViewState.doOnData] */
     @PublishedApi internal var onData: ( (V) -> Unit ) = {}

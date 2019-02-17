@@ -18,7 +18,7 @@ class SourceFilePojoMapper: PojoMapper<SourceFile, SourceFilePojo>() {
 
     /** @see PojoMapper.toEntity */
     override fun SourceFilePojo.toEntity() = with(this ) {
-        val sourceFileType = SourceFile.Type.valueOf( souceType )
+        val sourceFileType = SourceFile.Type.valueOf( sourceType )
         when ( type ) {
             SourceFile.Epg.TYPE_NAME -> SourceFile.Epg( path, sourceFileType, name )
             SourceFile.Playlist.TYPE_NAME -> SourceFile.Playlist( path, sourceFileType, name )
