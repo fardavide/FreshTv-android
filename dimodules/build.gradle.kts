@@ -11,6 +11,8 @@ dependencies {
     implementation( project(":androiddatabase" ) )
     implementation( project(":commonandroid" ) )
     implementation( project(":localdata" ) )
+    implementation( project(":localdata:room" ) )
+    implementation( project(":localdata:sqldelight" ) )
     implementation( project(":parsers" ) )
     implementation( project(":settings" ) )
 

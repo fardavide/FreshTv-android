@@ -3,7 +3,7 @@ enableFeaturePreview("GRADLE_METADATA" )
 include(":buildSrc")
 
 include(":domain")
-include(":localdata")
+include(":localdata", ":localdata:sqldelight", ":localdata:room" )
 include(":parsers" )
 
 include(":androiddatabase" )

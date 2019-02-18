@@ -1,40 +1,28 @@
 package studio.forface.freshtv.localdata.sources
 
 import studio.forface.freshtv.domain.entities.ChannelGroup.Type
-import studio.forface.freshtv.localdata.ChannelGroupPojo
-import studio.forface.freshtv.localdata.ChannelGroupQueries
 
 /**
  * @author Davide Giuseppe Farella.
  * A source for Channel Groups stored locally
  */
-class ChannelGroupsLocalSource( private val queries: ChannelGroupQueries) {
+interface ChannelGroupsLocalSource<Pojo> {
 
-    /** @return all the stored [ChannelGroupPojo] of [Type.MOVIE] */
-    fun allMovie(): List<ChannelGroupPojo> = queries.selectsMovie().executeAsList()
+    /** @return all the stored [Pojo] of [Type.MOVIE] */
+    fun allMovie(): List<Pojo>
 
-    /** @return all the stored [ChannelGroupPojo] of [Type.TV] */
-    fun allTv(): List<ChannelGroupPojo> = queries.selectsTv().executeAsList()
+    /** @return all the stored [Pojo] of [Type.TV] */
+    fun allTv(): List<Pojo>
 
-    /** Create a new [ChannelGroupPojo] */
-    fun createChannelGroup( group: ChannelGroupPojo) {
-        with( group ) {
-            queries.insert( id, name, type, imageUrl )
-        }
-    }
+    /** Create a new [Pojo] */
+    fun createChannelGroup( group: Pojo)
 
-    /** Delete all the stored [ChannelGroupPojo] */
-    fun deleteAll() {
-        queries.deleteAll()
-    }
+    /** Delete all the stored [Pojo] */
+    fun deleteAll()
 
-    /** @return the [ChannelGroupPojo] with the given [id] */
-    fun group( id: String ): ChannelGroupPojo = queries.selectById( id ).executeAsOne()
+    /** @return the [Pojo] with the given [id] */
+    fun group( id: String ): Pojo
 
-    /** Update an already stored [ChannelGroupPojo] */
-    fun updateGroup( group: ChannelGroupPojo) {
-        with( group ) {
-            queries.update( id, name, imageUrl )
-        }
-    }
+    /** Update an already stored [Pojo] */
+    fun updateGroup( group: Pojo )
 }

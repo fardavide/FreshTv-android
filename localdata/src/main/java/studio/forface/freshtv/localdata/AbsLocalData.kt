@@ -4,7 +4,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
-import studio.forface.freshtv.domain.entities.SourceFile.*
+import studio.forface.freshtv.domain.entities.SourceFile.Epg
+import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.errors.ChannelNotImplementedException
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.gateways.LocalData.Result
@@ -16,17 +17,23 @@ import studio.forface.freshtv.localdata.sources.*
  * @author Davide Giuseppe Farella.
  * A repository for retrieve and store [IChannel]s and EPG info locally.
  */
-internal class LocalDataImpl(
-    private val channelGroups: ChannelGroupsLocalSource,
-    private val movieChannels: MovieChannelsLocalSource,
-    private val sourceFiles: SourceFilesLocalSource,
-    private val tvChannels: TvChannelsLocalSource,
-    private val tvGuides: TvGuidesLocalSource,
-    private val channelGroupMapper: ChannelGroupPojoMapper = ChannelGroupPojoMapper(),
-    private val movieChannelMapper: MovieChannelPojoMapper = MovieChannelPojoMapper(),
-    private val sourceFileMapper: SourceFilePojoMapper = SourceFilePojoMapper(),
-    private val tvChannelMapper: TvChannelPojoMapper = TvChannelPojoMapper(),
-    private val tvGuideMapper: TvGuidePojoMapper = TvGuidePojoMapper()
+abstract class AbsLocalData<
+        ChannelGroupPojo,
+        MovieChannelPojo,
+        SourceFilePojo,
+        TvChannelPojo,
+        TvGuidePojo
+>(
+    private val channelGroups: ChannelGroupsLocalSource<ChannelGroupPojo>,
+    private val movieChannels: MovieChannelsLocalSource<MovieChannelPojo>,
+    private val sourceFiles: SourceFilesLocalSource<SourceFilePojo>,
+    private val tvChannels: TvChannelsLocalSource<TvChannelPojo>,
+    private val tvGuides: TvGuidesLocalSource<TvGuidePojo>,
+    private val channelGroupMapper: ChannelGroupPojoMapper<ChannelGroupPojo>,
+    private val movieChannelMapper: MovieChannelPojoMapper<MovieChannelPojo>,
+    private val sourceFileMapper: SourceFilePojoMapper<SourceFilePojo>,
+    private val tvChannelMapper: TvChannelPojoMapper<TvChannelPojo>,
+    private val tvGuideMapper: TvGuidePojoMapper<TvGuidePojo>
 ) : LocalData {
 
     /** @return all the [IChannel] with the given [playlistPath] in [IChannel.playlistPaths] */

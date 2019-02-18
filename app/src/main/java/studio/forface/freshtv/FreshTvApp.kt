@@ -5,7 +5,8 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import studio.forface.freshtv.dimodules.businessModules
+import studio.forface.freshtv.dimodules.Database
+import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
@@ -15,6 +16,7 @@ import timber.log.Timber
  * @author Davide Giuseppe Farella.
  * The [Application]
  */
+@Suppress("unused")
 class FreshTvApp: Application() {
 
     /** When the app is created */
@@ -32,7 +34,7 @@ class FreshTvApp: Application() {
             // declare used Android context
             androidContext(this@FreshTvApp )
             // declare modules
-            modules(businessModules + appModule )
+            modules(otherModules( Database.Room ) + appModule )
         }
 
         // Init Timber
