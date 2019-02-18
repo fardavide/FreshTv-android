@@ -6,7 +6,7 @@ import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.localdata.sqldelight.sources.*
 
 /** A [Module] that handles dependencies for `localData` module */
-val sqlDelightlocalDataModule = module {
+val sqlDelightLocalDataModule = module {
 
     /* Main */
     factory<LocalData> { DelightLocalData(

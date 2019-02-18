@@ -12,12 +12,12 @@ import studio.forface.freshtv.localdata.Database
 
 /** A [Module] that handles dependencies of `androiddatabase` module */
 val androidDatabaseModule = module {
-    single<SqlDriver> { AndroidSqliteDriver(
+    single<SqlDriver>( createdAtStart = true ) { AndroidSqliteDriver(
             Database.Schema,
             androidApplication(),
             "FreshTv"
     ) }
-    single { Database(
+    single( createdAtStart = true ) { Database(
             driver = get(),
             movieChannelPojoAdapter = get(),
             tvChannelPojoAdapter = get(),

@@ -5,7 +5,7 @@ import studio.forface.freshtv.androiddatabase.androidDatabaseModule
 import studio.forface.freshtv.commonandroid.commonAndroidModule
 import studio.forface.freshtv.domain.useCasesModule
 import studio.forface.freshtv.localdata.room.roomLocalDataModule
-import studio.forface.freshtv.localdata.sqldelight.sqlDelightlocalDataModule
+import studio.forface.freshtv.localdata.sqldelight.sqlDelightLocalDataModule
 import studio.forface.freshtv.parsers.parsersModule
 import studio.forface.freshtv.settings.settingsModule
 
@@ -17,7 +17,7 @@ fun otherModules( database: Database ) =
         settingsModule +
         useCasesModule +
         when ( database ) {
-                Database.SqlDelight -> sqlDelightlocalDataModule
+                Database.SqlDelight -> sqlDelightLocalDataModule
                 Database.Room -> roomLocalDataModule
         }
 
