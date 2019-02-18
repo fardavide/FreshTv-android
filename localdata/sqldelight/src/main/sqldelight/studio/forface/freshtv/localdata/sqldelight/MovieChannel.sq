@@ -1,0 +1,94 @@
+import java.lang.Boolean;
+import kotlin.collections.List;
+import kotlin.collections.Map;
+
+CREATE TABLE movieChannelPojo (
+  id TEXT NOT NULL PRIMARY KEY,
+  name TEXT NOT NULL,
+  groupName TEXT NOT NULL,
+  imageUrl TEXT,
+  mediaUrls TEXT AS Map<String, Int> NOT NULL,
+  playlistPaths TEXT AS List<String> NOT NULL,
+  favorite INTEGER AS Boolean NOT NULL,
+  tmdbId INTEGER AS Int
+);
+
+CREATE INDEX movieChannel_name ON movieChannelPojo(name);
+
+insert:
+  INSERT INTO movieChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths, favorite, tmdbId )
+  VALUES ( ?, ?, ?, ?, ?, ?, ?, ? );
+
+update:
+  UPDATE movieChannelPojo
+  SET id = :id, name = ?, groupName = ?, imageUrl = ?, mediaUrls = ?, playlistPaths = ?, favorite = ?, tmdbId = ?
+  WHERE id = :id;
+
+delete:
+  DELETE FROM movieChannelPojo
+  WHERE id = ?;
+
+deleteAll:
+  DELETE FROM movieChannelPojo;
+
+count:
+  SELECT count(*) FROM movieChannelPojo;
+
+countByGroup:
+  SELECT count(*)
+  FROM movieChannelPojo
+  WHERE groupName = ?;
+
+selectAll:
+  SELECT *
+  FROM movieChannelPojo
+  ORDER BY
+    favorite ASC,
+    name ASC;
+
+selectPaged:
+  SELECT *
+  FROM movieChannelPojo
+  ORDER BY
+    favorite ASC,
+    name ASC
+  LIMIT :limit OFFSET :offset;
+
+selectById:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE id = ?
+  LIMIT 1;
+
+selectByName:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE name LIKE ?
+  ORDER BY
+    favorite ASC,
+    name ASC;
+
+selectByGroup:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE groupName = ?
+  ORDER BY
+    favorite ASC,
+    name ASC;
+
+selectPagedByGroup:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE groupName = ?
+  ORDER BY
+    favorite ASC,
+    name ASC
+  LIMIT :limit OFFSET: offset;
+
+selectByPlaylistPath:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  ORDER BY
+    favorite ASC,
+    name ASC;
