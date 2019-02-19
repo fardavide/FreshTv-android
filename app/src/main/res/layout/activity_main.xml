@@ -48,6 +48,8 @@
         android:layout_gravity="bottom"
         app:navigationIcon="@drawable/ic_hamburger"
         app:backgroundTint="@android:color/white"
+        app:hideFabOnScroll="false"
+        app:hideOnScroll="true"
         app:leftCornerRadius="24dp"
         app:rightCornerRadius="24dp"/>
 

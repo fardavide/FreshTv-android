@@ -15,6 +15,7 @@ import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
 import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditPlaylistFragment
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEpgsFragment
+import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToTvChannelsFragment
 import studio.forface.freshtv.uimodels.*
 import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
@@ -94,6 +95,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasTvs )
                 primaryItem( R.string.menu_tv_channels ) {
                     iconResource = R.drawable.ic_tv
+                    navDirections = actionToTvChannelsFragment()
                 }
 
             // Movie Channels

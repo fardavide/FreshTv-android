@@ -14,12 +14,12 @@
         app:destination="@id/editPlaylistFragment" />
 
     <action
+        android:id="@+id/action_to_tvChannelsFragment"
+        app:destination="@id/tvChannelsFragment" />
+
+    <action
         android:id="@+id/action_to_epgsFragment"
-        app:destination="@id/epgsFragment"
-        app:enterAnim="@anim/nav_default_enter_anim"
-        app:exitAnim="@anim/nav_default_exit_anim"
-        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        app:destination="@id/epgsFragment" />
 
     <fragment
         android:id="@+id/epgsFragment"

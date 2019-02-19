@@ -36,6 +36,9 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     private val recyclerView
             by lazy { requireView().findViewById<RecyclerView>( R.id.recyclerView ) }
 
+    override val title: String?
+        get() = "TODO"
+
     /** When the `Activity` is created */
     override fun onActivityCreated( savedInstanceState: Bundle? ) {
         super.onActivityCreated( savedInstanceState )
