@@ -39,8 +39,8 @@ internal class PlaylistParser {
                 }
                 is Result.Group -> groups.send( result.content )
                 is Result.Error -> errors.send( result.error )
-                // Explicit else branch needed for avoid to forget smtng, since result is sealed
-                // but when is statement
+                // Explicit else branch needed for avoid to forget something, since result is sealed but when is
+                // statement
                 else -> throw AssertionError("${result::class.qualifiedName} not implemented" )
             }
         }

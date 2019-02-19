@@ -55,7 +55,7 @@ internal class FileContentResolver(
 
             return if ( needToDecompress )
                 GZIPInputStream( inputStream() ).reader().readText()
-            else contentToString()
+            else String(this )
         }
     }
 

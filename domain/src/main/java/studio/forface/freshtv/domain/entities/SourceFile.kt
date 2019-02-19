@@ -13,7 +13,7 @@ sealed class SourceFile {
     data class Epg(
         override val path: String,
         override val type: Type,
-        override val name: String?
+        override val name: String? = null
     ): SourceFile() {
 
         companion object { const val TYPE_NAME = "Epg" }
@@ -29,7 +29,7 @@ sealed class SourceFile {
     data class Playlist(
         override val path: String,
         override val type: Type,
-        override val name: String?
+        override val name: String? = null
     ): SourceFile() {
 
         companion object { const val TYPE_NAME = "Playlist" }

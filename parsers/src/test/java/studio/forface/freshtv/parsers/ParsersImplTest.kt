@@ -101,7 +101,7 @@ internal class ParsersImplTest {
         }
     }
 
-    // @Test // test only manually due to http call
+    @Test // test only manually due to http call
     fun `playlist realTest`() {
         val source = ParsersImpl()
 
