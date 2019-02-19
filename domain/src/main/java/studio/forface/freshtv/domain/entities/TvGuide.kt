@@ -21,7 +21,7 @@ data class TvGuide (
         val description: String,
 
         /** An OPTIONAL [String] url for the image of the Program */
-        val imageUrl: String?,
+        val imageUrl: Url?,
 
         /** A [String] category for the image of the Program */
         val category: String?,

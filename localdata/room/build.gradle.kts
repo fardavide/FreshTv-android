@@ -16,5 +16,6 @@ dependencies {
     api( Libs.Android.room )
     kapt( Libs.Android.room_compiler )
     api( Libs.Android.room_coroutines )
+    api( Libs.Android.paging )
     androidTestImplementation( Libs.Android.room_testing )
 }

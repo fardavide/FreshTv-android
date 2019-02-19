@@ -1,19 +1,22 @@
-package studio.forface.freshtv.localdata.mappers
+package studio.forface.freshtv.localdata.room.mappers
 
 import studio.forface.freshtv.domain.entities.TvGuide
-import studio.forface.freshtv.localdata.TvGuidePojo
+import studio.forface.freshtv.localdata.room.entities.TvGuidePojo
+import studio.forface.freshtv.localdata.mappers.PojoMapper
+import studio.forface.freshtv.localdata.mappers.TvGuidePojoMapper
 
 /**
  * @author Davide Giuseppe Farella.
  * A Mapper for [TvGuidePojo]
  *
- * Inherit from [PojoMapper].
+ * Inherit from [TvGuidePojoMapper] and [PojoMapper].
  */
-class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
+class RoomTvGuidePojoMapper : TvGuidePojoMapper<TvGuidePojo> {
 
     /** @see PojoMapper.toPojo */
     override fun TvGuide.toPojo() = with(this ) {
-        TvGuidePojo.Impl(
+        val pojoCredits = credits?.let{ TvGuidePojo.Credits( it.director, it.actors ) }
+        TvGuidePojo(
                 id =                id,
                 channelId =         channelId,
                 title =             title,
@@ -22,8 +25,7 @@ class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
                 category =          category,
                 year =              year,
                 country =           country,
-                credits_director =  credits?.director,
-                credits_actors =     credits?.actors,
+                credits =           pojoCredits,
                 rating =            rating,
                 startTime =         startTime,
                 endTime =           endTime
@@ -32,8 +34,7 @@ class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
 
     /** @see PojoMapper.toEntity */
     override fun TvGuidePojo.toEntity() = with(this ) {
-        val credits = if ( credits_director != null && credits_actors != null )
-            TvGuide.Credits( credits_director!!, credits_actors!! ) else null
+        val entityCredits = credits?.let{ TvGuide.Credits( it.director, it.actors ) }
 
         TvGuide(
                 id =            id,
@@ -44,7 +45,7 @@ class TvGuidePojoMapper : PojoMapper<TvGuide, TvGuidePojo>() {
                 category =      category,
                 year =          year,
                 country =       country,
-                credits =       credits,
+                credits =       entityCredits,
                 rating =        rating,
                 startTime =     startTime,
                 endTime =       endTime

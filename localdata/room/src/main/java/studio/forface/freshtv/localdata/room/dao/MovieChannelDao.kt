@@ -1,5 +1,6 @@
 package studio.forface.freshtv.localdata.room.dao
 
+import androidx.paging.DataSource
 import androidx.room.*
 import studio.forface.freshtv.localdata.room.entities.MovieChannelPojo
 
@@ -24,12 +25,21 @@ interface MovieChannelDao {
     @Query("SELECT * FROM Movie_channels ORDER BY favorite ASC, name ASC" )
     fun selectAll(): List<MovieChannelPojo>
 
+    @Query("SELECT * FROM Movie_channels ORDER BY favorite ASC, name ASC" )
+    fun selectAllPaged(): DataSource.Factory<Int, MovieChannelPojo>
+
     @Query("SELECT * FROM Movie_channels WHERE id = :id LIMIT 1" )
     fun selectById( id: String ): MovieChannelPojo
 
     @Query("SELECT * FROM Movie_channels WHERE groupName = :groupName ORDER BY favorite ASC, name ASC" )
     fun selectByGroup( groupName: String ): List<MovieChannelPojo>
 
+    @Query("SELECT * FROM Movie_channels WHERE groupName = :groupName ORDER BY favorite ASC, name ASC" )
+    fun selectByGroupPaged( groupName: String ): DataSource.Factory<Int, MovieChannelPojo>
+
     @Query("SELECT * FROM Movie_channels WHERE playlistPaths REGEXP '(^|, ) Escape(' + :path + ') (, |\$)' ORDER BY favorite ASC, name ASC" )
     fun selectByPlaylistPath( path: String ): List<MovieChannelPojo>
+
+    @Query("SELECT * FROM Movie_channels WHERE playlistPaths REGEXP '(^|, ) Escape(' + :path + ') (, |\$)' ORDER BY favorite ASC, name ASC" )
+    fun selectByPlaylistPathPaged( path: String ): DataSource.Factory<Int, MovieChannelPojo>
 }

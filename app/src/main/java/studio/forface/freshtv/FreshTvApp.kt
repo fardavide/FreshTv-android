@@ -34,7 +34,7 @@ class FreshTvApp: Application() {
             // declare used Android context
             androidContext(this@FreshTvApp )
             // declare modules
-            modules(otherModules( Database.Room ) + appModule )
+            modules(otherModules( Database.SqlDelight ) + appModule )
         }
 
         // Init Timber

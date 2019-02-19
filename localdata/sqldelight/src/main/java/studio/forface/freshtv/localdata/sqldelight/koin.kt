@@ -5,17 +5,19 @@ import org.koin.dsl.module
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.localdata.sqldelight.sources.*
 
-/** A [Module] that handles dependencies for `localData` module */
+/** A [Module] that handles dependencies for `localData` module with SqlDelight database */
 val sqlDelightLocalDataModule = module {
 
     /* Main */
-    factory<LocalData> { DelightLocalData(
+    factory<LocalData> {
+        DelightLocalData(
             channelGroups = get(),
             movieChannels = get(),
             sourceFiles = get(),
             tvChannels = get(),
             tvGuides = get()
-    ) }
+        )
+    }
 
     /* Sources */
     factory { DelightChannelGroupsLocalSource( get() ) }

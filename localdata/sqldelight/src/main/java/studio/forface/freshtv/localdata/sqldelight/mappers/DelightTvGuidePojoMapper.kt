@@ -1,6 +1,7 @@
 package studio.forface.freshtv.localdata.sqldelight.mappers
 
 import studio.forface.freshtv.domain.entities.TvGuide
+import studio.forface.freshtv.domain.entities.Url
 import studio.forface.freshtv.localdata.mappers.PojoMapper
 import studio.forface.freshtv.localdata.mappers.TvGuidePojoMapper
 import studio.forface.freshtv.localdata.sqldelight.TvGuidePojo
@@ -20,12 +21,12 @@ class DelightTvGuidePojoMapper : TvGuidePojoMapper<TvGuidePojo> {
                 channelId =         channelId,
                 title =             title,
                 description =       description,
-                imageUrl =          imageUrl,
+                imageUrl =          imageUrl?.s,
                 category =          category,
                 year =              year,
                 country =           country,
                 credits_director =  credits?.director,
-                credits_actors =     credits?.actors,
+                credits_actors =    credits?.actors,
                 rating =            rating,
                 startTime =         startTime,
                 endTime =           endTime
@@ -42,7 +43,7 @@ class DelightTvGuidePojoMapper : TvGuidePojoMapper<TvGuidePojo> {
                 channelId =     channelId,
                 title =         title,
                 description =   description,
-                imageUrl =      imageUrl,
+                imageUrl =      imageUrl?.let { Url( it ) },
                 category =      category,
                 year =          year,
                 country =       country,

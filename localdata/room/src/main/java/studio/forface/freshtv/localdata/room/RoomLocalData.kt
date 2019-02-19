@@ -2,15 +2,9 @@ package studio.forface.freshtv.localdata.room
 
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.localdata.AbsLocalData
-import studio.forface.freshtv.localdata.room.entities.ChannelGroupPojo
-import studio.forface.freshtv.localdata.room.entities.MovieChannelPojo
-import studio.forface.freshtv.localdata.room.entities.SourceFilePojo
-import studio.forface.freshtv.localdata.room.mappers.RoomChannelGroupPojoMapper
-import studio.forface.freshtv.localdata.room.mappers.RoomMovieChannelPojoMapper
-import studio.forface.freshtv.localdata.room.mappers.RoomSourceFilePojoMapper
-import studio.forface.freshtv.localdata.room.sources.RoomChannelGroupsLocalSource
-import studio.forface.freshtv.localdata.room.sources.RoomMovieChannelsLocalSource
-import studio.forface.freshtv.localdata.room.sources.RoomSourceFilesLocalSource
+import studio.forface.freshtv.localdata.room.entities.*
+import studio.forface.freshtv.localdata.room.mappers.*
+import studio.forface.freshtv.localdata.room.sources.*
 
 /**
  * @author Davide Giuseppe Farella.

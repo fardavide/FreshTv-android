@@ -7,12 +7,11 @@ plugins {
 android { applyAndroidConfig() }
 
 dependencies {
-    api( project(":domain") )
-    implementation( project(":localdata" ) )
+    implementation( project(":androiddatabase" ) )
+    implementation( project(":localdata:room" ) )
 
     applyTests()
     applyAndroidTests()
 
-    api( Libs.koin_android )
-    implementation( Libs.Android.paging )
+    androidTestImplementation( Libs.Android.room_testing )
 }

@@ -39,6 +39,11 @@ countByGroup:
   FROM movieChannelPojo
   WHERE groupName = ?;
 
+countByPlaylistPath:
+  SELECT count(*)
+  FROM movieChannelPojo
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)";
+
 selectAll:
   SELECT *
   FROM movieChannelPojo
@@ -92,3 +97,12 @@ selectByPlaylistPath:
   ORDER BY
     favorite ASC,
     name ASC;
+
+selectPagedByPlaylistPath:
+  SELECT *
+  FROM movieChannelPojo
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  ORDER BY
+    favorite ASC,
+    name ASC
+  LIMIT :limit OFFSET :offset;

@@ -6,7 +6,7 @@ include(":domain")
 include(":localdata", ":localdata:sqldelight", ":localdata:room" )
 include(":parsers" )
 
-include(":androiddatabase" )
+include(":androiddatabase", ":androiddatabase:sqldelight", ":androiddatabase:room" )
 include(":commonandroid" )
 include(":dimodules")
 include(":player")

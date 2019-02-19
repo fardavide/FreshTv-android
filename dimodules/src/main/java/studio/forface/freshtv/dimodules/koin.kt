@@ -2,6 +2,8 @@ package studio.forface.freshtv.dimodules
 
 import org.koin.core.module.Module
 import studio.forface.freshtv.androiddatabase.androidDatabaseModule
+import studio.forface.freshtv.androiddatabase.room.roomAndroidDatabaseModule
+import studio.forface.freshtv.androiddatabase.sqldelight.sqlDelightAndroidDatabaseModule
 import studio.forface.freshtv.commonandroid.commonAndroidModule
 import studio.forface.freshtv.domain.useCasesModule
 import studio.forface.freshtv.localdata.room.roomLocalDataModule
@@ -17,8 +19,8 @@ fun otherModules( database: Database ) =
         settingsModule +
         useCasesModule +
         when ( database ) {
-                Database.SqlDelight -> sqlDelightLocalDataModule
-                Database.Room -> roomLocalDataModule
+                Database.SqlDelight -> sqlDelightLocalDataModule + sqlDelightAndroidDatabaseModule
+                Database.Room -> roomLocalDataModule + roomAndroidDatabaseModule
         }
 
 enum class Database { SqlDelight, Room }

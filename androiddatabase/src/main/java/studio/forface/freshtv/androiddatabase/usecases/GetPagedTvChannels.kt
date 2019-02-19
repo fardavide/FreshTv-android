@@ -1,6 +1,7 @@
 package studio.forface.freshtv.androiddatabase.usecases
 
 import androidx.paging.DataSource
+import studio.forface.freshtv.androiddatabase.localdata.AbsPagedLocalData
 import studio.forface.freshtv.androiddatabase.localdata.PagedLocalData
 import studio.forface.freshtv.domain.entities.TvChannel
 
