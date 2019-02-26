@@ -26,7 +26,8 @@ delete:
   WHERE path = ?;
 
 count:
-  SELECT count(*) FROM sourceFilePojo;
+  SELECT count(*)
+  FROM sourceFilePojo;
 
 selectAll:
   SELECT *
@@ -36,6 +37,12 @@ selectAllByType:
   SELECT *
   FROM sourceFilePojo
   WHERE type = ?;
+
+selectAllByTypePaged:
+  SELECT *
+  FROM sourceFilePojo
+  WHERE type = ?
+  LIMIT :limit OFFSET :offset;
 
 select:
   SELECT *

@@ -26,7 +26,7 @@ import studio.forface.viewstatestore.*
  *
  * Inherit from [ScopedViewModel]
  */
-internal class EditPlaylistViewModel(
+internal class EditPlaylistViewModel( // TODO delete playlist
         private val interactor: EditPlaylistInteractor,
         private val presenter: PlaylistPresenter,
         private val playlistPath: String?

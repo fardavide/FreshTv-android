@@ -16,9 +16,7 @@ fun TestedExtension.applyAndroidConfig(applicationId: String? = null ) {
             isMinifyEnabled = false
             proguardFiles( getDefaultProguardFile("proguard-android.txt" ), "proguard-rules.pro" )
         }
-        getByName("debug" ) {
-            matchingFallbacks = listOf( "release" ) // TODO https://github.com/russhwolf/multiplatform-settings/issues/16
-        }
+        getByName("debug" ) {  }
     }
     compileOptions {
         sourceCompatibility = Project.jdkVersion

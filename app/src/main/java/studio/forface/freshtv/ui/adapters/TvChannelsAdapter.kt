@@ -5,37 +5,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
-import studio.forface.freshtv.commonandroid.utils.inflate
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 
 /**
  * @author Davide Giuseppe Farella.
  * A [PagedListAdapter] for [TvChannelUiModel]
  *
- * Implements [ClickableAdapter]
+ * Inherit from [ClickableAdapter]
  */
 internal class TvChannelsAdapter:
-        PagedListAdapter<TvChannelUiModel, TvChannelsAdapter.TvChannelViewHolder>( DiffCallback ),
-        ClickableAdapter<TvChannelUiModel> {
-
-    /** A callback that will be triggered when an item is clicked */
-    override var onItemClick: (TvChannelUiModel) -> Unit = {}
-
-    /** A callback that will be triggered when an item is long clicked */
-    override var onItemLongClick: (TvChannelUiModel) -> Unit = {}
+        BasePagedAdapter<TvChannelUiModel, TvChannelsAdapter.TvChannelViewHolder>( DiffCallback ) {
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): TvChannelViewHolder {
         return TvChannelViewHolder( TextView( parent.context ) ) // TODO inflate real view
-    }
-
-    /** @see PagedListAdapter.onBindViewHolder */
-    override fun onBindViewHolder( holder: TvChannelViewHolder, position: Int ) {
-        getItem( position )?.let {
-            holder.onBind( it )
-            holder.prepareClickListeners()
-        } // TODO ?: holder.clear()
     }
 
     /** A [DiffUtil.ItemCallback] for [TvChannelsAdapter] */

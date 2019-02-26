@@ -7,6 +7,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.view.MenuItem
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.navArgs
@@ -57,6 +58,9 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
 
     /** @return a NULLABLE [getView] casted as [ConstraintLayout] */
     private val layout get() = view as? ConstraintLayout
+
+    /** @see RootFragment.menuRes */
+    override val menuRes: Int? get() = ( mode == CREATE ) { R.menu.menu_delete }
 
     /** The [EditPlaylistFragment.Mode] */
     private val mode by lazy { if ( args.playlistPath == null ) CREATE else EDIT }
@@ -114,6 +118,20 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
             editSourceFileFromWebButton.setOnClickListener { type = REMOTE }
             editSourceFilePickFileButton.setOnClickListener { pickFileWithPermissions() }
         }
+    }
+
+    /**
+     * When a [MenuItem] is selected from Options Menu.
+     * @see menuRes
+     */
+    override fun onOptionsItemSelected( item: MenuItem ): Boolean {
+        when ( item.itemId ) {
+
+            R.id.action_delete -> {
+                // TODO show delete confirmation
+            }
+        }
+        return super.onOptionsItemSelected( item )
     }
 
     /** When [startActivityForResult] return its result */

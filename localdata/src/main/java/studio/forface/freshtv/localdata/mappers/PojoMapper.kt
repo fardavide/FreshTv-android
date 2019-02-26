@@ -17,8 +17,18 @@ interface PojoMapper<E, P> {
 }
 
 /**
- *  Override of invoke operator for get access to `this` [PojoMapper] as receiver of the lambda for call extension
- *  functions declared in this class:
- *  e.g. `userMapper { registrationParams.toPojo() }`
+ * Override of invoke operator for get access to `this` [PojoMapper] as receiver of the lambda for call extension
+ * functions declared in this class:
+ * e.g. `userMapper { registrationParams.toPojo() }`
  */
 inline operator fun <E, P, T> PojoMapper<E, P>.invoke( f: PojoMapper<E, P>.() -> T ) = f()
+
+/**
+ * Call [Collection.map] passing a [PojoMapper] as receiver for the lambda [block]
+ *
+ * E.g. `myListOfT.map( myTMapper ) { it.toPojo() }`
+ */
+inline fun <T, V, E, P, M: PojoMapper<E, P>> Collection<T>.map(
+    mapper: M,
+    block: M.(T) -> V
+) = map { mapper.block( it ) }

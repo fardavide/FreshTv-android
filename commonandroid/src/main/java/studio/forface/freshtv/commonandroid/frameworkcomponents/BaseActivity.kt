@@ -149,7 +149,7 @@ abstract class BaseActivity(
                 if ( fabParams == null ) fab.hide()
                 else {
                     fab.setImageResource( fabParams.drawableRes )
-                    // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text
+                    // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text, but an extended Fab would be great
                     fab.setOnClickListener( fabParams.action )
                     if ( fabParams.showOnStart ) fab.show() else fab.hide()
                 }

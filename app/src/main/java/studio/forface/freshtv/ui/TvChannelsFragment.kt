@@ -14,7 +14,7 @@ import studio.forface.freshtv.viewmodels.TvChannelsViewModel
 
 /**
  * @author Davide Giuseppe Farella
- * A `Fragment` for See the stored `TvChannels` with their `TvGuide`
+ * A `Fragment` for see the stored `TvChannels` with their `TvGuide`
  *
  * // TODO inherit from [NestedFragment]
  */
@@ -35,8 +35,7 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     // TODO cannot import synthetic from another module
     private val recyclerView by lazy { view!!.findViewById<RecyclerView>( R.id.recyclerView ) }
 
-    override val title: String?
-        get() = "TODO"
+    override val title: String? get() = "TODO"
 
     /** When the `Activity` is created */
     override fun onActivityCreated( savedInstanceState: Bundle? ) {

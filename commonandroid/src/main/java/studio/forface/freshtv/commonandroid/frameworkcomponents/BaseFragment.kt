@@ -2,9 +2,7 @@ package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
@@ -104,6 +102,16 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
      * DO NOT CALL IT DIRECTLY, SINCE [title] CAN OVERRIDE IT!
      */
     @get: StringRes open val titleRes: Int? get() = R.string.empty
+
+    /**
+     * When is requested to create an Options Menu ( if [menuRes] is not null ), call
+     * [MenuInflater.inflate] with our [menuRes] and the received [menu].
+     *
+     * [menuRes] cannot be null, since this method will be called only if [menuRes] is not null.
+     */
+    override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater ) {
+        inflater.inflate( menuRes!!, menu )
+    }
 
     /** A class containing params for configure a `FloatingActionButton` */
     data class FabParams(

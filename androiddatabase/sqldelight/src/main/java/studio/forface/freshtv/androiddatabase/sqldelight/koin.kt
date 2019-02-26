@@ -10,6 +10,7 @@ import studio.forface.freshtv.androiddatabase.sqldelight.localdata.DelightPagedL
 import studio.forface.freshtv.androiddatabase.sqldelight.sources.DelightPagedMovieChannelsLocalSource
 import studio.forface.freshtv.androiddatabase.sqldelight.sources.DelightPagedTvChannelsLocalSource
 import studio.forface.freshtv.localdata.sqldelight.Database
+import studio.forface.freshtv.localdata.sqldelight.sources.DelightSourceFilesLocalSource
 
 /** A [Module] that handles dependencies of `androiddatabase` module with SqlDelight database */
 val sqlDelightAndroidDatabaseModule = module {
@@ -31,14 +32,17 @@ val sqlDelightAndroidDatabaseModule = module {
 
     /* Source */
     factory { DelightPagedMovieChannelsLocalSource( queries = get() ) }
+    factory { DelightSourceFilesLocalSource( queries = get() ) }
     factory { DelightPagedTvChannelsLocalSource( queries = get() ) }
 
     /* Use cases */
     factory<PagedLocalData> {
         DelightPagedLocalData(
             movieChannels = get(),
+            sourceFiles = get(),
             tvChannels = get(),
             movieChannelMapper = get(),
+            sourceFilesMapper = get(),
             tvChannelMapper = get()
         )
     }

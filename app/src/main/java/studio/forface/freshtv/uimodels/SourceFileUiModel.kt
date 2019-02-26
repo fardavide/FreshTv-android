@@ -32,4 +32,9 @@ internal sealed class SourceFileUiModel {
             override val sourceType: SourceFile.Type,
             override val sourceTypeIconRes: Int
     ): SourceFileUiModel()
+
+    override fun equals( other: Any? ) =
+        ( this as? Epg ) == other || ( this as? Playlist ) == other
+
+    override fun hashCode() = ( this as? Epg )?.hashCode() ?: ( this as Playlist ).hashCode()
 }

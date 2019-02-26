@@ -3,6 +3,7 @@ package studio.forface.freshtv.presenters
 import studio.forface.freshtv.uimodels.SourceFileUiModel.Playlist
 import studio.forface.freshtv.domain.usecases.GetPlaylist
 import studio.forface.freshtv.mappers.SourceFileUiModelMapper
+import studio.forface.freshtv.mappers.invoke
 
 /**
  * @author Davide Giuseppe Farella
@@ -13,7 +14,7 @@ internal class PlaylistPresenter(
         private val mapper: SourceFileUiModelMapper
 ) {
 
-    /** @return [Playlist] */
+    /** @return [Playlist] with the given [playlistPath] */
     operator fun invoke( playlistPath: String ) =
             mapper { getPlaylist( playlistPath ).toUiModel() }
 }

@@ -16,8 +16,8 @@ internal class TvChannelUiModelMapper :
 
     /** @see UiModelMapper.toUiModel */
     override fun TvChannelWithGuide.toUiModel(): TvChannelUiModel {
-        val currentProgram = guide?.let { null } // TODO
-        val imageUrl = channel.imageUrl?.s ?: EMPTY_STRING // TODO
+        val currentProgram = guide?.let { null } // TODO get current program
+        val imageUrl = channel.imageUrl?.s ?: EMPTY_STRING // TODO default icon
         return TvChannelUiModel( channel.id, channel.name, imageUrl, currentProgram )
     }
 
