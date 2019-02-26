@@ -96,10 +96,10 @@ internal class EditPlaylistViewModel( // TODO delete playlist
     /** When [SourceFileUiModel] is received from [PlaylistPresenter] */
     private fun onPlaylistReceived( uiModel: SourceFileUiModel ) {
         with( uiModel ) {
-            playlist.setData( this )
+            type = sourceType
             path = fullPath
             name = shownName
-            type = sourceType
+            playlist.setData( this )
         }
     }
 
