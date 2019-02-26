@@ -1,5 +1,6 @@
 package studio.forface.freshtv.uimodels
 
+import androidx.annotation.DrawableRes
 import studio.forface.freshtv.domain.entities.SourceFile
 
 /**
@@ -12,13 +13,15 @@ internal sealed class SourceFileUiModel {
     abstract val fullPath: String
     abstract val shortPath: String
     abstract val sourceType: SourceFile.Type
+    @get:DrawableRes abstract val sourceTypeIconRes: Int
 
     data class Epg(
             override val databaseName: String?,
             override val shownName: String,
             override val fullPath: String,
             override val shortPath: String,
-            override val sourceType: SourceFile.Type
+            override val sourceType: SourceFile.Type,
+            override val sourceTypeIconRes: Int
     ): SourceFileUiModel()
 
     data class Playlist(
@@ -26,6 +29,7 @@ internal sealed class SourceFileUiModel {
             override val shownName: String,
             override val fullPath: String,
             override val shortPath: String,
-            override val sourceType: SourceFile.Type
+            override val sourceType: SourceFile.Type,
+            override val sourceTypeIconRes: Int
     ): SourceFileUiModel()
 }

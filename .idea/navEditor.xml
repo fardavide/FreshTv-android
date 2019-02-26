@@ -18,13 +18,23 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_to_playlistsFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="action_to_tvChannelsFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="editPlaylistFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="269" />
-                            <option name="y" value="297" />
+                            <option name="x" value="-163" />
+                            <option name="y" value="592" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -35,8 +45,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1" />
-                            <option name="y" value="284" />
+                            <option name="x" value="65" />
+                            <option name="y" value="299" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -47,8 +57,20 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-293" />
-                            <option name="y" value="-79" />
+                            <option name="x" value="-150" />
+                            <option name="y" value="-87" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="playlistsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-158" />
+                            <option name="y" value="293" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -59,8 +81,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-67" />
-                            <option name="y" value="-73" />
+                            <option name="x" value="66" />
+                            <option name="y" value="-83" />
                           </Point>
                         </option>
                       </LayoutPositions>

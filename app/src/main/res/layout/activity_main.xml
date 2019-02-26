@@ -21,15 +21,22 @@
         app:elevation="0dp"
         android:fitsSystemWindows="true">
 
-        <TextView
-            android:id="@+id/titleTextView"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="24sp"
-            android:textAlignment="center"
-            android:fitsSystemWindows="true"/>
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:fitsSystemWindows="true"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

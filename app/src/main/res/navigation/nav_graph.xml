@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -9,34 +10,52 @@
         android:label="HomeFragment" >
     </fragment>
 
-    <action
-        android:id="@+id/action_to_editPlaylistFragment"
-        app:destination="@id/editPlaylistFragment" />
-
+    <!-- Global actions -->
     <action
         android:id="@+id/action_to_tvChannelsFragment"
         app:destination="@id/tvChannelsFragment" />
 
     <action
+        android:id="@+id/action_to_playlistsFragment"
+        app:destination="@id/playlistsFragment" />
+
+    <action
+        android:id="@+id/action_to_editPlaylistFragment"
+        app:destination="@id/editPlaylistFragment" />
+
+    <action
         android:id="@+id/action_to_epgsFragment"
         app:destination="@id/epgsFragment" />
 
+
+    <!-- Fragments -->
     <fragment
-        android:id="@+id/epgsFragment"
-        android:name="studio.forface.freshtv.ui.EpgsFragment"
-        android:label="EpgsFragment" />
+        android:id="@+id/tvChannelsFragment"
+        android:name="studio.forface.freshtv.ui.TvChannelsFragment"
+        android:label="TvChannelsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
+
+    <fragment
+        android:id="@+id/playlistsFragment"
+        android:name="studio.forface.freshtv.ui.PlaylistsFragment"
+        android:label="PlaylistsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
 
     <fragment
         android:id="@+id/editPlaylistFragment"
         android:name="studio.forface.freshtv.ui.EditPlaylistFragment"
-        android:label="EditPlaylistFragment" >
+        android:label="EditPlaylistFragment"
+        tools:layout="@layout/fragment_source_file_edit_state_editing_file">
         <argument
             android:name="playlistPath"
             app:argType="string"
             app:nullable="true" />
     </fragment>
+
     <fragment
-        android:id="@+id/tvChannelsFragment"
-        android:name="studio.forface.freshtv.ui.TvChannelsFragment"
-        android:label="TvChannelsFragment" />
+        android:id="@+id/epgsFragment"
+        android:name="studio.forface.freshtv.ui.EpgsFragment"
+        android:label="EpgsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
+
 </navigation>

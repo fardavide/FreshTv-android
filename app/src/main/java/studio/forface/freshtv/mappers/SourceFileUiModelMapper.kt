@@ -1,5 +1,6 @@
 package studio.forface.freshtv.mappers
 
+import studio.forface.freshtv.R
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 
@@ -15,13 +16,17 @@ internal class SourceFileUiModelMapper: UiModelMapper<SourceFile, SourceFileUiMo
     override fun SourceFile.toUiModel(): SourceFileUiModel {
         val shownName = name ?: path.substringAfterLast('/' )
         val shortPath = path // TOOD
-        return when( this ) {
+        val sourceTypeIconRes = when( type ) {
+            SourceFile.Type.LOCAL -> R.drawable.ic_file
+            SourceFile.Type.REMOTE -> R.drawable.ic_web
+        }
 
+        return when( this ) {
             is SourceFile.Epg ->
-                SourceFileUiModel.Epg( name, shownName, path, shortPath, type )
+                SourceFileUiModel.Epg( name, shownName, path, shortPath, type, sourceTypeIconRes )
 
             is SourceFile.Playlist ->
-                SourceFileUiModel.Playlist( name, shownName, path, shortPath, type )
+                SourceFileUiModel.Playlist( name, shownName, path, shortPath, type, sourceTypeIconRes )
         }
     }
 

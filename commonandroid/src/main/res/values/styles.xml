@@ -2,13 +2,18 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+
+        <!-- Colors. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@android:color/white</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@android:color/black</item>
         <item name="android:colorBackground">@color/colorBackground</item>
+
+        <!-- Other -->
+        <item name="fontFamily">@font/champagne_limousines</item>
+
     </style>
 
 </resources>
