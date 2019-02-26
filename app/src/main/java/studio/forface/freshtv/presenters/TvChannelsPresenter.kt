@@ -3,10 +3,8 @@ package studio.forface.freshtv.presenters
 import androidx.paging.DataSource
 import studio.forface.freshtv.androiddatabase.usecases.GetPagedTvChannels
 import studio.forface.freshtv.domain.usecases.GetCurrentTvGuide
-import studio.forface.freshtv.uimodels.SourceFileUiModel.Playlist
-import studio.forface.freshtv.domain.usecases.GetPlaylist
-import studio.forface.freshtv.mappers.SourceFileUiModelMapper
 import studio.forface.freshtv.mappers.TvChannelUiModelMapper
+import studio.forface.freshtv.mappers.map
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 
 /**
@@ -25,5 +23,5 @@ internal class TvChannelsPresenter(
      */
     operator fun invoke( groupName: String? ) =
             ( groupName?.let { getPagedTvChannels( groupName ) } ?: getPagedTvChannels() )
-                    .map { mapper { ( it to getCurrentTvGuide( it.id ) ).toUiModel() } }
+                    .map( mapper ) { ( it to getCurrentTvGuide( it.id ) ).toUiModel() }
 }
