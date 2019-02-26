@@ -101,16 +101,16 @@ internal class ParsersImplTest {
         }
     }
 
-    @Test // test only manually due to http call
+    // @Test // test only manually due to http call
     fun `playlist realTest`() {
         val source = ParsersImpl()
 
         runBlocking {
             source.readFrom(
                     Playlist("https://sourcetv.info/dl/01/it29.m3u", SourceFile.Type.REMOTE ),
-                    { println( it ) },
-                    { println( it ) },
-                    { println( "${it.reason.name} - ${it.rawChannel}" ) }
+                    onChannel = { println( it ) },
+                    onGroup = { println( it ) },
+                    onError = { println( "${it.reason.name} - ${it.rawChannel}" ) }
             )
         }
     }

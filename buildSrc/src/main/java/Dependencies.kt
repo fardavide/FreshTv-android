@@ -1,9 +1,11 @@
 @file:Suppress("MayBeConstant", "unused")
 
-import com.android.build.gradle.TestedExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
-import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.DependencyHandlerScope
+import org.gradle.kotlin.dsl.ScriptHandlerScope
+import org.gradle.kotlin.dsl.kotlin
+import org.gradle.kotlin.dsl.maven
 
 val repos: RepositoryHandler.() -> Unit get() = {
     google()
@@ -42,51 +44,6 @@ fun DependencyHandler.applyAndroidTests() {
     }
 }
 
-fun TestedExtension.applyAndroidConfig( applicationId: String? = null ) {
-    compileSdkVersion( Project.targetSdk )
-    defaultConfig {
-        applicationId?.let { this.applicationId = it }
-        minSdkVersion( Project.minSdk )
-        targetSdkVersion( Project.targetSdk )
-        versionCode = Project.versionCode
-        versionName = Project.versionName
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
-    }
-    buildTypes {
-        getByName("release" ) {
-            isMinifyEnabled = false
-            proguardFiles( getDefaultProguardFile("proguard-android.txt" ), "proguard-rules.pro" )
-        }
-        getByName("debug" ) {
-            matchingFallbacks = listOf( "release" ) // TODO https://github.com/russhwolf/multiplatform-settings/issues/16
-        }
-    }
-    compileOptions {
-        sourceCompatibility = Project.jdkVersion
-        targetCompatibility = Project.jdkVersion
-    }
-    packagingOptions {
-        exclude("META-INF/DEPENDENCIES" )
-        exclude("META-INF/LICENSE" )
-        exclude("META-INF/LICENSE.txt" )
-        exclude("META-INF/license.txt" )
-        exclude("META-INF/NOTICE" )
-        exclude("META-INF/NOTICE.txt" )
-        exclude("META-INF/notice.txt" )
-        exclude("META-INF/ASL2.0" )
-        exclude("META-INF/ktor-http.kotlin_module" )
-        exclude("META-INF/kotlinx-io.kotlin_module" )
-        exclude("META-INF/atomicfu.kotlin_module" )
-        exclude("META-INF/ktor-utils.kotlin_module" )
-        exclude("META-INF/kotlinx-coroutines-io.kotlin_module" )
-        exclude("META-INF/ktor-client-json.kotlin_module" )
-        exclude("META-INF/ktor-client-logging.kotlin_module" )
-        exclude("META-INF/ktor-client-core.kotlin_module" )
-        exclude("org/threeten/bp/format/ChronologyText.properties" )
-    }
-}
-
 object Versions {
     val kotlin =                        "1.3.20"
     val coroutines =                    "1.1.1"
@@ -95,7 +52,7 @@ object Versions {
     val fabric =                        "1.25.4"
     val firebase_crashlytics_android =  "2.9.8"
     val koin =                          "2.0.0-beta-1"
-    val ktor =                          "1.1.2"
+    val ktor =                          "1.1.3"
     val mockk =                         "1.9"
     val settings =                      "0.2"
     val sqldelight =                    "1.0.3"
@@ -112,13 +69,14 @@ object Versions {
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_material_bottom_bar =   "1.1-beta-3"
+    val android_material_bottom_bar =   "1.1-beta-4"
     val android_navigation =            "1.0.0-beta01"
     val android_paging =                "2.1.0"
     val android_picasso =               "2.71828"
     val android_room =                  "2.1.0-alpha04"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
+    val android_view_state_store =      "1.0"
     val android_work =                  "1.0.0-beta04"
 }
 
@@ -176,6 +134,8 @@ object Libs {
         val room_testing =                      "androidx.room:room-testing:${Versions.android_room}"
         val support_annotations =               "com.android.support:support-annotations:28.0.0"
         val test_runner =                       "com.android.support.test:runner:${Versions.android_test_runner}"
+        val view_state_store =                  "studio.forface.viewstatestore:viewstatestore:${Versions.android_view_state_store}"
+        val view_state_store_paging =           "studio.forface.viewstatestore:viewstatestore-paging:${Versions.android_view_state_store}"
         val work =                              "android.arch.work:work-runtime-ktx:${Versions.android_work}"
     }
 }

@@ -13,10 +13,10 @@ import androidx.navigation.fragment.findNavController
 import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
-import studio.forface.freshtv.commonandroid.viewstate.AbsViewStateStore
-import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
-import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
 import studio.forface.materialbottombar.dsl.MaterialPanel
+import studio.forface.viewstatestore.AbsViewStateStore
+import studio.forface.viewstatestore.ViewStateObserver
+import studio.forface.viewstatestore.ViewStateStore
 
 /**
  * @author Davide Giuseppe Farella.
@@ -118,7 +118,7 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
             observe( viewLifecycleOwner, block )
 
     /** Call [ViewStateStore.observeData] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
-    inline fun <V> AbsViewStateStore<V>.observeData(crossinline block: (V) -> Unit  ) =
+    inline fun <V> AbsViewStateStore<V>.observeData( crossinline block: (V) -> Unit  ) =
             observeData( viewLifecycleOwner, block )
 }
 

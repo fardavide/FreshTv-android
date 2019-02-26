@@ -5,11 +5,11 @@ import android.content.res.Resources
 import android.util.Log
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import studio.forface.freshtv.commonandroid.viewstate.ViewState
 import studio.forface.freshtv.domain.gateways.Notifier
 import studio.forface.freshtv.domain.gateways.Notifier.Action
 import studio.forface.freshtv.domain.gateways.OptionalAction
 import studio.forface.freshtv.domain.utils.nonNullMessage
+import studio.forface.viewstatestore.ViewState
 import timber.log.Timber
 
 /**

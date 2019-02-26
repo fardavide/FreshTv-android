@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
-import studio.forface.freshtv.commonandroid.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
+import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
 import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
 import studio.forface.freshtv.viewmodels.TvChannelsViewModel
+
 
 /**
  * @author Davide Giuseppe Farella
@@ -26,15 +26,14 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     /** A reference to [TvChannelsAdapter] for [recyclerView] */
     private val adapter = TvChannelsAdapter()
 
-    /** A reference to [TvChannelsViewModel] */
+    /** A reference to [TvChannelsViewModel] for retrieve the stored `Channel`s */
     private val channelsViewModel by viewModel<TvChannelsViewModel> { parametersOf( groupName ) }
 
-    /** An OPTIONAL [String] received from [getArguments] for filter elements */
+    /** An OPTIONAL [String] received from [getArguments] for filter elements by their `groupName` */
     private val groupName by lazy { arguments?.getString( ARG_GROUP_NAME ) }
 
     // TODO cannot import synthetic from another module
-    private val recyclerView
-            by lazy { requireView().findViewById<RecyclerView>( R.id.recyclerView ) }
+    private val recyclerView by lazy { view!!.findViewById<RecyclerView>( R.id.recyclerView ) }
 
     override val title: String?
         get() = "TODO"

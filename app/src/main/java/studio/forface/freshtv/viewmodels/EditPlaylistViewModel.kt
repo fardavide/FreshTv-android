@@ -6,11 +6,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
-import studio.forface.freshtv.commonandroid.viewstate.*
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.Url
 import studio.forface.freshtv.domain.entities.Validable
-import studio.forface.freshtv.domain.usecases.RefreshChannels
 import studio.forface.freshtv.domain.utils.EMPTY_STRING
 import studio.forface.freshtv.entities.SourceFilePath
 import studio.forface.freshtv.interactors.EditPlaylistInteractor
@@ -20,6 +18,7 @@ import studio.forface.freshtv.ui.EditPlaylistFragment
 import studio.forface.freshtv.ui.EditPlaylistFragment.State.*
 import studio.forface.freshtv.uimodels.SourceFileEditFormUiModel
 import studio.forface.freshtv.uimodels.SourceFileUiModel
+import studio.forface.viewstatestore.*
 
 /**
  * @author Davide Giuseppe Farella
@@ -90,7 +89,7 @@ internal class EditPlaylistViewModel(
 
     /** Called when [create] or [save] has succeed */
     private fun onSuccess() {
-        RefreshChannelsWorker.enqueue( path.toString() )
+        RefreshChannelsWorker.enqueue(path.toString())
         state.postData( SaveCompleted )
     }
 

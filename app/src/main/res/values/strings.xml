@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Fresh Tv</string>
 
-    <!-- Actions -->
+    <!-- Actions -->Ω
     <string name="action_add_playlist">Add a playlist</string>
+
+    <!-- Errors -->
+    <string name="read_single_playlist_error_count_args">Cannot read %d Channels from Playlist: %s</string>
+    <string name="read_multi_playlist_error_count_args">Cannot read %d Channels from %d Playlists</string>
 
     <!-- Menu -->
     <string name="menu_movie_channels">Movie Channels</string>

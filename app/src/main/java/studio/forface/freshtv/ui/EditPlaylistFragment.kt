@@ -33,12 +33,15 @@ import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
  */
 internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file_edit ) {
 
-    /** A reference to [EditPlaylistFragmentArgs] for get [EditPlaylistFragmentArgs.playlistPath] */
+    /**
+     * A reference to [EditPlaylistFragmentArgs] for get the `playlistPath` of the current editing `Playlist`
+     * from [navArgs]
+     */
     private val args by navArgs<EditPlaylistFragmentArgs>()
 
-    /** A reference to [EditPlaylistViewModel] */
+    /** A reference to [EditPlaylistViewModel] for edit a `Playlist` element */
     private val editPlaylistViewModel
-            by viewModel<EditPlaylistViewModel> { parametersOf( args.playlistPath ) }
+            by viewModel<EditPlaylistViewModel> {  parametersOf( args.playlistPath ) }
 
     /** @see RootFragment.fabParams */
     override val fabParams: FabParams get() = FabParams(

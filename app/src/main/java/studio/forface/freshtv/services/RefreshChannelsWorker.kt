@@ -1,17 +1,19 @@
 package studio.forface.freshtv.services
 
 import android.content.Context
-import android.util.Log
 import androidx.work.*
 import androidx.work.ListenableWorker.Result.retry
 import androidx.work.ListenableWorker.Result.success
 import kotlinx.coroutines.runBlocking
 import org.koin.core.inject
+import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
 import studio.forface.freshtv.commonandroid.utils.enqueueUniqueWork
+import studio.forface.freshtv.commonandroid.utils.getString
 import studio.forface.freshtv.commonandroid.utils.workManager
 import studio.forface.freshtv.domain.usecases.DeleteOldGuides
 import studio.forface.freshtv.domain.usecases.RefreshChannels
+import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.*
 
 /**
  * @author Davide Giuseppe Farella.
@@ -25,7 +27,7 @@ class RefreshChannelsWorker(
     companion object {
         /** An unique name for the [RefreshChannelsWorker] */
         private const val WORKER_NAME = "refresh_channels"
-        /** The name of the argument of `Playlist` path in `Work`s Data */
+        /** The name of the argument of `Playlist`s path in `Work`s Data */
         private const val ARG_PLAYLIST_PATH = "playlist_path"
 
         /** Enqueue [RefreshChannelsWorker] without params, for refresh from all the `Playlist`s */
@@ -41,7 +43,7 @@ class RefreshChannelsWorker(
          */
         fun enqueue( playlistPath: String ) {
             val work = OneTimeWorkRequestBuilder<RefreshChannelsWorker>()
-                    .setInputData( workDataOf(ARG_PLAYLIST_PATH to playlistPath ) )
+                    .setInputData( workDataOf( ARG_PLAYLIST_PATH to playlistPath ) )
                     .build()
             workManager.enqueueUniqueWork(
                     "$WORKER_NAME$playlistPath",
@@ -66,9 +68,28 @@ class RefreshChannelsWorker(
             }
         }
 
-        catching.onSuccess { notifier.error( it.joinToString { error -> error.reason.name } )  }
-                .onFailure { notifier.error( it ); return retry() }
+        catching
+            .onSuccess {
+                val errorMessage = when ( it ) {
+                    is Single -> getString(
+                        R.string.read_single_playlist_error_count_args,
+                        it.parsingErrors.size,
+                        it.playlist.name ?: it.playlist.path
+                    )
+                    is Multi -> getString(
+                        R.string.read_multi_playlist_error_count_args,
+                        it.all.flatMap { singleError -> singleError.parsingErrors }.size,
+                        it.all.size
+                    )
+                }
+                notifier.error( errorMessage )
+                return success()
+            }
+            .onFailure {
+                notifier.error( it )
+                return retry()
+            }
 
-        return success()
+        throw AssertionError("Unreachable code" )
     }
 }

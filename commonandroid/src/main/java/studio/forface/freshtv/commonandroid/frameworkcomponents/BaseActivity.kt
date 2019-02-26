@@ -7,7 +7,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -15,17 +14,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.SnackbarContentLayout
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentResumed
-import studio.forface.freshtv.commonandroid.viewstate.ViewStateObserver
-import studio.forface.freshtv.commonandroid.viewstate.ViewStateStore
 import studio.forface.freshtv.domain.gateways.Notifier
 import studio.forface.materialbottombar.dsl.MaterialPanel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.set
+import studio.forface.viewstatestore.ViewStateObserver
+import studio.forface.viewstatestore.ViewStateStore
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 

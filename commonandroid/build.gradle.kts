@@ -39,5 +39,6 @@ dependencies {
     api( Libs.Android.navigation_ui )
     api( Libs.Android.paging )
     implementation( Libs.Android.picasso )
+    api( Libs.Android.view_state_store )
     api( Libs.Android.work )
 }
