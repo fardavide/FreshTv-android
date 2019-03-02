@@ -12,7 +12,7 @@ data class TvChannel(
     override val groupName: String = IChannel.NO_GROUP_NAME,
     override val imageUrl: Url? = null,
     override val mediaUrls: Map<String, Int> = mutableMapOf(),
-    override val playlistPaths: List<String> = mutableListOf(),
+    override val playlistPaths: Set<String> = mutableSetOf(),
     override val favorite: Boolean = false
 ): IChannel {
 
@@ -29,7 +29,7 @@ data class TvChannel(
         groupName =     groupName,
         imageUrl =      imageUrl,
         mediaUrls =     mutableMapOf( mediaUrl to 0 ),
-        playlistPaths = mutableListOf( playlistPath )
+        playlistPaths = mutableSetOf( playlistPath )
     )
 
     /** An operator function for merge 2 [MovieChannel] entities. e.g. `movieChannel1 + movieChannel2` */

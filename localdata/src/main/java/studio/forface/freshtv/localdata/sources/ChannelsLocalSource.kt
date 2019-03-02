@@ -1,5 +1,6 @@
 package studio.forface.freshtv.localdata.sources
 
+import kotlinx.coroutines.channels.ReceiveChannel
 import studio.forface.freshtv.domain.entities.IChannel
 
 /**
@@ -22,6 +23,9 @@ interface ChannelsLocalSource<T> {
 
     /** @return the [Int] count of the stored channels [T] */
     fun count(): Int
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored channels [T] */
+    suspend fun observeCount(): ReceiveChannel<Int>
 
     /** Create a new channel [T] */
     fun createChannel( channel: T )

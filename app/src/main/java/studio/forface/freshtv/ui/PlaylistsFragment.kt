@@ -51,7 +51,7 @@ class PlaylistsFragment: RootFragment( R.layout.fragment_recycler_view ) {
     /** When the [PlaylistsFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
-        recyclerView.layoutManager = LinearLayoutManager( context )
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager( context )
     }
 }

@@ -22,24 +22,35 @@ import studio.forface.freshtv.domain.gateways.Notifier
 import studio.forface.materialbottombar.dsl.MaterialPanel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.set
-import studio.forface.viewstatestore.ViewStateObserver
-import studio.forface.viewstatestore.ViewStateStore
+import studio.forface.viewstatestore.ViewStateActivity
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
+import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
+
 
 /**
  * @author Davide Giuseppe Farella.
  * A base class for Activity's.
  *
- * @param layoutRes The [LayoutRes] of the Layout for our `Activity`
  *
- * Inherit from [AppCompatActivity].
- * Implements [AndroidUiComponent]
- * Implements [SnackbarManager]
+ * Inherit from [AppCompatActivity]
+ *
+ * Implements [AndroidUiComponent] for be able to retrieve some instance like [notifier] or [imageLoader]
+ *
+ * Implements [SnackbarManager] for handle the [Snackbar] messages
+ *
+ * Implements [ViewStateActivity] for `ViewStateStore` extensions
+ *
+ *
+ * @param layoutRes The [LayoutRes] of the Layout for our `Activity`
  */
 abstract class BaseActivity(
     @LayoutRes private val layoutRes: Int
-): AppCompatActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager {
+): AppCompatActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager, ViewStateActivity {
 
     /** @return the `Activity`s [MaterialBottomDrawerLayout] */
     protected abstract val drawerLayout: MaterialBottomDrawerLayout
@@ -86,11 +97,48 @@ abstract class BaseActivity(
 
     /** Called when a [BaseFragment] is resumed */
     @Suppress("MemberVisibilityCanBePrivate", "UNUSED_PARAMETER")
-    protected fun onFragmentResumed( fragment: BaseFragment ) {  }
+    protected fun onFragmentResumed( fragment: BaseFragment ) {
+        if ( fragment is RootFragment ) {
+
+            // Title
+            fragment.title?.let { titleTextView.text = it }
+            titleTextView.setTextColor( fragment.titleColor )
+
+            // Options Menu
+            fragment.setHasOptionsMenu( fragment.menuRes != null )
+
+            // Background
+            setBackgroundColor(
+                fragment.backgroundColor ?: getThemeColor( android.R.attr.colorBackground )
+            )
+
+            // Fab
+            fab?.let { fab ->
+                val fabParams = fragment.fabParams
+                if ( fabParams == null ) fab.hide()
+                else {
+                    fab.setImageResource( fabParams.drawableRes )
+                    // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text, but an extended Fab would be great
+                    fab.setOnClickListener( fabParams.action )
+                    if ( fabParams.showOnStart ) fab.show() else fab.hide()
+                }
+            }
+        }
+    }
 
     /** If [navController] can't [NavController.navigateUp] call [onBackPressed] */
     override fun onNavigateUp() =
         navController.navigateUp() || false.also { onBackPressed() }
+
+    /** Close the Soft Keyboard */
+    fun closeKeyboard() {
+        val inputMethodManager = getSystemService<InputMethodManager>() ?: return
+        // Find the currently focused view, so we can grab the correct window token from it.
+        // If no view currently has focus, create a new one, just so we can grab a window token from it
+        val view = currentFocus ?: View(this )
+        inputMethodManager.hideSoftInputFromWindow( view.windowToken,0 )
+        view.clearFocus()
+    }
 
     /** Close a [MaterialPanel] and remove it from [drawerLayout] */
     fun dismissAndRemovePanel( panelId: Int ) {
@@ -125,35 +173,14 @@ abstract class BaseActivity(
      */
     private fun setFragmentLifecycleListener() {
         if ( fragmentLifecycleListener != null ) return
-        fragmentLifecycleListener = supportFragmentManager.onFragmentResumed { fragment ->
-            fragment.assertIsBaseFragment()
-            onFragmentResumed( fragment )
 
-            if ( fragment !is RootFragment ) return@onFragmentResumed
+        fragmentLifecycleListener = supportFragmentManager.onFragmentLifecycle {
 
-            // Title
-            fragment.title?.let { titleTextView.text = it }
-            titleTextView.setTextColor( fragment.titleColor )
+            // When Fragment is Paused, call closeKeyboard
+            onPaused { closeKeyboard() }
 
-            // Options Menu
-            fragment.setHasOptionsMenu( fragment.menuRes != null )
-
-            // Background
-            setBackgroundColor(
-                    fragment.backgroundColor ?: getThemeColor( android.R.attr.colorBackground )
-            )
-
-            // Fab
-            fab?.let { fab ->
-                val fabParams = fragment.fabParams
-                if ( fabParams == null ) fab.hide()
-                else {
-                    fab.setImageResource( fabParams.drawableRes )
-                    // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text, but an extended Fab would be great
-                    fab.setOnClickListener( fabParams.action )
-                    if ( fabParams.showOnStart ) fab.show() else fab.hide()
-                }
-            }
+            // When Fragment is Resumed, call onFragmentResumed
+            onResumed { onFragmentResumed( it.assertIsBaseFragment() ) }
         }
     }
 
@@ -174,15 +201,11 @@ abstract class BaseActivity(
         action?.let { snackBar.setAction( action.name ) { action.block() } }
         snackBar.show( type )
     }
-
-    /** Call [ViewStateStore.observe] with `this` `Activity` as [LifecycleOwner] */
-    inline fun <V> ViewStateStore<V>.observe( block: ViewStateObserver<V>.() -> Unit  ) =
-            observe(this@BaseActivity, block )
 }
 
 /** Assert that the given [Fragment] is a [BaseFragment] */
 @UseExperimental( ExperimentalContracts::class )
-private fun Fragment.assertIsBaseFragment() {
+private fun Fragment.assertIsBaseFragment() : BaseFragment {
     contract { returns() implies ( this@assertIsBaseFragment is BaseFragment ) }
     val fragment = this
     if ( fragment !is BaseFragment ) {
@@ -190,6 +213,7 @@ private fun Fragment.assertIsBaseFragment() {
         val baseFragmentName = BaseFragment::class.qualifiedName
         throw AssertionError("'$fragmentName' does not inherit from '$baseFragmentName'")
     }
+    return fragment
 }
 
 /**

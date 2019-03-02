@@ -1,6 +1,7 @@
 package studio.forface.freshtv.localdata
 
 import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.coroutineScope
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
@@ -44,14 +45,21 @@ abstract class AbsLocalData<
         val tvs = async {
             tvChannels.channelsWithPlaylist( playlistPath ).map { tvChannelMapper { it.toEntity() } }
         }
+
         movies.await() + tvs.await()
     }
 
     /** @return the [Int] count of the stored [MovieChannel]s */
     override fun countMovieChannels(): Int = movieChannels.count()
 
+    /** @return [ReceiveChannel] of the [Int] count of the stored [MovieChannel]s */
+    override suspend fun observeCountMovieChannels() = movieChannels.observeCount()
+
     /** @return the [Int] count of the stored [TvChannel]s */
     override fun countTvChannels(): Int = tvChannels.count()
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored [TvChannel]s */
+    override suspend fun observeCountTvChannels() = tvChannels.observeCount()
 
     /** Store a [IChannel] in the appropriate [ChannelsLocalSource] */
     private fun createChannel( channel: IChannel) {

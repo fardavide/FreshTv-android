@@ -1,5 +1,5 @@
 import java.lang.Boolean;
-import kotlin.collections.List;
+import kotlin.collections.Set;
 import kotlin.collections.Map;
 
 CREATE TABLE movieChannelPojo (
@@ -8,7 +8,7 @@ CREATE TABLE movieChannelPojo (
   groupName TEXT NOT NULL,
   imageUrl TEXT,
   mediaUrls TEXT AS Map<String, Int> NOT NULL,
-  playlistPaths TEXT AS List<String> NOT NULL,
+  playlistPaths TEXT AS Set<String> NOT NULL,
   favorite INTEGER AS Boolean NOT NULL,
   tmdbId INTEGER AS Int
 );
@@ -93,7 +93,7 @@ selectPagedByGroup:
 selectByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  WHERE playlistPaths LIKE :playlistPath --TODO"(^|, ) Escape(" + :playlistPath + ") (, |$)"
   ORDER BY
     favorite ASC,
     name ASC;
@@ -101,7 +101,7 @@ selectByPlaylistPath:
 selectPagedByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  WHERE playlistPaths LIKE :playlistPath --TODO"(^|, ) Escape(" + :playlistPath + ") (, |$)"
   ORDER BY
     favorite ASC,
     name ASC

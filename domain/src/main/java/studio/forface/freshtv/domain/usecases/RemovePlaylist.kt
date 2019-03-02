@@ -26,8 +26,8 @@ class RemovePlaylist( private val localData: LocalData ) {
             .groupBy { it.playlistPaths.isEmpty() }
 
         // Delete channels without playlist paths
-        channelsToEdit.getValue(true ).forEach { localData.deleteChannel( it.id ) }
+        channelsToEdit[true]?.forEach { localData.deleteChannel( it.id ) }
         // Update others
-        channelsToEdit.getValue(false ).forEach { localData.updateChannel( it ) }
+        channelsToEdit[false]?.forEach { localData.updateChannel( it ) }
     }
 }

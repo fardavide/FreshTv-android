@@ -1,5 +1,6 @@
 package studio.forface.freshtv.domain.gateways
 
+import kotlinx.coroutines.channels.ReceiveChannel
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
 import studio.forface.freshtv.domain.utils.handle
@@ -26,8 +27,14 @@ interface LocalData {
     /** @return the [Int] count of the stored [MovieChannel]s */
     fun countMovieChannels(): Int
 
+    /** @return [ReceiveChannel] of the [Int] count of the stored [MovieChannel]s */
+    suspend fun observeCountMovieChannels(): ReceiveChannel<Int>
+
     /** @return the [Int] count of the stored [TvChannel]s */
     fun countTvChannels(): Int
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored [TvChannel]s */
+    suspend fun observeCountTvChannels(): ReceiveChannel<Int>
 
     /** Delete all the stored [IChannel]s */
     fun deleteAllChannels()

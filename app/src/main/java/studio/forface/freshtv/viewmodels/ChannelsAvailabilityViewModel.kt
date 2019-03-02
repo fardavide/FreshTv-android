@@ -3,15 +3,13 @@ package studio.forface.freshtv.viewmodels
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
-import studio.forface.viewstatestore.ViewStateStore
-import studio.forface.viewstatestore.setData
-import studio.forface.viewstatestore.setError
-import studio.forface.viewstatestore.setLoading
 import studio.forface.freshtv.presenters.ChannelsAvailabilityPresenter
 import studio.forface.freshtv.uimodels.ChannelsAvailabilityUiModel
+import studio.forface.viewstatestore.*
 
 /**
  * @author Davide Giuseppe Farella
@@ -27,11 +25,24 @@ internal class ChannelsAvailabilityViewModel(
     val channelsAvailability = ViewStateStore<ChannelsAvailabilityUiModel>()
 
     init {
-        channelsAvailability.setLoading()
-        launch {
-            withContext( Main ) { runCatching { presenter() } }
-                .onSuccess { channelsAvailability.setData( it ) }
-                .onFailure { channelsAvailability.setError( it ) }
+        // When ViewModel is instantiated, start observing for UiModels
+        launch( IO ) { startObserving() }
+    }
+
+    private suspend fun startObserving() {
+        channelsAvailability.postLoading()
+
+        runCatching {
+
+            // Receive Models
+            for ( uiModel in presenter.observe() )
+                channelsAvailability.postData( uiModel )
+
+        // If some error occurs, notify it, wait and then try again
+        }.onFailure {
+            channelsAvailability.postError( it )
+            delay( DEFAULT_ERROR_DELAY )
+            startObserving()
         }
     }
 }

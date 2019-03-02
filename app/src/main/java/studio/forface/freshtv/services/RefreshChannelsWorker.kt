@@ -11,9 +11,9 @@ import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
 import studio.forface.freshtv.commonandroid.utils.enqueueUniqueWork
 import studio.forface.freshtv.commonandroid.utils.getString
 import studio.forface.freshtv.commonandroid.utils.workManager
-import studio.forface.freshtv.domain.usecases.DeleteOldGuides
 import studio.forface.freshtv.domain.usecases.RefreshChannels
-import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.*
+import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.Multi
+import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.Single
 
 /**
  * @author Davide Giuseppe Farella.
@@ -53,7 +53,7 @@ class RefreshChannelsWorker(
         }
     }
 
-    /** An instance of [DeleteOldGuides] */
+    /** An instance of [RefreshChannels] */
     private val refreshChannels by inject<RefreshChannels>()
 
     /**

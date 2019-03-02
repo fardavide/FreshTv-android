@@ -3,6 +3,7 @@
 
     <!-- Actions -->
     <string name="action_add">Add</string>
+    <string name="action_cancel">Cancel</string>
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>
     <string name="action_filter">Filter</string>

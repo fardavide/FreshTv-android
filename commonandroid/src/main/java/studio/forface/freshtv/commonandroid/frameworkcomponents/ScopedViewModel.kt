@@ -16,6 +16,10 @@ import kotlin.coroutines.CoroutineContext
  */
 abstract class ScopedViewModel: ViewModel(), CoroutineScope {
 
+    companion object {
+        const val DEFAULT_ERROR_DELAY = 30_000L
+    }
+
     /** An instance of [Job] for [CoroutineContext] */
     private val job = Job()
 

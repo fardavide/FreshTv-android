@@ -5,4 +5,6 @@
     <color name="colorPrimaryDark">#039be5</color>
     <color name="colorSecondary">#ffb74d</color>
     <color name="colorBackground">#fbfdff</color>
+
+    <color name="red_500">#f44336</color>
 </resources>

@@ -16,6 +16,7 @@
     <string name="menu_tv_channels">Tv Channels</string>
 
     <!-- Prompt -->
+    <string name="prompt_delete_playlist">Do you really want to delete this Playlist?</string>
     <string name="prompt_playlist_name">Playlist name</string>
     <string name="prompt_playlist_path">Playlist path</string>
     <string name="prompt_playlist_url">Playlist url</string>

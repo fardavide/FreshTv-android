@@ -25,6 +25,8 @@ import studio.forface.freshtv.ui.EditPlaylistFragment.Mode.EDIT
 import studio.forface.freshtv.ui.EditPlaylistFragment.State.*
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
+import studio.forface.materialbottombar.dsl.drawer
+import studio.forface.materialbottombar.panels.params.*
 
 /**
  * @author Davide Giuseppe Farella
@@ -60,7 +62,7 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     private val layout get() = view as? ConstraintLayout
 
     /** @see RootFragment.menuRes */
-    override val menuRes: Int? get() = ( mode == CREATE ) { R.menu.menu_delete }
+    override val menuRes: Int? get() = ( mode == EDIT ) { R.menu.menu_delete }
 
     /** The [EditPlaylistFragment.Mode] */
     private val mode by lazy { if ( args.playlistPath == null ) CREATE else EDIT }
@@ -127,9 +129,24 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     override fun onOptionsItemSelected( item: MenuItem ): Boolean {
         when ( item.itemId ) {
 
-            R.id.action_delete -> {
-                // TODO show delete confirmation
-            }
+            R.id.action_delete -> showPanel( item.itemId , drawer { // TODO use panel instead.
+                header {
+                    titleTextRes = R.string.prompt_delete_playlist
+                    titleSpSize = 18f
+                }
+                body {
+                    primaryItem( R.string.action_delete ) {
+                        titleBold = true
+                        titleColorRes = R.color.red_500
+                        onClick {
+                            dismissAndRemovePanel( item.itemId )
+                            editPlaylistViewModel.delete()
+                            navController.popBackStack()
+                        }
+                    }
+                    primaryItem( R.string.action_cancel ) onClick { dismissAndRemovePanel( item.itemId ) }
+                }
+            } )
         }
         return super.onOptionsItemSelected( item )
     }

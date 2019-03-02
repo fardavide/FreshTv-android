@@ -12,7 +12,10 @@ import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.materialbottombar.dsl.MaterialPanel
+import studio.forface.materialbottombar.dsl.PanelBuilder
+import studio.forface.materialbottombar.dsl.panel
 import studio.forface.viewstatestore.AbsViewStateStore
+import studio.forface.viewstatestore.ViewStateFragment
 import studio.forface.viewstatestore.ViewStateObserver
 import studio.forface.viewstatestore.ViewStateStore
 
@@ -26,7 +29,7 @@ import studio.forface.viewstatestore.ViewStateStore
  * Inherit from [Fragment].
  * Implements [AndroidUiComponent]
  */
-sealed class BaseFragment( @LayoutRes private val layoutRes: Int ): Fragment(), AndroidUiComponent {
+sealed class BaseFragment( @LayoutRes private val layoutRes: Int ): Fragment(), AndroidUiComponent, ViewStateFragment {
 
     /** On [onCreateView] we inflate the [layoutRes] into the [container] */
     override fun onCreateView(
@@ -49,6 +52,11 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ): Fragment(), 
     /** Add the given [MaterialPanel] and open it. */
     fun showPanel( panelId: Int, panel: MaterialPanel ) {
         baseActivity?.showPanel( panelId, panel )
+    }
+
+    /** Add the [MaterialPanel] created through [builder] and open it. */
+    fun showPanel( panelId: Int, builder: PanelBuilder.() -> Unit ) {
+        showPanel( panelId, panel { builder() } )
     }
 }
 
@@ -120,20 +128,10 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
             internal val showOnStart: Boolean = true,
             internal val action: (View) -> Unit
     )
-
-    /** Call [ViewStateStore.observe] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
-    inline fun <V> AbsViewStateStore<V>.observe( block: ViewStateObserver<V>.() -> Unit  ) =
-            observe( viewLifecycleOwner, block )
-
-    /** Call [ViewStateStore.observeData] with [Fragment.getViewLifecycleOwner] as [LifecycleOwner] */
-    inline fun <V> AbsViewStateStore<V>.observeData( crossinline block: (V) -> Unit  ) =
-            observeData( viewLifecycleOwner, block )
 }
 
 /**
  * A base class for a [Fragment] that is nested inside another [RootFragment]
  * Inherit from [BaseFragment]
  */
-abstract class NestedFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes ) {
-
-}
+abstract class NestedFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes )

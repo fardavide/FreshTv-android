@@ -54,7 +54,6 @@ object Versions {
     val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.3"
     val mockk =                         "1.9"
-    val settings =                      "0.2"
     val sqldelight =                    "1.0.3"
     val threeten_android_bp =           "1.1.1"
     val threeten_bp =                   "1.3.2"
@@ -76,7 +75,7 @@ object Versions {
     val android_room =                  "2.1.0-alpha04"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
-    val android_view_state_store =      "1.0"
+    val android_view_state_store =      "1.1-beta-1"
     val android_work =                  "1.0.0-beta04"
 }
 
@@ -99,7 +98,6 @@ object Libs {
     val ktor_apache =                           "io.ktor:ktor-client-apache:${Versions.ktor}"
     val mockk =                                 "io.mockk:mockk:${Versions.mockk}"
     val mockk_android =                         "io.mockk:mockk-android:${Versions.mockk}"
-    val settings =                              "com.russhwolf:multiplatform-settings:${Versions.settings}"
     val sqldelight =                            "com.squareup.sqldelight:runtime-jvm:${Versions.sqldelight}"
     val sqldelight_android_driver =             "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
     val sqldelight_android_paging =             "com.squareup.sqldelight:android-paging-extensions:${Versions.sqldelight}"

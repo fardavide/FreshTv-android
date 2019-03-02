@@ -1,9 +1,17 @@
 package studio.forface.freshtv.localdata.sqldelight.sources
 
+import com.squareup.sqldelight.Query
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.map
+import kotlinx.coroutines.channels.produce
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.localdata.sources.MovieChannelsLocalSource
 import studio.forface.freshtv.localdata.sqldelight.MovieChannelPojo
 import studio.forface.freshtv.localdata.sqldelight.MovieChannelQueries
+import studio.forface.freshtv.localdata.sqldelight.utils.asChannel
+import studio.forface.freshtv.localdata.sqldelight.utils.mapToOne
 
 /**
  * @author Davide Giuseppe Farella.
@@ -33,6 +41,9 @@ class DelightMovieChannelsLocalSource(
 
     /** @return the [Int] count of the stored channels [MovieChannelPojo] */
     override fun count(): Int = queries.count().executeAsOne().toInt()
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored channels [MovieChannelPojo] */
+    override suspend fun observeCount() = queries.count().asChannel().mapToOne().map { it.toInt() }
 
     /** Create a new channel [MovieChannelPojo] */
     override fun createChannel( channel: MovieChannelPojo) = with( channel ) {

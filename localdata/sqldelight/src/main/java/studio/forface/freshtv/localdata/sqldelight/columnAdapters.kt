@@ -32,3 +32,9 @@ object StringListColumnAdapter : ColumnAdapter<List<String>, String> {
     override fun encode( value: List<String> ) = value.joinToString( separator = SEPARATOR )
     override fun decode( databaseValue: String ) = databaseValue.split( SEPARATOR )
 }
+
+/** A [ColumnAdapter] for [Set] of [String] */
+object StringSetColumnAdapter : ColumnAdapter<Set<String>, String> {
+    override fun encode( value: Set<String> ) = value.joinToString( separator = SEPARATOR )
+    override fun decode( databaseValue: String ) = databaseValue.split( SEPARATOR ).toSet()
+}

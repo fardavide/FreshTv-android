@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp">
+
+    <TextView
+        android:id="@+id/sourceItemNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        tools:text="Test Playlist"/>
+
+    <TextView
+        android:id="@+id/sourceItemPathTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        tools:text="http://4face.studio/playlists/italy/playlist1"/>
+
+</LinearLayout>

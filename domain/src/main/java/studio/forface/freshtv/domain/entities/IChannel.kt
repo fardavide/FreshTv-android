@@ -56,7 +56,7 @@ interface IChannel {
      * NOTE: the path will also represents the id of the Playlist, so we can query it for get its name ( if available )
      * or other info.
      */
-    val playlistPaths: List<String>
+    val playlistPaths: Set<String>
 
     /** A [Boolean] representing whether the user set the element as favorite */
     val favorite: Boolean
@@ -67,7 +67,7 @@ interface IChannel {
         groupName:      String =            this.groupName,
         imageUrl:       Url? =              this.imageUrl,
         mediaUrls:      Map<String, Int> =  this.mediaUrls,
-        playlistPaths:  List<String> =      this.playlistPaths,
+        playlistPaths:  Set<String> =       this.playlistPaths,
         favorite:       Boolean =           this.favorite
     ): IChannel {
         return when( this ) {

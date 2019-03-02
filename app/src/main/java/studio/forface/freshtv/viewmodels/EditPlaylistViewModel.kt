@@ -39,7 +39,7 @@ internal class EditPlaylistViewModel( // TODO delete playlist
     val playlist = ViewStateStore<SourceFileUiModel>()
 
     /** A [ViewStateStore] of [EditPlaylistFragment.State] */
-    val state = ViewStateStore<EditPlaylistFragment.State>( ChooseType )
+    val state = ViewStateStore<EditPlaylistFragment.State>()
 
     /** The [SourceFileUiModel.shownName] */
     var name: CharSequence = EMPTY_STRING
@@ -72,7 +72,7 @@ internal class EditPlaylistViewModel( // TODO delete playlist
                         .onSuccess( ::onPlaylistReceived )
                         .onFailure { playlist.setError( it ) }
             }
-        }
+        } else state.setData( ChooseType )
     }
 
     /** Create a `Playlist` */
@@ -87,9 +87,14 @@ internal class EditPlaylistViewModel( // TODO delete playlist
         onSuccess()
     }
 
+    /** Delete the current `Playlist` */
+    fun delete() {
+        interactor.remove( path.toString() )
+    }
+
     /** Called when [create] or [save] has succeed */
     private fun onSuccess() {
-        RefreshChannelsWorker.enqueue(path.toString())
+        RefreshChannelsWorker.enqueue( path.toString() )
         state.postData( SaveCompleted )
     }
 

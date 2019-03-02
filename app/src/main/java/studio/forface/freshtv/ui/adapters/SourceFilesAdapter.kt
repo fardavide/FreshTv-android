@@ -5,8 +5,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import kotlinx.android.synthetic.main.item_source_file.view.*
+import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
+import studio.forface.freshtv.commonandroid.utils.inflate
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 
 /**
@@ -20,7 +23,7 @@ internal class SourceFilesAdapter:
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): PlaylistViewHolder {
-        return PlaylistViewHolder( TextView( parent.context ) ) // TODO inflate real view
+        return PlaylistViewHolder( parent.inflate( R.layout.item_source_file ) )
     }
 
     /** A [DiffUtil.ItemCallback] for [SourceFilesAdapter] */
@@ -44,7 +47,10 @@ internal class SourceFilesAdapter:
         /** @see ClickableAdapter.ViewHolder.onBind */
         override fun onBind( item: SourceFileUiModel ) {
             super.onBind( item )
-            ( itemView as TextView ).text = item.fullPath
+            itemView.apply {
+                sourceItemNameTextView.text = item.shownName
+                sourceItemPathTextView.text = item.fullPath
+            }
         }
     }
 }
