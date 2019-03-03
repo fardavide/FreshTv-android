@@ -1,5 +1,6 @@
 package studio.forface.freshtv.presenters
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
@@ -35,7 +36,7 @@ internal class ChannelsAvailabilityPresenter(
      * Creates a single [ReceiveChannel] from [HasMovieChannels.observe] and [HasTvChannels.observe]
      * [ReceiveChannel]s
      */
-    suspend fun observe(): ReceiveChannel<ChannelsAvailabilityUiModel> = coroutineScope {
+    fun CoroutineScope.observe(): ReceiveChannel<ChannelsAvailabilityUiModel> {
         val channel = Channel<ChannelsAvailabilityUiModel>( CONFLATED )
 
         launch( IO ) {
@@ -56,7 +57,7 @@ internal class ChannelsAvailabilityPresenter(
             }
         }
 
-        channel
+        return channel
     }
 
     /** @return OPTIONAL [ChannelsAvailabilityUiModel] IF [hadMovieChannels] and [hadTvChannels] are NOT NULL */
@@ -68,3 +69,7 @@ internal class ChannelsAvailabilityPresenter(
         hasTvs = hadTvChannels!!
     )
 }
+
+internal suspend operator fun <T> ChannelsAvailabilityPresenter.invoke(
+    block: suspend ChannelsAvailabilityPresenter.() -> T
+) = block()

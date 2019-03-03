@@ -10,6 +10,7 @@ import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
+import studio.forface.viewstatestore.ViewStateStoreConfig
 import timber.log.Timber
 
 /**
@@ -39,6 +40,9 @@ class FreshTvApp: Application() {
 
         // Init Timber
         Timber.plant( get() )
+
+        // Configure ViewStateStore
+        ViewStateStoreConfig.dropOnSame = true
 
         // Enqueue Works
         DeleteOldGuidesWorker.enqueue( 1.days, 10.hours )

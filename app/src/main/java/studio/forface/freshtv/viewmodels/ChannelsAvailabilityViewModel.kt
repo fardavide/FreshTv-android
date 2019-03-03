@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
 import studio.forface.freshtv.presenters.ChannelsAvailabilityPresenter
+import studio.forface.freshtv.presenters.invoke
 import studio.forface.freshtv.uimodels.ChannelsAvailabilityUiModel
 import studio.forface.viewstatestore.*
 
@@ -35,7 +36,7 @@ internal class ChannelsAvailabilityViewModel(
         runCatching {
 
             // Receive Models
-            for ( uiModel in presenter.observe() )
+            for ( uiModel in presenter { observe() } )
                 channelsAvailability.postData( uiModel )
 
         // If some error occurs, notify it, wait and then try again
