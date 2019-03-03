@@ -50,7 +50,7 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     override val fabParams: FabParams get() = FabParams(
             R.drawable.ic_save_black,
             R.string.action_save,
-            showOnStart = editPlaylistViewModel.state.state().data is ReadyToSave
+            showOnStart = editPlaylistViewModel.state.state()?.data is ReadyToSave
     ) {
         when ( mode ) {
             CREATE -> editPlaylistViewModel.create()

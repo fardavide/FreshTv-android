@@ -5,8 +5,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import kotlinx.android.synthetic.main.item_channel_tv.view.*
+import studio.forface.freshtv.R.layout.item_channel_tv
 import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
+import studio.forface.freshtv.commonandroid.imageloader.invoke
+import studio.forface.freshtv.commonandroid.utils.inflate
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 
 /**
@@ -20,7 +24,7 @@ internal class TvChannelsAdapter:
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): TvChannelViewHolder {
-        return TvChannelViewHolder( TextView( parent.context ) ) // TODO inflate real view
+        return TvChannelViewHolder( parent.inflate( item_channel_tv ) )
     }
 
     /** A [DiffUtil.ItemCallback] for [TvChannelsAdapter] */
@@ -42,9 +46,29 @@ internal class TvChannelsAdapter:
     class TvChannelViewHolder( itemView: View): ClickableAdapter.ViewHolder<TvChannelUiModel>( itemView ) {
 
         /** @see ClickableAdapter.ViewHolder.onBind */
-        override fun onBind( item: TvChannelUiModel ) {
+        override fun onBind( item: TvChannelUiModel ) = with( itemView ) {
             super.onBind( item )
-            ( itemView as TextView ).text = item.name
+
+            // Image
+            imageLoader {
+                image = item.image
+                target = tvChannelImage
+            }
+
+            // Name
+            tvChannelName.text = item.name
+
+            // Favorite
+            tvChannelFavorite.setOnClickListener { /* TODO */ }
+            imageLoader {
+                image = item.favoriteImage
+                target = tvChannelFavorite
+            }
+
+            // Program
+            item.currentProgram?.let { program ->
+
+            }
         }
     }
 }

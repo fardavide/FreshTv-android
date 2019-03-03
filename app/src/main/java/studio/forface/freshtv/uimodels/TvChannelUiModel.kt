@@ -1,5 +1,7 @@
 package studio.forface.freshtv.uimodels
 
+import androidx.annotation.DrawableRes
+
 /**
  * @author Davide Giuseppe Farella
  * An Ui Model representing a Tv Channel with its Tv Guide ( if available ).
@@ -7,7 +9,8 @@ package studio.forface.freshtv.uimodels
 internal data class TvChannelUiModel(
         val id: String,
         val name: String,
-        val imageUrl: String,
+        val image: StringUrlOrDrawableRes,
+        @DrawableRes val favoriteImage: Int,
         val currentProgram: CurrentProgram?
 ) {
     /** A data class containing info of the current Program of `TvChannel` */
@@ -18,3 +21,6 @@ internal data class TvChannelUiModel(
             val progressPercentage: Int
     )
 }
+
+/** A typealias of [Any] representing a [String] url OR a [DrawableRes] */
+internal typealias StringUrlOrDrawableRes = Any

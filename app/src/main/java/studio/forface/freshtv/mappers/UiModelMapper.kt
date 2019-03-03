@@ -21,10 +21,14 @@ abstract class UiModelMapper<in Ein, UI, out Eout> {
 }
 
 /**
- * A typealias of [Unit] for unsupported mapping; usually for an unsupported mapping from `UiModel`
+ * A typealias of [Nothing] for unsupported mapping; usually for an unsupported mapping from `UiModel`
  * to `Entity`
  */
-internal typealias Unsupported = Unit
+internal typealias Unsupported = Nothing
+
+/** A `null` value casted as [Nothing] - [Unsupported] */
+@Suppress("CAST_NEVER_SUCCEEDS")
+internal val unsupported: Nothing = null as Nothing
 
 /**
  * Override of invoke operator for get access to `this` [UiModelMapper] as receiver of the

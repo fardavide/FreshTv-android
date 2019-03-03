@@ -121,7 +121,7 @@ internal class EditPlaylistViewModel( // TODO delete playlist
         state.setData( if ( isValid ) ReadyToSave else Editing( type!! ) )
         if ( isValid ) {
             if ( type == SourceFile.Type.LOCAL ) {
-                val oldData = form.state().data ?: SourceFileEditFormUiModel()
+                val oldData = form.state()?.data ?: SourceFileEditFormUiModel()
                 val newData = oldData.copy( path = path )
                 if ( oldData != newData ) form.setData( newData )
             }
@@ -138,7 +138,7 @@ internal class EditPlaylistViewModel( // TODO delete playlist
             }
             is Validable.Result.Success -> null
         }
-        val oldData = form.state().data ?: SourceFileEditFormUiModel()
+        val oldData = form.state()?.data ?: SourceFileEditFormUiModel()
         val newData = oldData.copy( urlError = errorRes )
         if ( oldData != newData ) form.setData( newData )
     }

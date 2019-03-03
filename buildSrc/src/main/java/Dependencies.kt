@@ -75,7 +75,7 @@ object Versions {
     val android_room =                  "2.1.0-alpha04"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
-    val android_view_state_store =      "1.1-beta-2"
+    val android_view_state_store =      "1.1-beta-3"
     val android_work =                  "1.0.0-beta04"
 }
 

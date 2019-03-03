@@ -33,7 +33,11 @@
         android:id="@+id/tvChannelsFragment"
         android:name="studio.forface.freshtv.ui.TvChannelsFragment"
         android:label="TvChannelsFragment"
-        tools:layout="@layout/fragment_recycler_view"/>
+        tools:layout="@layout/fragment_recycler_view">
+        <action
+            android:id="@+id/action_tvChannelsFragment_to_playerFragment"
+            app:destination="@id/playerFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/playlistsFragment"
@@ -57,5 +61,16 @@
         android:name="studio.forface.freshtv.ui.EpgsFragment"
         android:label="EpgsFragment"
         tools:layout="@layout/fragment_recycler_view"/>
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="studio.forface.freshtv.player.ui.PlayerFragment"
+        android:label="PlayerFragment"
+        tools:layout="@layout/fragment_player">
+        <argument
+            android:name="channelId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>

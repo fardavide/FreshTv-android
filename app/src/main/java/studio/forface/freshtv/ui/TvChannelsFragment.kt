@@ -9,8 +9,8 @@ import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
 import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
+import studio.forface.freshtv.ui.TvChannelsFragmentDirections.Companion.actionTvChannelsFragmentToPlayerFragment
 import studio.forface.freshtv.viewmodels.TvChannelsViewModel
-
 
 /**
  * @author Davide Giuseppe Farella
@@ -24,7 +24,9 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     companion object { const val ARG_GROUP_NAME = "extra.group-name" }
 
     /** A reference to [TvChannelsAdapter] for [recyclerView] */
-    private val adapter = TvChannelsAdapter()
+    private val adapter = TvChannelsAdapter().apply {
+        onItemClick = { navController.navigate( actionTvChannelsFragmentToPlayerFragment( it.id ) ) }
+    }
 
     /** A reference to [TvChannelsViewModel] for retrieve the stored `Channel`s */
     private val channelsViewModel by viewModel<TvChannelsViewModel> { parametersOf( groupName ) }
