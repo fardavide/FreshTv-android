@@ -9,9 +9,8 @@
     <!-- Image -->
     <ImageView
         android:id="@+id/tvChannelImage"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        tools:layout_width="100dp"
         android:padding="16dp"
         tools:src="@drawable/ic_tv"/>
 
@@ -53,8 +52,9 @@
             android:layout_gravity="end|top"
             tools:src="@drawable/ic_favorite"/>
 
-        <!-- Program times -->
+        <!-- Program -->
         <LinearLayout
+            android:id="@+id/tvChannelProgram"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

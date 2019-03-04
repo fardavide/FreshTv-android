@@ -16,7 +16,7 @@ import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter.ViewHolder
  */
 abstract class BasePagedAdapter<UiModel, ViewHolder: ClickableAdapter.ViewHolder<UiModel>>(
         itemCallback: DiffUtil.ItemCallback<UiModel>
-): PagedListAdapter<UiModel, ViewHolder>( itemCallback ), ClickableAdapter<UiModel> {
+): PagedListAdapter<UiModel, ViewHolder>( itemCallback ), ClickableAdapter<UiModel, ViewHolder> {
 
     /** A callback that will be triggered when an item is clicked */
     override var onItemClick: (UiModel) -> Unit = {}
@@ -28,7 +28,7 @@ abstract class BasePagedAdapter<UiModel, ViewHolder: ClickableAdapter.ViewHolder
     override fun onBindViewHolder( holder: ViewHolder, position: Int ) {
         getItem( position )?.let {
             holder.onBind( it )
-            holder.prepareClickListeners()
+            prepareClickListeners( holder )
         } // TODO ?: holder.clear()
     }
 }

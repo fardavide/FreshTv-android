@@ -3,6 +3,7 @@ package studio.forface.freshtv
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
+import studio.forface.freshtv.interactors.ChannelChangeFavoriteInteractor
 import studio.forface.freshtv.interactors.EditPlaylistInteractor
 import studio.forface.freshtv.mappers.SourceFileUiModelMapper
 import studio.forface.freshtv.mappers.TvChannelUiModelMapper
@@ -19,12 +20,8 @@ import studio.forface.freshtv.viewmodels.TvChannelsViewModel
 val appModule = module {
 
     /* Interactors */
-    factory {
-        EditPlaylistInteractor(
-            addPlaylist = get(),
-            updatePlaylist = get()
-        )
-    }
+    factory { ChannelChangeFavoriteInteractor( updateChannelFavoriteState = get() ) }
+    factory { EditPlaylistInteractor( addPlaylist = get(), updatePlaylist = get() ) }
 
     /* Mappers */
     factory { SourceFileUiModelMapper() }
@@ -55,6 +52,7 @@ val appModule = module {
     viewModel { (groupName: String?) ->
         TvChannelsViewModel(
             presenter = get(),
+            interactor = get(),
             groupName = groupName
         )
     }

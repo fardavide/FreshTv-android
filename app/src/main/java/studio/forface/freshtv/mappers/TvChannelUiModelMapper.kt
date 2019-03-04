@@ -1,16 +1,14 @@
 package studio.forface.freshtv.mappers
 
 import org.threeten.bp.LocalDateTime
-import studio.forface.freshtv.commonandroid.utils.defaultDateTimeFormatter
 import studio.forface.freshtv.commonandroid.utils.defaultTimeFormatter
 import studio.forface.freshtv.domain.entities.TvChannel
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.utils.LocalDateTimeHelper.localOffset
 import studio.forface.freshtv.domain.utils.toEpochMillis
-import studio.forface.freshtv.domain.utils.toEpochSecond
 import studio.forface.freshtv.uimodels.TvChannelUiModel
-import studio.forface.freshtv.R.drawable.ic_favorite as favoriteDrawable
-import studio.forface.freshtv.R.drawable.ic_favorite_black as notFavoriteDrawable
+import studio.forface.freshtv.commonandroid.R.drawable.ic_favorite as favoriteDrawable
+import studio.forface.freshtv.commonandroid.R.drawable.ic_favorite_black as notFavoriteDrawable
 import studio.forface.freshtv.R.drawable.ic_tv as tvDrawable
 
 /**
@@ -32,6 +30,7 @@ internal class TvChannelUiModelMapper :
             id =                channel.id,
             name =              channel.name,
             image =             image,
+            favorite =          channel.favorite,
             favoriteImage =     favoriteImage,
             currentProgram =    currentProgram
         )

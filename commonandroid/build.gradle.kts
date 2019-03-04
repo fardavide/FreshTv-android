@@ -32,6 +32,7 @@ dependencies {
     api( Libs.Android.constraint_layout )
     implementation( Libs.Android.cue )
     api( Libs.Android.design )
+    implementation( Libs.Android.glide )
     api( Libs.Android.ktx )
     api( Libs.Android.material )
     api( Libs.Android.material_bottom_bar )

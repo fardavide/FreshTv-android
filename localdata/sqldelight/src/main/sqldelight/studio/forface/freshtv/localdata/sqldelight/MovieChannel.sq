@@ -48,14 +48,14 @@ selectAll:
   SELECT *
   FROM movieChannelPojo
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC;
 
 selectPaged:
   SELECT *
   FROM movieChannelPojo
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC
   LIMIT :limit OFFSET :offset;
 
@@ -70,7 +70,7 @@ selectByName:
   FROM movieChannelPojo
   WHERE name LIKE ?
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC;
 
 selectByGroup:
@@ -78,7 +78,7 @@ selectByGroup:
   FROM movieChannelPojo
   WHERE groupName = ?
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC;
 
 selectPagedByGroup:
@@ -86,7 +86,7 @@ selectPagedByGroup:
   FROM movieChannelPojo
   WHERE groupName = ?
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC
   LIMIT :limit OFFSET: offset;
 
@@ -95,7 +95,7 @@ selectByPlaylistPath:
   FROM movieChannelPojo
   WHERE playlistPaths LIKE :playlistPath --TODO"(^|, ) Escape(" + :playlistPath + ") (, |$)"
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC;
 
 selectPagedByPlaylistPath:
@@ -103,6 +103,6 @@ selectPagedByPlaylistPath:
   FROM movieChannelPojo
   WHERE playlistPaths LIKE :playlistPath --TODO"(^|, ) Escape(" + :playlistPath + ") (, |$)"
   ORDER BY
-    favorite ASC,
+    favorite DESC,
     name ASC
   LIMIT :limit OFFSET :offset;

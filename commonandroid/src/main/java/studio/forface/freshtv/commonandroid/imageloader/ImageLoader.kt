@@ -36,7 +36,7 @@ interface ImageLoader {
             is File -> ::fileToImageView
             is Int -> ::resourceToImageView
             is Uri -> ::uriToImageView
-            is String -> ::uriToImageView
+            is String -> ::urlToImageView
             else -> throw NotImplementedError( "${image::class.qualifiedName} not implemented" )
         } as LoadFunction
         function( image, target, shape )

@@ -13,9 +13,9 @@ import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter.ViewHolder
  *
  * Inherit from [RecyclerView.Adapter].
  */
-abstract class BaseAdapter<T>(
+abstract class BaseAdapter<T, ViewHolder: ClickableAdapter.ViewHolder<T>>(
         private val itemsComparator: ItemsComparator<T>
-): RecyclerView.Adapter<ClickableAdapter.ViewHolder<T>>(), ClickableAdapter<T> {
+): RecyclerView.Adapter<ViewHolder>(), ClickableAdapter<T, ViewHolder> {
 
     /**
      * A [List] of items [T].
@@ -47,10 +47,10 @@ abstract class BaseAdapter<T>(
      * [clickListenerInvoker] and [longClickListenerInvoker] for the [holder].
      * @see RecyclerView.Adapter.onBindViewHolder
      */
-    override fun onBindViewHolder( holder: ViewHolder<T>, position: Int ) {
+    override fun onBindViewHolder( holder: ViewHolder, position: Int ) {
         val item = items[position]
         holder.onBind( item )
-        holder.prepareClickListeners()
+        prepareClickListeners( holder )
     }
 
     /**

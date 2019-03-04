@@ -10,6 +10,7 @@ internal data class TvChannelUiModel(
         val id: String,
         val name: String,
         val image: StringUrlOrDrawableRes,
+        val favorite: Boolean,
         @DrawableRes val favoriteImage: Int,
         val currentProgram: CurrentProgram?
 ) {

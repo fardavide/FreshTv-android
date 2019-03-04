@@ -8,7 +8,7 @@ import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiCompone
  * @author Davide Giuseppe Farella.
  * A common interface for Adapters that has clickable items [T]
  */
-interface ClickableAdapter<T> {
+interface ClickableAdapter<T, VH: ClickableAdapter.ViewHolder<T>> {
 
     /** A callback that will be triggered when an item is clicked */
     var onItemClick: (T) -> Unit
@@ -35,8 +35,8 @@ interface ClickableAdapter<T> {
     }
 
     /** Calls private [prepareViewHolder] on the receiver [ViewHolder] */
-    fun ViewHolder<T>.prepareClickListeners() {
-        prepareViewHolder(this )
+    fun prepareClickListeners( holder: VH ) {
+        prepareViewHolder( holder )
     }
 
     /** A base [RecyclerView.ViewHolder] for [ClickableAdapter] implementations */

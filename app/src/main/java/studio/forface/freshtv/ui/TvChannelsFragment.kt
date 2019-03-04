@@ -26,6 +26,7 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     /** A reference to [TvChannelsAdapter] for [recyclerView] */
     private val adapter = TvChannelsAdapter().apply {
         onItemClick = { navController.navigate( actionTvChannelsFragmentToPlayerFragment( it.id ) ) }
+        onItemFavoriteChange = { channelsViewModel.setFavoriteChannel( it ) }
     }
 
     /** A reference to [TvChannelsViewModel] for retrieve the stored `Channel`s */
@@ -37,7 +38,7 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     // TODO cannot import synthetic from another module
     private val recyclerView by lazy { view!!.findViewById<RecyclerView>( R.id.recyclerView ) }
 
-    override val title: String? get() = "TODO"
+    override val title: String? get() = "TODO" // TODO remove when it will be NestedFragment
 
     /** When the `Activity` is created */
     override fun onActivityCreated( savedInstanceState: Bundle? ) {
