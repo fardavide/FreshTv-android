@@ -2,8 +2,6 @@ package studio.forface.freshtv.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnLayout
-import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,10 +9,13 @@ import kotlinx.android.synthetic.main.item_channel_tv.view.*
 import studio.forface.freshtv.R.layout.item_channel_tv
 import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
-import studio.forface.freshtv.commonandroid.imageloader.invoke
 import studio.forface.freshtv.commonandroid.utils.inflate
 import studio.forface.freshtv.domain.usecases.FavoritedChannel
 import studio.forface.freshtv.uimodels.TvChannelUiModel
+import studio.forface.theia.dsl.imageDrawableRes
+import studio.forface.theia.dsl.imageUrl
+import studio.forface.theia.dsl.invoke
+import studio.forface.theia.dsl.placeholderDrawableRes
 
 /**
  * @author Davide Giuseppe Farella.
@@ -29,8 +30,8 @@ internal class TvChannelsAdapter:
     var onItemFavoriteChange: (FavoritedChannel) -> Unit = {}
 
     /**
-     * An invoker for [onItemLongClick], we use it so the [ViewHolder] will always use the updated
-     * [onItemLongClick] even if it changes after the [ViewHolder] is created.
+     * An invoker for [onItemLongClick], we use it so the `ViewHolder` will always use the updated
+     * [onItemLongClick] even if it changes after the `ViewHolder` is created.
      */
     val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
 
@@ -69,8 +70,9 @@ internal class TvChannelsAdapter:
             super.onBind( item )
 
             // Image
-            imageLoader {
-                image = item.image
+            theia {
+                item.image?.let { imageUrl = it }
+                placeholderDrawableRes = item.imagePlaceHolder
                 target = tvChannelImage
             }
 
@@ -81,8 +83,8 @@ internal class TvChannelsAdapter:
             tvChannelFavorite.setOnClickListener {
                 itemFavoriteChangeInvoker( item.id to ! item.favorite )
             }
-            imageLoader {
-                image = item.favoriteImage
+            theia {
+                imageDrawableRes = item.favoriteImage
                 target = tvChannelFavorite
             }
 

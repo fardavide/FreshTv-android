@@ -10,6 +10,9 @@ import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
+import studio.forface.theia.TheiaConfig
+import studio.forface.theia.cache.weeks
+import studio.forface.theia.invoke
 import studio.forface.viewstatestore.ViewStateStoreConfig
 import studio.forface.viewstatestore.invoke
 import timber.log.Timber
@@ -41,6 +44,13 @@ class FreshTvApp: Application() {
 
         // Init Timber
         Timber.plant( get() )
+
+        // Configure Theia
+        TheiaConfig {
+            cacheDuration = 2.weeks
+            loggingEnabled = BuildConfig.DEBUG
+            logger = get()
+        }
 
         // Configure ViewStateStore
         ViewStateStoreConfig {

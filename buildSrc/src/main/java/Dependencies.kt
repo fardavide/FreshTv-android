@@ -45,7 +45,7 @@ fun DependencyHandler.applyAndroidTests() {
 }
 
 object Versions {
-    val kotlin =                        "1.3.20"
+    val kotlin =                        "1.3.21"
     val coroutines =                    "1.1.1"
     val serialization =                 "0.10.0"
 
@@ -76,6 +76,7 @@ object Versions {
     val android_room =                  "2.1.0-alpha04"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
+    val android_theia =                 "0.3-alpha-1"
     val android_view_state_store =      "1.1-beta-3"
     val android_work =                  "1.0.0-beta04"
 }
@@ -135,6 +136,7 @@ object Libs {
         val room_testing =                      "androidx.room:room-testing:${Versions.android_room}"
         val support_annotations =               "com.android.support:support-annotations:28.0.0"
         val test_runner =                       "com.android.support.test:runner:${Versions.android_test_runner}"
+        val theia =                             "studio.forface.theia:theia:${Versions.android_theia}"
         val view_state_store =                  "studio.forface.viewstatestore:viewstatestore:${Versions.android_view_state_store}"
         val view_state_store_paging =           "studio.forface.viewstatestore:viewstatestore-paging:${Versions.android_view_state_store}"
         val work =                              "android.arch.work:work-runtime-ktx:${Versions.android_work}"

@@ -3,6 +3,7 @@ package studio.forface.freshtv.commonandroid.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiComponent
+import studio.forface.theia.dsl.TheiaViewHolder
 
 /**
  * @author Davide Giuseppe Farella.
@@ -40,7 +41,7 @@ interface ClickableAdapter<T, VH: ClickableAdapter.ViewHolder<T>> {
     }
 
     /** A base [RecyclerView.ViewHolder] for [ClickableAdapter] implementations */
-    abstract class ViewHolder<T>( itemView: View): RecyclerView.ViewHolder( itemView ), AndroidUiComponent {
+    abstract class ViewHolder<T>( itemView: View): TheiaViewHolder( itemView ), AndroidUiComponent {
 
         internal var clickListenerInvoker: (T) -> Unit = {}
         internal var longClickListenerInvoker: (T) -> Unit = {}

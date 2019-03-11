@@ -1,5 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="studio.forface.freshtv">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="studio.forface.freshtv">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
@@ -11,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
 
         android:theme="@style/AppTheme"
+
+        android:usesCleartextTraffic="true"
 
         android:allowBackup="true"
         android:fullBackupContent="false"

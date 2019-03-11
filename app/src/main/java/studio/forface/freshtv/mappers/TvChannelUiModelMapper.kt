@@ -22,7 +22,7 @@ internal class TvChannelUiModelMapper :
 
     /** @see UiModelMapper.toUiModel */
     override fun TvChannelWithGuide.toUiModel(): TvChannelUiModel {
-        val image = channel.imageUrl?.s ?: tvDrawable
+        val image = channel.imageUrl?.s
         val favoriteImage = if ( channel.favorite ) favoriteDrawable else notFavoriteDrawable
         val currentProgram = guide?.toUiModel()
 
@@ -30,6 +30,7 @@ internal class TvChannelUiModelMapper :
             id =                channel.id,
             name =              channel.name,
             image =             image,
+            imagePlaceHolder =  tvDrawable,
             favorite =          channel.favorite,
             favoriteImage =     favoriteImage,
             currentProgram =    currentProgram

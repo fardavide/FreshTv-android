@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import studio.forface.freshtv.commonandroid.R
@@ -14,10 +13,8 @@ import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.materialbottombar.dsl.MaterialPanel
 import studio.forface.materialbottombar.dsl.PanelBuilder
 import studio.forface.materialbottombar.dsl.panel
-import studio.forface.viewstatestore.AbsViewStateStore
+import studio.forface.theia.dsl.TheiaFragment
 import studio.forface.viewstatestore.ViewStateFragment
-import studio.forface.viewstatestore.ViewStateObserver
-import studio.forface.viewstatestore.ViewStateStore
 
 /**
  * @author Davide Giuseppe Farella.
@@ -26,10 +23,11 @@ import studio.forface.viewstatestore.ViewStateStore
  *
  * @param layoutRes The [LayoutRes] of the Layout we will inflate in our [Fragment]
  *
- * Inherit from [Fragment].
+ * Inherit from [TheiaFragment].
  * Implements [AndroidUiComponent]
  */
-sealed class BaseFragment( @LayoutRes private val layoutRes: Int ): Fragment(), AndroidUiComponent, ViewStateFragment {
+sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
+    TheiaFragment(), AndroidUiComponent, ViewStateFragment {
 
     /** On [onCreateView] we inflate the [layoutRes] into the [container] */
     override fun onCreateView(

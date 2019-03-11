@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid.notifier
+package studio.forface.freshtv.commonandroid.log
 
 import android.util.Log
 import com.crashlytics.android.Crashlytics

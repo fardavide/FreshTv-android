@@ -4,12 +4,11 @@ import android.content.res.Resources
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import studio.forface.freshtv.commonandroid.imageloader.GlideImageLoader
-import studio.forface.freshtv.commonandroid.imageloader.ImageLoader
-import studio.forface.freshtv.commonandroid.imageloader.PicassoImageLoader
+import studio.forface.freshtv.commonandroid.log.TheiaLibLogger
+import studio.forface.freshtv.commonandroid.log.TimberTree
 import studio.forface.freshtv.commonandroid.notifier.AndroidNotifier
-import studio.forface.freshtv.commonandroid.notifier.TimberTree
 import studio.forface.freshtv.commonandroid.notifier.Toast
+import studio.forface.theia.log.TheiaLogger
 import timber.log.Timber
 
 /** A [Module] that handles dependencies of `commonandroid` module */
@@ -17,7 +16,7 @@ val commonAndroidModule = module {
     factory<Resources> { androidContext().resources }
 
     single { AndroidNotifier( resources = get(), toast = get() ) }
-    single<ImageLoader> { PicassoImageLoader( androidContext() ) }
+    factory<TheiaLogger> { TheiaLibLogger() }
     factory<Timber.Tree> { TimberTree() }
     factory { Toast( androidContext() ) }
 }

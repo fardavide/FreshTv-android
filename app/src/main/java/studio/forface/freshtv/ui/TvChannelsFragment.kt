@@ -2,6 +2,7 @@ package studio.forface.freshtv.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
@@ -47,6 +48,8 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
             doOnData { adapter.submitList( it ) }
             doOnError { notifier.error( it ) }
         }
+
+        //recyclerView.get().att
     }
 
     /** When the [TvChannelsFragment]s [View] is created */

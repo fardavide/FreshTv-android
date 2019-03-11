@@ -9,7 +9,8 @@ import androidx.annotation.DrawableRes
 internal data class TvChannelUiModel(
         val id: String,
         val name: String,
-        val image: StringUrlOrDrawableRes,
+        val image: String?,
+        @DrawableRes val imagePlaceHolder: Int,
         val favorite: Boolean,
         @DrawableRes val favoriteImage: Int,
         val currentProgram: CurrentProgram?
@@ -22,6 +23,3 @@ internal data class TvChannelUiModel(
             val progressPercentage: Int
     )
 }
-
-/** A typealias of [Any] representing a [String] url OR a [DrawableRes] */
-internal typealias StringUrlOrDrawableRes = Any

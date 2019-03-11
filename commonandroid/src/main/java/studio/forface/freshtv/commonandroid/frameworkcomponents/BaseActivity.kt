@@ -2,12 +2,13 @@ package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
@@ -17,19 +18,15 @@ import com.google.android.material.snackbar.Snackbar
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
-import studio.forface.freshtv.commonandroid.utils.onFragmentResumed
+import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
 import studio.forface.freshtv.domain.gateways.Notifier
 import studio.forface.materialbottombar.dsl.MaterialPanel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.set
+import studio.forface.theia.dsl.TheiaActivity
 import studio.forface.viewstatestore.ViewStateActivity
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.getSystemService
-import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
 
 
 /**
@@ -37,7 +34,7 @@ import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
  * A base class for Activity's.
  *
  *
- * Inherit from [AppCompatActivity]
+ * Inherit from [TheiaActivity]
  *
  * Implements [AndroidUiComponent] for be able to retrieve some instance like [notifier] or [imageLoader]
  *
@@ -50,7 +47,7 @@ import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
  */
 abstract class BaseActivity(
     @LayoutRes private val layoutRes: Int
-): AppCompatActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager, ViewStateActivity {
+): TheiaActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager, ViewStateActivity {
 
     /** @return the `Activity`s [MaterialBottomDrawerLayout] */
     protected abstract val drawerLayout: MaterialBottomDrawerLayout
