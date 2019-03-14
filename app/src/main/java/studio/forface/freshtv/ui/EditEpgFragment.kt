@@ -20,41 +20,41 @@ import studio.forface.freshtv.commonandroid.utils.*
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Type.LOCAL
 import studio.forface.freshtv.domain.entities.SourceFile.Type.REMOTE
-import studio.forface.freshtv.ui.EditPlaylistFragment.Mode.CREATE
-import studio.forface.freshtv.ui.EditPlaylistFragment.Mode.EDIT
-import studio.forface.freshtv.ui.EditPlaylistFragment.State.*
+import studio.forface.freshtv.ui.EditEpgFragment.Mode.CREATE
+import studio.forface.freshtv.ui.EditEpgFragment.Mode.EDIT
+import studio.forface.freshtv.ui.EditEpgFragment.State.*
 import studio.forface.freshtv.uimodels.SourceFileUiModel
-import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
+import studio.forface.freshtv.viewmodels.EditEpgViewModel
 import studio.forface.materialbottombar.dsl.drawer
 import studio.forface.materialbottombar.panels.params.*
 
 /**
  * @author Davide Giuseppe Farella
- * A `Fragment` for Edit or Create a `Playlist`
+ * A `Fragment` for Edit or Create an `EPG`
  *
  * Inherit from [RootFragment]
  */
-internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file_edit ) {
+internal class EditEpgFragment: RootFragment( R.layout.fragment_source_file_edit ) {
 
     /**
-     * A reference to [EditPlaylistFragmentArgs] for get the `playlistPath` of the current editing `Playlist`
+     * A reference to [EditEpgFragmentArgs] for get the `epgPath` of the current editing `Playlist`
      * from [navArgs]
      */
-    private val args by navArgs<EditPlaylistFragmentArgs>()
+    private val args by navArgs<EditEpgFragmentArgs>()
 
-    /** A reference to [EditPlaylistViewModel] for edit a `Playlist` element */
-    private val editPlaylistViewModel
-            by viewModel<EditPlaylistViewModel> { parametersOf( args.playlistPath ) }
+    /** A reference to [EditEpgViewModel] for edit an `EPG` element */
+    private val editEpgViewModel
+            by viewModel<EditEpgViewModel> { parametersOf( args.epgPath ) }
 
     /** @see RootFragment.fabParams */
     override val fabParams: FabParams get() = FabParams(
             R.drawable.ic_save_black,
             R.string.action_save,
-            showOnStart = editPlaylistViewModel.state.state()?.data is ReadyToSave
+            showOnStart = editEpgViewModel.state.state()?.data is ReadyToSave
     ) {
         when ( mode ) {
-            CREATE -> editPlaylistViewModel.create()
-            EDIT -> editPlaylistViewModel.save()
+            CREATE -> editEpgViewModel.create()
+            EDIT -> editEpgViewModel.save()
         }
     }
 
@@ -65,12 +65,12 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
     override val menuRes: Int? get() = ( mode == EDIT ) { R.menu.menu_delete }
 
     /** The [EditPlaylistFragment.Mode] */
-    private val mode by lazy { if ( args.playlistPath == null ) CREATE else EDIT }
+    private val mode by lazy { if ( args.epgPath == null ) CREATE else EDIT }
 
     /** @see RootFragment.titleRes */
     override val titleRes: Int? get() = when ( mode ) {
-        CREATE -> R.string.title_add_playlist
-        EDIT ->   R.string.title_edit_playlist
+        CREATE -> R.string.title_add_epg
+        EDIT ->   R.string.title_edit_epg
     }
 
     /** When the `Activity` is created */
@@ -78,7 +78,7 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
         super.onActivityCreated( savedInstanceState )
 
         // Observe to a State for the Fragment
-        editPlaylistViewModel.state.observeData { state ->
+        editEpgViewModel.state.observeData { state ->
             when ( state ) {
                 is SaveCompleted -> navController.popBackStack()
                 is ReadyToSave -> fab?.show()
@@ -99,30 +99,30 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
         }
 
         // Observe to Form for the Fragment
-        editPlaylistViewModel.form.observeData {
+        editEpgViewModel.form.observeData {
             editSourceFileUrlLayout.errorRes = it.urlError
             it.path?.let { path -> editSourceFilePathEditText.setText( path ) }
         }
 
-        // Observe to a previously stored `Playlist`
-        editPlaylistViewModel.playlist.observe {
+        // Observe to a previously stored `EPG`
+        editEpgViewModel.epg.observe {
             // Update UI
-            doOnData( ::onPlaylist )
+            doOnData( ::onEpg )
             doOnError { notifier.error( it ) }
         }
     }
 
-    /** When the [EditPlaylistFragment]s [View] is created */
+    /** When the [EditEpgFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
-        editSourceFilePromptTextView.setText( R.string.load_playlist_from )
-        editSourceFileNameLayout.hint = getText( R.string.prompt_playlist_name )
-        editSourceFilePathLayout.hint = getText( R.string.prompt_playlist_path )
-        editSourceFileUrlLayout.hint = getText( R.string.prompt_playlist_url )
+        editSourceFilePromptTextView.setText( R.string.load_epg_from )
+        editSourceFileNameLayout.hint = getText( R.string.prompt_epg_name )
+        editSourceFilePathLayout.hint = getText( R.string.prompt_epg_path )
+        editSourceFileUrlLayout.hint = getText( R.string.prompt_epg_url )
 
         editSourceFileUrlEditText.isEnabled = mode == CREATE
 
-        with( editPlaylistViewModel ) {
+        with( editEpgViewModel ) {
             editSourceFileNameEditText.onTextChange { name = it }
             editSourceFileUrlEditText.onTextChange { path = it }
             editSourceFileFromFileButton.setOnClickListener { type = LOCAL }
@@ -149,7 +149,7 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
                         titleColorRes = R.color.red_500
                         onClick {
                             dismissAndRemovePanel( item.itemId )
-                            editPlaylistViewModel.delete()
+                            editEpgViewModel.delete()
                             navController.popBackStack()
                         }
                     }
@@ -200,15 +200,15 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
 
     /** When a File is selected as Source path */
     private fun onFileSelected( uri: Uri ) {
-        editPlaylistViewModel.path =
+        editEpgViewModel.path =
                 Environment.getExternalStorageDirectory().absolutePath + uri.path!!
     }
 
-    /** When the [SourceFileUiModel] Playlist is received from [EditPlaylistViewModel] */
-    private fun onPlaylist( playlist: SourceFileUiModel ) {
-        editSourceFileNameEditText.setText( playlist.shownName )
-        editSourceFilePathEditText.setText( playlist.fullPath )
-        editSourceFileUrlEditText.setText( playlist.fullPath )
+    /** When the [SourceFileUiModel] Playlist is received from [EditEpgViewModel] */
+    private fun onEpg( epg: SourceFileUiModel ) {
+        editSourceFileNameEditText.setText( epg.shownName )
+        editSourceFilePathEditText.setText( epg.fullPath )
+        editSourceFileUrlEditText.setText( epg.fullPath )
     }
 
     /** Pick a File to be used as `Playlist`s path */
@@ -240,10 +240,10 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
         } else pickFile()
     }
 
-    /** An enum for the mode of the [EditPlaylistFragment] */
+    /** An enum for the mode of the [EditEpgFragment] */
     enum class Mode { CREATE, EDIT }
 
-    /** An enum for the current state of the [EditPlaylistFragment] */
+    /** An enum for the current state of the [EditEpgFragment] */
     sealed class State {
         object ChooseType : State()
         class Editing( val type: SourceFile.Type ) : State()
@@ -254,14 +254,14 @@ internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file
 
 /**
  * A request code for Permissions for pick file
- * @see EditPlaylistFragment.requestPermissions
- * @see EditPlaylistFragment.onRequestPermissionsResult
+ * @see EditEpgFragment.requestPermissions
+ * @see EditEpgFragment.onRequestPermissionsResult
  */
 private const val PICK_FILE_PERM_REQUEST_CODE = 7435
 
 /**
  * A request code for pick file
- * @see EditPlaylistFragment.startActivityForResult
- * @see EditPlaylistFragment.onActivityResult
+ * @see EditEpgFragment.startActivityForResult
+ * @see EditEpgFragment.onActivityResult
  */
 private const val PICK_FILE_REQUEST_CODE = 7435

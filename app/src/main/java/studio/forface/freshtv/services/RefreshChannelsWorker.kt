@@ -51,6 +51,11 @@ class RefreshChannelsWorker(
                     work
             )
         }
+
+        /** Cancel [RefreshChannelsWorker] for the given [playlistPath] */
+        fun cancel( playlistPath: String ) {
+            workManager.cancelUniqueWork( "$WORKER_NAME$playlistPath" )
+        }
     }
 
     /** An instance of [RefreshChannels] */
@@ -90,6 +95,6 @@ class RefreshChannelsWorker(
                 return retry()
             }
 
-        throw AssertionError("Unreachable code" )
+        throw AssertionError( "Unreachable code" )
     }
 }

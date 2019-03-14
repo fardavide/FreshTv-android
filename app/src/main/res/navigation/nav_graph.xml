@@ -27,6 +27,10 @@
         android:id="@+id/action_to_epgsFragment"
         app:destination="@id/epgsFragment" />
 
+    <action
+        android:id="@+id/action_to_editEpgFragment"
+        app:destination="@id/editEpgFragment"/>
+
 
     <!-- Fragments -->
     <fragment
@@ -54,6 +58,16 @@
             android:name="playlistPath"
             app:argType="string"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editEpgFragment"
+        android:name="studio.forface.freshtv.ui.EditEpgFragment"
+        android:label="EditEpgFragment"
+        tools:layout="@layout/fragment_source_file_edit_state_editing_web">
+        <argument
+            android:name="epgPath"
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
 
     <fragment

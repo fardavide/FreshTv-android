@@ -1,6 +1,5 @@
 package studio.forface.freshtv.commonandroid.log
 
-import android.util.Log
 import studio.forface.theia.TheiaException
 import studio.forface.theia.actualMessage
 import studio.forface.theia.log.TheiaLogger

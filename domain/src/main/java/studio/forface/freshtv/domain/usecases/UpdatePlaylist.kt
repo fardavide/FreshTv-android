@@ -11,8 +11,8 @@ import studio.forface.freshtv.domain.gateways.updatePlaylist
 class UpdatePlaylist( private val localData: LocalData ) {
 
     /** Change the [Playlist.path] and [Playlist.name] of the given [Playlist] */
-    operator fun invoke( playlist: Playlist, path: String, name: String? ) {
-        this( playlist.path, name ) // TODO check if path is needed
+    operator fun invoke( playlist: Playlist, name: String? ) {
+        this( playlist.path, name )
     }
 
     /** Change the [Playlist.path] and [Playlist.name] of the [Playlist] with the given [playlistPath] */

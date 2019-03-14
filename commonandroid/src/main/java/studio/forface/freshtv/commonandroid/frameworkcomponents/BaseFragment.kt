@@ -32,7 +32,7 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
     /** On [onCreateView] we inflate the [layoutRes] into the [container] */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? = inflater.inflate( layoutRes, container,false )
+    ): View = inflater.inflate( layoutRes, container,false )
 
     /** The [Fragment]'s [NavController] */
     val navController: NavController by lazy { findNavController() }

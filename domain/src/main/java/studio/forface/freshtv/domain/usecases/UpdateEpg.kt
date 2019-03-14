@@ -11,12 +11,12 @@ import studio.forface.freshtv.domain.gateways.updateEpg
 class UpdateEpg( private val localData: LocalData ) {
 
     /** Change the [Epg.path] and [Epg.name] of the given [Epg] */
-    operator fun invoke( epg: Epg, path: String, name: String? ) {
-        this( epg.path, path, name )
+    operator fun invoke( epg: Epg, name: String? ) {
+        this( epg.path, name )
     }
 
     /** Change the [Epg.path] and [Epg.name] of the [Epg] with the given [epgPath] */
-    operator fun invoke( epgPath: String, path: String, name: String? ) {
-        localData.updateEpg( epgPath ) { it.copy( path = path, name = name ) }
+    operator fun invoke( epgPath: String, name: String? ) {
+        localData.updateEpg( epgPath ) { it.copy( path = epgPath, name = name ) }
     }
 }

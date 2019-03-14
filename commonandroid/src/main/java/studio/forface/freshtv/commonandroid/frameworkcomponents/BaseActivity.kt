@@ -20,8 +20,13 @@ import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
 import studio.forface.freshtv.domain.gateways.Notifier
+import studio.forface.freshtv.domain.utils.optLet
+import studio.forface.freshtv.domain.utils.optWith
+import studio.forface.materialbottombar.doOnPanelClose
+import studio.forface.materialbottombar.doOnPanelState
 import studio.forface.materialbottombar.dsl.MaterialPanel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
+import studio.forface.materialbottombar.layout.PanelChangeListener
 import studio.forface.materialbottombar.set
 import studio.forface.theia.dsl.TheiaActivity
 import studio.forface.viewstatestore.ViewStateActivity
@@ -36,7 +41,7 @@ import kotlin.contracts.contract
  *
  * Inherit from [TheiaActivity]
  *
- * Implements [AndroidUiComponent] for be able to retrieve some instance like [notifier] or [imageLoader]
+ * Implements [AndroidUiComponent] for be able to retrieve some instance like [notifier]
  *
  * Implements [SnackbarManager] for handle the [Snackbar] messages
  *
@@ -58,8 +63,10 @@ abstract class BaseActivity(
      */
     private var fragmentLifecycleListener: FragmentManager.FragmentLifecycleCallbacks? = null
 
-    /** @return an OPTIONAL `Activity`s [FloatingActionButton] */
-    open val fab: FloatingActionButton? = null
+    /** @return the `Activity`s [FloatingActionButton] */
+    abstract val fab: FloatingActionButton
+
+    private var isDrawerOpen = false
 
     /** @return the `Activity`s [NavController] */
     protected abstract val navController: NavController
@@ -75,6 +82,9 @@ abstract class BaseActivity(
         super.onCreate( savedInstanceState )
         setFragmentLifecycleListener()
         setContentView( layoutRes )
+        drawerLayout.doOnPanelState { _, state ->
+            isDrawerOpen = state != MaterialBottomDrawerLayout.Fly.BOTTOM
+        }
     }
 
     /** When the `Activity` is Started */
@@ -97,29 +107,61 @@ abstract class BaseActivity(
     protected fun onFragmentResumed( fragment: BaseFragment ) {
         if ( fragment is RootFragment ) {
 
-            // Title
-            fragment.title?.let { titleTextView.text = it }
-            titleTextView.setTextColor( fragment.titleColor )
-
-            // Options Menu
-            fragment.setHasOptionsMenu( fragment.menuRes != null )
-
-            // Background
-            setBackgroundColor(
-                fragment.backgroundColor ?: getThemeColor( android.R.attr.colorBackground )
-            )
-
-            // Fab
-            fab?.let { fab ->
-                val fabParams = fragment.fabParams
-                if ( fabParams == null ) fab.hide()
-                else {
-                    fab.setImageResource( fabParams.drawableRes )
-                    // fab.setText( fabParams.textRes ) // TODO Fab can't have a Text, but an extended Fab would be great
-                    fab.setOnClickListener( fabParams.action )
-                    if ( fabParams.showOnStart ) fab.show() else fab.hide()
+            // If fabParams is null, hide and reset fab. We call it now for avoid glitches
+            fun resetFabIfNeeded() {
+                if ( fragment.fabParams == null ) {
+                    fab.hide()
+                    fab.setImageBitmap( null )
+                    fab.setOnClickListener( null )
                 }
             }
+
+            // Title
+            fun setTitle() {
+                fragment.title?.let { titleTextView.text = it }
+                titleTextView.setTextColor( fragment.titleColor )
+            }
+
+            // Options Menu
+            fun setOptionsMenu() = fragment.setHasOptionsMenu( fragment.menuRes != null )
+
+            // Background
+            fun setBg() =
+                setBackgroundColor( fragment.backgroundColor ?: getThemeColor( android.R.attr.colorBackground ) )
+
+            // Fab
+            fun setFab() {
+                optWith( fragment.fabParams ) {
+                    fab.setImageResource( drawableRes )
+                    // fab.setText( textRes ) // TODO Fab can't have a Text, but an extended Fab would be great
+                    fab.setOnClickListener( action )
+                }
+            }
+            fun showOrHideFab() =
+                if ( fragment.fabParams?.showOnStart == true ) fab.show() else fab.hide()
+
+            // Lambda to be called after bars hide
+            val setAfterHide = {
+                setTitle()
+                setOptionsMenu()
+                setBg()
+                setFab()
+            }
+
+            // Lambda to be called after bars show
+            val setAfterShow = {
+                showOrHideFab()
+            }
+
+            // Hide and Show bars with setAfterHide and showAfterHide actions
+            val hideAndShowBars: PanelChangeListener = {
+                resetFabIfNeeded()
+                drawerLayout.hideAndShowBars( true, doAfterHide = setAfterHide, doAfterShow = setAfterShow )
+            }
+
+            // If isDrawerOpen run hideAndShowBars after close, else run it now
+            if ( isDrawerOpen ) drawerLayout.doOnPanelClose( once = true, callback = hideAndShowBars )
+            else hideAndShowBars( 0 )
         }
     }
 

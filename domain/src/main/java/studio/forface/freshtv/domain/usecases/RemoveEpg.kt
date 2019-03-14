@@ -11,7 +11,7 @@ import studio.forface.freshtv.domain.gateways.LocalData
 class RemoveEpg( private val localData: LocalData ) {
 
     /** @see invoke */
-    suspend operator fun invoke( epg: Epg ) {
+    operator fun invoke( epg: Epg ) {
         this( epg.path )
     }
 
@@ -19,7 +19,7 @@ class RemoveEpg( private val localData: LocalData ) {
      * Delete the stored [Epg] and remove it reference to relative [IChannel.playlistPaths].
      * Also delete the [IChannel] without any playlist path.
      */
-    suspend operator fun invoke( epgPath: String ) {
+    operator fun invoke( epgPath: String ) {
         localData.deleteEpg( epgPath )
     }
 }

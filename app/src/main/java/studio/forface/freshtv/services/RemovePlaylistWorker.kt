@@ -60,12 +60,15 @@ class RemovePlaylistWorker(
         }
 
         catching
-            .onSuccess { return success() }
+            .onSuccess {
+                RefreshChannelsWorker.cancel( playlistPath )
+                return success()
+            }
             .onFailure {
                 notifier.error( it )
                 return retry()
             }
 
-        throw AssertionError("Unreachable code" )
+        throw AssertionError( "Unreachable code" )
     }
 }

@@ -32,14 +32,14 @@ class FreshTvApp: Application() {
         // Fabric.with(this, Crashlytics() ) TODO register on Firebase
 
         // Init ThreeTen Android backport.
-        AndroidThreeTen.init(this )
+        AndroidThreeTen.init( this )
 
         // Start Koin!
         startKoin {
             // declare used Android context
-            androidContext(this@FreshTvApp )
+            androidContext( this@FreshTvApp )
             // declare modules
-            modules(otherModules( Database.SqlDelight ) + appModule )
+            modules( otherModules( Database.SqlDelight ) + appModule )
         }
 
         // Init Timber

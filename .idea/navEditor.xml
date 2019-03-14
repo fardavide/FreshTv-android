@@ -28,6 +28,18 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="editEpgFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="64" />
+                            <option name="y" value="567" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="editPlaylistFragment">
                     <value>
                       <LayoutPositions>

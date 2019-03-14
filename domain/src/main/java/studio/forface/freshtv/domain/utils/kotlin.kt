@@ -15,8 +15,12 @@ inline fun <T: Any?> handle( default: T? = null, block: () -> T ) : T? {
     catch ( t: Throwable ) { default }
 }
 
+/** Same as [optWith], but pass [T] as argument */
+inline fun <T: Any, V> optLet( arg: T?, block: (T) -> V ) =
+        arg?.let { block( arg ) }
+
 /** Same as `with`, but execute [block] only if [receiver] is not null */
-inline fun <T: Any, V> optWith( receiver: T?, block: (T) -> V ) =
+inline fun <T: Any, V> optWith( receiver: T?, block: T.() -> V ) =
         receiver?.let { block( receiver ) }
 
 /**
@@ -35,5 +39,5 @@ inline infix fun <T: Any> T?.or( block: () -> T ) : T = this ?: block()
 
 /** Wait until [evaluation] is true */
 inline fun wait( evaluation: () -> Boolean ) {
-    while( ! evaluation() ) { /* await */ }
+    while( ! evaluation() ) { /* wait */ }
 }

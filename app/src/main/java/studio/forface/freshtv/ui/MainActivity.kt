@@ -12,6 +12,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
+import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditEpgFragment
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditPlaylistFragment
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEpgsFragment
 import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToPlaylistsFragment

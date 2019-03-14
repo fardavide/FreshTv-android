@@ -24,7 +24,9 @@
     <string name="image_load_from_web">Load from web</string>
 
     <!-- Titles -->
+    <string name="title_add_epg">Add EPG</string>
     <string name="title_add_playlist">Add Playlist</string>
+    <string name="title_edit_epg">Edit EPG</string>
     <string name="title_edit_playlist">Edit Playlist</string>
 
     <!-- Messages -->

@@ -1,8 +1,9 @@
 package studio.forface.freshtv.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.core.view.get
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
@@ -24,7 +25,7 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     /** A key for [groupName] argument */
     companion object { const val ARG_GROUP_NAME = "extra.group-name" }
 
-    /** A reference to [TvChannelsAdapter] for [recyclerView] */
+    /** A reference to [TvChannelsAdapter] for `recyclerView` */
     private val adapter = TvChannelsAdapter().apply {
         onItemClick = { navController.navigate( actionTvChannelsFragmentToPlayerFragment( it.id ) ) }
         onItemFavoriteChange = { channelsViewModel.setFavoriteChannel( it ) }
@@ -36,9 +37,6 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
     /** An OPTIONAL [String] received from [getArguments] for filter elements by their `groupName` */
     private val groupName by lazy { arguments?.getString( ARG_GROUP_NAME ) }
 
-    // TODO cannot import synthetic from another module
-    private val recyclerView by lazy { view!!.findViewById<RecyclerView>( R.id.recyclerView ) }
-
     override val title: String? get() = "TODO" // TODO remove when it will be NestedFragment
 
     /** When the `Activity` is created */
@@ -48,14 +46,13 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
             doOnData { adapter.submitList( it ) }
             doOnError { notifier.error( it ) }
         }
-
-        //recyclerView.get().att
     }
 
     /** When the [TvChannelsFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
-        recyclerView.layoutManager = LinearLayoutManager( context )
+        val recyclerView = view.findViewById<RecyclerView>( R.id.recyclerView )
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager( context )
     }
 }

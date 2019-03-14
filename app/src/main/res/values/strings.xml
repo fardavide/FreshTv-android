@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Fresh Tv</string>
 
-    <!-- Actions -->Ω
+    <!-- Actions -->
     <string name="action_add_playlist">Add a playlist</string>
+    <string name="action_add_epg">Add an EPG</string>
 
     <!-- Errors -->
     <string name="read_single_playlist_error_count_args">Cannot read %d Channels from Playlist: %s</string>
@@ -16,9 +17,13 @@
     <string name="menu_tv_channels">Tv Channels</string>
 
     <!-- Prompt -->
+    <string name="prompt_delete_epg">Do you really want to delete this EPG?</string>
     <string name="prompt_delete_playlist">Do you really want to delete this Playlist?</string>
+    <string name="prompt_epg_name">EPG name</string>
     <string name="prompt_playlist_name">Playlist name</string>
+    <string name="prompt_epg_path">EPG path</string>
     <string name="prompt_playlist_path">Playlist path</string>
+    <string name="prompt_epg_url">EPG url</string>
     <string name="prompt_playlist_url">Playlist url</string>
 
 </resources>

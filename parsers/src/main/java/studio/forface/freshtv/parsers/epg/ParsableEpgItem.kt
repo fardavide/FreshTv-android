@@ -9,7 +9,7 @@ import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.errors.ParsingEpgError.Reason
 import studio.forface.freshtv.domain.utils.EMPTY_STRING
-import studio.forface.freshtv.domain.utils.optWith
+import studio.forface.freshtv.domain.utils.optLet
 import studio.forface.freshtv.parsers.utils.*
 
 /**
@@ -78,13 +78,13 @@ internal inline class ParsableEpgItem( private val s: String ) {
         val root = readDocument( s )
 
         val channelId =     root attr PARAM_CHANNEL_ID
-        val credits = optWith(root optChild PARAM_CREDITS ) {
+        val credits = optLet( root optChild PARAM_CREDITS ) {
             TvGuide.Credits(
                     it optChildValue PARAM_DIRECTOR,
                     it childListValues PARAM_ACTOR
             )
         }
-        val rating = optWith<Node, String>( root optChild PARAM_RATING ) {
+        val rating = optLet<Node, String>( root optChild PARAM_RATING ) {
             it childValue PARAM_RATING_VALUE
         }
 

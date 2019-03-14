@@ -4,23 +4,19 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import studio.forface.freshtv.interactors.ChannelChangeFavoriteInteractor
+import studio.forface.freshtv.interactors.EditEpgInteractor
 import studio.forface.freshtv.interactors.EditPlaylistInteractor
 import studio.forface.freshtv.mappers.SourceFileUiModelMapper
 import studio.forface.freshtv.mappers.TvChannelUiModelMapper
-import studio.forface.freshtv.presenters.ChannelsAvailabilityPresenter
-import studio.forface.freshtv.presenters.PlaylistPresenter
-import studio.forface.freshtv.presenters.PlaylistsPresenter
-import studio.forface.freshtv.presenters.TvChannelsPresenter
-import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
-import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
-import studio.forface.freshtv.viewmodels.PlaylistsViewModel
-import studio.forface.freshtv.viewmodels.TvChannelsViewModel
+import studio.forface.freshtv.presenters.*
+import studio.forface.freshtv.viewmodels.*
 
 /** A [Module] that handles dependencies for use cases of `app` module */
 val appModule = module {
 
     /* Interactors */
     factory { ChannelChangeFavoriteInteractor( updateChannelFavoriteState = get() ) }
+    factory { EditEpgInteractor( addEpg = get(), removeEpg = get(), updateEpg = get() ) }
     factory { EditPlaylistInteractor( addPlaylist = get(), updatePlaylist = get() ) }
 
     /* Mappers */
@@ -29,6 +25,7 @@ val appModule = module {
 
     /* Presenters */
     factory { ChannelsAvailabilityPresenter( hasMovieChannels = get(), hasTvChannels = get() ) }
+    factory { EpgPresenter( getEpg = get(), mapper = get() ) }
     factory { PlaylistPresenter( getPlaylist = get(), mapper = get() ) }
     factory { PlaylistsPresenter( getPlaylists = get(), mapper = get() ) }
     factory {
@@ -41,6 +38,13 @@ val appModule = module {
 
     /* View Models */
     viewModel { ChannelsAvailabilityViewModel( presenter = get() ) }
+    viewModel { (epgPath: String?) ->
+        EditEpgViewModel(
+            interactor = get(),
+            presenter = get(),
+            epgPath = epgPath
+        )
+    }
     viewModel { (playlistPath: String?) ->
         EditPlaylistViewModel(
             interactor = get(),

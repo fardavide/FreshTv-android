@@ -1,4 +1,4 @@
-@file:Suppress("MayBeConstant", "unused")
+@file:Suppress("MayBeConstant")
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
@@ -64,15 +64,15 @@ object Versions {
     val android_cue =                   "1.1"
     val android_espresso =              "3.1.1"
     val android_exo_player =            "2.9.4"
-    val android_glide =                 "4.9.0"
+    //val android_glide =                 "4.9.0"
     val android_gradle_plugin =         "3.3.0"
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_material_bottom_bar =   "1.1-beta-4"
+    val android_material_bottom_bar =   "1.1-beta-8"
     val android_navigation =            "1.0.0-beta01"
     val android_paging =                "2.1.0"
-    val android_picasso =               "2.71828"
+    //val android_picasso =               "2.71828"
     val android_room =                  "2.1.0-alpha04"
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
@@ -81,6 +81,7 @@ object Versions {
     val android_work =                  "1.0.0-beta04"
 }
 
+@Suppress("unused")
 object Libs {
 
     /* Kotlin */
@@ -115,8 +116,8 @@ object Libs {
         val design =                            "com.android.support:design:${Versions.android_support}"
         val espresso =                          "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
         val exo_player =                        "com.google.android.exoplayer:exoplayer:${Versions.android_exo_player}"
-        val glide =                             "com.github.bumptech.glide:glide:${Versions.android_glide}"
-        val glide_compiler =                    "com.github.bumptech.glide:compiler:${Versions.android_glide}"
+        //val glide =                             "com.github.bumptech.glide:glide:${Versions.android_glide}"
+        //val glide_compiler =                    "com.github.bumptech.glide:compiler:${Versions.android_glide}"
         val ktx =                               "androidx.core:core-ktx:${Versions.android_ktx}"
         val lifecycle_compiler =                "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
         val lifecycle_extensions =              "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
@@ -129,7 +130,7 @@ object Libs {
         val navigation_fragment =               "android.arch.navigation:navigation-fragment-ktx:${Versions.android_navigation}"
         val navigation_ui =                     "android.arch.navigation:navigation-ui-ktx:${Versions.android_navigation}"
         val paging =                            "androidx.paging:paging-runtime-ktx:${Versions.android_paging}"
-        val picasso =                           "com.squareup.picasso:picasso:${Versions.android_picasso}"
+        //val picasso =                           "com.squareup.picasso:picasso:${Versions.android_picasso}"
         val room =                              "androidx.room:room-runtime:${Versions.android_room}"
         val room_compiler =                     "androidx.room:room-compiler:${Versions.android_room}"
         val room_coroutines =                   "androidx.room:room-coroutines:${Versions.android_room}"
