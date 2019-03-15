@@ -6,13 +6,13 @@ import kotlin.test.assertNotNull
 
 /**
  * @author Davide Giuseppe Farella
- * Test class for [ParsablePlaylist]
+ * Test class for [ParsableStringPlaylist]
  */
 internal class ParsablePlaylistTest {
 
     @Test
     fun extractItems() {
-        val result = ParsablePlaylist( mockPlaylistContent ).extractItems()
+        val result = ParsableStringPlaylist( mockPlaylistContent ).extractItems()
         assertNotNull( result.first() )
         assert( result.isNotEmpty() )
     }

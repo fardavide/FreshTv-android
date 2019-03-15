@@ -2,16 +2,12 @@
 
 package studio.forface.freshtv.parsers.playlist
 
-import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.coroutineScope
-import java.io.InputStream
-
 /**
  * @author Davide Giuseppe Farella.
  * An inline class that represents the content of a Playlist and expose [extractItems] for make a
  * first parsing on the content and split it in [ParsablePlaylistItem]s.
  */
-internal inline class ParsablePlaylist( private val stream: InputStream ) {
+internal inline class ParsableStringPlaylist(private val s: String ) {
 
     private companion object {
 
@@ -26,18 +22,11 @@ internal inline class ParsablePlaylist( private val stream: InputStream ) {
     }
 
     /**
-     * @return a [List] of [ParsablePlaylistItem] extracted from the content of [ParsablePlaylist]
+     * @return a [List] of [ParsablePlaylistItem] extracted from the content of [ParsableStringPlaylist]
      */
-    suspend fun extractItems( items: SendChannel<ParsablePlaylistItem> ) = coroutineScope<Unit> {
-        stream.bufferedReader().use { reader ->
-            // TODO
-        }
-        s
-            .removePrefix( HEADER ).removeSuffix( FOOTER )
-            .split( CHANNEL_HEAD )
-            .map { ParsablePlaylistItem( it.trim() ) }
-            .toList()
-
-        items.close()
-    }
+    fun extractItems() : List<ParsablePlaylistItem> = s
+        .removePrefix( HEADER ).removeSuffix( FOOTER )
+        .split( CHANNEL_HEAD )
+        .map { ParsablePlaylistItem( it.trim() ) }
+        .toList()
 }

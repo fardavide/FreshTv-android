@@ -1,5 +1,8 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE")
+
 package studio.forface.freshtv.parsers.playlist
 
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.coroutineScope
 import studio.forface.freshtv.domain.entities.ChannelGroup
@@ -8,7 +11,9 @@ import studio.forface.freshtv.domain.entities.MovieChannel
 import studio.forface.freshtv.domain.entities.TvChannel
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.utils.forEachAsync
+import studio.forface.freshtv.domain.utils.wait
 import studio.forface.freshtv.parsers.playlist.ParsablePlaylistItem.Result
+import java.io.InputStream
 
 /**
  * @author Davide Giuseppe Farella.
@@ -18,16 +23,16 @@ internal class PlaylistParser {
 
     /** Parse the [playlistContent] and submit items via the given [SendChannel]s */
     suspend operator fun invoke(
-            playlistPath: String,
-            playlistContent: String,
-            channels: SendChannel<IChannel>,
-            groups: SendChannel<ChannelGroup>,
-            errors: SendChannel<ParsingChannelError>
+        playlistPath: String,
+        playlistContent: String,
+        channels: SendChannel<IChannel>,
+        groups: SendChannel<ChannelGroup>,
+        errors: SendChannel<ParsingChannelError>
     ) = coroutineScope<Unit> {
 
         val cachedGroups = mutableListOf<ChannelGroup>()
 
-        val playlist = ParsablePlaylist( playlistContent )
+        val playlist = ParsableStringPlaylist( playlistContent )
         playlist.extractItems().forEachAsync {
             when ( val result = it( playlistPath ) ) {
                 is Result.Channel -> {
@@ -44,6 +49,45 @@ internal class PlaylistParser {
                 else -> throw AssertionError("${result::class.qualifiedName} not implemented" )
             }
         }
+        channels.close()
+        groups.close()
+        errors.close()
+    }
+
+    /** Parse the [playlistStream] and submit items via the given [SendChannel]s */
+    suspend operator fun invoke(
+        playlistPath: String,
+        playlistStream: InputStream,
+        channels: SendChannel<IChannel>,
+        groups: SendChannel<ChannelGroup>,
+        errors: SendChannel<ParsingChannelError>
+    ) = coroutineScope<Unit> {
+
+        val cachedGroups = mutableListOf<ChannelGroup>()
+
+        val items = Channel<ParsablePlaylistItem>()
+        val playlist = ParsablePlaylist( playlistStream )
+        playlist.extractItems( items )
+
+        for ( item in items ) {
+            when ( val result = item( playlistPath ) ) {
+                is Result.Channel -> {
+                    channels.send( result.content )
+                    result.content.group { group ->
+                        if ( cachedGroups.needsToUpdateWith( group ) )
+                            groups.send( group )
+                    }
+                }
+                is Result.Group -> groups.send( result.content )
+                is Result.Error -> errors.send( result.error )
+                // Explicit else branch needed for avoid to forget something, since result is sealed but when is
+                // statement
+                else -> throw AssertionError("${result::class.qualifiedName} not implemented" )
+            }
+        }
+
+        wait { items.isClosedForReceive }
+
         channels.close()
         groups.close()
         errors.close()

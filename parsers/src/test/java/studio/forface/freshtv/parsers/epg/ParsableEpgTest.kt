@@ -6,13 +6,13 @@ import kotlin.test.assertNotNull
 
 /**
  * @author Davide Giuseppe Farella
- * Test class for [ParsableEpg]
+ * Test class for [ParsableStringEpg]
  */
 class ParsableEpgTest {
 
     @Test
     fun extractItems() {
-        val result = ParsableEpg( mockEpgContent ).extractItems()
+        val result = ParsableStringEpg( mockEpgContent ).extractItems()
         assertNotNull( result.first() )
         assert( result.isNotEmpty() )
     }
