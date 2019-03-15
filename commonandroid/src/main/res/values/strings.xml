@@ -19,18 +19,6 @@
     <string name="hint_optional">Optional</string>
     <string name="hint_required">Required</string>
 
-    <!-- Images description -->
-    <string name="image_load_from_file">Load from file</string>
-    <string name="image_load_from_web">Load from web</string>
-
-    <!-- Titles -->
-    <string name="title_add_epg">Add EPG</string>
-    <string name="title_add_playlist">Add Playlist</string>
-    <string name="title_edit_epg">Edit EPG</string>
-    <string name="title_edit_playlist">Edit Playlist</string>
-
     <!-- Messages -->
-    <string name="load_epg_from">Load EPG from…</string>
-    <string name="load_playlist_from">Load Playlist from…</string>
-    <string name="permission_denied">Permission denied</string>
+     <string name="permission_denied">Permission denied</string>
 </resources>

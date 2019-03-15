@@ -36,6 +36,12 @@ import studio.forface.materialbottombar.panels.params.*
  */
 internal class EditEpgFragment: RootFragment( R.layout.fragment_source_file_edit ) {
 
+    companion object {
+        /** @return `NavDirections` to this `Fragment` */
+        fun directions( epgPath: String? = null ) =
+                HomeFragmentDirections.actionToEditEpgFragment( epgPath )
+    }
+
     /**
      * A reference to [EditEpgFragmentArgs] for get the `epgPath` of the current editing `Playlist`
      * from [navArgs]

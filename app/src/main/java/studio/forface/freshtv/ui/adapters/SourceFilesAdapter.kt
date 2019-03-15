@@ -2,7 +2,6 @@ package studio.forface.freshtv.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import kotlinx.android.synthetic.main.item_source_file.view.*

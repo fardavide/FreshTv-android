@@ -25,9 +25,10 @@ delete:
   DELETE FROM sourceFilePojo
   WHERE path = ?;
 
-count:
+countByType:
   SELECT count(*)
-  FROM sourceFilePojo;
+  FROM sourceFilePojo
+  WHERE type = ?;
 
 selectAll:
   SELECT *

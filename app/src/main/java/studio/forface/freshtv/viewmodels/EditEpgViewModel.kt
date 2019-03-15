@@ -13,6 +13,7 @@ import studio.forface.freshtv.domain.utils.EMPTY_STRING
 import studio.forface.freshtv.entities.SourceFilePath
 import studio.forface.freshtv.interactors.EditEpgInteractor
 import studio.forface.freshtv.presenters.EpgPresenter
+import studio.forface.freshtv.services.RefreshTvGuidesWorker
 import studio.forface.freshtv.ui.EditEpgFragment
 import studio.forface.freshtv.ui.EditEpgFragment.State.*
 import studio.forface.freshtv.uimodels.SourceFileEditFormUiModel
@@ -93,6 +94,7 @@ internal class EditEpgViewModel(
 
     /** Called when [create] or [save] has succeed */
     private fun onSuccess() {
+        RefreshTvGuidesWorker.enqueue( path.toString() )
         state.postData( SaveCompleted )
     }
 

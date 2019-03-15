@@ -12,11 +12,6 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
-import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditEpgFragment
-import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditPlaylistFragment
-import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEpgsFragment
-import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToPlaylistsFragment
-import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToTvChannelsFragment
 import studio.forface.freshtv.uimodels.*
 import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
@@ -89,14 +84,14 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasNothing )
                 primaryItem( R.string.action_add_playlist ) {
                     iconResource = R.drawable.ic_playlist
-                    navDirections = actionToEditPlaylistFragment(null )
+                    navDirections = EditPlaylistFragment.directions()
                 }
 
             // Tv Channels
             if ( channelsAvailability.hasTvs )
                 primaryItem( R.string.menu_tv_channels ) {
                     iconResource = R.drawable.ic_tv
-                    navDirections = actionToTvChannelsFragment()
+                    navDirections = TvChannelsFragment.directions()
                 }
 
             // Movie Channels
@@ -112,13 +107,13 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasAny )
                 primaryItem( R.string.menu_my_playlists ) {
                     iconResource = R.drawable.ic_playlist
-                    navDirections = actionToPlaylistsFragment()
+                    navDirections = PlaylistsFragment.directions()
                 }
 
             // My EPGs
             primaryItem( R.string.menu_my_epgs ) {
                 iconResource = R.drawable.ic_epg
-                navDirections = actionToEpgsFragment()
+                navDirections = EpgsFragment.directions()
             }
 
             // Divider

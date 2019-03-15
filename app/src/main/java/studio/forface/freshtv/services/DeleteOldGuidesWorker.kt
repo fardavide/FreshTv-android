@@ -1,16 +1,17 @@
 package studio.forface.freshtv.services
 
 import android.content.Context
-import androidx.work.*
 import androidx.work.ListenableWorker.Result.retry
 import androidx.work.ListenableWorker.Result.success
+import androidx.work.PeriodicWorkRequest
+import androidx.work.Worker
+import androidx.work.WorkerParameters
 import org.koin.core.inject
 import org.threeten.bp.Duration
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
 import studio.forface.freshtv.commonandroid.utils.enqueueUniquePeriodicWork
 import studio.forface.freshtv.commonandroid.utils.workManager
 import studio.forface.freshtv.domain.usecases.DeleteOldGuides
-import java.util.concurrent.TimeUnit
 
 /**
  * @author Davide Giuseppe Farella.

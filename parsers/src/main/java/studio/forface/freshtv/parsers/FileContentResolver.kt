@@ -33,7 +33,7 @@ internal class FileContentResolver(
     suspend operator fun invoke( playlist: Playlist ) = this ( playlist.type, playlist.path )
 
     /** @return the [String] content of the given [Epg] */
-    suspend operator fun invoke( epg: Epg ) =  this ( epg.type, epg.path )
+    suspend operator fun invoke( epg: Epg ) = this ( epg.type, epg.path )
 
 
     /** An interface for retrieve the content of a given [String] path */

@@ -1,17 +1,15 @@
 package studio.forface.freshtv.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
-import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
 import studio.forface.freshtv.ui.TvChannelsFragmentDirections.Companion.actionTvChannelsFragmentToPlayerFragment
+import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
 import studio.forface.freshtv.viewmodels.TvChannelsViewModel
 
 /**
@@ -22,8 +20,13 @@ import studio.forface.freshtv.viewmodels.TvChannelsViewModel
  */
 internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view ) {
 
-    /** A key for [groupName] argument */
-    companion object { const val ARG_GROUP_NAME = "extra.group-name" }
+    companion object {
+        /** A key for [groupName] argument */
+        const val ARG_GROUP_NAME = "extra.group-name"
+
+        /** @return `NavDirections` to this `Fragment` */
+        fun directions() = HomeFragmentDirections.actionToTvChannelsFragment()
+    }
 
     /** A reference to [TvChannelsAdapter] for `recyclerView` */
     private val adapter = TvChannelsAdapter().apply {

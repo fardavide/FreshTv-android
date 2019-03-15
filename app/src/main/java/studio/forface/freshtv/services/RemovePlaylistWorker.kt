@@ -6,13 +6,8 @@ import androidx.work.ListenableWorker.Result.retry
 import androidx.work.ListenableWorker.Result.success
 import kotlinx.coroutines.runBlocking
 import org.koin.core.inject
-import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
-import studio.forface.freshtv.commonandroid.utils.enqueueUniqueWork
-import studio.forface.freshtv.commonandroid.utils.getString
 import studio.forface.freshtv.commonandroid.utils.workManager
-import studio.forface.freshtv.domain.usecases.DeleteOldGuides
-import studio.forface.freshtv.domain.usecases.RefreshChannels
 import studio.forface.freshtv.domain.usecases.RemovePlaylist
 
 /**

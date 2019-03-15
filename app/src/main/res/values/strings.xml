@@ -6,15 +6,25 @@
     <string name="action_add_epg">Add an EPG</string>
 
     <!-- Errors -->
+    <string name="read_single_epg_error_count_args">Cannot read %d Guides from EPG: %s</string>
     <string name="read_single_playlist_error_count_args">Cannot read %d Channels from Playlist: %s</string>
+    <string name="read_multi_epg_error_count_args">Cannot read %d Guides from %d EPGs</string>
     <string name="read_multi_playlist_error_count_args">Cannot read %d Channels from %d Playlists</string>
 
     <!-- Menu -->
     <string name="menu_movie_channels">Movie Channels</string>
-    <string name="menu_my_playlists">My Playlists</string>
     <string name="menu_my_epgs">My EPGs</string>
+    <string name="menu_my_playlists">My Playlists</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_tv_channels">Tv Channels</string>
+
+    <!-- Images description -->
+    <string name="image_load_from_file">Load from file</string>
+    <string name="image_load_from_web">Load from web</string>
+
+    <!-- Messages -->
+    <string name="load_epg_from">Load EPG from…</string>
+    <string name="load_playlist_from">Load Playlist from…</string>
 
     <!-- Prompt -->
     <string name="prompt_delete_epg">Do you really want to delete this EPG?</string>
@@ -25,5 +35,11 @@
     <string name="prompt_playlist_path">Playlist path</string>
     <string name="prompt_epg_url">EPG url</string>
     <string name="prompt_playlist_url">Playlist url</string>
+
+    <!-- Titles -->
+    <string name="title_add_epg">Add EPG</string>
+    <string name="title_add_playlist">Add Playlist</string>
+    <string name="title_edit_epg">Edit EPG</string>
+    <string name="title_edit_playlist">Edit Playlist</string>
 
 </resources>

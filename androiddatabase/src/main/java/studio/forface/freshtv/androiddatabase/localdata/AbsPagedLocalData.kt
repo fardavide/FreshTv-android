@@ -7,6 +7,7 @@ import studio.forface.freshtv.androiddatabase.sources.PagedSourceFilesLocalSourc
 import studio.forface.freshtv.androiddatabase.sources.PagedTvChannelsLocalSource
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.entities.MovieChannel
+import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.entities.TvChannel
 import studio.forface.freshtv.localdata.mappers.MovieChannelPojoMapper
@@ -25,6 +26,9 @@ abstract class AbsPagedLocalData<MovieChannelPojo, SourceFilePojo, TvChannelPojo
         private val sourceFilesMapper: SourceFilePojoMapper<SourceFilePojo>,
         private val tvChannelMapper: TvChannelPojoMapper<TvChannelPojo>
 ) {
+
+    /** @return a [DataSource.Factory] of all the [Epg]s from Local Source */
+    fun epgs() = sourceFiles.allEpgs().map( sourceFilesMapper ) { it.toEntity() }
 
     /** @return a [DataSource.Factory] of all the [MovieChannel]s from Local Source */
     fun movieChannels(): DataSource.Factory<Int, MovieChannel> = movieChannels.all()

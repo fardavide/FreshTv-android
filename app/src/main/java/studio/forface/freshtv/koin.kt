@@ -26,6 +26,7 @@ val appModule = module {
     /* Presenters */
     factory { ChannelsAvailabilityPresenter( hasMovieChannels = get(), hasTvChannels = get() ) }
     factory { EpgPresenter( getEpg = get(), mapper = get() ) }
+    factory { EpgsPresenter( getEpgs = get(), mapper = get() ) }
     factory { PlaylistPresenter( getPlaylist = get(), mapper = get() ) }
     factory { PlaylistsPresenter( getPlaylists = get(), mapper = get() ) }
     factory {
@@ -52,6 +53,7 @@ val appModule = module {
             playlistPath = playlistPath
         )
     }
+    viewModel { EpgsViewModel( presenter = get() ) }
     viewModel { PlaylistsViewModel( presenter = get() ) }
     viewModel { (groupName: String?) ->
         TvChannelsViewModel(

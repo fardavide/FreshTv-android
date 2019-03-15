@@ -48,6 +48,11 @@
         android:name="studio.forface.freshtv.ui.PlaylistsFragment"
         android:label="PlaylistsFragment"
         tools:layout="@layout/fragment_recycler_view"/>
+    <fragment
+        android:id="@+id/epgsFragment"
+        android:name="studio.forface.freshtv.ui.EpgsFragment"
+        android:label="EpgsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
 
     <fragment
         android:id="@+id/editPlaylistFragment"
@@ -69,12 +74,6 @@
             app:argType="string"
             app:nullable="true"/>
     </fragment>
-
-    <fragment
-        android:id="@+id/epgsFragment"
-        android:name="studio.forface.freshtv.ui.EpgsFragment"
-        android:label="EpgsFragment"
-        tools:layout="@layout/fragment_recycler_view"/>
 
     <fragment
         android:id="@+id/playerFragment"

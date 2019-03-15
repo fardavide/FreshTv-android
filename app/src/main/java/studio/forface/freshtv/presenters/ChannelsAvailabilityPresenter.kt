@@ -5,7 +5,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
 import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.commonandroid.utils.invoke
 import studio.forface.freshtv.domain.usecases.HasMovieChannels

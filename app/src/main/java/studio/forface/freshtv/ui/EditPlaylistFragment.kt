@@ -36,6 +36,12 @@ import studio.forface.materialbottombar.panels.params.*
  */
 internal class EditPlaylistFragment: RootFragment( R.layout.fragment_source_file_edit ) {
 
+    companion object {
+        /** @return `NavDirections` to this `Fragment` */
+        fun directions( playlistPath: String? = null ) =
+                HomeFragmentDirections.actionToEditPlaylistFragment( playlistPath )
+    }
+
     /**
      * A reference to [EditPlaylistFragmentArgs] for get the `playlistPath` of the current editing `Playlist`
      * from [navArgs]

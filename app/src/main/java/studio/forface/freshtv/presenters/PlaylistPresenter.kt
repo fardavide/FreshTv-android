@@ -1,9 +1,9 @@
 package studio.forface.freshtv.presenters
 
-import studio.forface.freshtv.uimodels.SourceFileUiModel.Playlist
 import studio.forface.freshtv.domain.usecases.GetPlaylist
 import studio.forface.freshtv.mappers.SourceFileUiModelMapper
 import studio.forface.freshtv.mappers.invoke
+import studio.forface.freshtv.uimodels.SourceFileUiModel.Playlist
 
 /**
  * @author Davide Giuseppe Farella

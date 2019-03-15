@@ -7,9 +7,9 @@ import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.utils.LocalDateTimeHelper.localOffset
 import studio.forface.freshtv.domain.utils.toEpochMillis
 import studio.forface.freshtv.uimodels.TvChannelUiModel
+import studio.forface.freshtv.R.drawable.ic_tv as tvDrawable
 import studio.forface.freshtv.commonandroid.R.drawable.ic_favorite as favoriteDrawable
 import studio.forface.freshtv.commonandroid.R.drawable.ic_favorite_black as notFavoriteDrawable
-import studio.forface.freshtv.R.drawable.ic_tv as tvDrawable
 
 /**
  * @author Davide Giuseppe Farella.

@@ -20,12 +20,12 @@ class DelightPagedSourceFilesLocalSource(
     /** @return [DataSource.Factory] for all the stored Epgs [SourceFilePojo] */
     override fun allEpgs(): DataSource.Factory<Int, SourceFilePojo> = QueryDataSourceFactory(
         queryProvider = { l, o -> queries.selectAllByTypePaged( SourceFile.Epg.TYPE_NAME, l, o ) },
-        countQuery = queries.count()
+        countQuery = queries.countByType( SourceFile.Epg.TYPE_NAME )
     )
 
     /** @return [DataSource.Factory] for all the stored Playlists [SourceFilePojo] */
     override fun allPlaylists(): DataSource.Factory<Int, SourceFilePojo> = QueryDataSourceFactory(
         queryProvider = { l, o -> queries.selectAllByTypePaged( SourceFile.Playlist.TYPE_NAME, l, o ) },
-        countQuery = queries.count()
+        countQuery = queries.countByType( SourceFile.Playlist.TYPE_NAME )
     )
 }

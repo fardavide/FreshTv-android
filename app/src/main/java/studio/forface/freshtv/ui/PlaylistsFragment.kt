@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
-import studio.forface.freshtv.ui.HomeFragmentDirections.Companion.actionToEditPlaylistFragment
 import studio.forface.freshtv.ui.adapters.SourceFilesAdapter
 import studio.forface.freshtv.viewmodels.PlaylistsViewModel
 
@@ -19,16 +18,21 @@ import studio.forface.freshtv.viewmodels.PlaylistsViewModel
  */
 class PlaylistsFragment: RootFragment( R.layout.fragment_recycler_view ) {
 
+    companion object {
+        /** @return `NavDirections` to this `Fragment` */
+        fun directions() = HomeFragmentDirections.actionToPlaylistsFragment()
+    }
+
     /** A reference to [SourceFilesAdapter] for `recyclerView` */
     private val adapter = SourceFilesAdapter().apply {
-        onItemClick = { navController.navigate( actionToEditPlaylistFragment( it.fullPath ) ) }
+        onItemClick = { navController.navigate( EditPlaylistFragment.directions( it.fullPath ) ) }
     }
 
     /** @see RootFragment.fabParams */
     override val fabParams: FabParams get() = FabParams(
         R.drawable.ic_new_black,
         R.string.action_add_playlist
-    ) { navController.navigate( actionToEditPlaylistFragment( null ) ) }
+    ) { navController.navigate( EditPlaylistFragment.directions(null ) ) }
 
     /** A reference to [PlaylistsViewModel] for retrieve the stored `Playlist`s */
     private val playlistsViewModel by viewModel<PlaylistsViewModel>()
