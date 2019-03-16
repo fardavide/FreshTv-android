@@ -5,6 +5,7 @@ package studio.forface.freshtv.parsers.epg
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.w3c.dom.Node
+import org.xml.sax.SAXParseException
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.errors.ParsingEpgError.Reason

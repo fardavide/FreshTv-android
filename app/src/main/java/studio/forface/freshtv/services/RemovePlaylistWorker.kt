@@ -1,12 +1,16 @@
 package studio.forface.freshtv.services
 
 import android.content.Context
-import androidx.work.*
+import androidx.work.ExistingWorkPolicy
 import androidx.work.ListenableWorker.Result.retry
 import androidx.work.ListenableWorker.Result.success
+import androidx.work.Worker
+import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 import org.koin.core.inject
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
+import studio.forface.freshtv.commonandroid.utils.enqueueUniqueWork
 import studio.forface.freshtv.commonandroid.utils.workManager
 import studio.forface.freshtv.domain.usecases.RemovePlaylist
 
@@ -30,13 +34,10 @@ class RemovePlaylistWorker(
          * [playlistPath]
          */
         fun enqueue( playlistPath: String ) {
-            val work = OneTimeWorkRequestBuilder<RemovePlaylistWorker>()
-                .setInputData( workDataOf( ARG_PLAYLIST_PATH to playlistPath ) )
-                .build()
-            workManager.enqueueUniqueWork(
-                "$WORKER_NAME$playlistPath",
-                ExistingWorkPolicy.REPLACE,
-                work
+            workManager.enqueueUniqueWork<RemovePlaylistWorker>(
+                uniqueWorkName = "$WORKER_NAME$playlistPath",
+                replacePolicy = ExistingWorkPolicy.REPLACE,
+                workData = workDataOf( ARG_PLAYLIST_PATH to playlistPath )
             )
         }
     }

@@ -17,12 +17,14 @@ val workManager get() = WorkManager.getInstance()
 
 /** Enqueue an unique periodic Work without any optional parameters */
 inline fun <reified W: ListenableWorker> WorkManager.enqueueUniquePeriodicWork(
-        uniqueWorkName: String,
-        repeatInterval: Duration,
-        flexTimeInterval: Duration? = null,
-        replace: Boolean = false,
-        exponentialBackoff: Boolean = true,
-        backoffDelay: Duration = 30.seconds
+    uniqueWorkName: String,
+    repeatInterval: Duration,
+    flexTimeInterval: Duration? = null,
+    replace: Boolean = false,
+    exponentialBackoff: Boolean = true,
+    backoffDelay: Duration = 30.seconds,
+    constraints: Constraints = Constraints.NONE,
+    workData: Data? = null
 ) {
     val timeUnit = TimeUnit.MINUTES
     val repeatMin = repeatInterval.toMinutes()
@@ -35,7 +37,11 @@ inline fun <reified W: ListenableWorker> WorkManager.enqueueUniquePeriodicWork(
         PeriodicWorkRequestBuilder<W>( repeatMin, timeUnit, flexMin, timeUnit )
     else PeriodicWorkRequestBuilder<W>( repeatMin, timeUnit )
 
-    builder.setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
+    builder.apply {
+        setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
+        setConstraints( constraints )
+        workData?.let { setInputData( it ) }
+    }
 
     enqueueUniquePeriodicWork( uniqueWorkName, replacePolicy, builder.build() )
 }
@@ -45,13 +51,27 @@ inline fun <reified W: ListenableWorker> WorkManager.enqueueUniqueWork(
         uniqueWorkName: String,
         replacePolicy: ExistingWorkPolicy = ExistingWorkPolicy.APPEND,
         exponentialBackoff: Boolean = true,
-        backoffDelay: Duration = 30.seconds
+        backoffDelay: Duration = 30.seconds,
+        constraints: Constraints = Constraints.NONE,
+        workData: Data? = null
 ) {
     val timeUnit = TimeUnit.MINUTES
     val backoffPolicy = if ( exponentialBackoff ) EXPONENTIAL else LINEAR
 
-    val builder = OneTimeWorkRequestBuilder<W>()
-            .setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
+    val builder = OneTimeWorkRequestBuilder<W>().apply {
+        setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
+        setConstraints( constraints )
+        workData?.let { setInputData( it ) }
+    }
 
     enqueueUniqueWork( uniqueWorkName, replacePolicy, builder.build() )
+}
+
+/** @return [Constraints] invoking lambda [block] with [Constraints.Builder] as receiver */
+@Suppress("FunctionName")
+fun WorkConstraints(block: Constraints.Builder.() -> Unit ): Constraints {
+    return with( Constraints.Builder() ) {
+        block()
+        build()
+    }
 }

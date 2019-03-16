@@ -30,7 +30,7 @@ val mockMovieChannel = MovieChannel(
     groupName = "movieGroup",
     imageUrl = Url( "http://image.jpg" ),
     mediaUrls = mutableMapOf( "url1" to 4, "url2" to 2, "url3" to 0 ),
-    playlistPaths = mutableListOf( "http://playlist1.xml", "storage/documents/playlist2.xml" ),
+    playlistPaths = setOf( "http://playlist1.xml", "storage/documents/playlist2.xml" ),
     tmdbId = 1234
 )
 
@@ -46,7 +46,7 @@ val mockTvChannel = TvChannel(
     groupName = "tvGroup",
     imageUrl = Url( "http://image.jpg" ),
     mediaUrls = mutableMapOf( "url1" to 4, "url2" to 2, "url3" to 0 ),
-    playlistPaths = mutableListOf( "http://playlist1.xml", "storage/documents/playlist2.xml" )
+    playlistPaths = setOf( "http://playlist1.xml", "storage/documents/playlist2.xml" )
 )
 
 val mockTvGuide = TvGuide(

@@ -25,7 +25,7 @@ internal class TvChannelsViewModel(
 ): ScopedViewModel() {
 
     /** A [ViewStateStore] of [PagedList] of [TvChannelsViewModel] */
-    val channels = PagedViewStateStore<TvChannelUiModel>(50 )
+    val channels = PagedViewStateStore<TvChannelUiModel>(20 )
 
     init {
         channels.setLoading()

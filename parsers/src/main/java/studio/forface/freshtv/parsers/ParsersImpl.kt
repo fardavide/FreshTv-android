@@ -1,7 +1,10 @@
 package studio.forface.freshtv.parsers
 
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
+import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
@@ -29,15 +32,18 @@ internal class ParsersImpl(
     override suspend fun readFrom(
         epg: SourceFile.Epg,
         onTvGuide: suspend (TvGuide) -> Unit,
-        onError: suspend (ParsingEpgError) -> Unit
-    ) = coroutineScope {
+        onError: suspend (ParsingEpgError) -> Unit,
+        onProgress: (Int) -> Unit
+    ) = coroutineScope<Unit> {
         val guidesChannel = Channel<TvGuide>()
         val errorsChannel = Channel<ParsingEpgError>()
+        val progressChannel = Channel<Int>( CONFLATED )
 
         launch { for ( guide in guidesChannel ) onTvGuide( guide ) }
         launch { for( error in errorsChannel ) onError( error ) }
+        launch { for( progress in progressChannel ) onProgress( progress ) }
 
-        epgParser( contentResolver( epg ), guidesChannel, errorsChannel )
+        launch { epgParser( contentResolver( epg ), guidesChannel, errorsChannel, progressChannel ) }
     }
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */
@@ -46,21 +52,23 @@ internal class ParsersImpl(
             onChannel: suspend (IChannel) -> Unit,
             onGroup: suspend (ChannelGroup) -> Unit,
             onError: suspend (ParsingChannelError) -> Unit
-    ) = coroutineScope {
-        val channelsChannel = Channel<IChannel>()
-        val groupsChannel = Channel<ChannelGroup>()
-        val errorsChannel = Channel<ParsingChannelError>()
+    ) = coroutineScope<Unit> {
+        val channelsChannel = Channel<IChannel>( UNLIMITED )
+        val groupsChannel = Channel<ChannelGroup>( UNLIMITED )
+        val errorsChannel = Channel<ParsingChannelError>( UNLIMITED )
 
         launch { for( channel in channelsChannel ) onChannel( channel ) }
         launch { for( group in groupsChannel ) onGroup( group ) }
         launch { for( error in errorsChannel ) onError( error ) }
 
-        playlistParser(
+        launch {
+            playlistParser(
                 playlist.path,
                 contentResolver( playlist ),
                 channelsChannel,
                 groupsChannel,
                 errorsChannel
-        )
+            )
+        }
     }
 }

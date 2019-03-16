@@ -90,6 +90,7 @@ internal class EditEpgViewModel(
     /** Delete the current `EPG` */
     fun delete() {
         interactor.remove( path.toString() )
+        RefreshTvGuidesWorker.cancel( path.toString() )
     }
 
     /** Called when [create] or [save] has succeed */

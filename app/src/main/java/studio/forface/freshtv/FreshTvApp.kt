@@ -10,6 +10,8 @@ import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
+import studio.forface.freshtv.services.RefreshChannelsWorker
+import studio.forface.freshtv.services.RefreshTvGuidesWorker
 import studio.forface.theia.TheiaConfig
 import studio.forface.theia.cache.weeks
 import studio.forface.theia.invoke
@@ -59,6 +61,8 @@ class FreshTvApp: Application() {
         }
 
         // Enqueue Works
-        DeleteOldGuidesWorker.enqueue( 1.days, 10.hours )
+        RefreshChannelsWorker.enqueue( 1.days )
+        RefreshTvGuidesWorker.enqueue( 3.days )
+        DeleteOldGuidesWorker.enqueue( 5.days )
     }
 }

@@ -20,6 +20,7 @@ import studio.forface.freshtv.commonandroid.utils.*
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Type.LOCAL
 import studio.forface.freshtv.domain.entities.SourceFile.Type.REMOTE
+import studio.forface.freshtv.domain.utils.invoke
 import studio.forface.freshtv.ui.EditEpgFragment.Mode.CREATE
 import studio.forface.freshtv.ui.EditEpgFragment.Mode.EDIT
 import studio.forface.freshtv.ui.EditEpgFragment.State.*

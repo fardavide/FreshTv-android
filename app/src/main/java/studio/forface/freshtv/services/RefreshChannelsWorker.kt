@@ -6,11 +6,10 @@ import androidx.work.ListenableWorker.Result.retry
 import androidx.work.ListenableWorker.Result.success
 import kotlinx.coroutines.runBlocking
 import org.koin.core.inject
+import org.threeten.bp.Duration
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
-import studio.forface.freshtv.commonandroid.utils.enqueueUniqueWork
-import studio.forface.freshtv.commonandroid.utils.getString
-import studio.forface.freshtv.commonandroid.utils.workManager
+import studio.forface.freshtv.commonandroid.utils.*
 import studio.forface.freshtv.domain.usecases.RefreshChannels
 import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.Multi
 import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.Single
@@ -31,9 +30,12 @@ class RefreshChannelsWorker(
         private const val ARG_PLAYLIST_PATH = "playlist_path"
 
         /** Enqueue [RefreshChannelsWorker] without params, for refresh from all the `Playlist`s */
-        fun enqueue() {
-            workManager.enqueueUniqueWork<RefreshChannelsWorker>(
-                    WORKER_NAME, replacePolicy = ExistingWorkPolicy.REPLACE
+        fun enqueue( repeatInterval: Duration, flexInterval: Duration? = null ) {
+            val constraints = WorkConstraints {
+                setRequiredNetworkType( NetworkType.CONNECTED )
+            }
+            workManager.enqueueUniquePeriodicWork<RefreshChannelsWorker>(
+                    WORKER_NAME, repeatInterval, flexInterval, constraints = constraints
             )
         }
 
@@ -42,13 +44,10 @@ class RefreshChannelsWorker(
          * [playlistPath]
          */
         fun enqueue( playlistPath: String ) {
-            val work = OneTimeWorkRequestBuilder<RefreshChannelsWorker>()
-                    .setInputData( workDataOf( ARG_PLAYLIST_PATH to playlistPath ) )
-                    .build()
-            workManager.enqueueUniqueWork(
-                    "$WORKER_NAME$playlistPath",
-                    ExistingWorkPolicy.REPLACE,
-                    work
+            workManager.enqueueUniqueWork<RefreshChannelsWorker>(
+                uniqueWorkName = "$WORKER_NAME$playlistPath",
+                replacePolicy = ExistingWorkPolicy.REPLACE,
+                workData = workDataOf( ARG_PLAYLIST_PATH to playlistPath )
             )
         }
 

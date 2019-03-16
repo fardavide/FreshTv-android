@@ -16,6 +16,14 @@ class RefreshTvGuides(
     private val parsers: Parsers
 ) {
 
+    /** A lambda that will be invoked when a progress is received */
+    private var progressCallback: (Int) -> Unit = {}
+
+    /** Set [progressCallback] for execute a lambda [block] when a progress is received */
+    fun onProgress( block: (Int) -> Unit ) {
+        progressCallback = block
+    }
+
     /**
      * Refresh the playlists previously added
      * @return a [RefreshTvGuides.Error.Multi] of [Epg]s and [ParsingEpgError]s
@@ -33,7 +41,8 @@ class RefreshTvGuides(
         parsers.readFrom(
             epg = epg,
             onTvGuide = { localData.storeTvGuide( it ) },
-            onError = { errors += it }
+            onError = { errors += it },
+            onProgress = { progressCallback( it ) }
         )
         Error.Single( epg, errors )
     }
@@ -45,8 +54,19 @@ class RefreshTvGuides(
     suspend operator fun invoke( epgPath: String ) =
             this( localData.epg( epgPath ) )
 
+    /** A sealed class for wrapping [ParsingEpgError]s */
     sealed class Error {
-        data class Single( val epg: Epg, val parsingErrors: List<ParsingEpgError> ) : Error()
-        data class Multi( val all: List<Single> ) : Error()
+        /** @return whether error is present */
+        abstract val hasError: Boolean
+
+        /** A class representing a [ParsingEpgError]s for a single [Epg] */
+        data class Single( val epg: Epg, val parsingErrors: List<ParsingEpgError> ) : Error() {
+            override val hasError get() = parsingErrors.isNotEmpty()
+        }
+
+        /** A class representing a [ParsingEpgError]s for multiple [Epg]. It wraps a list of [Single] */
+        data class Multi( val all: List<Single> ) : Error() {
+            override val hasError get() = all.map { it.hasError }.reduce { acc, b -> acc || b }
+        }
     }
 }

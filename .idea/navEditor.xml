@@ -8,6 +8,11 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="action_to_editEpgFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_to_editPlaylistFragment">
                     <value>
                       <LayoutPositions />

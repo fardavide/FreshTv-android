@@ -3,8 +3,12 @@
 package studio.forface.freshtv.parsers.playlist
 
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.entities.MovieChannel
@@ -12,6 +16,7 @@ import studio.forface.freshtv.domain.entities.TvChannel
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.utils.forEachAsync
 import studio.forface.freshtv.domain.utils.wait
+import studio.forface.freshtv.parsers.SizedStream
 import studio.forface.freshtv.parsers.playlist.ParsablePlaylistItem.Result
 import java.io.InputStream
 
@@ -57,7 +62,7 @@ internal class PlaylistParser {
     /** Parse the [playlistStream] and submit items via the given [SendChannel]s */
     suspend operator fun invoke(
         playlistPath: String,
-        playlistStream: InputStream,
+        playlistStream: SizedStream,
         channels: SendChannel<IChannel>,
         groups: SendChannel<ChannelGroup>,
         errors: SendChannel<ParsingChannelError>
@@ -65,32 +70,35 @@ internal class PlaylistParser {
 
         val cachedGroups = mutableListOf<ChannelGroup>()
 
-        val items = Channel<ParsablePlaylistItem>()
+        val items = Channel<ParsablePlaylistItem>( UNLIMITED )
         val playlist = ParsablePlaylist( playlistStream )
-        playlist.extractItems( items )
 
-        for ( item in items ) {
-            when ( val result = item( playlistPath ) ) {
-                is Result.Channel -> {
-                    channels.send( result.content )
-                    result.content.group { group ->
-                        if ( cachedGroups.needsToUpdateWith( group ) )
-                            groups.send( group )
+        launch {
+            items.consumeEach { item ->
+                when ( val result = item( playlistPath ) ) {
+                    is Result.Channel -> {
+                        channels.send( result.content )
+                        result.content.group { group ->
+                            if ( cachedGroups.needsToUpdateWith( group ) )
+                                groups.send( group )
+                        }
                     }
+                    is Result.Group -> groups.send( result.content )
+                    is Result.Error -> errors.send( result.error )
+                    // Explicit else branch needed for avoid to forget something, since result is sealed but when is
+                    // statement
+                    else -> throw AssertionError("${result::class.qualifiedName} not implemented")
                 }
-                is Result.Group -> groups.send( result.content )
-                is Result.Error -> errors.send( result.error )
-                // Explicit else branch needed for avoid to forget something, since result is sealed but when is
-                // statement
-                else -> throw AssertionError("${result::class.qualifiedName} not implemented" )
             }
         }
 
-        wait { items.isClosedForReceive }
+        launch {
+            playlist.extractItems( items )
 
-        channels.close()
-        groups.close()
-        errors.close()
+            channels.close()
+            groups.close()
+            errors.close()
+        }
     }
 
     /** Extract a [ChannelGroup] from an [IChannel] and execute the lambda [block] with it */

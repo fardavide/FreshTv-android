@@ -6,7 +6,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
-import studio.forface.freshtv.commonandroid.utils.invoke
+import studio.forface.freshtv.domain.utils.invoke
 import studio.forface.freshtv.domain.usecases.HasMovieChannels
 import studio.forface.freshtv.domain.usecases.HasTvChannels
 import studio.forface.freshtv.uimodels.ChannelsAvailabilityUiModel

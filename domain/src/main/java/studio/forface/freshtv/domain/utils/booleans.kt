@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid.utils
+package studio.forface.freshtv.domain.utils
 
 /*
  * Author: Davide Giuseppe Farella

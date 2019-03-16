@@ -18,7 +18,8 @@ interface Parsers {
     suspend fun readFrom(
         epg: Epg,
         onTvGuide: suspend (TvGuide) -> Unit,
-        onError: suspend (ParsingEpgError) -> Unit
+        onError: suspend (ParsingEpgError) -> Unit,
+        onProgress: (Int) -> Unit
     )
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */

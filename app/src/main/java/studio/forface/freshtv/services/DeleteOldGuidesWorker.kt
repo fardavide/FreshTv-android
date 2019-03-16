@@ -26,7 +26,7 @@ class DeleteOldGuidesWorker(
         /** An unique name for the [DeleteOldGuidesWorker] */
         private const val WORKER_NAME = "delete_old_tv_guides"
 
-        /** Enqueue [DeleteOldGuidesWorker] as [PeriodicWorkRequest] for upload a large batch */
+        /** Enqueue [DeleteOldGuidesWorker] as [PeriodicWorkRequest] */
         fun enqueue( repeatInterval: Duration, flexInterval: Duration? = null ) {
             workManager.enqueueUniquePeriodicWork<DeleteOldGuidesWorker>(
                     WORKER_NAME, repeatInterval, flexInterval
