@@ -11,4 +11,4 @@ import org.threeten.bp.format.DateTimeFormatter
 val defaultDateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
 /** @return a default [DateTimeFormatter] for Time only */
-val defaultTimeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_TIME
+val defaultTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm" )

@@ -13,6 +13,17 @@ import studio.forface.freshtv.player.R
  */
 class PlayerFragment: RootFragment( R.layout.fragment_player ) {
 
+    companion object {
+        /** A key for [channelId] argument */
+        const val ARG_CHANNEL_ID = "extra.channel-id"
+
+        /** @return `NavDirections` to this `Fragment` */
+        //fun directions() = PlayerFragmentDirections.actionToTvChannelsFragment()
+    }
+
+    /** A [String] received from [getArguments] for retrieve the `Channel` with the given `id` */
+    private val channelId by lazy { arguments?.getString( ARG_CHANNEL_ID ) }
+
     /** A [NestedFragment] for the player */
     class VideoFragment: NestedFragment( R.layout.fragment_player_video )
 

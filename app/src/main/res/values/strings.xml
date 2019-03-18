@@ -25,6 +25,8 @@
     <!-- Messages -->
     <string name="load_epg_from">Load EPG from…</string>
     <string name="load_playlist_from">Load Playlist from…</string>
+    <string name="refresh_channels_completed">Channels updated</string>
+    <string name="refresh_tv_guides_completed">Tv Guides updated</string>
 
     <!-- Prompt -->
     <string name="prompt_delete_epg">Do you really want to delete this EPG?</string>

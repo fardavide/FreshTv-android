@@ -76,21 +76,7 @@ class RefreshTvGuidesWorker(
 
         catching
             .onSuccess { error ->
-                if ( error.hasError ) {
-                    val errorMessage = when ( error ) {
-                        is Single -> getString(
-                            R.string.read_single_epg_error_count_args,
-                            error.parsingErrors.size,
-                            error.epg.name ?: error.epg.path
-                        )
-                        is Multi -> getString(
-                            R.string.read_multi_epg_error_count_args,
-                            error.all.flatMap { singleError -> singleError.parsingErrors }.size,
-                            error.all.size
-                        )
-                    }
-                    notifier.error(errorMessage)
-                }
+                showResult( error )
                 return success()
             }
             .onFailure {
@@ -99,5 +85,25 @@ class RefreshTvGuidesWorker(
             }
 
         throw AssertionError( "Unreachable code" )
+    }
+
+    /** Show the result to the user */
+    private fun showResult( error: RefreshTvGuides.Error ) {
+        if ( error.hasError ) {
+            val errorMessage = when ( error ) {
+                is Single -> getString(
+                    R.string.read_single_epg_error_count_args,
+                    error.parsingErrors.size,
+                    error.epg.name ?: error.epg.path
+                )
+                is Multi -> getString(
+                    R.string.read_multi_epg_error_count_args,
+                    error.all.flatMap { singleError -> singleError.parsingErrors }.size,
+                    error.all.size
+                )
+            }
+            notifier.warn( errorMessage )
+
+        } else notifier.info( getString( R.string.refresh_tv_guides_completed ) )
     }
 }

@@ -34,13 +34,6 @@
                 tools:text="Channel 5"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
-            <TextView
-                android:id="@+id/tvChannelProgramName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Otto sotto un tetto"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
-
         </LinearLayout>
 
         <!-- Favorite -->
@@ -59,6 +52,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/tvChannelProgramName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                tools:text="Otto sotto un tetto"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

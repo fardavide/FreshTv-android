@@ -23,6 +23,16 @@ interface TvGuidesLocalSource<Pojo> {
     /**
      * @return all the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId]
      *
+     * @param time the [LocalDateTime] representing the the time range to query.
+     * Default if the [LocalDateTime.now]
+     *
+     * This will query all the [Pojo] where [time] is between which has [Pojo]'s startTime and [Pojo]'s endTime
+     */
+    fun guidesForChannel( channelId: String, time: LocalDateTime? ): List<Pojo>
+
+    /**
+     * @return all the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId]
+     *
      * @param from the [LocalDateTime] representing the start of the time range to query.
      * Default if the [LocalDateTime] created from the Unix value of [Long.MIN_VALUE]
      *
@@ -32,7 +42,7 @@ interface TvGuidesLocalSource<Pojo> {
      * [from] and [to] will query all the [Pojo] which has [Pojo]'s startTime or [Pojo]'s endTime in range of [from]
      * and [to], or which [from] or [to] is in range of [Pojo]'s startTime and [Pojo]'s endTime
      */
-    fun guidesForChannel( channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<Pojo>
+    fun guidesForChannelRanged( channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<Pojo>
 
     /** Update an already stored guide [Pojo] */
     fun updateGuide( guide: Pojo )

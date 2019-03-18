@@ -38,12 +38,12 @@ internal class TvChannelUiModelMapper :
     }
 
     private fun TvGuide.toUiModel(): TvChannelUiModel.CurrentProgram {
-        val ( startEpoch, endEpoch ) = endTime.toEpochMillis( localOffset ) to startTime.toEpochMillis( localOffset )
+        val ( startEpoch, endEpoch ) = startTime.toEpochMillis( localOffset ) to endTime.toEpochMillis( localOffset )
         val currentEpoch = LocalDateTime.now().toEpochMillis( localOffset )
 
         val runtime = endEpoch - startEpoch
         val progress = currentEpoch - startEpoch
-        // x : 100 = progress : runtime
+        // runtime : progress = 100 : x
         val progressPercentage = ( progress * 100 ) / runtime
 
         return TvChannelUiModel.CurrentProgram(

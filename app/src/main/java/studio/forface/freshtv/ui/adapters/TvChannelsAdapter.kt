@@ -91,6 +91,7 @@ internal class TvChannelsAdapter:
             // Program
             tvChannelProgram.isVisible = item.currentProgram != null
             item.currentProgram?.let { program ->
+                tvChannelProgramName.text = program.title
                 tvChannelProgramStartTime.text = program.startTime
                 tvChannelProgramEndTime.text = program.endTime
                 tvChannelProgramProgress.progress = program.progressPercentage

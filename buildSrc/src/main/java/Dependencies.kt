@@ -54,7 +54,7 @@ object Versions {
     val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.3"
     val mockk =                         "1.9"
-    val sqldelight =                    "1.0.3"
+    val sqldelight =                    "1.1.1"
     val threeten_android_bp =           "1.1.1"
     val threeten_bp =                   "1.3.2"
     val timber =                        "4.7.1"
@@ -77,7 +77,7 @@ object Versions {
     val android_support =               "1.0.0-beta01"
     val android_test_runner =           "1.1.1"
     val android_theia =                 "0.3-alpha-1"
-    val android_view_state_store =      "1.1-beta-3"
+    val android_view_state_store =      "1.1-beta-5"
     val android_work =                  "1.0.0-beta04"
 }
 

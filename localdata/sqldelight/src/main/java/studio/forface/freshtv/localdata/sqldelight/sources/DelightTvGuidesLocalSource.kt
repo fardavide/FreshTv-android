@@ -47,6 +47,19 @@ class DelightTvGuidesLocalSource(
     override fun guide( id: String ): TvGuidePojo = queries.selectById( id ).executeAsOne()
 
     /**
+     * @return all the stored Guides [TvGuidesLocalSource] with [TvGuidesLocalSource]'s channelId as the given
+     * [channelId]
+     *
+     * @param time the [LocalDateTime] representing the the time range to query.
+     * Default if the [LocalDateTime.now]
+     *
+     * This will query all the [TvGuidePojo] where [time] is between which has [TvGuidePojo.startTime] and
+     * [TvGuidePojo.endTime]
+     */
+    override fun guidesForChannel( channelId: String, time: LocalDateTime? ) =
+            queries.selectByChannelId( channelId, time ?: LocalDateTime.now() ).executeAsList()
+
+    /**
      * @return all the stored Guides [TvGuidePojo] with [TvGuidePojo.channelId] as the given [channelId]
      *
      * @param from the [LocalDateTime] representing the start of the time range to query.
@@ -59,13 +72,19 @@ class DelightTvGuidesLocalSource(
      * in range of [from] and [to], or which [from] or [to] is in range of [TvGuidePojo.startTime] and
      * [TvGuidePojo.endTime]
      */
-    override fun guidesForChannel( channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<TvGuidePojo> {
-        return queries.selectByChannelId(
+    override fun guidesForChannelRanged(
+        channelId: String,
+        from: LocalDateTime?,
+        to: LocalDateTime?
+    ): List<TvGuidePojo> {
+        return queries.selectByChannelIdRanged(
             channelId,
             from = from ?: LocalDateTimeHelper.ofEpochSecond( Long.MIN_VALUE ),
             to = to ?: LocalDateTimeHelper.ofEpochSecond( Long.MAX_VALUE )
         ).executeAsList()
     }
+
+
 
     /** Update an already stored guide [TvGuidePojo] */
     override fun updateGuide( guide: TvGuidePojo) {

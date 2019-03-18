@@ -1,3 +1,5 @@
+import com.squareup.sqldelight.gradle.SqlDelightDatabase
+
 plugins {
     id("java-library" )
     id("kotlin" )
@@ -13,4 +15,8 @@ dependencies {
     api( Libs.sqldelight )
 }
 
-sqldelight.packageName = "${Project.id}.localdata.sqldelight"
+sqldelight {
+    methodMissing("Database", arrayOf( closureOf<SqlDelightDatabase> {
+        packageName = "${Project.id}.localdata.sqldelight"
+    } ) )
+}

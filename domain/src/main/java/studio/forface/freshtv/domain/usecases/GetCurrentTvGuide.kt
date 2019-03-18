@@ -1,6 +1,5 @@
 package studio.forface.freshtv.domain.usecases
 
-import org.threeten.bp.LocalDateTime.now
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.gateways.LocalData
 
@@ -15,7 +14,5 @@ class GetCurrentTvGuide( private val localData: LocalData ) {
      * It will query from `now` to 10 seconds later and pick the last result, for avoid to pick
      * a [TvGuide] near to finish
      */
-    operator fun invoke( channelId: String ) =
-            localData.tvGuides( channelId, now(), now().plusSeconds(10 ) )
-                    .lastOrNull()
+    operator fun invoke( channelId: String ) = localData.tvGuides( channelId ).lastOrNull()
 }

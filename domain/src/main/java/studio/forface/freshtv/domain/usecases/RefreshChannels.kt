@@ -45,8 +45,19 @@ class RefreshChannels(
     suspend operator fun invoke( playlistPath: String ) =
             this( localData.playlist( playlistPath ) )
 
+    /** A sealed class for wrapping [ParsingChannelError]s */
     sealed class Error {
-        data class Single( val playlist: Playlist, val parsingErrors: List<ParsingChannelError> ) : Error()
-        data class Multi( val all: List<Single> ) : Error()
+        /** @return whether error is present */
+        abstract val hasError: Boolean
+
+        /** A class representing a [ParsingChannelError]s for a single [Playlist] */
+        data class Single( val playlist: Playlist, val parsingErrors: List<ParsingChannelError> ) : Error() {
+            override val hasError get() = parsingErrors.isNotEmpty()
+        }
+
+        /** A class representing a [ParsingChannelError]s for multiple [Playlist]. It wraps a list of [Single] */
+        data class Multi( val all: List<Single> ) : Error() {
+            override val hasError get() = all.map { it.hasError }.reduce { acc, b -> acc || b }
+        }
     }
 }

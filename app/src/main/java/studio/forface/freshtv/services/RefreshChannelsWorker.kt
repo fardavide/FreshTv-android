@@ -73,20 +73,8 @@ class RefreshChannelsWorker(
         }
 
         catching
-            .onSuccess {
-                val errorMessage = when ( it ) {
-                    is Single -> getString(
-                        R.string.read_single_playlist_error_count_args,
-                        it.parsingErrors.size,
-                        it.playlist.name ?: it.playlist.path
-                    )
-                    is Multi -> getString(
-                        R.string.read_multi_playlist_error_count_args,
-                        it.all.flatMap { singleError -> singleError.parsingErrors }.size,
-                        it.all.size
-                    )
-                }
-                notifier.error( errorMessage )
+            .onSuccess { error ->
+                showResult( error )
                 return success()
             }
             .onFailure {
@@ -95,5 +83,25 @@ class RefreshChannelsWorker(
             }
 
         throw AssertionError( "Unreachable code" )
+    }
+
+    /** Show the result to the user */
+    private fun showResult( error: RefreshChannels.Error ) {
+        if ( error.hasError ) {
+            val errorMessage = when ( error ) {
+                is Single -> getString(
+                    R.string.read_single_playlist_error_count_args,
+                    error.parsingErrors.size,
+                    error.playlist.name ?: error.playlist.path
+                )
+                is Multi -> getString(
+                    R.string.read_multi_playlist_error_count_args,
+                    error.all.flatMap { singleError -> singleError.parsingErrors }.size,
+                    error.all.size
+                )
+            }
+            notifier.warn( errorMessage )
+
+        } else notifier.info( getString( R.string.refresh_channels_completed ) )
     }
 }

@@ -2,6 +2,7 @@ package studio.forface.freshtv.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
@@ -48,6 +49,7 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
         channelsViewModel.channels.observe {
             doOnData { adapter.submitList( it ) }
             doOnError { notifier.error( it ) }
+            doOnLoadingChange( ::onLoading )
         }
     }
 
@@ -57,5 +59,12 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
         val recyclerView = view.findViewById<RecyclerView>( R.id.recyclerView )
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager( context )
+    }
+
+    /** Update the loading change */
+    private fun onLoading( loading: Boolean ) {
+        with( requireView().findViewById<ContentLoadingProgressBar>( R.id.progressBar ) ) {
+            if ( loading ) show() else hide()
+        }
     }
 }

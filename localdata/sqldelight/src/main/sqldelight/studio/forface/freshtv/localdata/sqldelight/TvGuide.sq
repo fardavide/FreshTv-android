@@ -73,6 +73,12 @@ selectByChannelId:
   SELECT *
   FROM tvGuidePojo
   WHERE channelId = ?
+  AND :time BETWEEN startTime AND endTime;
+
+selectByChannelIdRanged:
+  SELECT *
+  FROM tvGuidePojo
+  WHERE channelId = ?
   AND (
     ( startTime = :from AND endTime = :to ) -- Workaround for infer type of :from and :to
     OR (
