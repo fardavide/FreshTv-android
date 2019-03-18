@@ -61,10 +61,9 @@ internal class TvChannelsFragment: RootFragment( R.layout.fragment_recycler_view
         recyclerView.layoutManager = LinearLayoutManager( context )
     }
 
-    /** Update the loading change */
+    /** Update the loading state */
     private fun onLoading( loading: Boolean ) {
-        with( requireView().findViewById<ContentLoadingProgressBar>( R.id.progressBar ) ) {
-            if ( loading ) show() else hide()
-        }
+        val progressBar = requireView().findViewById<ContentLoadingProgressBar>( R.id.progressBar )
+        if ( loading ) progressBar.show() else progressBar.hide()
     }
 }
