@@ -1,5 +1,6 @@
 package studio.forface.freshtv.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -12,6 +13,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
+import studio.forface.freshtv.commonandroid.utils.Android
 import studio.forface.freshtv.uimodels.*
 import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
@@ -50,6 +52,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
         super.onCreate( savedInstanceState )
+        if ( Android.MARSHMALLOW ) window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         setDrawer()
         setSupportActionBar( bottomAppBar )
         // bottomAppBar.setupWithNavController( navController ) TODO: navigationIcon not showing
