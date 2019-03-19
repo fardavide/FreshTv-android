@@ -9,6 +9,7 @@
         <item name="colorOnPrimary">@android:color/white</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@android:color/black</item>
+        <item name="colorError">@color/red_700</item>
         <item name="android:colorBackground">@color/colorBackground</item>
 
         <!-- Edit text -->

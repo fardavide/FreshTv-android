@@ -7,4 +7,5 @@
     <color name="colorBackground">#fcfcfc</color>
 
     <color name="red_500">#f44336</color>
+    <color name="red_700">#d32f2f</color>
 </resources>
