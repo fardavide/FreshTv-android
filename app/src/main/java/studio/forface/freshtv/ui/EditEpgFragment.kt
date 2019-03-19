@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_source_file_edit.*
@@ -87,7 +89,18 @@ internal class EditEpgFragment: RootFragment( R.layout.fragment_source_file_edit
         // Observe to a State for the Fragment
         editEpgViewModel.state.observeData { state ->
             when ( state ) {
-                is SaveCompleted -> navController.popBackStack()
+                is SaveCompleted -> showDialog { bodyView ->
+                    header {
+                        titleTextRes = R.string.refresh_tv_guides_delayed_title
+                        titleColorRes = R.color.colorPrimary
+                        titleSpSize = 16f
+                    }
+                    bodyView.findViewById<TextView>( R.id.dialogContentTextView )
+                        .setText( R.string.refresh_tv_guides_delayed_message )
+
+                    bodyView.findViewById<Button>( R.id.dialogPositiveButton )
+                        .setOnClickListener{ dismissPanel(); navController.popBackStack() }
+                }
                 is ReadyToSave -> fab?.show()
                 else -> fab?.hide()
             }

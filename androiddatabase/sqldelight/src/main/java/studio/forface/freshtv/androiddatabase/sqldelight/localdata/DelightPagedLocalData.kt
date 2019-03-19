@@ -11,6 +11,8 @@ import studio.forface.freshtv.localdata.sqldelight.TvChannelPojo
 import studio.forface.freshtv.localdata.sqldelight.mappers.DelightMovieChannelPojoMapper
 import studio.forface.freshtv.localdata.sqldelight.mappers.DelightSourceFilePojoMapper
 import studio.forface.freshtv.localdata.sqldelight.mappers.DelightTvChannelPojoMapper
+import studio.forface.freshtv.localdata.sqldelight.mappers.DelightTvChannelWithGuidePojoMapper
+import studio.forface.freshtv.localdata.sqldelight.utils.TvChannelWithGuidePojo
 
 /**
  * @author Davide Giuseppe Farella.
@@ -22,7 +24,14 @@ internal class DelightPagedLocalData(
     tvChannels: DelightPagedTvChannelsLocalSource,
     movieChannelMapper: DelightMovieChannelPojoMapper,
     sourceFilesMapper: DelightSourceFilePojoMapper,
-    tvChannelMapper: DelightTvChannelPojoMapper
-) : AbsPagedLocalData<MovieChannelPojo, SourceFilePojo, TvChannelPojo>(
-    movieChannels, sourceFiles, tvChannels, movieChannelMapper, sourceFilesMapper, tvChannelMapper
+    tvChannelMapper: DelightTvChannelPojoMapper,
+    tvChannelWithGuideMapper: DelightTvChannelWithGuidePojoMapper
+) : AbsPagedLocalData<MovieChannelPojo, SourceFilePojo, TvChannelPojo, TvChannelWithGuidePojo>(
+    movieChannels,
+    sourceFiles,
+    tvChannels,
+    movieChannelMapper,
+    sourceFilesMapper,
+    tvChannelMapper,
+    tvChannelWithGuideMapper
 )

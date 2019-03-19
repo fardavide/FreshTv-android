@@ -6,4 +6,4 @@ package studio.forface.freshtv.androiddatabase.sources
  *
  * Inherit from [PagedChannelsLocalSource]
  */
-interface PagedMovieChannelsLocalSource<Pojo>: PagedChannelsLocalSource<Pojo>
+interface PagedMovieChannelsLocalSource<ChannelPojo> : PagedChannelsLocalSource<ChannelPojo>

@@ -89,6 +89,25 @@ selectPagedByGroup:
     name ASC
   LIMIT :limit OFFSET :offset;
 
+selectPagedByGroupWithGuide:
+  SELECT
+    tvChannelPojo.id,
+    name,
+    tvChannelPojo.imageUrl,
+    favorite,
+    title AS programTitle,
+    startTime AS programStatTime,
+    endTime AS programEndTime
+  FROM tvChannelPojo
+  LEFT JOIN tvGuidePojo ON
+    tvGuidePojo.channelId = tvChannelPojo.id
+    AND :time BETWEEN tvGuidePojo.startTime AND tvGuidePojo.endTime
+  WHERE groupName = ?
+  ORDER BY
+    favorite DESC,
+    name ASC
+  LIMIT :limit OFFSET :offset;
+
 selectByPlaylistPath:
   SELECT *
   FROM tvChannelPojo

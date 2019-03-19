@@ -12,8 +12,8 @@
 
     <!-- Global actions -->
     <action
-        android:id="@+id/action_to_tvChannelsFragment"
-        app:destination="@id/tvChannelsFragment" />
+        android:id="@+id/action_to_tvChannelGroupsFragment"
+        app:destination="@id/tvChannelGroupsFragment" />
 
     <action
         android:id="@+id/action_to_playlistsFragment"
@@ -33,6 +33,11 @@
 
 
     <!-- Fragments -->
+    <fragment
+        android:id="@+id/tvChannelGroupsFragment"
+        android:name="studio.forface.freshtv.ui.TvChannelGroupsFragment"
+        android:label="TvChannelGroupsFragment"
+        tools:layout="@layout/fragment_view_pager_tabbed"/>
     <fragment
         android:id="@+id/tvChannelsFragment"
         android:name="studio.forface.freshtv.ui.TvChannelsFragment"

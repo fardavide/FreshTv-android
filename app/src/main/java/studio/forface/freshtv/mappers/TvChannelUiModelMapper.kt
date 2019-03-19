@@ -3,6 +3,7 @@ package studio.forface.freshtv.mappers
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.commonandroid.utils.defaultTimeFormatter
 import studio.forface.freshtv.domain.entities.TvChannel
+import studio.forface.freshtv.domain.entities.TvChannelWithGuide
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.utils.LocalDateTimeHelper.localOffset
 import studio.forface.freshtv.domain.utils.toEpochMillis
@@ -22,22 +23,22 @@ internal class TvChannelUiModelMapper :
 
     /** @see UiModelMapper.toUiModel */
     override fun TvChannelWithGuide.toUiModel(): TvChannelUiModel {
-        val image = channel.imageUrl?.s
-        val favoriteImage = if ( channel.favorite ) favoriteDrawable else notFavoriteDrawable
-        val currentProgram = guide?.toUiModel()
+        val image = imageUrl?.s
+        val favoriteImage = if ( favorite ) favoriteDrawable else notFavoriteDrawable
+        val currentProgram = program?.toUiModel()
 
         return TvChannelUiModel(
-            id =                channel.id,
-            name =              channel.name,
+            id =                id,
+            name =              name,
             image =             image,
             imagePlaceHolder =  tvDrawable,
-            favorite =          channel.favorite,
+            favorite =          favorite,
             favoriteImage =     favoriteImage,
             currentProgram =    currentProgram
         )
     }
 
-    private fun TvGuide.toUiModel(): TvChannelUiModel.CurrentProgram {
+    private fun TvChannelWithGuide.Program.toUiModel(): TvChannelUiModel.CurrentProgram {
         val ( startEpoch, endEpoch ) = startTime.toEpochMillis( localOffset ) to endTime.toEpochMillis( localOffset )
         val currentEpoch = LocalDateTime.now().toEpochMillis( localOffset )
 
@@ -57,12 +58,3 @@ internal class TvChannelUiModelMapper :
     /** @see UiModelMapper.toEntity */
     override fun TvChannelUiModel.toEntity() = unsupported
 }
-
-/** A typealias of a [Pair] of [TvChannel] and OPTIONAL [TvGuide] */
-private typealias TvChannelWithGuide = Pair<TvChannel, TvGuide?>
-
-/** @return [TvChannel] from a [TvChannelWithGuide] */
-private val TvChannelWithGuide.channel get() = first
-
-/** @return OPTIONAL [TvGuide] from a [TvChannelWithGuide] */
-private val TvChannelWithGuide.guide get() = second

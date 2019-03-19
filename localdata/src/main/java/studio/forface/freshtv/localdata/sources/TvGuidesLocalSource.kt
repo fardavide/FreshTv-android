@@ -21,14 +21,14 @@ interface TvGuidesLocalSource<Pojo> {
     fun guide( id: String ): Pojo
 
     /**
-     * @return all the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId]
+     * @return the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId]
      *
      * @param time the [LocalDateTime] representing the the time range to query.
      * Default if the [LocalDateTime.now]
      *
      * This will query all the [Pojo] where [time] is between which has [Pojo]'s startTime and [Pojo]'s endTime
      */
-    fun guidesForChannel( channelId: String, time: LocalDateTime? ): List<Pojo>
+    fun guideForChannel( channelId: String, time: LocalDateTime? ): Pojo
 
     /**
      * @return all the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId]

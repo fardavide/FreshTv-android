@@ -23,13 +23,13 @@ class DelightPagedMovieChannelsLocalSource(
     )
 
     /** @return a [DataSource.Factory] for the stored channels [MovieChannelPojo] with the given `Channel` groupName */
-    override fun channelsWithGroup( groupName: String ) = QueryDataSourceFactory(
+    override fun channelsByGroup( groupName: String ) = QueryDataSourceFactory(
         queryProvider = { l, o ->  queries.selectPagedByGroup( groupName, l, o ) },
         countQuery = queries.countByGroup( groupName )
     )
 
     /** @return the stored channels [MovieChannelPojo] with the given [playlistPath] in `Channel` playlistPaths */
-    override fun channelsWithPlaylist( playlistPath: String ) = QueryDataSourceFactory(
+    override fun channelsByPlaylist( playlistPath: String ) = QueryDataSourceFactory(
         queryProvider = { l, o ->  queries.selectPagedByPlaylistPath( playlistPath, l, o ) },
         countQuery = queries.countByPlaylistPath( playlistPath )
     )

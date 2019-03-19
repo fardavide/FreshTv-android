@@ -4,6 +4,7 @@ import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.gateways.AppSettings
 import studio.forface.freshtv.domain.gateways.LocalData
+import studio.forface.freshtv.domain.utils.BackDuration
 
 /**
  * @author Davide Giuseppe Farella.
@@ -19,5 +20,10 @@ class DeleteOldGuides( private val localData: LocalData, private val settings: A
         before: LocalDateTime = LocalDateTime.now().minusDays( settings.oldGuidesLifespanDays )
     ) {
         localData.deleteTvGuidesBefore( before )
+    }
+
+    /** Delete all the [TvGuide]s before the given [BackDuration] */
+    operator fun invoke( before: BackDuration ) {
+        localData.deleteTvGuidesBefore( before() )
     }
 }

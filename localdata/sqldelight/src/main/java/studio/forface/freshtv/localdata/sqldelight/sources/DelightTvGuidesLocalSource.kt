@@ -27,7 +27,7 @@ class DelightTvGuidesLocalSource(
                     year =              year,
                     country =           country,
                     credits_director =  credits_director,
-                    credits_actors =     credits_actors,
+                    credits_actors =    credits_actors,
                     rating =            rating,
                     startTime =         startTime,
                     endTime =           endTime
@@ -47,7 +47,7 @@ class DelightTvGuidesLocalSource(
     override fun guide( id: String ): TvGuidePojo = queries.selectById( id ).executeAsOne()
 
     /**
-     * @return all the stored Guides [TvGuidesLocalSource] with [TvGuidesLocalSource]'s channelId as the given
+     * @return the stored Guides [TvGuidesLocalSource] with [TvGuidesLocalSource]'s channelId as the given
      * [channelId]
      *
      * @param time the [LocalDateTime] representing the the time range to query.
@@ -56,8 +56,8 @@ class DelightTvGuidesLocalSource(
      * This will query all the [TvGuidePojo] where [time] is between which has [TvGuidePojo.startTime] and
      * [TvGuidePojo.endTime]
      */
-    override fun guidesForChannel( channelId: String, time: LocalDateTime? ) =
-            queries.selectByChannelId( channelId, time ?: LocalDateTime.now() ).executeAsList()
+    override fun guideForChannel( channelId: String, time: LocalDateTime? ) =
+            queries.selectByChannelId( channelId, time ?: LocalDateTime.now() ).executeAsOne()
 
     /**
      * @return all the stored Guides [TvGuidePojo] with [TvGuidePojo.channelId] as the given [channelId]

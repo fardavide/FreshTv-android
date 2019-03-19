@@ -91,7 +91,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasTvs )
                 primaryItem( R.string.menu_tv_channels ) {
                     iconResource = R.drawable.ic_tv
-                    navDirections = TvChannelsFragment.directions()
+                    navDirections = TvChannelGroupsFragment.directions()
                 }
 
             // Movie Channels

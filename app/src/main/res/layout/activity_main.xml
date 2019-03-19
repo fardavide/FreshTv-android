@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:background="@android:color/white"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="24sp"
                 android:textAlignment="center"

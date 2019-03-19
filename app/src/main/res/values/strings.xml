@@ -26,6 +26,10 @@
     <string name="load_epg_from">Load EPG from…</string>
     <string name="load_playlist_from">Load Playlist from…</string>
     <string name="refresh_channels_completed">Channels updated</string>
+    <string name="refresh_tv_guides_delayed_title">Refresh of Tv Guides delayed</string>
+    <string name="refresh_tv_guides_delayed_message">
+        Since the refresh of Tv Guides is an expensive process, it will delayed when the device will be in idle, for not slow down other database operations
+    </string>
     <string name="refresh_tv_guides_completed">Tv Guides updated</string>
 
     <!-- Prompt -->
@@ -43,5 +47,6 @@
     <string name="title_add_playlist">Add Playlist</string>
     <string name="title_edit_epg">Edit EPG</string>
     <string name="title_edit_playlist">Edit Playlist</string>
+    <string name="title_tv_channels">TV Channels</string>
 
 </resources>

@@ -25,5 +25,5 @@ import androidx.fragment.app.Fragment
  * @return [ColorInt] for the given [androidColorAttr] from a [Fragment] for the current [Theme].
  * @see FragmentActivity.getThemeColor
  */
-@ColorInt fun Fragment.getThemeColor( androidColorAttr: Int ): Int? =
-    activity?.getThemeColor( androidColorAttr )
+@ColorInt fun Fragment.getThemeColor( androidColorAttr: Int ): Int =
+        requireActivity().getThemeColor( androidColorAttr )

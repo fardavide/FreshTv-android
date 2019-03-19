@@ -47,8 +47,18 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
         baseActivity?.dismissPanel()
     }
 
+    /** Shortcut for show a dialog [MaterialPanel] with a static id */
+    fun showDialog( builder: PanelBuilder.( View ) -> Unit ) {
+        val body = layoutInflater.inflate( R.layout.layout_dialog_body, requireView() as ViewGroup,false )
+        val panel = panel { builder( body ).apply {
+            customBody( body ) { /* TODO: optional in lib */ }
+        } }
+        showPanel( DIALOG_PANEL_ID, panel )
+    }
+
     /** Add the given [MaterialPanel] and open it. */
     fun showPanel( panelId: Int, panel: MaterialPanel ) {
+        panel.wrapToContent = false // TODO fix in lib
         baseActivity?.showPanel( panelId, panel )
     }
 
@@ -57,6 +67,9 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
         showPanel( panelId, panel { builder() } )
     }
 }
+
+/** An [Int] ID for [BaseFragment.showPanel] for a generic dialog [MaterialPanel] */
+private const val DIALOG_PANEL_ID = 909
 
 /**
  * A base class for a [Fragment] that have an `Activity` as parent

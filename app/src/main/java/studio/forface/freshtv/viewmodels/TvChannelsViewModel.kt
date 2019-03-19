@@ -21,7 +21,7 @@ import studio.forface.viewstatestore.setLoading
 internal class TvChannelsViewModel(
         private val presenter: TvChannelsPresenter,
         private val interactor: ChannelChangeFavoriteInteractor,
-        private val groupName: String?
+        private val groupName: String
 ): ScopedViewModel() {
 
     /** A [ViewStateStore] of [PagedList] of [TvChannelsViewModel] */
@@ -37,5 +37,6 @@ internal class TvChannelsViewModel(
     /** Change the Favorite state of a `Channel` */
     fun setFavoriteChannel( favoritedChannel: FavoritedChannel ) {
         interactor( favoritedChannel )
+        channels.setLoading()
     }
 }

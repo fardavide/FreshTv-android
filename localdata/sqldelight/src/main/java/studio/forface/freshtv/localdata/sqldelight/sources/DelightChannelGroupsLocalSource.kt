@@ -14,10 +14,10 @@ class DelightChannelGroupsLocalSource(
 ): ChannelGroupsLocalSource<ChannelGroupPojo> {
 
     /** @return all the stored [ChannelGroupPojo] of [Type.MOVIE] */
-    override fun allMovie(): List<ChannelGroupPojo> = queries.selectsMovie().executeAsList()
+    override fun allMovie() = queries.selectMovie().executeAsList()
 
     /** @return all the stored [ChannelGroupPojo] of [Type.TV] */
-    override fun allTv(): List<ChannelGroupPojo> = queries.selectsTv().executeAsList()
+    override fun allTv() = queries.selectTv().executeAsList()
 
     /** Create a new [ChannelGroupPojo] */
     override fun createChannelGroup( group: ChannelGroupPojo) {
@@ -32,7 +32,7 @@ class DelightChannelGroupsLocalSource(
     }
 
     /** @return the [ChannelGroupPojo] with the given [id] */
-    override fun group( id: String ): ChannelGroupPojo = queries.selectById( id ).executeAsOne()
+    override fun group( id: String ) = queries.selectById( id ).executeAsOne()
 
     /** Update an already stored [ChannelGroupPojo] */
     override fun updateGroup( group: ChannelGroupPojo) {

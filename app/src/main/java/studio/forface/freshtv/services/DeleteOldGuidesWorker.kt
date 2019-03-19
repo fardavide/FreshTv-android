@@ -12,6 +12,8 @@ import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
 import studio.forface.freshtv.commonandroid.utils.enqueueUniquePeriodicWork
 import studio.forface.freshtv.commonandroid.utils.workManager
 import studio.forface.freshtv.domain.usecases.DeleteOldGuides
+import studio.forface.freshtv.domain.utils.ago
+import studio.forface.freshtv.domain.utils.days
 
 /**
  * @author Davide Giuseppe Farella.
@@ -42,7 +44,7 @@ class DeleteOldGuidesWorker(
      * @return [success] if [deleteOldGuides] completes without exceptions, else [retry]
      */
     override fun doWork(): Result {
-        runCatching { deleteOldGuides() }
+        runCatching { deleteOldGuides(2 days ago ) }
             .onFailure { notifier.error( it ); return retry() }
         return success()
     }

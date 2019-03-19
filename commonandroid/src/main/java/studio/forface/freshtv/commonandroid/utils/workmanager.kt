@@ -38,7 +38,9 @@ inline fun <reified W: ListenableWorker> WorkManager.enqueueUniquePeriodicWork(
     else PeriodicWorkRequestBuilder<W>( repeatMin, timeUnit )
 
     builder.apply {
-        setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
+        // Set backoff criteria only if IDLE is not required, due to "Cannot set backoff criteria on an idle mode job"
+        if ( ! Android.MARSHMALLOW || ! constraints.requiresDeviceIdle() )
+            setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
         setConstraints( constraints )
         workData?.let { setInputData( it ) }
     }
@@ -59,7 +61,9 @@ inline fun <reified W: ListenableWorker> WorkManager.enqueueUniqueWork(
     val backoffPolicy = if ( exponentialBackoff ) EXPONENTIAL else LINEAR
 
     val builder = OneTimeWorkRequestBuilder<W>().apply {
-        setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
+        // Set backoff criteria only if IDLE is not required, due to "Cannot set backoff criteria on an idle mode job"
+        if ( ! Android.MARSHMALLOW || ! constraints.requiresDeviceIdle() )
+            setBackoffCriteria( backoffPolicy, backoffDelay.toMinutes(), timeUnit )
         setConstraints( constraints )
         workData?.let { setInputData( it ) }
     }

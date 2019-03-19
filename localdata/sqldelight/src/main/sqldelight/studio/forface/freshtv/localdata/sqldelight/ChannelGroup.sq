@@ -29,12 +29,12 @@ selectAll:
   SELECT *
   FROM channelGroupPojo;
 
-selectsMovie:
+selectMovie:
   SELECT *
   FROM channelGroupPojo
   WHERE type = 'MOVIE';
 
-selectsTv:
+selectTv:
   SELECT *
   FROM channelGroupPojo
   WHERE type = 'TV';

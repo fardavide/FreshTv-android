@@ -105,8 +105,8 @@ internal class PlaylistParser {
     private suspend fun IChannel.group( block: suspend (ChannelGroup) -> Unit ) {
         val type = when( this ) {
             is MovieChannel -> ChannelGroup.Type.MOVIE
-            is TvChannel -> ChannelGroup.Type.MOVIE
-            else -> throw AssertionError( "${this::class.qualifiedName} not implemented" )
+            is TvChannel -> ChannelGroup.Type.TV
+            else -> throw AssertionError("${this::class.qualifiedName} not implemented" )
         }
         block( ChannelGroup( groupName, type ) )
     }

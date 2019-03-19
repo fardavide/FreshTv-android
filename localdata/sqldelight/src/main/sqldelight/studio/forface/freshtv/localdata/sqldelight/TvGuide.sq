@@ -17,7 +17,8 @@ CREATE TABLE tvGuidePojo (
   endTime INTEGER AS LocalDateTime NOT NULL
 );
 
-CREATE INDEX tv_guide_program_name ON tvGuidePojo(title);
+CREATE INDEX tv_guide_program_title ON tvGuidePojo(title);
+CREATE INDEX tv_guide_program_title_and_time ON tvGuidePojo(title, startTime, endTime);
 
 insert:
   INSERT INTO tvGuidePojo(
@@ -73,7 +74,8 @@ selectByChannelId:
   SELECT *
   FROM tvGuidePojo
   WHERE channelId = ?
-  AND :time BETWEEN startTime AND endTime;
+  AND :time BETWEEN startTime AND endTime
+  LIMIT 1;
 
 selectByChannelIdRanged:
   SELECT *

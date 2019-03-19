@@ -28,7 +28,7 @@
                       <LayoutPositions />
                     </value>
                   </entry>
-                  <entry key="action_to_tvChannelsFragment">
+                  <entry key="action_to_tvChannelGroupsFragment">
                     <value>
                       <LayoutPositions />
                     </value>
@@ -86,8 +86,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="193" />
-                            <option name="y" value="-401" />
+                            <option name="x" value="423" />
+                            <option name="y" value="-413" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -105,13 +105,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="tvChannelGroupsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="68" />
+                            <option name="y" value="-89" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="tvChannelsFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="66" />
-                            <option name="y" value="-83" />
+                            <option name="x" value="303" />
+                            <option name="y" value="-88" />
                           </Point>
                         </option>
                         <option name="myPositions">

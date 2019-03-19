@@ -39,6 +39,7 @@ val sqlDelightLocalDataModule = module {
     factory { DelightMovieChannelPojoMapper() }
     factory { DelightSourceFilePojoMapper() }
     factory { DelightTvChannelPojoMapper() }
+    factory { DelightTvChannelWithGuidePojoMapper() }
     factory { DelightTvGuidePojoMapper() }
 
     /* Pojo adapters */

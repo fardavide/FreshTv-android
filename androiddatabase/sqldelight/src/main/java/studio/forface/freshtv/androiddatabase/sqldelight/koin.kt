@@ -43,7 +43,8 @@ val sqlDelightAndroidDatabaseModule = module {
             tvChannels = get(),
             movieChannelMapper = get(),
             sourceFilesMapper = get(),
-            tvChannelMapper = get()
+            tvChannelMapper = get(),
+            tvChannelWithGuideMapper = get()
         )
     }
 }

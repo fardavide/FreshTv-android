@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="24dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="16dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/dialogContentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec massa urna, iaculis sit amet finibus eget, pharetra ut metus. Duis ornare nulla arcu, quis vulputate nisi luctus quis."/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_gravity="end"
+        style="?attr/buttonBarStyle">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogNegativeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/action_cancel"
+            android:visibility="gone"
+            style="?attr/buttonBarNegativeButtonStyle"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogPositiveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_ok"
+            style="?attr/buttonBarPositiveButtonStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>

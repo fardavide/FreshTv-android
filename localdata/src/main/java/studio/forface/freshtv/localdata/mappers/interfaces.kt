@@ -19,5 +19,8 @@ interface SourceFilePojoMapper<Pojo>: PojoMapper<SourceFile, Pojo>
 /** A Mapper for `TvChannel`s Pojo */
 interface TvChannelPojoMapper<Pojo>: PojoMapper<TvChannel, Pojo>
 
+/** A Mapper for `TvChannel`s with relative Guide Pojo */
+interface TvChannelWithGuidePojoMapper<Pojo>: PojoMapper<TvChannelWithGuide, Pojo>
+
 /** A Mapper for `TvGuide`s Pojo */
 interface TvGuidePojoMapper<Pojo> : PojoMapper<TvGuide, Pojo>

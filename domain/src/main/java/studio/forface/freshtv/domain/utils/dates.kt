@@ -11,10 +11,10 @@ object LocalDateTimeHelper {
 
     /** @return the local [ZoneOffset] */
     val localOffset get(): ZoneOffset =
-        ZoneOffset.systemDefault().rules.getOffset( Instant.now() )
+            ZoneOffset.systemDefault().rules.getOffset( Instant.now() )
 
     /** @return [LocalDateTime.ofEpochSecond] with default value for [nanoOfSecond] and [offset] */
-    fun ofEpochSecond( epochSecond: Long, nanoOfSecond: Int = 0, offset: ZoneOffset = ZoneOffset.UTC ) =
+    fun ofEpochSecond( epochSecond: Long, nanoOfSecond: Int = 0, offset: ZoneOffset = ZoneOffset.UTC ): LocalDateTime =
             LocalDateTime.ofEpochSecond( epochSecond, nanoOfSecond, offset )
 
     /** @return [LocalDateTime.ofEpochSecond] with an epoch in milliseconds */
@@ -33,6 +33,24 @@ val Int.hours: Duration get() = Duration.ofHours( toLong() )
 
 /** @return a [Duration] equivalent to the given [Int] of seconds */
 val Int.seconds: Duration get() = Duration.ofSeconds( toLong() )
+
+/** @return a [BackDuration] equivalent to the given [Int] of days */
+infix fun Int.days( ago: ago ) = BackDuration( this.days )
+
+/** @return a [BackDuration] equivalent to the given [Int] of hours */
+infix fun Int.hours( ago: ago ) = BackDuration( this.hours )
+
+/** @return a [BackDuration] equivalent to the given [Int] of seconds */
+infix fun Int.seconds( ago: ago ) = BackDuration( this.seconds )
+
+/** An "empty" object for create a [BackDuration] via infix functions */
+object ago
+
+/** A class that holds a [Duration] and can be invoked for retrieve the current time `minus` the [Duration] */
+class BackDuration internal constructor( private val duration: Duration ) {
+    /** @return a [LocalDateTime] represented by the current time `minus` [duration] */
+    operator fun invoke(): LocalDateTime = LocalDateTime.now().minus( duration )
+}
 
 /**
  * Serialize a [LocalDate] into a [String].

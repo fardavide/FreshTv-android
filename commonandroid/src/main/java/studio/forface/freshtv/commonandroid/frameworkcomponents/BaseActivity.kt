@@ -250,7 +250,7 @@ private fun Fragment.assertIsBaseFragment() : BaseFragment {
     if ( fragment !is BaseFragment ) {
         val fragmentName = fragment::class.qualifiedName
         val baseFragmentName = BaseFragment::class.qualifiedName
-        throw AssertionError("'$fragmentName' does not inherit from '$baseFragmentName'")
+        throw AssertionError("'$fragmentName' does not inherit from '$baseFragmentName'" )
     }
     return fragment
 }

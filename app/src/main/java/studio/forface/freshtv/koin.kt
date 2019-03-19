@@ -7,6 +7,7 @@ import studio.forface.freshtv.interactors.ChannelChangeFavoriteInteractor
 import studio.forface.freshtv.interactors.EditEpgInteractor
 import studio.forface.freshtv.interactors.EditPlaylistInteractor
 import studio.forface.freshtv.mappers.SourceFileUiModelMapper
+import studio.forface.freshtv.mappers.TvChannelGroupUiModelMapper
 import studio.forface.freshtv.mappers.TvChannelUiModelMapper
 import studio.forface.freshtv.presenters.*
 import studio.forface.freshtv.viewmodels.*
@@ -21,6 +22,7 @@ val appModule = module {
 
     /* Mappers */
     factory { SourceFileUiModelMapper() }
+    factory { TvChannelGroupUiModelMapper() }
     factory { TvChannelUiModelMapper() }
 
     /* Presenters */
@@ -29,37 +31,15 @@ val appModule = module {
     factory { EpgsPresenter( getEpgs = get(), mapper = get() ) }
     factory { PlaylistPresenter( getPlaylist = get(), mapper = get() ) }
     factory { PlaylistsPresenter( getPlaylists = get(), mapper = get() ) }
-    factory {
-        TvChannelsPresenter(
-            getPagedTvChannels = get(),
-            getCurrentTvGuide = get(),
-            mapper = get()
-        )
-    }
+    factory { TvChannelGroupsPresenter( getGroups = get(), mapper = get() ) }
+    factory { TvChannelsPresenter( getPagedTvChannels = get(), mapper = get() ) }
 
     /* View Models */
     viewModel { ChannelsAvailabilityViewModel( presenter = get() ) }
-    viewModel { (epgPath: String?) ->
-        EditEpgViewModel(
-            interactor = get(),
-            presenter = get(),
-            epgPath = epgPath
-        )
-    }
-    viewModel { (playlistPath: String?) ->
-        EditPlaylistViewModel(
-            interactor = get(),
-            presenter = get(),
-            playlistPath = playlistPath
-        )
-    }
+    viewModel { (epgPath: String?) -> EditEpgViewModel( interactor = get(), presenter = get(), epgPath = epgPath ) }
+    viewModel { (playlistPath: String?) -> EditPlaylistViewModel( interactor = get(),  presenter = get(),  playlistPath = playlistPath ) }
     viewModel { EpgsViewModel( presenter = get() ) }
     viewModel { PlaylistsViewModel( presenter = get() ) }
-    viewModel { (groupName: String?) ->
-        TvChannelsViewModel(
-            presenter = get(),
-            interactor = get(),
-            groupName = groupName
-        )
-    }
+    viewModel { TvChannelGroupsViewModel( presenter = get() ) }
+    viewModel { (groupName: String) -> TvChannelsViewModel( presenter = get(),  interactor = get(),  groupName = groupName ) }
 }
