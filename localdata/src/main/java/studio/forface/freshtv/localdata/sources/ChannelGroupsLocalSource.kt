@@ -15,9 +15,12 @@ interface ChannelGroupsLocalSource<Pojo> {
     fun allTv(): List<Pojo>
 
     /** Create a new [Pojo] */
-    fun createChannelGroup( group: Pojo)
+    fun createChannelGroup( group: Pojo )
 
-    /** Delete all the stored [Pojo] */
+    /** Delete the stored [Pojo] with the given [id] */
+    fun delete( id: String )
+
+    /** Delete all the stored [Pojo]s */
     fun deleteAll()
 
     /** @return the [Pojo] with the given [id] */

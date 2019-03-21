@@ -55,6 +55,10 @@ internal abstract class AbsEditSourceFileViewModel(
      * @see onPathChange
      */
     private var path: CharSequence = EMPTY_STRING
+        set( value ) {
+            field = value
+            onPathChange()
+        }
 
     /**
      * The [SourceFileUiModel.sourceType]
@@ -88,7 +92,7 @@ internal abstract class AbsEditSourceFileViewModel(
         val newPath = uri.toString()
         if ( newPath == path ) return
 
-        onPathChange()
+        path = newPath
         // Get file name from ContentResolver
         requireContext().contentResolver
             .query( uri,null,null,null,null )?.use { cursor ->
@@ -102,12 +106,15 @@ internal abstract class AbsEditSourceFileViewModel(
     fun setFilePath( path: CharSequence ) {
         if ( path.toString() == this.path ) return
 
-        onPathChange()
+        this.path = path
         // Get file name from path
-        val name = handle { path.substring(
-            startIndex = path.lastIndexOf('/' ) + 1,
-            endIndex = path.lastIndexOf('.' )
-        ) }
+        val startIndex = with( path.lastIndexOf('/' ) ) {
+            if ( this >= 0 ) this +1 else return
+        }
+        val endIndex = with( path.lastIndexOf('.' ) ) {
+            if ( this > startIndex ) this else path.length
+        }
+        val name = handle { path.substring( startIndex, endIndex ) }
         form.setData( lastForm.copy( name = name ) )
     }
 

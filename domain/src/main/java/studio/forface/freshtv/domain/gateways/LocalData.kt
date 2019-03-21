@@ -1,6 +1,8 @@
 package studio.forface.freshtv.domain.gateways
 
+import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.coroutineScope
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
 import studio.forface.freshtv.domain.utils.handle
@@ -13,6 +15,27 @@ import studio.forface.freshtv.domain.entities.SourceFile.Playlist
  * A repository for retrieve and store [IChannel]s and EPG info locally.
  */
 interface LocalData {
+
+    /**
+     * @return all the [IChannel]s from Local Source
+     * @param groupName an OPTIONAL filter for [IChannel.groupName]
+     */
+    suspend fun allChannels( groupName: String? = null ) = coroutineScope {
+        val tvs = async { tvChannels( groupName ) }
+        val movies = async { movieChannels( groupName ) }
+        tvs.await() + movies.await()
+    }
+
+    /**
+     * @return all the [ChannelGroup]s from Local Source
+     * @see tvGroups
+     * @see movieGroups
+     */
+    suspend fun allGroups(): List<ChannelGroup> = coroutineScope {
+        val tv = async { tvGroups() }
+        val movies = async { movieGroups() }
+        tv.await() + movies.await()
+    }
 
     /** @return the [IChannel] with the given [channelId] */
     fun channel( channelId: String ): IChannel =
@@ -47,6 +70,9 @@ interface LocalData {
 
     /** Delete the stored [Epg] with the given [Epg.path] */
     fun deleteEpg( epgPath: String )
+
+    /** Delete the stored [ChannelGroup] with the given [ChannelGroup.id] */
+    fun deleteGroup( groupId: String )
 
     /** Delete the stored [Playlist] with the given [Playlist.path] */
     fun deletePlaylist( playlistPath: String )

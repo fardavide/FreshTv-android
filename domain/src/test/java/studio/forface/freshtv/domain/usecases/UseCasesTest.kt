@@ -26,8 +26,8 @@ class UseCasesTest {
     @Test
     fun addPlaylist() {
         val playlists = mockPlaylist
-        val add = AddPlaylist(mockLocalData)
-        add( playlists.path, playlists.type, playlists.name )
+        val add = AddPlaylist( mockLocalData )
+        add( playlists.path, playlists.type, playlists.name!! )
 
         verify { mockLocalData.storePlaylist( playlists ) }
         assertEquals( mockLocalData.playlists(), listOf( playlists ) )

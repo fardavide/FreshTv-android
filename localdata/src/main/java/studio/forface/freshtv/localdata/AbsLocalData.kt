@@ -1,3 +1,5 @@
+@file:Suppress("FoldInitializerAndIfToElvis")
+
 package studio.forface.freshtv.localdata
 
 import kotlinx.coroutines.async
@@ -112,6 +114,11 @@ abstract class AbsLocalData<
         sourceFiles.delete( epgPath )
     }
 
+    /** Delete the stored [ChannelGroup] with the given [ChannelGroup.id] */
+    override fun deleteGroup( groupId: String ) {
+        channelGroups.delete( groupId )
+    }
+
     /** Delete the stored [Playlist] with the given [Playlist.path] */
     override fun deletePlaylist( playlistPath: String ) {
         sourceFiles.delete( playlistPath )
@@ -139,7 +146,12 @@ abstract class AbsLocalData<
             is TvChannel -> handle { tvChannelMapper { tvChannels.channel( newChannel.id ).toEntity() } }
             else -> throw ChannelNotImplementedException( this::class, this::mergeChannel, newChannel::class )
         }
-        oldChannel ?: return Result.FAILURE
+
+        // return FAILURE if oldChannel is not found
+        if ( oldChannel == null ) return Result.FAILURE
+        // return SUCCESS if oldChannel is same as newChannel
+        if ( oldChannel == newChannel ) return Result.SUCCESS
+
         updateChannel(oldChannel + newChannel )
         return Result.SUCCESS
     }
@@ -151,7 +163,12 @@ abstract class AbsLocalData<
      */
     private fun mergeEpg( newEpg: Epg ): Result {
         val oldEpg = handle { sourceFileMapper { sourceFiles.epg( newEpg.path ).toEntity() as Epg } }
-        oldEpg ?: return Result.FAILURE
+
+        // return FAILURE if oldEpg is not found
+        if ( oldEpg == null ) return Result.FAILURE
+        // return SUCCESS if oldEpg is same as newEpg
+        if ( oldEpg == newEpg ) return Result.SUCCESS
+
         updateEpg(oldEpg + newEpg )
         return Result.SUCCESS
     }
@@ -163,7 +180,12 @@ abstract class AbsLocalData<
      */
     private fun mergeGuide( newGuide: TvGuide ): Result {
         val oldGuide = handle { tvGuideMapper { tvGuides.guide( newGuide.id ).toEntity() } }
-        oldGuide ?: return Result.FAILURE
+
+        // return FAILURE if oldGuide is not found
+        if ( oldGuide == null ) return Result.FAILURE
+        // return SUCCESS if oldGuide is same as newGuide
+        if ( oldGuide == newGuide ) return Result.SUCCESS
+
         updateTvGuide(oldGuide + newGuide )
         return Result.SUCCESS
     }
@@ -176,7 +198,12 @@ abstract class AbsLocalData<
      */
     private fun mergeGroup( newGroup: ChannelGroup ): Result {
         val oldGroup = handle { channelGroupMapper { channelGroups.group( newGroup.id ).toEntity() } }
-        oldGroup ?: return Result.FAILURE
+
+        // return FAILURE if oldGroup is not found
+        if ( oldGroup == null ) return Result.FAILURE
+        // return SUCCESS if oldGroup is same as newGroup
+        if ( oldGroup == newGroup ) return Result.SUCCESS
+
         updateGroup(oldGroup + newGroup )
         return Result.SUCCESS
     }
@@ -190,7 +217,12 @@ abstract class AbsLocalData<
         val oldPlaylist = handle { sourceFileMapper {
             sourceFiles.playlist( newPlaylist.path ).toEntity() as Playlist
         } }
-        oldPlaylist ?: return Result.FAILURE
+
+        // return FAILURE if oldPlaylist is not found
+        if ( oldPlaylist == null ) return Result.FAILURE
+        // return SUCCESS if oldPlaylist is same as newPlaylist
+        if ( oldPlaylist == newPlaylist ) return Result.SUCCESS
+
         updatePlaylist(oldPlaylist + newPlaylist )
         return Result.SUCCESS
     }

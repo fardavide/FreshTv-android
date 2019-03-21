@@ -47,13 +47,13 @@ class RefreshChannelsWorker(
             workManager.enqueueUniqueWork<RefreshChannelsWorker>(
                 uniqueWorkName = "$WORKER_NAME$playlistPath",
                 replacePolicy = ExistingWorkPolicy.REPLACE,
-                workData = workDataOf( ARG_PLAYLIST_PATH to playlistPath )
+                workData = workDataOf(ARG_PLAYLIST_PATH to playlistPath )
             )
         }
 
         /** Cancel [RefreshChannelsWorker] for the given [playlistPath] */
         fun cancel( playlistPath: String ) {
-            workManager.cancelUniqueWork( "$WORKER_NAME$playlistPath" )
+            workManager.cancelUniqueWork("$WORKER_NAME$playlistPath" )
         }
     }
 
@@ -71,6 +71,8 @@ class RefreshChannelsWorker(
                 playlistPath?.let { refreshChannels( it ) } ?: refreshChannels()
             }
         }
+
+        RemoveEmptyGroupsWorker.enqueue()
 
         catching
             .onSuccess { error ->

@@ -64,11 +64,11 @@ val mockTvGuide = TvGuide(
         endTime = mockNow
 )
 
-val mockPlaylistSource = mockk<Parsers> {
-    coEvery { readFrom( any(), any(), any(), any() ) } answers {
-        this.fieldValue
-    }
-}
+//val mockPlaylistSource = mockk<Parsers> {
+//    coEvery { readFrom() } answers {
+//        this.fieldValue
+//    }
+//}
 
 val mockLocalData = mockk<LocalData> {
 

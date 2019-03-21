@@ -1,11 +1,25 @@
+@file:Suppress("unused")
+
 package studio.forface.freshtv.domain.utils
 
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
+/** @see Iterable.filter where [predicate]s are called asynchronously */
+suspend fun <T> Iterable<T>.filterAsync( predicate: suspend (T) -> Boolean ) = coroutineScope {
+    map { it to async { predicate( it ) } } // map to ITEM 'to' deferred PREDICATE
+        .filter { it.second.await() } // await and evaluate PREDICATE
+        .map { it.first } // re-map to ITEM
+}
+
 /** @see Iterable.forEach where [block]s are called asynchronously */
 suspend fun <T> Iterable<T>.forEachAsync( block: suspend (T) -> Unit ) = coroutineScope {
     map { async { block( it ) } }.forEach { it.await() }
+}
+
+/** @see Iterable.map where [mapper]s are called asynchronously */
+suspend fun <T, R> Iterable<T>.mapAsync( mapper: suspend (T) -> R ) = coroutineScope {
+    map { async { mapper( it ) } }.map { it.await() }
 }
 
 /** @return [Iterable.reduce] if [Iterator.hasNext], else `null` */

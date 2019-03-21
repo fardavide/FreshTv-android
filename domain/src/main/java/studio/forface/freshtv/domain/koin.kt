@@ -38,6 +38,7 @@ val useCasesModule = module {
 
     /* Remove */
     factory { RemoveChannelMediaUrl( localData = get() ) }
+    factory { RemoveEmptyGroups( localData = get() ) }
     factory { RemoveEpg( localData = get() ) }
     factory { RemovePlaylist( localData = get() ) }
 

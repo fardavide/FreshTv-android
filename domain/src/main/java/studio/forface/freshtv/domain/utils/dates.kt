@@ -1,3 +1,5 @@
+@file:Suppress("unused", "UNUSED_PARAMETER", "ClassName")
+
 package studio.forface.freshtv.domain.utils
 
 import org.threeten.bp.*
@@ -26,13 +28,16 @@ object LocalDateTimeHelper {
 }
 
 /** @return a [Duration] equivalent to the given [Int] of days */
-val Int.days: Duration get() = Duration.ofDays( toLong() )
+val Number.days: Duration get() = Duration.ofDays( toLong() )
 
 /** @return a [Duration] equivalent to the given [Int] of hours */
-val Int.hours: Duration get() = Duration.ofHours( toLong() )
+val Number.hours: Duration get() = Duration.ofHours( toLong() )
 
 /** @return a [Duration] equivalent to the given [Int] of seconds */
-val Int.seconds: Duration get() = Duration.ofSeconds( toLong() )
+val Number.seconds: Duration get() = Duration.ofSeconds( toLong() )
+
+/** @return a [Duration] equivalent to the given [Int] of milliseconds */
+val Number.millis: Duration get() = Duration.ofMillis( toLong() )
 
 /** @return a [BackDuration] equivalent to the given [Int] of days */
 infix fun Int.days( ago: ago ) = BackDuration( this.days )

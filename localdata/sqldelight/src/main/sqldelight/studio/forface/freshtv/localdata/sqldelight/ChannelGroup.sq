@@ -22,6 +22,10 @@ update:
 deleteAll:
   DELETE FROM channelGroupPojo;
 
+deleteById:
+  DELETE FROM channelGroupPojo
+  WHERE id = ?;
+
 count:
   SELECT count(*) FROM channelGroupPojo;
 

@@ -26,6 +26,11 @@ class DelightChannelGroupsLocalSource(
         }
     }
 
+    /** Delete the stored [ChannelGroupPojo] with the given [id] */
+    override fun delete( id: String ) {
+        queries.deleteById( id )
+    }
+
     /** Delete all the stored [ChannelGroupPojo] */
     override fun deleteAll() {
         queries.deleteAll()
