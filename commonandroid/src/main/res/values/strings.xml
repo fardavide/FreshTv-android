@@ -20,6 +20,10 @@
     <string name="hint_optional">Optional</string>
     <string name="hint_required">Required</string>
 
+    <!-- Images description -->
+    <string name="image_channel_logo">Channel logo</string>
+    <string name="image_channel_favorite">Channel favorite</string>
+
     <!-- Messages -->
      <string name="permission_denied">Permission denied</string>
 </resources>

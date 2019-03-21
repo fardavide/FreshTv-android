@@ -4,7 +4,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
@@ -23,7 +22,7 @@ import studio.forface.freshtv.parsers.playlist.PlaylistParser
  * Implementation of [Parsers]
  */
 internal class ParsersImpl(
-    private val contentResolver: FileContentResolver = FileContentResolver(),
+    private val contentResolver: FileContentResolver,
     private val epgParser: EpgParser = EpgParser(),
     private val playlistParser: PlaylistParser = PlaylistParser()
 ): Parsers {
@@ -43,7 +42,7 @@ internal class ParsersImpl(
         launch { for( error in errorsChannel ) onError( error ) }
         launch { for( progress in progressChannel ) onProgress( progress ) }
 
-        launch { epgParser( contentResolver( epg ), guidesChannel, errorsChannel, progressChannel ) }
+        launch { epgParser(contentResolver(epg), guidesChannel, errorsChannel) }
     }
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */

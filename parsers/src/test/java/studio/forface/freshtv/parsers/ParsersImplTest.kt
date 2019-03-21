@@ -14,15 +14,15 @@ import studio.forface.freshtv.domain.entities.SourceFile.Playlist
  */
 internal class ParsersImplTest {
 
-    private val mockEpgSizedStream = SizedStream( mockEpgContent.byteInputStream(),100 )
-    private val mockPlaylistSizedStream = SizedStream( mockPlaylistContent.byteInputStream(),100 )
+    private val mockEpgStream = mockEpgContent.byteInputStream()
+    private val mockPlaylistStream = mockPlaylistContent.byteInputStream()
 
     private val mockLocal = mockk<FileContentResolver.Local> {
-        coEvery { this@mockk( any() ) } answers { mockEpgSizedStream }
+        coEvery { this@mockk( any() ) } answers { mockEpgStream }
     }
 
     private val mockRemote = mockk<FileContentResolver.Remote> {
-        coEvery { this@mockk( any() ) } answers { mockPlaylistSizedStream }
+        coEvery { this@mockk( any() ) } answers { mockPlaylistStream }
     }
 
     private val mockResolver = spyk( FileContentResolver( mockLocal, mockRemote ) ) {

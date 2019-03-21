@@ -12,7 +12,8 @@ CREATE TABLE tvChannelPojo (
   favorite INTEGER AS Boolean NOT NULL
 );
 
-CREATE INDEX tvChannel_name ON tvChannelPojo( name );
+CREATE INDEX tvChannel_groupName_id ON tvChannelPojo( groupName, id );
+CREATE INDEX tvChannel_groupName_id_favorite_name ON tvChannelPojo( groupName, id, favorite, name );
 
 insert:
   INSERT INTO tvChannelPojo( id, name, groupName, imageUrl, mediaUrls, playlistPaths, favorite )

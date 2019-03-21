@@ -8,23 +8,26 @@ import studio.forface.freshtv.services.RemovePlaylistWorker
 /**
  * @author Davide Giuseppe Farella
  * An Interactor for Add or Update a `Playlist`
+ *
+ * Inherit from [AbsEditSourceFileInteractor]
  */
 internal class EditPlaylistInteractor(
         private val addPlaylist: AddPlaylist,
         private val updatePlaylist: UpdatePlaylist
-) {
+) : AbsEditSourceFileInteractor {
+
     /** Add a `Playlist` with the given [path], [type] and [name] */
-    fun add( path: String, type: SourceFile.Type, name: String? ) {
+    override fun add( path: String, type: SourceFile.Type, name: String? ) {
         addPlaylist( path, type,name ?: path )
     }
 
     /** Remove the `Playlist` with the given [path] and its relative `Channel`s */
-    fun remove( path: String ) {
+    override fun remove( path: String ) {
         RemovePlaylistWorker.enqueue( path )
     }
 
     /** Add a `Playlist` with the given [path] and [name] */
-    fun update( path: String, name: String? ) {
+    override fun update( path: String, name: String? ) {
         updatePlaylist( path, name )
     }
 }

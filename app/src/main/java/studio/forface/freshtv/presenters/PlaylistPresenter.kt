@@ -8,13 +8,15 @@ import studio.forface.freshtv.uimodels.SourceFileUiModel.Playlist
 /**
  * @author Davide Giuseppe Farella
  * A Presenter for get a `Playlist`
+ *
+ * Inherit from [AbsSourceFilePresenter]
  */
 internal class PlaylistPresenter(
         private val getPlaylist: GetPlaylist,
-        private val mapper: SourceFileUiModelMapper
-) {
+        override val mapper: SourceFileUiModelMapper
+) : AbsSourceFilePresenter() {
 
-    /** @return [Playlist] with the given [playlistPath] */
-    operator fun invoke( playlistPath: String ) =
-            mapper { getPlaylist( playlistPath ).toUiModel() }
+    /** @return [Playlist] with the given [filePath] */
+    override operator fun invoke( filePath: String ) =
+            mapper { getPlaylist( filePath ).toUiModel() }
 }

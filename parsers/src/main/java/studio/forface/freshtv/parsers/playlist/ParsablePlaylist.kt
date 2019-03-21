@@ -4,18 +4,17 @@ package studio.forface.freshtv.parsers.playlist
 
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.domain.utils.EMPTY_STRING
-import studio.forface.freshtv.parsers.SizedStream
 import studio.forface.freshtv.parsers.utils.forEachLine
+import java.io.InputStream
 
 /**
  * @author Davide Giuseppe Farella.
  * An inline class that represents the content of a Playlist and expose [extractItems] for make a
  * first parsing on the content and split it in [ParsablePlaylistItem]s.
  */
-internal class ParsablePlaylist( private val stream: SizedStream ) {
+internal class ParsablePlaylist( private val stream: InputStream ) {
 
     private companion object {
 
@@ -31,7 +30,7 @@ internal class ParsablePlaylist( private val stream: SizedStream ) {
 
     /** Read the [stream] and send [ParsablePlaylistItem]s to the given [SendChannel] */
     suspend fun extractItems( items: SendChannel<ParsablePlaylistItem> ) = withContext( IO ) {
-        stream.input.bufferedReader().use { reader ->
+        stream.bufferedReader().use { reader ->
             var temp = EMPTY_STRING
 
             // If temp is not blank, create a ParsablePlaylistItem and offer to items' Channel

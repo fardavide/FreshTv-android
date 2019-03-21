@@ -17,8 +17,8 @@ CREATE TABLE tvGuidePojo (
   endTime INTEGER AS LocalDateTime NOT NULL
 );
 
-CREATE INDEX tv_guide_program_title ON tvGuidePojo(title);
-CREATE INDEX tv_guide_program_title_and_time ON tvGuidePojo(title, startTime, endTime);
+CREATE INDEX tvGuide_program_startTime ON tvGuidePojo( startTime );
+CREATE INDEX tvGuide_program_channelId_startTime_endTime ON tvGuidePojo( channelId, startTime, endTime );
 
 insert:
   INSERT INTO tvGuidePojo(

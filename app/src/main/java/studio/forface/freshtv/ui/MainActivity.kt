@@ -1,6 +1,5 @@
 package studio.forface.freshtv.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -132,7 +131,8 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
     /** When [ChannelsAvailabilityUiModel] is received from [ChannelsAvailabilityViewModel] */
     private fun onChannelsAvailability( channelsAvailability: ChannelsAvailabilityUiModel ) {
         setDrawer( channelsAvailability )
-        // TODO navigate
+        if ( channelsAvailability.hasNothing )
+            navController.navigate( PlaylistsFragment.directions() )
     }
 
     /** [buildDrawer] and set as [MaterialBottomDrawerLayout.drawer] of [root] [View] */

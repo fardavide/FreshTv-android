@@ -24,10 +24,17 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
 
         /** A [String] representing the param name of the logo */
         const val PARAM_LOGO = "tvg-logo"
+
+        /** An array of common extensions for videos */
+        val VIDEO_EXTENSIONS = arrayOf( "3gp", "avi", "flv", "mkv", "mp4", "mpg", "mpeg", "wmv" )
     }
 
-    /** TODO: return real channel type */
-    private fun channelType() = ChannelType.Tv
+    /** @return the [ChannelType] for the current [IChannel] by reading the extension of the given [mediaLink] */
+    private fun channelType( mediaLink: String ): ChannelType {
+        for ( ext in VIDEO_EXTENSIONS )
+            if ( mediaLink.endsWith( ext, ignoreCase = true ) ) return ChannelType.Movie
+        return ChannelType.Tv
+    }
 
     /** @return a [Result.Error] with [s] and the given [Reason] */
     private fun e( reason: Reason ) = Result( ParsingChannelError( s, reason ) )
@@ -58,26 +65,14 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
         val imageUrl = s.extract( PARAM_LOGO )?.let { Url( it ).validOrNull<Url>() }
         val tempName = params.substringAfterLast(',' ).notBlankOrNull()?.trim()
 
-        // Commented due to worst regex performance
-        //val regexMatch =
-        //    """$PARAM_ID="([^\\"]*)".*$PARAM_GROUP="([^\\"]*)".*$PARAM_LOGO="([^\\"]*)",(.*)""".toRegex()
-        //        .find( s ) ?: return e( Reason.WrongFormat )
-        //
-        //val ( tempId, tempGroupName, tempImageUrl, tempName ) = regexMatch
-        //    .groupValues.drop(1 ).map { it.notBlankOrNull() }
-
         // Return if both tempId and tempName are null
         if ( tempId == null && tempName == null )
             return e( Reason.NoNameAndId )
 
-        // Commented due to worst regex performance
-        //val groupName = tempGroupName ?: IChannel.NO_GROUP_NAME
-        //val imageUrl = tempImageUrl?.let { Url( it ).validOrNull<Url>() }
-
         val id = ( tempId ?: tempName )!!.toLowerCase()
         val name = ( tempName ?: tempId )!!
 
-        val content = when( channelType() ) {
+        val content = when( channelType( link ) ) {
             ChannelType.Movie -> MovieChannel( id, name, groupName, imageUrl, link, playlistPath )
             ChannelType.Tv -> TvChannel( id, name, groupName, imageUrl, link, playlistPath )
         }

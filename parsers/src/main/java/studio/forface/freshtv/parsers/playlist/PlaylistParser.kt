@@ -7,7 +7,6 @@ import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.domain.entities.ChannelGroup
 import studio.forface.freshtv.domain.entities.IChannel
@@ -15,8 +14,6 @@ import studio.forface.freshtv.domain.entities.MovieChannel
 import studio.forface.freshtv.domain.entities.TvChannel
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.utils.forEachAsync
-import studio.forface.freshtv.domain.utils.wait
-import studio.forface.freshtv.parsers.SizedStream
 import studio.forface.freshtv.parsers.playlist.ParsablePlaylistItem.Result
 import java.io.InputStream
 
@@ -62,7 +59,7 @@ internal class PlaylistParser {
     /** Parse the [playlistStream] and submit items via the given [SendChannel]s */
     suspend operator fun invoke(
         playlistPath: String,
-        playlistStream: SizedStream,
+        playlistStream: InputStream,
         channels: SendChannel<IChannel>,
         groups: SendChannel<ChannelGroup>,
         errors: SendChannel<ParsingChannelError>

@@ -108,12 +108,10 @@ abstract class BaseActivity(
         if ( fragment is RootFragment ) {
 
             // If fabParams is null, hide and reset fab. We call it now for avoid glitches
-            fun resetFabIfNeeded() {
-                if ( fragment.fabParams == null ) {
-                    fab.hide()
-                    fab.setImageBitmap( null )
-                    fab.setOnClickListener( null )
-                }
+            if ( fragment.fabParams == null ) {
+                fab.hide()
+                fab.setImageBitmap( null )
+                fab.setOnClickListener( null )
             }
 
             // Title
@@ -140,28 +138,18 @@ abstract class BaseActivity(
             fun showOrHideFab() =
                 if ( fragment.fabParams?.showOnStart == true ) fab.show() else fab.hide()
 
-            // Lambda to be called after bars hide
-            val setAfterHide = {
+            // Setup
+            val setup: PanelChangeListener = {
                 setTitle()
                 setOptionsMenu()
                 setBg()
                 setFab()
-            }
-
-            // Lambda to be called after bars show
-            val setAfterShow = {
                 showOrHideFab()
             }
 
-            // Hide and Show bars with setAfterHide and showAfterHide actions
-            val hideAndShowBars: PanelChangeListener = {
-                resetFabIfNeeded()
-                drawerLayout.hideAndShowBars( true, doAfterHide = setAfterHide, doAfterShow = setAfterShow )
-            }
-
-            // If isDrawerOpen run hideAndShowBars after close, else run it now
-            if ( isDrawerOpen ) drawerLayout.doOnPanelClose( once = true, callback = hideAndShowBars )
-            else hideAndShowBars( 0 )
+            // If isDrawerOpen run setup after close, else run it now
+            if ( isDrawerOpen ) drawerLayout.doOnPanelClose( once = true, callback = setup )
+            else setup(0 )
         }
     }
 

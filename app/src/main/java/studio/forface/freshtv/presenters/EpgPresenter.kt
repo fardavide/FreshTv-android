@@ -8,13 +8,15 @@ import studio.forface.freshtv.uimodels.SourceFileUiModel.Epg
 /**
  * @author Davide Giuseppe Farella
  * A Presenter for get an `EPG`
+ *
+ * Inherit from [AbsSourceFilePresenter]
  */
 internal class EpgPresenter(
         private val getEpg: GetEpg,
-        private val mapper: SourceFileUiModelMapper
-) {
+        override val mapper: SourceFileUiModelMapper
+) : AbsSourceFilePresenter() {
 
-    /** @return [Epg] with the given [epgPath] */
-    operator fun invoke( epgPath: String ) =
-            mapper { getEpg( epgPath ).toUiModel() }
+    /** @return [Epg] with the given [filePath] */
+    override operator fun invoke( filePath: String ) =
+            mapper { getEpg( filePath ).toUiModel() }
 }

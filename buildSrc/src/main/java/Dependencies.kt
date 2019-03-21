@@ -68,7 +68,7 @@ object Versions {
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_material_bottom_bar =   "1.1-beta-8"
+    val android_material_bottom_bar =   "1.1-beta-11"
     val android_navigation =            "1.0.0-beta01"
     val android_paging =                "2.1.0"
     val android_room =                  "2.1.0-alpha04"
@@ -77,7 +77,7 @@ object Versions {
     val android_theia =                 "0.3-alpha-1"
     val android_view_pager2 =           "1.0.0-alpha02"
     val android_view_state_store =      "1.1-beta-5"
-    val android_work =                  "1.0.0-beta04"
+    val android_work =                  "1.0.0"
 }
 
 @Suppress("unused")

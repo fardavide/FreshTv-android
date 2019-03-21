@@ -82,7 +82,7 @@ class RefreshChannelsWorker(
                 return retry()
             }
 
-        throw AssertionError( "Unreachable code" )
+        throw AssertionError("Unreachable code" )
     }
 
     /** Show the result to the user */

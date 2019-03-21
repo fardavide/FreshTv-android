@@ -5,6 +5,7 @@ import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.gateways.Parsers
+import studio.forface.freshtv.domain.utils.reduceOrDefault
 
 /**
  * @author Davide Giuseppe Farella
@@ -57,7 +58,8 @@ class RefreshChannels(
 
         /** A class representing a [ParsingChannelError]s for multiple [Playlist]. It wraps a list of [Single] */
         data class Multi( val all: List<Single> ) : Error() {
-            override val hasError get() = all.map { it.hasError }.reduce { acc, b -> acc || b }
+            override val hasError get() = all.map { it.hasError }
+                    .reduceOrDefault(false ) { acc, b -> acc || b }
         }
     }
 }

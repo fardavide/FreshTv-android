@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="?attr/selectableItemBackground">
 
     <!-- Image -->
     <ImageView
@@ -12,6 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:padding="16dp"
+        android:contentDescription="@string/image_channel_logo"
         tools:src="@drawable/ic_tv"/>
 
     <FrameLayout
@@ -43,6 +45,7 @@
             android:layout_height="32dp"
             android:layout_margin="4dp"
             android:layout_gravity="end|top"
+            android:contentDescription="@string/image_channel_favorite"
             tools:src="@drawable/ic_favorite"/>
 
         <!-- Program -->

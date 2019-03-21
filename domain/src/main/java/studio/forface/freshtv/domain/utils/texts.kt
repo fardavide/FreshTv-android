@@ -2,6 +2,9 @@ package studio.forface.freshtv.domain.utils
 
 const val EMPTY_STRING = ""
 
+/** Infix function for call [String.equals] with `ignoreCase` to `true` */
+infix fun String?.equalsNoCase( other: String? ) = equals( other, ignoreCase = true )
+
 /** @return null if the receiver [CharSequence.isBlank] else the receiver itself */
 fun CharSequence.notBlankOrNull() = if ( isBlank() ) null else this
 

@@ -141,6 +141,7 @@
             android:id="@+id/editSourceFilePathEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:inputType="textUri" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,7 +153,6 @@
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/image_load_from_web"
         android:padding="16dp"
-        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/editSourceFilePathLayout"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="@+id/editSourceFileNameLayout"

@@ -7,6 +7,7 @@ import studio.forface.freshtv.domain.entities.SourceFile.Playlist
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingChannelError
 import studio.forface.freshtv.domain.errors.ParsingEpgError
+import java.io.InputStream
 
 /**
  * @author Davide Giuseppe Farella
@@ -35,4 +36,10 @@ interface Parsers {
  * An invoke function for execute a [block] within a [Parsers]
  * @return [T]
  */
-operator fun <T> Parsers.invoke(block: Parsers.() -> T ) = block()
+operator fun <T> Parsers.invoke( block: Parsers.() -> T ) = block()
+
+/** An interface for retrieve an [InputStream] from a [String] representing an `Uri` */
+interface UriResolver {
+    /** @return an [InputStream] from a [String] representing an `Uri` */
+    operator fun invoke( stringUri: String ): InputStream
+}

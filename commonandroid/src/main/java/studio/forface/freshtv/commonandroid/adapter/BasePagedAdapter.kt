@@ -29,6 +29,6 @@ abstract class BasePagedAdapter<UiModel, ViewHolder: ClickableAdapter.ViewHolder
         getItem( position )?.let {
             holder.onBind( it )
             prepareClickListeners( holder )
-        } // TODO ?: holder.clear()
+        }
     }
 }

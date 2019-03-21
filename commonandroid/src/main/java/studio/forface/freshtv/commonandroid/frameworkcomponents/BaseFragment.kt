@@ -51,14 +51,13 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
     fun showDialog( builder: PanelBuilder.( View ) -> Unit ) {
         val body = layoutInflater.inflate( R.layout.layout_dialog_body, requireView() as ViewGroup,false )
         val panel = panel { builder( body ).apply {
-            customBody( body ) { /* TODO: optional in lib */ }
+            customBody( body )
         } }
         showPanel( DIALOG_PANEL_ID, panel )
     }
 
     /** Add the given [MaterialPanel] and open it. */
     fun showPanel( panelId: Int, panel: MaterialPanel ) {
-        panel.wrapToContent = false // TODO fix in lib
         baseActivity?.showPanel( panelId, panel )
     }
 

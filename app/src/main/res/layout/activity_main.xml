@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
 
     tools:context=".ui.MainActivity"
-    android:animateLayoutChanges="true"
+    android:animateLayoutChanges="false"
     android:fitsSystemWindows="false"
     android:background="?attr/colorPrimary">
 
