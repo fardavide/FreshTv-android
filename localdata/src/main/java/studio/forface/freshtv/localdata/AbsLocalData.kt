@@ -39,6 +39,16 @@ abstract class AbsLocalData<
     private val tvGuideMapper: TvGuidePojoMapper<TvGuidePojo>
 ) : LocalData {
 
+    /** @return [ReceiveChannel] of the [IChannel] with the given [channelId] */
+    override suspend fun observeChannel( channelId: String ): ReceiveChannel<IChannel> {
+        val channel = channel( channelId )
+        return when ( channel ) {
+            is MovieChannel -> movieChannels.obServeChannel( channelId ).map( movieChannelMapper ) { it.toEntity() }
+            is TvChannel -> tvChannels.obServeChannel( channelId ).map( tvChannelMapper ) { it.toEntity() }
+            else -> throw NotImplementedError()
+        }
+    }
+
     /** @return all the [IChannel] with the given [playlistPath] in [IChannel.playlistPaths] */
     override suspend fun channelsWithPlaylist( playlistPath: String ): List<IChannel> = coroutineScope {
         val movies = async {

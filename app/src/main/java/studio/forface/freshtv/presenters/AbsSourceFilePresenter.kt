@@ -4,8 +4,9 @@ import studio.forface.freshtv.mappers.SourceFileUiModelMapper
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 
 /**
- * @author Davide Giuseppe Farella
  * A Presenter for get a Source File
+ *
+ * @author Davide Giuseppe Farella
  */
 internal abstract class AbsSourceFilePresenter {
 

@@ -12,7 +12,7 @@ import studio.forface.freshtv.domain.utils.increment
 class IncrementChannelMediaFailure( private val localData: LocalData) {
 
     /** Increment the failure count of the given [mediaUrl] in the given [IChannel] [channel] */
-    operator fun invoke(channel: IChannel, mediaUrl: String ) = localData {
+    operator fun invoke( channel: IChannel, mediaUrl: String ) = localData {
         updateChannel( channel.copyObj( mediaUrls = channel.mediaUrls increment mediaUrl ) )
     }
 

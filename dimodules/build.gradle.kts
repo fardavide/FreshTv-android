@@ -16,6 +16,7 @@ dependencies {
     //implementation( project(":localdata:room" ) )
     implementation( project(":localdata:sqldelight" ) )
     implementation( project(":parsers" ) )
+    implementation( project(":player" ) )
     implementation( project(":settings" ) )
 
     applyTests()

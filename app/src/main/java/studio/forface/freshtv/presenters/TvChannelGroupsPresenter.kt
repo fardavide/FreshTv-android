@@ -2,7 +2,7 @@ package studio.forface.freshtv.presenters
 
 import studio.forface.freshtv.domain.usecases.GetTvChannelGroups
 import studio.forface.freshtv.mappers.TvChannelGroupUiModelMapper
-import studio.forface.freshtv.mappers.map
+import studio.forface.freshtv.commonandroid.mappers.map
 import studio.forface.freshtv.uimodels.TvChannelGroupUiModel
 
 /**

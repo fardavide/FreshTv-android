@@ -3,8 +3,9 @@ package studio.forface.freshtv.uimodels
 import androidx.annotation.DrawableRes
 
 /**
- * @author Davide Giuseppe Farella
  * An Ui Model representing a Tv Channel with its Tv Guide ( if available ).
+ *
+ * @author Davide Giuseppe Farella
  */
 internal data class TvChannelUiModel(
         val id: String,

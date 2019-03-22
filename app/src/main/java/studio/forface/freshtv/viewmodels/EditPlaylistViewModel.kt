@@ -12,9 +12,9 @@ import studio.forface.freshtv.services.RefreshChannelsWorker
  * Inherit from [AbsEditSourceFileViewModel]
  */
 internal class EditPlaylistViewModel(
-        interactor: EditPlaylistInteractor,
+        playlistPath: String?,
         presenter: PlaylistPresenter,
-        playlistPath: String?
+        interactor: EditPlaylistInteractor
 ): AbsEditSourceFileViewModel( interactor, presenter, playlistPath ) {
 
     /** Enqueue [RefreshChannelsWorker] for the given [filePath] */

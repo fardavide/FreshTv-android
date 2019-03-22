@@ -19,9 +19,9 @@ import studio.forface.viewstatestore.setLoading
  * Inherit from [ScopedViewModel]
  */
 internal class TvChannelsViewModel(
+        private val groupName: String,
         private val presenter: TvChannelsPresenter,
-        private val interactor: ChannelChangeFavoriteInteractor,
-        private val groupName: String
+        private val interactor: ChannelChangeFavoriteInteractor
 ): ScopedViewModel() {
 
     /** A [ViewStateStore] of [PagedList] of [TvChannelsViewModel] */

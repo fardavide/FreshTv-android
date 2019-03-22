@@ -16,6 +16,7 @@ val useCasesModule = module {
     factory { DeleteOldGuides( localData = get(), settings = get() ) }
 
     /* Get */
+    factory { GetChannel( localData = get() ) }
     factory { GetCurrentTvGuide( localData = get() ) }
     factory { GetEpg( localData = get() ) }
     factory { GetMovieChannelGroups( localData = get() ) }

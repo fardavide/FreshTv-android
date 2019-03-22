@@ -3,7 +3,7 @@ package studio.forface.freshtv.presenters
 import androidx.paging.DataSource
 import studio.forface.freshtv.androiddatabase.usecases.GetPagedPlaylists
 import studio.forface.freshtv.mappers.SourceFileUiModelMapper
-import studio.forface.freshtv.mappers.map
+import studio.forface.freshtv.commonandroid.mappers.map
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 
 /**

@@ -1,12 +1,9 @@
 package studio.forface.freshtv.presenters
 
 import androidx.paging.DataSource
-import studio.forface.freshtv.androiddatabase.usecases.GetPagedTvChannels
 import studio.forface.freshtv.androiddatabase.usecases.GetPagedTvChannelsWithGuide
-import studio.forface.freshtv.domain.usecases.GetCurrentTvGuide
-import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.mappers.TvChannelUiModelMapper
-import studio.forface.freshtv.mappers.map
+import studio.forface.freshtv.commonandroid.mappers.map
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 
 /**

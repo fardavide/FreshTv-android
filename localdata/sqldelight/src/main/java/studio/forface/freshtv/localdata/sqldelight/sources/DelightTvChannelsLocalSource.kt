@@ -23,19 +23,23 @@ class DelightTvChannelsLocalSource(
 
     /** @return all the stored channels [TvChannelPojo] */
     override fun all(): List<TvChannelPojo> = queries.selectAll()
-        .executeAsList()
+            .executeAsList()
 
     /** @return the channel [TvChannelPojo] with the given [channelId] */
     override fun channel( channelId: String ): TvChannelPojo = queries.selectById( channelId )
-        .executeAsOne()
+            .executeAsOne()
+
+    /** @return [ReceiveChannel] of the channel [TvChannelPojo] with the given [channelId] */
+    override suspend fun obServeChannel( channelId: String ) = queries.selectById( channelId )
+            .asChannel().mapToOne()
 
     /** @return the stored channels [TvChannelPojo] with the given [groupName] */
     override fun channelsWithGroup(groupName: String ): List<TvChannelPojo> =
-        queries.selectByGroup( groupName ).executeAsList()
+            queries.selectByGroup( groupName ).executeAsList()
 
     /** @return the stored channels [TvChannelPojo] with the given [playlistPath] in [IChannel.playlistPaths] */
     override fun channelsWithPlaylist( playlistPath: String ): List<TvChannelPojo> =
-        queries.selectByPlaylistPath( playlistPath ).executeAsList()
+            queries.selectByPlaylistPath( playlistPath ).executeAsList()
 
     /** @return the [Int] count of the stored channels [TvChannelPojo] */
     override fun count(): Int = queries.count().executeAsOne().toInt()

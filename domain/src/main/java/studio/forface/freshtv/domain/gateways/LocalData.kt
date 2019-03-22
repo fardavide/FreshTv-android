@@ -39,7 +39,10 @@ interface LocalData {
 
     /** @return the [IChannel] with the given [channelId] */
     fun channel( channelId: String ): IChannel =
-        handle { tvChannel( channelId ) } or { movieChannel( channelId ) }
+            handle { tvChannel( channelId ) } or { movieChannel( channelId ) }
+
+    /** @return [ReceiveChannel] of the [IChannel] with the given [channelId] */
+    suspend fun observeChannel( channelId: String ): ReceiveChannel<IChannel>
 
     /** @return all the [IChannel] with the given [playlistPath] in [IChannel.playlistPaths] */
     suspend fun channelsWithPlaylist( playlistPath: String ): List<IChannel>

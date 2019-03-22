@@ -1,5 +1,8 @@
 package studio.forface.freshtv.localdata.mappers
 
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.map
+
 /**
  * @author Davide Giuseppe Farella.
  * An common interface for transform an Entity to a Pojo and transform back a Pojo to an entity.
@@ -31,4 +34,14 @@ inline operator fun <E, P, T> PojoMapper<E, P>.invoke( f: PojoMapper<E, P>.() ->
 inline fun <T, V, E, P, M: PojoMapper<E, P>> Collection<T>.map(
     mapper: M,
     block: M.(T) -> V
+) = map { mapper.block( it ) }
+
+/**
+ * Call [ReceiveChannel.map] passing a [PojoMapper] as receiver for the lambda [block]
+ *
+ * E.g. `myChannel.map( myTMapper ) { it.toEntity() }`
+ */
+inline fun <T, V, E, P, M: PojoMapper<E, P>> ReceiveChannel<T>.map(
+    mapper: M,
+    crossinline block: M.(T) -> V
 ) = map { mapper.block( it ) }

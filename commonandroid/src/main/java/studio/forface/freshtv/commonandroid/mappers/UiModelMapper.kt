@@ -1,15 +1,18 @@
-package studio.forface.freshtv.mappers
+package studio.forface.freshtv.commonandroid.mappers
 
 import androidx.paging.DataSource
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.map
 
 /**
- * @author Davide Giuseppe Farella.
- * An common interface for transform an Entity to an UiModel and transform back an UiModel to an
+ * A common interface for transform an Entity to an UiModel and transform back an UiModel to an
  * entity.
  *
  * @param Ein the type of the source entity
  * @param UI the type of the UiModel
  * @param Eout the type of the entity generated
+ *
+ * @author Davide Giuseppe Farella.
  */
 abstract class UiModelMapper<in Ein, UI, out Eout> {
 
@@ -24,11 +27,11 @@ abstract class UiModelMapper<in Ein, UI, out Eout> {
  * A typealias of [Nothing] for unsupported mapping; usually for an unsupported mapping from `UiModel`
  * to `Entity`
  */
-internal typealias Unsupported = Nothing
+typealias Unsupported = Nothing
 
 /** A `null` value casted as [Nothing] - [Unsupported] */
 @Suppress("CAST_NEVER_SUCCEEDS")
-internal val unsupported: Nothing = null as Nothing
+val unsupported: Nothing = null as Nothing
 
 /**
  * Override of invoke operator for get access to `this` [UiModelMapper] as receiver of the
@@ -37,6 +40,16 @@ internal val unsupported: Nothing = null as Nothing
  */
 inline operator fun <T, Ein, UI, Eout, M: UiModelMapper<Ein, UI, Eout>> M.invoke( f: M.() -> T ) = f()
 
+
+/**
+ * Call [Collection.map] passing a [UiModelMapper] as receiver for the lambda [block]
+ *
+ * E.g. `myListOfT.map( myTMapper ) { it.toEntity() }`
+ */
+inline fun <I, O, M: UiModelMapper<I, O, *>> Collection<I>.map(
+    mapper: M,
+    block: M.(I) -> O
+) = map { mapper.block( it ) }
 
 /**
  * Call [DataSource.Factory.map] passing a [UiModelMapper] as receiver for the lambda [block]
@@ -49,11 +62,11 @@ inline fun <T, V, Ein, UI, Eout, M: UiModelMapper<Ein, UI, Eout>> DataSource.Fac
 ) = map { mapper.block( it ) }
 
 /**
- * Call [Collection.map] passing a [UiModelMapper] as receiver for the lambda [block]
+ * Call [ReceiveChannel.map] passing a [UiModelMapper] as receiver for the lambda [block]
  *
- * E.g. `myListOfT.map( myTMapper ) { it.toEntity() }`
+ * E.g. `myChannel.map( myTMapper ) { it.toEntity() }`
  */
-inline fun <I, O, M: UiModelMapper<I, O, *>> Collection<I>.map(
+inline fun <T, V, Ein, UI, Eout, M: UiModelMapper<Ein, UI, Eout>> ReceiveChannel<T>.map(
     mapper: M,
-    block: M.(I) -> O
+    crossinline block: M.(T) -> V
 ) = map { mapper.block( it ) }

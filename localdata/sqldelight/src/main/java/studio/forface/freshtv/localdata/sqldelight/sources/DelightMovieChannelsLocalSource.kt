@@ -11,6 +11,7 @@ import studio.forface.freshtv.localdata.sources.MovieChannelsLocalSource
 import studio.forface.freshtv.localdata.sqldelight.MovieChannelPojo
 import studio.forface.freshtv.localdata.sqldelight.MovieChannelQueries
 import studio.forface.freshtv.localdata.sqldelight.utils.asChannel
+import studio.forface.freshtv.localdata.sqldelight.utils.mapToList
 import studio.forface.freshtv.localdata.sqldelight.utils.mapToOne
 
 /**
@@ -25,19 +26,23 @@ class DelightMovieChannelsLocalSource(
 
     /** @return all the stored channels [MovieChannelPojo] */
     override fun all(): List<MovieChannelPojo> = queries.selectAll()
-        .executeAsList()
+            .executeAsList()
 
     /** @return the channel [MovieChannelPojo] with the given [channelId] */
     override fun channel( channelId: String ): MovieChannelPojo = queries.selectById( channelId )
-        .executeAsOne()
+            .executeAsOne()
+
+    /** @return [ReceiveChannel] of the channel [MovieChannelPojo] with the given [channelId] */
+    override suspend fun obServeChannel( channelId: String ) = queries.selectById( channelId )
+            .asChannel().mapToOne()
 
     /** @return the stored channels [MovieChannelPojo] with the given [IChannel.groupName] */
     override fun channelsWithGroup( groupName: String ): List<MovieChannelPojo> =
-        queries.selectByGroup( groupName ).executeAsList()
+            queries.selectByGroup( groupName ).executeAsList()
 
     /** @return the stored channels [MovieChannelPojo] with the given [playlistPath] in [IChannel.playlistPaths] */
     override fun channelsWithPlaylist( playlistPath: String ): List<MovieChannelPojo> =
-        queries.selectByPlaylistPath( playlistPath ).executeAsList()
+            queries.selectByPlaylistPath( playlistPath ).executeAsList()
 
     /** @return the [Int] count of the stored channels [MovieChannelPojo] */
     override fun count(): Int = queries.count().executeAsOne().toInt()

@@ -15,6 +15,9 @@ interface ChannelsLocalSource<T> {
     /** @return the channel [T] with the given [channelId] */
     fun channel( channelId: String ): T
 
+    /** @return [ReceiveChannel] of the channel [T] with the given [channelId] */
+    suspend fun obServeChannel( channelId: String ): ReceiveChannel<T>
+
     /** @return the stored channels [T] with the given [IChannel.groupName] */
     fun channelsWithGroup( groupName: String ): List<T>
 

@@ -12,9 +12,9 @@ import studio.forface.freshtv.services.RefreshTvGuidesWorker
  * Inherit from [AbsEditSourceFileViewModel]
  */
 internal class EditEpgViewModel(
-        interactor: EditEpgInteractor,
+        epgPath: String?,
         presenter: EpgPresenter,
-        epgPath: String?
+        interactor: EditEpgInteractor
 ) : AbsEditSourceFileViewModel( interactor, presenter, epgPath ) {
 
     /** Enqueue [RefreshTvGuidesWorker] for the given [filePath] */

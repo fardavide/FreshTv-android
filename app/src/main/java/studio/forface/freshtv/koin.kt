@@ -36,10 +36,10 @@ val appModule = module {
 
     /* View Models */
     viewModel { ChannelsAvailabilityViewModel( presenter = get() ) }
-    viewModel { (epgPath: String?) -> EditEpgViewModel( interactor = get(), presenter = get(), epgPath = epgPath ) }
-    viewModel { (playlistPath: String?) -> EditPlaylistViewModel( interactor = get(),  presenter = get(),  playlistPath = playlistPath ) }
+    viewModel { (epgPath: String?) -> EditEpgViewModel( epgPath, presenter = get(), interactor = get() ) }
+    viewModel { (playlistPath: String?) -> EditPlaylistViewModel( playlistPath, presenter = get(), interactor = get() ) }
     viewModel { EpgsViewModel( presenter = get() ) }
     viewModel { PlaylistsViewModel( presenter = get() ) }
     viewModel { TvChannelGroupsViewModel( presenter = get() ) }
-    viewModel { (groupName: String) -> TvChannelsViewModel( presenter = get(),  interactor = get(),  groupName = groupName ) }
+    viewModel { (groupName: String) -> TvChannelsViewModel( groupName, presenter = get(), interactor = get() ) }
 }

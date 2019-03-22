@@ -7,8 +7,9 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * @author Davide Giuseppe Farella.
  * Test class for collections
+ *
+ * @author Davide Giuseppe Farella
  */
 class CollectionsTest {
 

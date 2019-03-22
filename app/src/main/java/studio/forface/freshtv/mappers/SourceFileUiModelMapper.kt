@@ -1,6 +1,7 @@
 package studio.forface.freshtv.mappers
 
 import studio.forface.freshtv.R
+import studio.forface.freshtv.commonandroid.mappers.UiModelMapper
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 
