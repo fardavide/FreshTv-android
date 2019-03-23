@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph"
-            app:startDestination="@id/tvChannelGroupsFragment">
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/tvChannelGroupsFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -37,16 +39,16 @@
         android:id="@+id/tvChannelGroupsFragment"
         android:name="studio.forface.freshtv.ui.TvChannelGroupsFragment"
         android:label="TvChannelGroupsFragment"
-        tools:layout="@layout/fragment_view_pager_tabbed"/>
-    <fragment
-        android:id="@+id/tvChannelsFragment"
-        android:name="studio.forface.freshtv.ui.TvChannelsFragment"
-        android:label="TvChannelsFragment"
-        tools:layout="@layout/fragment_recycler_view">
+        tools:layout="@layout/fragment_view_pager_tabbed">
         <action
             android:id="@+id/action_tvChannelsFragment_to_playerFragment"
             app:destination="@id/playerFragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/tvChannelsFragment"
+        android:name="studio.forface.freshtv.ui.TvChannelsFragment"
+        android:label="TvChannelsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
 
     <fragment
         android:id="@+id/playlistsFragment"

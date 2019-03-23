@@ -144,4 +144,9 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
  * A base class for a [Fragment] that is nested inside another [RootFragment]
  * Inherit from [BaseFragment]
  */
-abstract class NestedFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes )
+abstract class NestedFragment<ParentFragment: RootFragment>( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes ) {
+
+    /** @return the [getParentFragment] casted as [ParentFragment] */
+    @Suppress("UNCHECKED_CAST")
+    val rootFragment get() = requireParentFragment() as ParentFragment
+}

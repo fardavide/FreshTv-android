@@ -14,8 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="1.78"
-        tools:layout="@layout/fragment_player_video"/>
-        <!--android:name="studio.forface.freshtv.player.ui.PlayerFragment.VideoFragment"-->
+        tools:layout="@layout/fragment_player_video"
+        android:name="studio.forface.freshtv.player.ui.VideoFragment"/>
 
     <fragment
         android:id="@+id/infoFragment"
@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/fragment_player_info"/>
-        <!--android:name="studio.forface.freshtv.player.ui.PlayerFragment.InfoFragment"-->
+        tools:layout="@layout/fragment_player_info"
+        android:name="studio.forface.freshtv.player.ui.InfoFragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

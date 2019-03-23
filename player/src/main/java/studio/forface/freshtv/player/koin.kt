@@ -3,7 +3,7 @@ package studio.forface.freshtv.player
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import studio.forface.freshtv.player.interactors.IncrementChannelSourceFailureInteractor
+import studio.forface.freshtv.player.interactors.UpdateChannelSourceFailureInteractor
 import studio.forface.freshtv.player.mappers.*
 import studio.forface.freshtv.player.presenters.ChannelPresenter
 import studio.forface.freshtv.player.presenters.ChannelSourcePresenter
@@ -13,7 +13,7 @@ import studio.forface.freshtv.player.viewmodels.ChannelSourceViewModel
 val playerModule = module {
 
     /* Interactors */
-    factory { IncrementChannelSourceFailureInteractor( incrementFailure = get() ) }
+    factory { UpdateChannelSourceFailureInteractor( incrementFailure = get(), resetChannelMediaFailure = get() ) }
 
     /* Mappers */
     factory { ChannelUiModelMapper() }

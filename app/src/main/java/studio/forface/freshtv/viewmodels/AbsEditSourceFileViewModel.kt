@@ -5,6 +5,7 @@ import android.provider.OpenableColumns
 import androidx.core.database.getStringOrNull
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import studio.forface.freshtv.R
@@ -73,7 +74,7 @@ internal abstract class AbsEditSourceFileViewModel(
     init {
         if ( filePath != null ) {
             sourceFile.setLoading()
-            launch {
+            launch( Main ) {
                 withContext( IO ) { runCatching { presenter( filePath ) } }
                         .onSuccess( ::onSourceFileReceived )
                         .onFailure { sourceFile.setError( it ) }

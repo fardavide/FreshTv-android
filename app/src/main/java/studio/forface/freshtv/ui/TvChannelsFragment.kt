@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
-import studio.forface.freshtv.ui.TvChannelsFragmentDirections.Companion.actionTvChannelsFragmentToPlayerFragment
+import studio.forface.freshtv.ui.TvChannelGroupsFragmentDirections.Companion.actionTvChannelsFragmentToPlayerFragment
 import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
 import studio.forface.freshtv.viewmodels.TvChannelsViewModel
 
@@ -20,7 +20,7 @@ import studio.forface.freshtv.viewmodels.TvChannelsViewModel
  *
  * Inherit from [NestedFragment]
  */
-internal class TvChannelsFragment: NestedFragment( R.layout.fragment_recycler_view ) {
+internal class TvChannelsFragment: NestedFragment<TvChannelGroupsFragment>( R.layout.fragment_recycler_view ) {
 
     companion object {
         /** @return a new instance of [TvChannelsFragment] with [groupName] in [TvChannelsFragment.mArguments] */
