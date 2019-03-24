@@ -1,9 +1,6 @@
 package studio.forface.freshtv.player.ui
 
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
 import studio.forface.freshtv.player.R
 

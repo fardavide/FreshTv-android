@@ -2,16 +2,14 @@ package studio.forface.freshtv.player.utils
 
 import android.content.Context
 import androidx.core.net.toUri
-import com.google.android.exoplayer2.ExoPlaybackException
-import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
-import com.google.android.exoplayer2.util.Util
-import studio.forface.freshtv.player.R
-import studio.forface.freshtv.player.ui.VideoFragment
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.upstream.TransferListener
+import com.google.android.exoplayer2.util.Util
+import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedAndroidViewModel
+import studio.forface.freshtv.player.R
 
 /** @return a [DefaultHttpDataSourceFactory] created from [exoPlayerUserAgent] */
 private val Context.httpDataSourceFactory get() =
@@ -36,7 +34,7 @@ internal fun HttpDataSourceFactory(
 private val Context.exoPlayerUserAgent get() = Util.getUserAgent(this, getString( R.string.app_name ) )
 
 /** @return a new instance of [MediaSourceFactory] */
-internal val VideoFragment.mediaSource get() = MediaSourceFactory( requireContext() )
+internal val ScopedAndroidViewModel.mediaSource get() = MediaSourceFactory( context )
 
 /** A class for create [MediaSource] for `Exo Player` */
 internal class MediaSourceFactory( private val context: Context ) {
@@ -44,22 +42,4 @@ internal class MediaSourceFactory( private val context: Context ) {
     /** @return an [ExtractorMediaSource] from the given [url] */
     internal infix fun fromUrl( url: String ) = ExtractorMediaSource.Factory( context.httpDataSourceFactory )
             .createMediaSource( url.toUri() )
-}
-
-/** A [Player.EventListener] that listen to [Player.EventListener.onPlayerError] and delivers to [onError] lambda */
-internal class PlayerErrorEventListener( private val onError: (ExoPlaybackException) -> Unit ): Player.EventListener {
-
-    /** When an [ExoPlaybackException] occurs, call [onError] */
-    override fun onPlayerError( error: ExoPlaybackException ) {
-        onError( error )
-    }
-}
-
-/** A [Player.EventListener] that listen to [Player.EventListener.onPlayerError] and delivers to [onError] lambda */
-internal class PlayerSurceEventListener( private val onError: (ExoPlaybackException) -> Unit ): Player.EventListener {
-
-    /** When an [ExoPlaybackException] occurs, call [onError] */
-    override fun onPlayerError( error: ExoPlaybackException ) {
-        onError( error )
-    }
 }

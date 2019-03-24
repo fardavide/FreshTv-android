@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Errors -->
+    <string name="bad_request">400: Bad Request</string>
+    <string name="forbidden_access">403: Forbidden access</string>
+    <string name="malformed_url">Malformed url</string>
+    <string name="stream_not_found">404: stream not found</string>
+    <string name="unknown_host">Unable to resolve hostname</string>
+    <string name="unsupported_stream_format">Unsupported stream format</string>
+
+</resources>

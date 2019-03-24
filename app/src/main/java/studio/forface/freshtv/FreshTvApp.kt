@@ -9,6 +9,7 @@ import studio.forface.freshtv.dimodules.Database
 import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
+import studio.forface.freshtv.player.playerErrorStateGenerator
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
 import studio.forface.freshtv.services.RefreshChannelsWorker
 import studio.forface.freshtv.services.RefreshTvGuidesWorker
@@ -57,7 +58,7 @@ class FreshTvApp: Application() {
         // Configure ViewStateStore
         ViewStateStoreConfig {
             dropOnSame = true
-            errorStateGenerator = { default }
+            errorStateGenerator = playerErrorStateGenerator
         }
 
         // Enqueue Works
