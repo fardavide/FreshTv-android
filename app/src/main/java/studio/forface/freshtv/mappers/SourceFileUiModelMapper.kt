@@ -16,7 +16,7 @@ internal class SourceFileUiModelMapper: UiModelMapper<SourceFile, SourceFileUiMo
     /** @see UiModelMapper.toUiModel */
     override fun SourceFile.toUiModel(): SourceFileUiModel {
         val shownName = name ?: path.substringAfterLast('/' )
-        val shortPath = path // TOOD
+        val shortPath = path // TODO
         val sourceTypeIconRes = when( type ) {
             SourceFile.Type.LOCAL -> R.drawable.ic_file
             SourceFile.Type.REMOTE -> R.drawable.ic_web

@@ -2,10 +2,10 @@ package studio.forface.freshtv.mappers
 
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.commonandroid.mappers.UiModelMapper
-import studio.forface.freshtv.commonandroid.mappers.Unsupported
-import studio.forface.freshtv.commonandroid.mappers.unsupported
 import studio.forface.freshtv.commonandroid.utils.defaultTimeFormatter
+import studio.forface.freshtv.domain.Unsupported
 import studio.forface.freshtv.domain.entities.TvChannelWithGuide
+import studio.forface.freshtv.domain.unsupported
 import studio.forface.freshtv.domain.utils.LocalDateTimeHelper.localOffset
 import studio.forface.freshtv.domain.utils.toEpochMillis
 import studio.forface.freshtv.uimodels.TvChannelUiModel

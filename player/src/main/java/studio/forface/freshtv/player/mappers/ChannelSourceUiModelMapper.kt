@@ -1,13 +1,10 @@
 package studio.forface.freshtv.player.mappers
 
 import studio.forface.freshtv.commonandroid.mappers.UiModelMapper
-import studio.forface.freshtv.commonandroid.mappers.Unsupported
-import studio.forface.freshtv.commonandroid.mappers.unsupported
+import studio.forface.freshtv.domain.Unsupported
 import studio.forface.freshtv.domain.entities.IChannel
-import studio.forface.freshtv.domain.entities.MovieChannel
-import studio.forface.freshtv.player.R
+import studio.forface.freshtv.domain.unsupported
 import studio.forface.freshtv.player.uiModels.ChannelSourceUiModel
-import studio.forface.freshtv.player.uiModels.ChannelUiModel
 
 /**
  * A Mapper of [ChannelSourceUiModel]

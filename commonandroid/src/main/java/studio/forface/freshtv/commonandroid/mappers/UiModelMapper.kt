@@ -24,16 +24,6 @@ abstract class UiModelMapper<in Ein, UI, out Eout> {
 }
 
 /**
- * A typealias of [Nothing] for unsupported mapping; usually for an unsupported mapping from `UiModel`
- * to `Entity`
- */
-typealias Unsupported = Nothing
-
-/** A `null` value casted as [Nothing] - [Unsupported] */
-@Suppress("CAST_NEVER_SUCCEEDS")
-val unsupported: Nothing = null as Nothing
-
-/**
  * Override of invoke operator for get access to `this` [UiModelMapper] as receiver of the
  * lambda for call extension functions declared in this class:
  * e.g. `userMapper { registrationParams.toUiModel() }`

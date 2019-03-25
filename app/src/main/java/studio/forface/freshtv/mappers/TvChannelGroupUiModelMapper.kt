@@ -1,9 +1,9 @@
 package studio.forface.freshtv.mappers
 
 import studio.forface.freshtv.commonandroid.mappers.UiModelMapper
-import studio.forface.freshtv.commonandroid.mappers.Unsupported
-import studio.forface.freshtv.commonandroid.mappers.unsupported
+import studio.forface.freshtv.domain.Unsupported
 import studio.forface.freshtv.domain.entities.ChannelGroup
+import studio.forface.freshtv.domain.unsupported
 import studio.forface.freshtv.uimodels.TvChannelGroupUiModel
 import studio.forface.freshtv.R.drawable.ic_tv as tvDrawable
 import studio.forface.freshtv.commonandroid.R.drawable.ic_favorite as favoriteDrawable
