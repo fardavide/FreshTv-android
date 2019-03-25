@@ -8,8 +8,8 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.upstream.TransferListener
 import com.google.android.exoplayer2.util.Util
-import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedAndroidViewModel
 import studio.forface.freshtv.player.R
+import studio.forface.freshtv.player.viewmodels.VideoPlayerViewModel
 
 /** @return a [DefaultHttpDataSourceFactory] created from [exoPlayerUserAgent] */
 private val Context.httpDataSourceFactory get() =
@@ -33,8 +33,8 @@ internal fun HttpDataSourceFactory(
 /** @return a [String] user agent for `Exo Player` */
 private val Context.exoPlayerUserAgent get() = Util.getUserAgent(this, getString( R.string.app_name ) )
 
-/** @return a new instance of [MediaSourceFactory] */
-internal val ScopedAndroidViewModel.mediaSource get() = MediaSourceFactory( context )
+/** @return a new instance of [MediaSourceFactory] from [VideoPlayerViewModel] */
+internal val VideoPlayerViewModel.mediaSource get() = MediaSourceFactory( context )
 
 /** A class for create [MediaSource] for `Exo Player` */
 internal class MediaSourceFactory( private val context: Context ) {

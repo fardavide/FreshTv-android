@@ -40,9 +40,13 @@ private class ForbiddenAccessError( throwable: Throwable ): ViewState.Error( thr
     override val customMessageRes get() = R.string.forbidden_access
 }
 
-/** A [ViewState.Error] for [MalformedUrlError] */
+/** A [ViewState.Error] for [MalformedURLException] */
 private class MalformedUrlError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = R.string.malformed_url
+    override val customMessageRes get() = when( throwable.cause?.cause?.message ) {
+        "unknown protocol: rtmp" -> R.string.unsupported_rtmp_stream
+        "unknown protocol: rtsp" -> R.string.unsupported_rtsp_stream
+        else -> R.string.malformed_url
+    }
 }
 
 /** A [ViewState.Error] for [HttpDataSource.InvalidResponseCodeException.responseCode] 404 */

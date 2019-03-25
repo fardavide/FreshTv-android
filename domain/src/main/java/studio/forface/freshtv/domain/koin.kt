@@ -38,6 +38,7 @@ val useCasesModule = module {
     factory { RefreshTvGuides( localData = get(), parsers = get() ) }
 
     /* Remove */
+    factory { RemoveAllChannels( localData = get() ) }
     factory { RemoveChannelMediaUrl( localData = get() ) }
     factory { RemoveEmptyGroups( localData = get() ) }
     factory { RemoveEpg( localData = get() ) }

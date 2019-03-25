@@ -10,6 +10,7 @@ include(":androiddatabase", ":androiddatabase:sqldelight" )//, ":androiddatabase
 include(":commonandroid" )
 include(":dimodules")
 include(":player")
+include(":preferences")
 include(":settings" )
 
 include(":app" )

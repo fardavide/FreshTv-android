@@ -65,6 +65,9 @@ interface LocalData {
     /** Delete all the stored [IChannel]s */
     fun deleteAllChannels()
 
+    /** Delete all the stored [ChannelGroup]s */
+    fun deleteAllGroups()
+
     /** Delete all the stored [TvGuide]s */
     fun deleteAllTvGuides()
 

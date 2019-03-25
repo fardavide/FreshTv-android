@@ -108,6 +108,11 @@ abstract class AbsLocalData<
         tvChannels.deleteAll()
     }
 
+    /** Delete all the stored [ChannelGroup]s */
+    override fun deleteAllGroups() {
+        channelGroups.deleteAll()
+    }
+
     /** Delete all the stored [TvGuide]s */
     override fun deleteAllTvGuides() {
         tvGuides.deleteAll()
