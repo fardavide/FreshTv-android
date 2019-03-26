@@ -1,8 +1,9 @@
 package studio.forface.freshtv.uimodels
 
 /**
- * @author Davide Giuseppe Farella
  * An Ui Model representing the availability of Channels
+ *
+ * @author Davide Giuseppe Farella
  */
 internal data class ChannelsAvailabilityUiModel(
     val hasMovies: Boolean,

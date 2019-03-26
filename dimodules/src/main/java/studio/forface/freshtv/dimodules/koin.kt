@@ -8,6 +8,7 @@ import studio.forface.freshtv.domain.useCasesModule
 import studio.forface.freshtv.localdata.sqldelight.sqlDelightLocalDataModule
 import studio.forface.freshtv.parsers.parsersModule
 import studio.forface.freshtv.player.playerModule
+import studio.forface.freshtv.preferences.preferencesModule
 import studio.forface.freshtv.settings.settingsModule
 
 /** A [List] of [Module] all the business modules */
@@ -16,6 +17,7 @@ fun otherModules( database: Database ) =
         commonAndroidModule +
         parsersModule +
         playerModule +
+        preferencesModule +
         settingsModule +
         useCasesModule +
         //when ( database ) {

@@ -1,29 +1,40 @@
-package studio.forface.freshtv.presenters
+package studio.forface.freshtv.preferences.presenters
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
-import studio.forface.freshtv.domain.utils.invoke
+import studio.forface.freshtv.commonandroid.mappers.invoke
 import studio.forface.freshtv.domain.usecases.HasMovieChannels
 import studio.forface.freshtv.domain.usecases.HasTvChannels
-import studio.forface.freshtv.uimodels.ChannelsAvailabilityUiModel
+import studio.forface.freshtv.domain.utils.invoke
+import studio.forface.freshtv.preferences.mappers.ChannelsDatabaseStateUiModelMapper
+import studio.forface.freshtv.preferences.uimodels.ChannelsDatabaseStateUiModel
 
 /**
+ * A Presenter for get Preferences for Clean Channels
+ *
  * @author Davide Giuseppe Farella
- * A Presenter for check the availability of Channels
  */
-internal class ChannelsAvailabilityPresenter(
+internal interface CleanChannelsPresenter {
+
+    fun CoroutineScope.observeChannelsDatabaseState() : ReceiveChannel<ChannelsDatabaseStateUiModel>
+}
+
+/** Implementation of [CleanChannelsPresenter] */
+internal class CleanChannelsPresenterImpl(
     private val hasMovieChannels: HasMovieChannels,
-    private val hasTvChannels: HasTvChannels
-) {
+    private val hasTvChannels: HasTvChannels,
+    private val mapper: ChannelsDatabaseStateUiModelMapper
+) : CleanChannelsPresenter {
+
     private var hadMovieChannels: Boolean? = null
     private var hadTvChannels: Boolean? = null
 
-    /** @return [ChannelsAvailabilityUiModel] */
-    operator fun invoke(): ChannelsAvailabilityUiModel {
+    /** @return [ChannelsDatabaseStateUiModel] */
+    fun channelsDatabaseState(): ChannelsDatabaseStateUiModel {
         hadMovieChannels = hasMovieChannels()
         hadTvChannels = hasTvChannels()
 
@@ -31,12 +42,12 @@ internal class ChannelsAvailabilityPresenter(
     }
 
     /**
-     * @return [ReceiveChannel] of [ChannelsAvailabilityUiModel]
+     * @return [ReceiveChannel] of [ChannelsDatabaseStateUiModel]
      * Creates a single [ReceiveChannel] from [HasMovieChannels.observe] and [HasTvChannels.observe]
      * [ReceiveChannel]s
      */
-    fun CoroutineScope.observe(): ReceiveChannel<ChannelsAvailabilityUiModel> {
-        val channel = Channel<ChannelsAvailabilityUiModel>( CONFLATED )
+    override fun CoroutineScope.observeChannelsDatabaseState(): ReceiveChannel<ChannelsDatabaseStateUiModel> {
+        val channel = Channel<ChannelsDatabaseStateUiModel>( Channel.CONFLATED )
 
         launch( IO ) {
             for ( boolean in hasMovieChannels.observe() ) {
@@ -59,17 +70,9 @@ internal class ChannelsAvailabilityPresenter(
         return channel
     }
 
-    /** @return OPTIONAL [ChannelsAvailabilityUiModel] IF [hadMovieChannels] and [hadTvChannels] are NOT NULL */
+    /** @return OPTIONAL [ChannelsDatabaseStateUiModel] IF [hadMovieChannels] and [hadTvChannels] are NOT NULL */
     private fun maybeMakeModel() = ( hadMovieChannels != null && hadTvChannels != null ) { assertMakeModel() }
 
-    /** @return [ChannelsAvailabilityUiModel], asserts that [hadMovieChannels] and [hadTvChannels] are NOT NULL */
-    private fun assertMakeModel() = ChannelsAvailabilityUiModel(
-        hasMovies = hadMovieChannels!!,
-        hasTvs = hadTvChannels!!
-    )
+    /** @return [ChannelsDatabaseStateUiModel], asserts that [hadMovieChannels] and [hadTvChannels] are NOT NULL */
+    private fun assertMakeModel() = mapper.invoke { ( hadMovieChannels!! || hadTvChannels!! ).toUiModel() }
 }
-
-/** Invoke operator for [ChannelsAvailabilityPresenter] */
-internal suspend operator fun <T> ChannelsAvailabilityPresenter.invoke(
-    block: suspend ChannelsAvailabilityPresenter.() -> T
-) = block()

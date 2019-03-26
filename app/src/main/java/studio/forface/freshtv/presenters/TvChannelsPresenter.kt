@@ -7,8 +7,9 @@ import studio.forface.freshtv.commonandroid.mappers.map
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 
 /**
- * @author Davide Giuseppe Farella
  * A Presenter for get `TvChannel`s
+ *
+ * @author Davide Giuseppe Farella
  */
 internal class TvChannelsPresenter(
         private val getPagedTvChannels: GetPagedTvChannelsWithGuide,

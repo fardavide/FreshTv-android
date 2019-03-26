@@ -12,7 +12,7 @@ import studio.forface.freshtv.mappers.TvChannelUiModelMapper
 import studio.forface.freshtv.presenters.*
 import studio.forface.freshtv.viewmodels.*
 
-/** A [Module] that handles dependencies for use cases of `app` module */
+/** A [Module] that handles dependencies of `app` module */
 val appModule = module {
 
     /* Interactors */

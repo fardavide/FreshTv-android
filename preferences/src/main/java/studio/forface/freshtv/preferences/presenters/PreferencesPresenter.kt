@@ -1,0 +1,21 @@
+package studio.forface.freshtv.preferences.presenters
+
+import org.koin.core.KoinComponent
+import org.koin.core.get
+
+/**
+ * A Presenter for get Preferences
+ *
+ * Implements [CleanChannelsPresenter]
+ *
+ * @author Davide Giuseppe Farella
+ */
+internal class PreferencesPresenter :
+    CleanChannelsPresenter by Delegates.get()
+
+/** Invoke operator for [PreferencesPresenter] */
+internal suspend operator fun <T> PreferencesPresenter.invoke( block: suspend PreferencesPresenter.() -> T ) =
+        block()
+
+/** A [KoinComponent] for get Delegates for [PreferencesPresenter] */
+private object Delegates : KoinComponent

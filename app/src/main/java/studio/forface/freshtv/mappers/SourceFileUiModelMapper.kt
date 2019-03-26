@@ -6,10 +6,10 @@ import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.uimodels.SourceFileUiModel
 
 /**
- * @author Davide Giuseppe Farella.
  * A Mapper of [SourceFileUiModel]
- *
  * Inherit from [UiModelMapper]
+ *
+ * @author Davide Giuseppe Farella
  */
 internal class SourceFileUiModelMapper: UiModelMapper<SourceFile, SourceFileUiModel, SourceFile>() {
 
