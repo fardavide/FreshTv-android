@@ -20,6 +20,10 @@ import studio.forface.freshtv.preferences.uimodels.ChannelsDatabaseStateUiModel
  */
 internal interface CleanChannelsPresenter {
 
+    /** @return [ChannelsDatabaseStateUiModel] */
+    fun channelsDatabaseState(): ChannelsDatabaseStateUiModel
+
+    /** @return [ReceiveChannel] of [ChannelsDatabaseStateUiModel] */
     fun CoroutineScope.observeChannelsDatabaseState() : ReceiveChannel<ChannelsDatabaseStateUiModel>
 }
 
@@ -34,7 +38,7 @@ internal class CleanChannelsPresenterImpl(
     private var hadTvChannels: Boolean? = null
 
     /** @return [ChannelsDatabaseStateUiModel] */
-    fun channelsDatabaseState(): ChannelsDatabaseStateUiModel {
+    override fun channelsDatabaseState(): ChannelsDatabaseStateUiModel {
         hadMovieChannels = hasMovieChannels()
         hadTvChannels = hasTvChannels()
 

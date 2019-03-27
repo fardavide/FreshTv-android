@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
+import studio.forface.freshtv.PreferencesFragment
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
 import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
@@ -124,6 +125,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             // Settings
             primaryItem( R.string.menu_settings ) {
                 iconResource = R.drawable.ic_settings
+                navDirections = PreferencesFragment.directions()
             }
         }
     }

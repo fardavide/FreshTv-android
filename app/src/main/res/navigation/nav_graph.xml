@@ -37,6 +37,11 @@
         app:destination="@id/editEpgFragment"/>
 
 
+    <action
+        android:id="@+id/action_to_preferencesFragment"
+        app:destination="@id/preferencesFragment"/>
+
+
     <!-- Fragments -->
     <fragment
         android:id="@+id/tvChannelGroupsFragment"
@@ -98,5 +103,11 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
+
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="studio.forface.freshtv.preferences.ui.PreferencesFragment"
+        android:label="PreferencesFragment"
+        tools:layout="@layout/fragment_preferences"/>
 
 </navigation>

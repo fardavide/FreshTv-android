@@ -28,6 +28,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_to_preferencesFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_to_tvChannelGroupsFragment">
                     <value>
                       <LayoutPositions />
@@ -38,8 +43,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="423" />
-                            <option name="y" value="659" />
+                            <option name="x" value="443" />
+                            <option name="y" value="637" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -50,8 +55,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="427" />
-                            <option name="y" value="293" />
+                            <option name="x" value="448" />
+                            <option name="y" value="296" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -62,8 +67,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="188" />
-                            <option name="y" value="670" />
+                            <option name="x" value="225" />
+                            <option name="y" value="634" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -98,8 +103,20 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="199" />
-                            <option name="y" value="307" />
+                            <option name="x" value="234" />
+                            <option name="y" value="291" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="preferencesFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="222" />
+                            <option name="y" value="958" />
                           </Point>
                         </option>
                       </LayoutPositions>

@@ -3,6 +3,8 @@ package studio.forface.freshtv.commonandroid.frameworkcomponents
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
+import android.widget.TextView
 import androidx.annotation.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -10,9 +12,13 @@ import androidx.navigation.fragment.findNavController
 import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
+import studio.forface.freshtv.commonandroid.utils.inflate
 import studio.forface.materialbottombar.dsl.MaterialPanel
 import studio.forface.materialbottombar.dsl.PanelBuilder
 import studio.forface.materialbottombar.dsl.panel
+import studio.forface.materialbottombar.panels.params.titleColorRes
+import studio.forface.materialbottombar.panels.params.titleSpSize
+import studio.forface.materialbottombar.panels.params.titleTextRes
 import studio.forface.theia.dsl.TheiaFragment
 import studio.forface.viewstatestore.ViewStateFragment
 
@@ -48,11 +54,40 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
     }
 
     /** Shortcut for show a dialog [MaterialPanel] with a static id */
-    fun showDialog( builder: PanelBuilder.( View ) -> Unit ) {
-        val body = layoutInflater.inflate( R.layout.layout_dialog_body, requireView() as ViewGroup,false )
-        val panel = panel { builder( body ).apply {
+    fun showDialog(
+        @StringRes titleRes: Int,
+        @StringRes contentRes: Int? = null,
+        @StringRes positiveTextRes: Int? = null,
+        @StringRes negativeTextRes: Int? = null,
+        onNegativeButton: () -> Unit = {},
+        onPositiveButton: () -> Unit = {}
+    ) {
+        val body = inflate( R.layout.layout_dialog_body ).apply {
+
+            // Set content
+            contentRes?.let { findViewById<TextView>( R.id.dialogContentTextView ).setText( it ) }
+
+            // Set positive Button
+            findViewById<Button>( R.id.dialogPositiveButton ).apply {
+                positiveTextRes?.let { setText( it ) }
+                setOnClickListener { dismissPanel(); onPositiveButton() }
+            }
+
+            // Set negative Button
+            findViewById<Button>( R.id.dialogNegativeButton ).apply {
+                negativeTextRes?.let { setText( it ) }
+                setOnClickListener { dismissPanel(); onNegativeButton() }
+            }
+        }
+        val panel = panel {
+            // Set Title
+            header {
+                titleTextRes = titleRes
+                titleColorRes = R.color.colorPrimary
+                titleSpSize = 16f
+            }
             customBody( body )
-        } }
+        }
         showPanel( DIALOG_PANEL_ID, panel )
     }
 

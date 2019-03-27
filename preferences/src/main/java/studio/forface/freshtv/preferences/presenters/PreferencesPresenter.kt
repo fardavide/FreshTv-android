@@ -7,11 +7,13 @@ import org.koin.core.get
  * A Presenter for get Preferences
  *
  * Implements [CleanChannelsPresenter]
+ * Implements [CleanGuidesPresenter]
  *
  * @author Davide Giuseppe Farella
  */
 internal class PreferencesPresenter :
-    CleanChannelsPresenter by Delegates.get()
+    CleanChannelsPresenter by Delegates.get(),
+    CleanGuidesPresenter by Delegates.get()
 
 /** Invoke operator for [PreferencesPresenter] */
 internal suspend operator fun <T> PreferencesPresenter.invoke( block: suspend PreferencesPresenter.() -> T ) =

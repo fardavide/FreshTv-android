@@ -29,6 +29,7 @@ val useCasesModule = module {
     /* Has */
     factory { HasMovieChannels( localData = get() ) }
     factory { HasTvChannels( localData = get() ) }
+    factory { HasTvGuides( localData = get() ) }
 
     /* Increment */
     factory { IncrementChannelMediaFailure( localData = get() ) }
@@ -39,6 +40,7 @@ val useCasesModule = module {
 
     /* Remove */
     factory { RemoveAllChannels( localData = get() ) }
+    factory { RemoveAllTvGuides( localData = get() ) }
     factory { RemoveChannelMediaUrl( localData = get() ) }
     factory { RemoveEmptyGroups( localData = get() ) }
     factory { RemoveEpg( localData = get() ) }

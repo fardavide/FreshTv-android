@@ -62,6 +62,12 @@ interface LocalData {
     /** @return [ReceiveChannel] of the [Int] count of the stored [TvChannel]s */
     suspend fun observeCountTvChannels(): ReceiveChannel<Int>
 
+    /** @return the [Int] count of the stored [TvGuide]s */
+    fun countTvGuides(): Int
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored [TvGuide]s */
+    suspend fun observeCountTvGuides(): ReceiveChannel<Int>
+
     /** Delete all the stored [IChannel]s */
     fun deleteAllChannels()
 

@@ -1,12 +1,20 @@
 package studio.forface.freshtv.localdata.sources
 
+import kotlinx.coroutines.channels.ReceiveChannel
 import org.threeten.bp.LocalDateTime
 
 /**
- * @author Davide Giuseppe Farella.
  * A source for Tv Guides stored locally
+ *
+ * @author Davide Giuseppe Farella
  */
 interface TvGuidesLocalSource<Pojo> {
+
+    /** @return the [Int] count of the stored channels [Pojo] */
+    fun count(): Int
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored channels [Pojo] */
+    suspend fun observeCount(): ReceiveChannel<Int>
 
     /** Create a new guide [Pojo] */
     fun createGuide( guide: Pojo)

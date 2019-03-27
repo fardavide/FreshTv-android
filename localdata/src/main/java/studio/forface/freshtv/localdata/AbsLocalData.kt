@@ -73,6 +73,12 @@ abstract class AbsLocalData<
     /** @return [ReceiveChannel] of the [Int] count of the stored [TvChannel]s */
     override suspend fun observeCountTvChannels() = tvChannels.observeCount()
 
+    /** @return the [Int] count of the stored [TvGuide]s */
+    override fun countTvGuides(): Int = tvGuides.count()
+
+    /** @return [ReceiveChannel] of the [Int] count of the stored [TvGuide]s */
+    override suspend fun observeCountTvGuides() = tvGuides.observeCount()
+
     /** Store a [IChannel] in the appropriate [ChannelsLocalSource] */
     private fun createChannel( channel: IChannel) {
         when( channel ) {

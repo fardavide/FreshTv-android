@@ -32,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@string/action_cancel"
-            android:visibility="gone"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:textColor="?attr/colorError"/>
 

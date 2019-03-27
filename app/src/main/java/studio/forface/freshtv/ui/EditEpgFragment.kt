@@ -66,17 +66,9 @@ internal class EditEpgFragment : AbsEditSourceFileFragment<EditEpgViewModel>() {
 
     /** A function called when [AbsEditSourceFileViewModel.state] is [AbsEditSourceFileFragment.State.SaveCompleted] */
     override fun onSaveComplete() {
-        showDialog { bodyView ->
-            header {
-                titleTextRes = R.string.refresh_tv_guides_delayed_title
-                titleColorRes = R.color.colorPrimary
-                titleSpSize = 16f
-            }
-            bodyView.findViewById<TextView>( R.id.dialogContentTextView )
-                .setText( R.string.refresh_tv_guides_delayed_message )
-
-            bodyView.findViewById<Button>( R.id.dialogPositiveButton )
-                .setOnClickListener{ dismissPanel(); navController.popBackStack() }
+        showDialog( R.string.refresh_tv_guides_delayed_title, R.string.refresh_tv_guides_delayed_message ) {
+            dismissPanel()
+            navController.popBackStack()
         }
     }
 }
