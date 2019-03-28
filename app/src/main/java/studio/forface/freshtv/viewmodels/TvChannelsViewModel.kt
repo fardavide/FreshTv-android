@@ -1,16 +1,13 @@
 package studio.forface.freshtv.viewmodels
 
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagedList
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
 import studio.forface.freshtv.domain.usecases.FavoritedChannel
 import studio.forface.freshtv.interactors.ChannelChangeFavoriteInteractor
 import studio.forface.freshtv.presenters.TvChannelsPresenter
 import studio.forface.freshtv.uimodels.TvChannelUiModel
-import studio.forface.viewstatestore.ViewStateStore
+import studio.forface.viewstatestore.paging.LockedPagedViewStateStore
 import studio.forface.viewstatestore.paging.PagedViewStateStore
-import studio.forface.viewstatestore.setError
-import studio.forface.viewstatestore.setLoading
 
 /**
  * @author Davide Giuseppe Farella
@@ -24,8 +21,8 @@ internal class TvChannelsViewModel(
         private val interactor: ChannelChangeFavoriteInteractor
 ): ScopedViewModel() {
 
-    /** A [ViewStateStore] of [PagedList] of [TvChannelsViewModel] */
-    val channels = PagedViewStateStore<TvChannelUiModel>(20 )
+    /** A [LockedPagedViewStateStore] of [TvChannelsViewModel] */
+    val channels = PagedViewStateStore<TvChannelUiModel>(20 ).lock
 
     init {
         channels.setLoading()

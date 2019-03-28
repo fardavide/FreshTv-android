@@ -8,10 +8,8 @@ import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
 import studio.forface.freshtv.presenters.ChannelsAvailabilityPresenter
 import studio.forface.freshtv.presenters.invoke
 import studio.forface.freshtv.uimodels.ChannelsAvailabilityUiModel
+import studio.forface.viewstatestore.LockedViewStateStore
 import studio.forface.viewstatestore.ViewStateStore
-import studio.forface.viewstatestore.postData
-import studio.forface.viewstatestore.postError
-import studio.forface.viewstatestore.postLoading
 
 /**
  * @author Davide Giuseppe Farella
@@ -23,8 +21,8 @@ internal class ChannelsAvailabilityViewModel(
     private val presenter: ChannelsAvailabilityPresenter
 ): ScopedViewModel() {
 
-    /** A [ViewStateStore] of [ChannelsAvailabilityUiModel] */
-    val channelsAvailability = ViewStateStore<ChannelsAvailabilityUiModel>()
+    /** A [LockedViewStateStore] of [ChannelsAvailabilityUiModel] */
+    val channelsAvailability = ViewStateStore<ChannelsAvailabilityUiModel>().lock
 
     init {
         // When ViewModel is instantiated, start observing for UiModels

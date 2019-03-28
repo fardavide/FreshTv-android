@@ -7,8 +7,8 @@ import studio.forface.freshtv.preferences.presenters.PreferencesPresenter
 import studio.forface.freshtv.preferences.presenters.invoke
 import studio.forface.freshtv.preferences.uimodels.ChannelsDatabaseStateUiModel
 import studio.forface.freshtv.preferences.uimodels.GuidesDatabaseStateUiModel
+import studio.forface.viewstatestore.LockedViewStateStore
 import studio.forface.viewstatestore.ViewStateStore
-import studio.forface.viewstatestore.postData
 
 /**
  * A `ViewModel` for get and edit Preferences
@@ -22,11 +22,11 @@ internal class PreferencesViewModel(
     private val interactor: EditPreferencesInteractor
 ) : ScopedViewModel() {
 
-    /** A [ViewStateStore] for [ChannelsDatabaseStateUiModel] */
-    val channelsDatabaseState = ViewStateStore<ChannelsDatabaseStateUiModel>()
+    /** A [LockedViewStateStore] for [ChannelsDatabaseStateUiModel] */
+    val channelsDatabaseState = ViewStateStore<ChannelsDatabaseStateUiModel>().lock
 
-    /** A [ViewStateStore] for [GuidesDatabaseStateUiModel] */
-    val guidesDatabaseState = ViewStateStore<GuidesDatabaseStateUiModel>()
+    /** A [LockedViewStateStore] for [GuidesDatabaseStateUiModel] */
+    val guidesDatabaseState = ViewStateStore<GuidesDatabaseStateUiModel>().lock
 
     init {
         // Observe Channels

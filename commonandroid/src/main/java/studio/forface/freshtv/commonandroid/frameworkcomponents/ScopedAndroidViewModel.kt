@@ -5,10 +5,9 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
+import studio.forface.viewstatestore.ViewStateStoreScope
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -17,8 +16,11 @@ import kotlin.coroutines.CoroutineContext
  *
  * Inherit from [AndroidViewModel].
  * Implements [CoroutineScope].
+ * Implements [ViewStateStoreScope].
  */
-abstract class ScopedAndroidViewModel( application: Application ): AndroidViewModel( application ), CoroutineScope {
+abstract class ScopedAndroidViewModel(
+    application: Application
+): AndroidViewModel( application ), CoroutineScope, ViewStateStoreScope {
 
     /** @return [Context] from [getApplication] */
     val context: Context get() = getApplication()

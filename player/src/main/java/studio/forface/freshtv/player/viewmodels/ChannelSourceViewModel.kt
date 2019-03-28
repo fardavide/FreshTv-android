@@ -6,10 +6,8 @@ import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
 import studio.forface.freshtv.player.interactors.UpdateChannelSourceFailureInteractor
 import studio.forface.freshtv.player.presenters.ChannelSourcePresenter
 import studio.forface.freshtv.player.uiModels.ChannelSourceUiModel
+import studio.forface.viewstatestore.LockedViewStateStore
 import studio.forface.viewstatestore.ViewStateStore
-import studio.forface.viewstatestore.postData
-import studio.forface.viewstatestore.postError
-import studio.forface.viewstatestore.setLoading
 import java.lang.System.currentTimeMillis
 
 /**
@@ -32,8 +30,8 @@ internal class ChannelSourceViewModel(
     /** A [Long] for keep track of the last delivery of [ChannelSourceUiModel] */
     private var lastSourceDeliveryTime = 0L
 
-    /** A [ViewStateStore] of [ChannelSourceUiModel] */
-    val source = ViewStateStore<ChannelSourceUiModel>()
+    /** A [LockedViewStateStore] of [ChannelSourceUiModel] */
+    val source = ViewStateStore<ChannelSourceUiModel>().lock
 
     init {
         source.setLoading()

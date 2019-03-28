@@ -18,5 +18,4 @@ dependencies {
     implementation( Libs.Android.lifecycle_runtime )
     implementation( Libs.Android.lifecycle_viewmodel )
     implementation( Libs.Android.material_bottom_bar_navigation )
-    implementation( Libs.Android.view_state_store_paging )
 }

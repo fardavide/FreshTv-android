@@ -2,10 +2,9 @@ package studio.forface.freshtv.commonandroid.frameworkcomponents
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
+import studio.forface.viewstatestore.paging.ViewStateStoreScope
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -14,8 +13,9 @@ import kotlin.coroutines.CoroutineContext
  *
  * Inherit from [ViewModel].
  * Implements [CoroutineScope].
+ * Implements [ViewStateStoreScope].
  */
-abstract class ScopedViewModel: ViewModel(), CoroutineScope {
+abstract class ScopedViewModel: ViewModel(), CoroutineScope, ViewStateStoreScope {
 
     companion object {
         const val DEFAULT_ERROR_DELAY = 30_000L

@@ -36,14 +36,14 @@ internal abstract class AbsEditSourceFileViewModel(
         private val filePath: String?
 ): ScopedViewModel() {
 
-    /** A [ViewStateStore] of [SourceFileEditFormUiModel] */
-    val form = ViewStateStore<SourceFileEditFormUiModel>()
+    /** A [LockedViewStateStore] of [SourceFileEditFormUiModel] */
+    val form = ViewStateStore<SourceFileEditFormUiModel>().lock
 
-    /** A [ViewStateStore] of [SourceFileUiModel] */
-    val sourceFile = ViewStateStore<SourceFileUiModel>()
+    /** A [LockedViewStateStore] of [SourceFileUiModel] */
+    val sourceFile = ViewStateStore<SourceFileUiModel>().lock
 
-    /** A [ViewStateStore] of [AbsEditSourceFileFragment.State] */
-    val state = ViewStateStore<AbsEditSourceFileFragment.State>()
+    /** A [LockedViewStateStore] of [AbsEditSourceFileFragment.State] */
+    val state = ViewStateStore<AbsEditSourceFileFragment.State>().lock
 
     /** The [SourceFileUiModel.shownName] */
     var name: CharSequence = EMPTY_STRING

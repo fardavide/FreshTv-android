@@ -41,5 +41,6 @@ dependencies {
     api( Libs.Android.theia )
     api( Libs.Android.view_pager2 )
     api( Libs.Android.view_state_store )
+    api( Libs.Android.view_state_store_paging )
     api( Libs.Android.work )
 }

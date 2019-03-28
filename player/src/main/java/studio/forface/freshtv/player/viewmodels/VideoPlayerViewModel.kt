@@ -29,11 +29,11 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
             player.prepare( videoSource )
         }
 
-    /** A [ViewStateStore] of [Nothing] delivering only [player]s errors via [ViewState.Error] */
-    val errors = ViewStateStore<Nothing>()
+    /** A [LockedViewStateStore] of [Nothing] delivering only [player]s errors via [ViewState.Error] */
+    val errors = ViewStateStore<Nothing>().lock
 
-    /** A [ViewStateStore] of [PlaybackState] */
-    val playbackState = ViewStateStore<PlaybackState>()
+    /** A [LockedViewStateStore] of [PlaybackState] */
+    val playbackState = ViewStateStore<PlaybackState>().lock
 
     /** Instance of [SimpleExoPlayer] for play the video source */
     private val player: SimpleExoPlayer by lazy { ExoPlayerFactory.newSimpleInstance( context ) }

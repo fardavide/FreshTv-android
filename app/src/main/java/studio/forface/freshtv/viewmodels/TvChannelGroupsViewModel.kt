@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
 import studio.forface.freshtv.presenters.TvChannelGroupsPresenter
 import studio.forface.freshtv.uimodels.TvChannelGroupUiModel
+import studio.forface.viewstatestore.LockedViewStateStore
 import studio.forface.viewstatestore.ViewStateStore
-import studio.forface.viewstatestore.setData
-import studio.forface.viewstatestore.setError
-import studio.forface.viewstatestore.setLoading
 
 /**
  * @author Davide Giuseppe Farella
@@ -19,8 +17,8 @@ internal class TvChannelGroupsViewModel(
         private val presenter: TvChannelGroupsPresenter
 ): ScopedViewModel() {
 
-    /** A [ViewStateStore] of [List] of [TvChannelGroupUiModel] */
-    val groups = ViewStateStore<List<TvChannelGroupUiModel>>()
+    /** A [LockedViewStateStore] of [List] of [TvChannelGroupUiModel] */
+    val groups = ViewStateStore<List<TvChannelGroupUiModel>>().lock
 
     init {
         groups.setLoading()
