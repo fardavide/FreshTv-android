@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Fresh Tv</string>
     <string name="empty"/>
 
     <!-- Actions -->

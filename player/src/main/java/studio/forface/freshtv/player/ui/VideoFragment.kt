@@ -33,20 +33,26 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
     override fun onActivityCreated( savedInstanceState: Bundle? ) {
         super.onActivityCreated( savedInstanceState )
 
+        // source from SourceViewModel
         sourceViewModel.source.observe {
             doOnData( ::onSourceReady )
             doOnError { notifier.error( it ) }
         }
 
-        playerViewModel.errors.observe {
-            doOnError { notifier.error( it ) }
+        // screenLock from PlayerViewModel
+        playerViewModel.screenLock.observeData( playerView::setKeepScreenOn )
+
+        // sourceState from PlayerViewModel
+        playerViewModel.sourceState.observeData {
+            when ( it ) {
+                is VideoPlayerViewModel.SourceState.Success -> onUrlLoadingSuccess( it.url )
+                is VideoPlayerViewModel.SourceState.Error -> onUrlLoadingFailed( it.url )
+            }
         }
 
-        playerViewModel.playbackState.observeData {
-            when ( it ) {
-                is VideoPlayerViewModel.PlaybackState.Success -> onUrlLoadingSuccess( it.url )
-                is VideoPlayerViewModel.PlaybackState.Error -> onUrlLoadingFailed( it.url )
-            }
+        // errors from PlayerViewModel
+        playerViewModel.errors.observe {
+            doOnError { notifier.error( it ) }
         }
     }
 

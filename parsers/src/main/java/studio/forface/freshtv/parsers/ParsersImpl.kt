@@ -36,13 +36,13 @@ internal class ParsersImpl(
     ) = coroutineScope<Unit> {
         val guidesChannel = Channel<TvGuide>()
         val errorsChannel = Channel<ParsingEpgError>()
-        val progressChannel = Channel<Int>( CONFLATED )
+        //val progressChannel = Channel<Int>( CONFLATED )
 
         launch { for ( guide in guidesChannel ) onTvGuide( guide ) }
         launch { for( error in errorsChannel ) onError( error ) }
-        launch { for( progress in progressChannel ) onProgress( progress ) }
+        //launch { for( progress in progressChannel ) onProgress( progress ) }
 
-        launch { epgParser(contentResolver(epg), guidesChannel, errorsChannel) }
+        launch { epgParser( contentResolver( epg ), guidesChannel, errorsChannel ) }
     }
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */

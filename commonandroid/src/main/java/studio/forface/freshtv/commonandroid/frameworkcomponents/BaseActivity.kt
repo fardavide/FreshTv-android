@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
@@ -20,7 +21,6 @@ import studio.forface.freshtv.commonandroid.notifier.SnackbarType
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
 import studio.forface.freshtv.domain.gateways.Notifier
-import studio.forface.freshtv.domain.utils.optLet
 import studio.forface.freshtv.domain.utils.optWith
 import studio.forface.materialbottombar.doOnPanelClose
 import studio.forface.materialbottombar.doOnPanelState
@@ -53,6 +53,9 @@ import kotlin.contracts.contract
 abstract class BaseActivity(
     @LayoutRes private val layoutRes: Int
 ): TheiaActivity(), LifecycleOwner, AndroidUiComponent, SnackbarManager, ViewStateActivity {
+
+    /** @return the `Activity`s [AppBarLayout] */
+    protected abstract val appBar: AppBarLayout
 
     /** @return the `Activity`s [MaterialBottomDrawerLayout] */
     protected abstract val drawerLayout: MaterialBottomDrawerLayout
@@ -114,6 +117,11 @@ abstract class BaseActivity(
                 fab.setOnClickListener( null )
             }
 
+            // Bars
+            fun setBars() {
+                toggleBars( fragment.hasBars )
+            }
+
             // Title
             fun setTitle() {
                 fragment.title?.let { titleTextView.text = it }
@@ -140,6 +148,7 @@ abstract class BaseActivity(
 
             // Setup
             val setup: PanelChangeListener = {
+                setBars()
                 setTitle()
                 setOptionsMenu()
                 setBg()
@@ -227,6 +236,17 @@ abstract class BaseActivity(
         val snackBar = Snackbar.make( rootView, message, Snackbar.LENGTH_LONG )
         action?.let { snackBar.setAction( action.name ) { action.block() } }
         snackBar.show( type )
+    }
+
+    /** Toggle the visibility of the bars */
+    private fun toggleBars( show: Boolean ) {
+        if ( show ) {
+            drawerLayout.showBars()
+            appBar.setExpanded( true )
+        } else {
+            drawerLayout.hideBars()
+            appBar.setExpanded( false )
+        }
     }
 }
 

@@ -93,7 +93,7 @@ selectPagedByGroup:
 selectByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths LIKE :playlistPath --TODO"(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
   ORDER BY
     favorite DESC,
     name ASC;
@@ -101,7 +101,7 @@ selectByPlaylistPath:
 selectPagedByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths LIKE :playlistPath --TODO"(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
   ORDER BY
     favorite DESC,
     name ASC

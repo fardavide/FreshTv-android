@@ -14,4 +14,5 @@ dependencies {
 
     /* Android */
     implementation( Libs.Android.exo_player )
+    implementation( Libs.Android.exo_player_rtmp )
 }

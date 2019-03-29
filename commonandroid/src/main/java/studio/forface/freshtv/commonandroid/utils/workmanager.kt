@@ -1,10 +1,9 @@
 package studio.forface.freshtv.commonandroid.utils
 
 import androidx.work.*
-import androidx.work.BackoffPolicy.*
+import androidx.work.BackoffPolicy.EXPONENTIAL
+import androidx.work.BackoffPolicy.LINEAR
 import org.threeten.bp.Duration
-import studio.forface.freshtv.domain.utils.days
-import studio.forface.freshtv.domain.utils.millis
 import studio.forface.freshtv.domain.utils.seconds
 import java.util.concurrent.TimeUnit
 

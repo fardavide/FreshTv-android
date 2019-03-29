@@ -1,7 +1,5 @@
 package studio.forface.freshtv.ui
 
-import android.widget.Button
-import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_source_file_edit.*
@@ -13,9 +11,6 @@ import studio.forface.freshtv.ui.AbsEditSourceFileFragment.Mode.CREATE
 import studio.forface.freshtv.ui.AbsEditSourceFileFragment.Mode.EDIT
 import studio.forface.freshtv.viewmodels.AbsEditSourceFileViewModel
 import studio.forface.freshtv.viewmodels.EditEpgViewModel
-import studio.forface.materialbottombar.panels.params.titleColorRes
-import studio.forface.materialbottombar.panels.params.titleSpSize
-import studio.forface.materialbottombar.panels.params.titleTextRes
 
 /**
  * @author Davide Giuseppe Farella

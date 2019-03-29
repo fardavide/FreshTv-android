@@ -131,6 +131,9 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
     /** The OPTIONAL [FabParams] for setup a `FloatingActionButton` in the `Activity` */
     open val fabParams: FabParams? = null
 
+    /** A [Boolean] representing whether AppBars must be visible for this [Fragment] */
+    open val hasBars = true
+
     /** The OPTIONAL [MenuRes] of the Options Menu for our [Fragment] */
     @get: MenuRes open val menuRes: Int? = null
 

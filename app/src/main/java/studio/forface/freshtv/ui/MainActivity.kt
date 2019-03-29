@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
@@ -20,6 +21,7 @@ import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.navigation.dsl.MaterialNavDrawer
 import studio.forface.materialbottombar.navigation.dsl.navDrawer
 import studio.forface.materialbottombar.panels.params.*
+import kotlinx.android.synthetic.main.activity_main.appBar as syntheticAppBar
 import kotlinx.android.synthetic.main.activity_main.fab as syntheticFab
 import kotlinx.android.synthetic.main.activity_main.titleTextView as syntheticTitleTextView
 
@@ -30,6 +32,9 @@ import kotlinx.android.synthetic.main.activity_main.titleTextView as syntheticTi
  * Inherit from [BaseActivity]
  */
 internal class MainActivity: BaseActivity( R.layout.activity_main ) {
+
+    /** @see BaseActivity.appBar */
+    override val appBar: AppBarLayout get() = syntheticAppBar
 
     /** @see BaseActivity.drawerLayout */
     override val drawerLayout: MaterialBottomDrawerLayout get() = root

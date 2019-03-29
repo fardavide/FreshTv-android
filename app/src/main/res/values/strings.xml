@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Fresh Tv</string>
 
     <!-- Actions -->
     <string name="action_add_playlist">Add a playlist</string>

@@ -15,11 +15,11 @@ class PlayerFragment: RootFragment( R.layout.fragment_player ) {
     companion object {
         /** A key for [channelId] argument */
         const val ARG_CHANNEL_ID = "channelId"
-
-        /** @return `NavDirections` to this `Fragment` */
-        //fun directions() = PlayerFragmentDirections.actionToTvChannelsFragment()
     }
 
     /** A [String] received from [getArguments] for retrieve the `Channel` with the given `id` */
     internal val channelId by lazy { requireArguments().getString( ARG_CHANNEL_ID ) }
+
+    /** @see RootFragment.hasBars */
+    override val hasBars = false
 }

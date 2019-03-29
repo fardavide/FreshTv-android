@@ -1,19 +1,24 @@
 package studio.forface.freshtv.player.utils
 
 import android.content.Context
+import android.content.ContextWrapper
 import androidx.core.net.toUri
+import com.google.android.exoplayer2.ext.rtmp.RtmpDataSourceFactory
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.upstream.TransferListener
 import com.google.android.exoplayer2.util.Util
-import studio.forface.freshtv.player.R
+import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.player.viewmodels.VideoPlayerViewModel
 
 /** @return a [DefaultHttpDataSourceFactory] created from [exoPlayerUserAgent] */
 private val Context.httpDataSourceFactory get() =
-        HttpDataSourceFactory( exoPlayerUserAgent, allowCrossProtocolRedirects = true )
+    HttpDataSourceFactory( exoPlayerUserAgent, allowCrossProtocolRedirects = true )
+
+/** @return a [RtmpDataSourceFactory] */
+private val rtmpDataSourceFactory get() = RtmpDataSourceFactory()
 
 /**
  * @constructor for [DefaultHttpDataSourceFactory].
@@ -40,6 +45,12 @@ internal val VideoPlayerViewModel.mediaSource get() = MediaSourceFactory( contex
 internal class MediaSourceFactory( private val context: Context ) {
 
     /** @return an [ExtractorMediaSource] from the given [url] */
-    internal infix fun fromUrl( url: String ) = ExtractorMediaSource.Factory( context.httpDataSourceFactory )
+    internal infix fun fromUrl( url: String ): ExtractorMediaSource? {
+        val dataSourceFactory = when {
+            url.startsWith("rtmp" ) || url.startsWith("rtsp" ) -> rtmpDataSourceFactory
+            else -> context.httpDataSourceFactory
+        }
+        return ExtractorMediaSource.Factory( dataSourceFactory )
             .createMediaSource( url.toUri() )
+    }
 }

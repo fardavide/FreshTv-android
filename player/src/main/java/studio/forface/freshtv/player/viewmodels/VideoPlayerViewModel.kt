@@ -32,8 +32,14 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
     /** A [LockedViewStateStore] of [Nothing] delivering only [player]s errors via [ViewState.Error] */
     val errors = ViewStateStore<Nothing>().lock
 
-    /** A [LockedViewStateStore] of [PlaybackState] */
-    val playbackState = ViewStateStore<PlaybackState>().lock
+    /**
+     * A [LockedViewStateStore] of [Boolean] for rules whether the screen need to be locked ( prevents the screen from
+     * getting dim / turned off )
+     */
+    val screenLock = ViewStateStore<Boolean>().lock
+
+    /** A [LockedViewStateStore] of [SourceState] */
+    val sourceState = ViewStateStore<SourceState>().lock
 
     /** Instance of [SimpleExoPlayer] for play the video source */
     private val player: SimpleExoPlayer by lazy { ExoPlayerFactory.newSimpleInstance( context ) }
@@ -46,19 +52,25 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
 
         /**
          * When the current source ( [currentUrl] ) fails to load ( whether is render error, web error, etc ), deliver
-         * the [ExoPlaybackException] to [error] and deliver [PlaybackState.Error] to [playbackState]
+         * the [ExoPlaybackException] to [error] and deliver [SourceState.Error] to [sourceState]
          */
         override fun onPlayerError( error: ExoPlaybackException) {
             errors.setError( error )
-            playbackState.setData( PlaybackState.Error( currentUrl ) )
+            sourceState.setData( SourceState.Error( currentUrl ) )
         }
 
         /**
-         * When the current source ( [currentUrl] ) succeed to load ( [playbackState] is [Player.STATE_READY] ), deliver
-         * [PlaybackState.Success] to [playbackState]
+         * When the current source ( [currentUrl] ) succeed to load ( [sourceState] is [Player.STATE_READY] ), deliver
+         * [SourceState.Success] to [sourceState]
          */
         override fun onPlayerStateChanged( playWhenReady: Boolean, state: Int ) {
-            if ( state == Player.STATE_READY ) playbackState.setData( PlaybackState.Success( currentUrl ) )
+            // If Ready set success for sourceState
+            if ( state == Player.STATE_READY )
+                sourceState.setData( SourceState.Success( currentUrl ) )
+
+            // Update the screenLock
+            val canTurnOff = state == Player.STATE_IDLE || state == Player.STATE_ENDED || ! playWhenReady
+            screenLock.setData( ! canTurnOff )
         }
     }
 
@@ -81,10 +93,10 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
     }
 
     /** A sealed class representing the Success or the Failure of the loading of a stream for [currentUrl] */
-    sealed class PlaybackState {
+    sealed class SourceState {
         abstract val url: String
 
-        class Success( override val url: String ) : PlaybackState()
-        class Error( override val url: String ) : PlaybackState()
+        class Success( override val url: String ) : SourceState()
+        class Error( override val url: String ) : SourceState()
     }
 }

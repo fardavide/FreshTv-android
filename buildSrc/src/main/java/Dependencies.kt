@@ -31,15 +31,16 @@ fun DependencyHandler.applyTests() = Libs.run {
 }
 
 fun DependencyHandler.applyAndroidTests() {
-    // Libs.run {
-    //     listOf( threeten_bp ).forEach { add( "testImplementation", it ) }
-    // }
+    Libs.Android.run {
+        listOf( robolectric )
+            .forEach { add( "testImplementation", it ) }
+    }
     Libs.run {
         listOf( test, test_junit, mockk_android )
             .forEach { add("androidTestImplementation", it ) }
     }
     Libs.Android.run {
-        listOf( espresso, test_runner )
+        listOf( espresso, test_core, test_fragment, test_rules, test_runner )
             .forEach { add( "androidTestImplementation", it ) }
     }
 }
@@ -63,7 +64,7 @@ object Versions {
     val android_constraint_layout =     "2.0.0-alpha1"
     val android_cue =                   "1.1"
     val android_espresso =              "3.1.1"
-    val android_exo_player =            "2.9.4"
+    val android_exo_player =            "2.9.6"
     val android_gradle_plugin =         "3.3.0"
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
@@ -71,12 +72,15 @@ object Versions {
     val android_material_bottom_bar =   "1.1-beta-11"
     val android_navigation =            "1.0.0-beta01"
     val android_paging =                "2.1.0"
+    val android_robolectric =           "4.2"
     val android_room =                  "2.1.0-alpha04"
     val android_support =               "1.0.0-beta01"
-    val android_test_runner =           "1.1.1"
+    val android_test_core =             "1.0.0"
+    val android_test_fragment =         "1.1.0-alpha03"
+    val android_test_runner =           "1.1.0"
     val android_theia =                 "0.3-alpha-1"
     val android_view_pager2 =           "1.0.0-alpha02"
-    val android_view_state_store =      "1.2-alpha-2"
+    val android_view_state_store =      "1.2-alpha-3"
     val android_work =                  "1.0.0"
 }
 
@@ -115,6 +119,7 @@ object Libs {
         val design =                            "com.android.support:design:${Versions.android_support}"
         val espresso =                          "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
         val exo_player =                        "com.google.android.exoplayer:exoplayer:${Versions.android_exo_player}"
+        val exo_player_rtmp =                   "com.google.android.exoplayer:extension-rtmp:${Versions.android_exo_player}"
         val ktx =                               "androidx.core:core-ktx:${Versions.android_ktx}"
         val lifecycle_compiler =                "androidx.lifecycle:lifecycle-compiler:${Versions.android_lifecycle}"
         val lifecycle_extensions =              "androidx.lifecycle:lifecycle-extensions:${Versions.android_lifecycle}"
@@ -127,12 +132,16 @@ object Libs {
         val navigation_fragment =               "android.arch.navigation:navigation-fragment-ktx:${Versions.android_navigation}"
         val navigation_ui =                     "android.arch.navigation:navigation-ui-ktx:${Versions.android_navigation}"
         val paging =                            "androidx.paging:paging-runtime-ktx:${Versions.android_paging}"
+        val robolectric =                       "org.robolectric:robolectric:${Versions.android_robolectric}"
         val room =                              "androidx.room:room-runtime:${Versions.android_room}"
         val room_compiler =                     "androidx.room:room-compiler:${Versions.android_room}"
         val room_coroutines =                   "androidx.room:room-coroutines:${Versions.android_room}"
         val room_testing =                      "androidx.room:room-testing:${Versions.android_room}"
         val support_annotations =               "com.android.support:support-annotations:28.0.0"
-        val test_runner =                       "com.android.support.test:runner:${Versions.android_test_runner}"
+        val test_core =                         "androidx.test:core:${Versions.android_test_core}"
+        val test_fragment =                     "androidx.fragment:fragment-testing:${Versions.android_test_fragment}"
+        val test_rules =                        "androidx.test:rules:${Versions.android_test_runner}"
+        val test_runner =                       "androidx.test:runner:${Versions.android_test_runner}"
         val theia =                             "studio.forface.theia:theia:${Versions.android_theia}"
         val view_pager2 =                       "androidx.viewpager2:viewpager2:${Versions.android_view_pager2}"
         val view_state_store =                  "studio.forface.viewstatestore:viewstatestore:${Versions.android_view_state_store}"
