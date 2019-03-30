@@ -21,7 +21,7 @@ class RemovePlaylist( private val localData: LocalData ) {
      */
     suspend operator fun invoke( playlistPath: String ) {
         localData.deletePlaylist( playlistPath )
-        val channelsToEdit = localData.channelsWithPlaylist( playlistPath )
+        val channelsToEdit = localData.allChannels() // TODO localData.channelsWithPlaylist( playlistPath )
             .map { it.copyObj( playlistPaths = it.playlistPaths - playlistPath ) }
             .groupBy { it.playlistPaths.isEmpty() }
 

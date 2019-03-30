@@ -61,6 +61,9 @@ interface IChannel {
     /** A [Boolean] representing whether the user set the element as favorite */
     val favorite: Boolean
 
+    /** @return the [Type] of this Channel */
+    val type: Type get() = if ( this is TvChannel ) Type.TV else Type.MOVIE
+
     /** A functions for copy an [IChannel] using the copy method of data class */
     fun copyObj(
         name:           String =            this.name,
@@ -99,4 +102,7 @@ interface IChannel {
             else -> throw ChannelNotImplementedException( IChannel::class, this::plus, this::class )
         }
     }
+
+    /** The type of the `Channel` */
+    enum class Type { MOVIE, TV }
 }

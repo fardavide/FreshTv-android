@@ -4,6 +4,7 @@ import com.squareup.sqldelight.Query
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.map
 import studio.forface.freshtv.domain.entities.IChannel
+import studio.forface.freshtv.localdata.escapeForRegex
 import studio.forface.freshtv.localdata.sources.ChannelsLocalSource
 import studio.forface.freshtv.localdata.sources.TvChannelsLocalSource
 import studio.forface.freshtv.localdata.sqldelight.TvChannelPojo
@@ -39,7 +40,7 @@ class DelightTvChannelsLocalSource(
 
     /** @return the stored channels [TvChannelPojo] with the given [playlistPath] in [IChannel.playlistPaths] */
     override fun channelsWithPlaylist( playlistPath: String ): List<TvChannelPojo> =
-            queries.selectByPlaylistPath( playlistPath ).executeAsList()
+            queries.selectByPlaylistPath( playlistPath.escapeForRegex() ).executeAsList()
 
     /** @return the [Int] count of the stored channels [TvChannelPojo] */
     override fun count(): Int = queries.count().executeAsOne().toInt()

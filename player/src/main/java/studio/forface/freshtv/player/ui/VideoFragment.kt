@@ -60,10 +60,13 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
         playerViewModel.setPlayerView( playerView )
+
+        playerView.resizeMode
     }
 
     /** When a [ChannelSourceUiModel] is received from [ChannelSourceViewModel] */
     private fun onSourceReady( source: ChannelSourceUiModel ) {
+        // TODO set playerView controls regarding source.type
         playerViewModel.currentUrl = source.url
 
         videoPlayerUrlTextView.apply {

@@ -20,7 +20,7 @@ internal class ChannelSourceUiModelMapper : UiModelMapper<IChannel, ChannelSourc
             .sortedBy { it.second }
             .first()
             .first
-        return ChannelSourceUiModel( url )
+        return ChannelSourceUiModel( url, type )
     }
 
     /** @see UiModelMapper.toEntity */

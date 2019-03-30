@@ -42,7 +42,7 @@ countByGroup:
 countByPlaylistPath:
   SELECT count(*)
   FROM movieChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)";
+  WHERE playlistPaths REGEXP "(^|, )" + :escapedPlaylistPath + "(, |$)";
 
 selectAll:
   SELECT *
@@ -93,7 +93,7 @@ selectPagedByGroup:
 selectByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  WHERE playlistPaths REGEXP "(^|, )" + :escapedPlaylistPath + "(, |$)"
   ORDER BY
     favorite DESC,
     name ASC;
@@ -101,7 +101,7 @@ selectByPlaylistPath:
 selectPagedByPlaylistPath:
   SELECT *
   FROM movieChannelPojo
-  WHERE playlistPaths REGEXP "(^|, ) Escape(" + :playlistPath + ") (, |$)"
+  WHERE playlistPaths REGEXP "(^|, )" + :escapedPlaylistPath + "(, |$)"
   ORDER BY
     favorite DESC,
     name ASC

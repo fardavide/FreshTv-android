@@ -55,6 +55,8 @@ class RemovePlaylistWorker(
             runBlocking { removePlaylist( playlistPath ) }
         }
 
+        RemoveEmptyGroupsWorker.enqueue()
+
         catching
             .onSuccess {
                 RefreshChannelsWorker.cancel( playlistPath )
