@@ -19,6 +19,11 @@
         app:popUpToInclusive="true"/>
 
     <action
+        android:id="@+id/action_to_movieChannelGroupsFragment"
+        app:destination="@id/movieChannelGroupsFragment"
+        app:popUpToInclusive="true"/>
+
+    <action
         android:id="@+id/action_to_playlistsFragment"
         app:destination="@id/playlistsFragment"
         app:popUpToInclusive="true"/>
@@ -42,7 +47,9 @@
         app:destination="@id/preferencesFragment"/>
 
 
-    <!-- Fragments -->
+    <!-- = = = FRAGMENTS = = = -->
+
+    <!-- Tv Groups -->
     <fragment
         android:id="@+id/tvChannelGroupsFragment"
         android:name="studio.forface.freshtv.ui.TvChannelGroupsFragment"
@@ -53,24 +60,39 @@
             app:destination="@id/playerFragment"/>
     </fragment>
 
+    <!-- Tv Channels -->
     <fragment
         android:id="@+id/tvChannelsFragment"
         android:name="studio.forface.freshtv.ui.TvChannelsFragment"
         android:label="TvChannelsFragment"
         tools:layout="@layout/fragment_recycler_view"/>
 
+    <!-- Movie Groups -->
+    <fragment
+        android:id="@+id/movieChannelGroupsFragment"
+        android:name="studio.forface.freshtv.ui.MovieChannelGroupsFragment"
+        android:label="MovieChannelGroupsFragment"
+        tools:layout="@layout/fragment_view_pager_tabbed">
+        <action
+            android:id="@+id/action_movieChannelsFragment_to_playerFragment"
+            app:destination="@id/playerFragment"/>
+    </fragment>
+
+    <!-- Movie Channels -->
+    <fragment
+        android:id="@+id/movieChannelsFragment"
+        android:name="studio.forface.freshtv.ui.MovieChannelsFragment"
+        android:label="MovieChannelsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
+
+    <!-- Playlists -->
     <fragment
         android:id="@+id/playlistsFragment"
         android:name="studio.forface.freshtv.ui.PlaylistsFragment"
         android:label="PlaylistsFragment"
         tools:layout="@layout/fragment_recycler_view"/>
 
-    <fragment
-        android:id="@+id/epgsFragment"
-        android:name="studio.forface.freshtv.ui.EpgsFragment"
-        android:label="EpgsFragment"
-        tools:layout="@layout/fragment_recycler_view"/>
-
+    <!-- Edit Playlist -->
     <fragment
         android:id="@+id/editPlaylistFragment"
         android:name="studio.forface.freshtv.ui.EditPlaylistFragment"
@@ -82,6 +104,14 @@
             app:nullable="true" />
     </fragment>
 
+    <!-- EPGs -->
+    <fragment
+        android:id="@+id/epgsFragment"
+        android:name="studio.forface.freshtv.ui.EpgsFragment"
+        android:label="EpgsFragment"
+        tools:layout="@layout/fragment_recycler_view"/>
+
+    <!-- Edit EPG -->
     <fragment
         android:id="@+id/editEpgFragment"
         android:name="studio.forface.freshtv.ui.EditEpgFragment"
@@ -93,6 +123,7 @@
             app:nullable="true"/>
     </fragment>
 
+    <!-- Player -->
     <fragment
         android:id="@+id/playerFragment"
         android:name="studio.forface.freshtv.player.ui.PlayerFragment"
@@ -104,6 +135,7 @@
             app:nullable="false" />
     </fragment>
 
+    <!-- Preferences -->
     <fragment
         android:id="@+id/preferencesFragment"
         android:name="studio.forface.freshtv.preferences.ui.PreferencesFragment"

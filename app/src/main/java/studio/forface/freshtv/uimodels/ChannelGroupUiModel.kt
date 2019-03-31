@@ -4,6 +4,6 @@ package studio.forface.freshtv.uimodels
 
 /**
  * @author Davide Giuseppe Farella
- * An Ui Model representing a Tv Channel's Group
+ * An Ui Model representing a Channel's Group
  */
-inline class TvChannelGroupUiModel( val name: String )
+inline class ChannelGroupUiModel(val name: String )

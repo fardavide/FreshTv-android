@@ -4,7 +4,6 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <!-- Colors -->
-        <item name="android:statusBarColor">@android:color/white</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@android:color/white</item>
@@ -12,6 +11,10 @@
         <item name="colorOnSecondary">@android:color/black</item>
         <item name="colorError">@color/red_700</item>
         <item name="android:colorBackground">@color/colorBackground</item>
+
+        <!-- System -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <!-- Edit text -->
         <item name="textInputStyle">@style/AppTextInput</item>

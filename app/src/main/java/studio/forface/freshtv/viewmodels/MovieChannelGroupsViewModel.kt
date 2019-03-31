@@ -9,11 +9,11 @@ import studio.forface.viewstatestore.ViewStateStore
 
 /**
  * @author Davide Giuseppe Farella
- * A [ViewModel] that get `TvChannel`s Groups
+ * A [ViewModel] that get `MovieChannel`s Groups
  *
  * Inherit from [ScopedViewModel]
  */
-internal class TvChannelGroupsViewModel(
+internal class MovieChannelGroupsViewModel(
         private val presenter: ChannelGroupsPresenter
 ): ScopedViewModel() {
 
@@ -22,7 +22,7 @@ internal class TvChannelGroupsViewModel(
 
     init {
         groups.setLoading()
-        runCatching { presenter.tv() }
+        runCatching { presenter.movie() }
                 .onSuccess { groups.setData( it ) }
                 .onFailure { groups.setError( it ) }
     }

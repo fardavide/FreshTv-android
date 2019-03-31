@@ -70,7 +70,7 @@ object Versions {
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
     val android_material_bottom_bar =   "1.1-beta-11"
-    val android_navigation =            "1.0.0-beta01"
+    val android_navigation =            "1.0.0"
     val android_paging =                "2.1.0"
     val android_robolectric =           "4.2"
     val android_room =                  "2.1.0-alpha04"

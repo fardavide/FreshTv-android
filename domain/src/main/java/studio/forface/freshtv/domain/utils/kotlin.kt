@@ -15,6 +15,12 @@ inline fun <T: Any?> handle( default: T? = null, block: () -> T ) : T? {
     catch ( t: Throwable ) { default }
 }
 
+/** An interface for entities that have a default [invoke] operator */
+interface Invokable
+
+/** Invoke operator */
+inline operator fun <T : Invokable, V> T.invoke( block: T.() -> V ) = block()
+
 /** Same as [optWith], but pass [T] as argument */
 inline fun <T: Any, V> optLet( arg: T?, block: (T) -> V ) =
         arg?.let { block( arg ) }

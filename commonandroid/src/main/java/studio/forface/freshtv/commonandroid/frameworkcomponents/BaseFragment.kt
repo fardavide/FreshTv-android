@@ -149,7 +149,7 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
      * Default: if [backgroundColor] is not null, [Color.WHITE] else [android.R.attr.colorPrimary].
      */
     @get: ColorInt open val titleColor: Int get() =
-        backgroundColor?.let { Color.WHITE } ?: getThemeColor( android.R.attr.colorPrimary )!!
+        backgroundColor?.let { Color.WHITE } ?: getThemeColor( android.R.attr.colorPrimary )
 
     /**
      * This value will contains a [StringRes] for the title we will set to the Toolbar in our `Activity`.

@@ -7,7 +7,7 @@ package studio.forface.freshtv.parsers.playlist
  * An inline class that represents the content of a Playlist and expose [extractItems] for make a
  * first parsing on the content and split it in [ParsablePlaylistItem]s.
  */
-internal inline class ParsableStringPlaylist(private val s: String ) {
+internal inline class ParsableStringPlaylist( private val s: String ) {
 
     private companion object {
 

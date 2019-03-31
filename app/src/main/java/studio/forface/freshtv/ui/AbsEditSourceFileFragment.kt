@@ -132,7 +132,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
             editSourceFileUrlEditText.onTextChange { setFilePath( it ) }
             editSourceFileFromFileButton.setOnClickListener { type = LOCAL }
             editSourceFileFromWebButton.setOnClickListener { type = REMOTE }
-            editSourceFilePickFileButton.setOnClickListener { pickFileWithPermissions() }
+            editSourceFilePickFileButton.setOnClickListener { pickFile() }
         }
     }
 
@@ -231,7 +231,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
     }
 
     /** Request the needed permissions for [pickFile] */
-    protected fun pickFileWithPermissions() {
+    private fun pickFileWithPermissions() {
         val perm = permission.READ_EXTERNAL_STORAGE
 
         if ( checkSelfPermission( perm ) != PERMISSION_GRANTED ) {

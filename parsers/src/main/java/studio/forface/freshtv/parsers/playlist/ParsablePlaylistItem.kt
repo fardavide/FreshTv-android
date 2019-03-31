@@ -26,7 +26,7 @@ internal inline class ParsablePlaylistItem( private val s: String ) {
         const val PARAM_LOGO = "tvg-logo"
 
         /** An array of common extensions for videos */
-        val VIDEO_EXTENSIONS = arrayOf( "3gp", "avi", "flv", "mkv", "mp4", "mpg", "mpeg", "wmv" )
+        val VIDEO_EXTENSIONS = arrayOf( "3gp", "avi", "flv", "m4v", "mkv", "mp4", "mpg", "mpeg", "wmv" )
     }
 
     /** @return the [ChannelType] for the current [IChannel] by reading the extension of the given [mediaLink] */

@@ -11,26 +11,26 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
 import studio.forface.freshtv.uimodels.ChannelGroupUiModel
-import studio.forface.freshtv.viewmodels.TvChannelGroupsViewModel
+import studio.forface.freshtv.viewmodels.MovieChannelGroupsViewModel
 
 /**
  * @author Davide Giuseppe Farella
- * A `Fragment` for see the stored `TvChannel`s Groups
+ * A `Fragment` for see the stored `MovieChannel`s Groups
  *
  * Inherit from [RootFragment]
  */
-internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pager_tabbed ) {
+internal class MovieChannelGroupsFragment: RootFragment( R.layout.fragment_view_pager_tabbed ) {
 
     companion object {
         /** @return `NavDirections` to this `Fragment` */
-        fun directions() = HomeFragmentDirections.actionToTvChannelGroupsFragment()
+        fun directions() = HomeFragmentDirections.actionToMovieChannelGroupsFragment()
     }
 
     /** A reference to [GroupsAdapter] for [viewPager] */
     private val adapter by lazy { GroupsAdapter( requireFragmentManager() ) }
 
-    /** A reference to [TvChannelGroupsViewModel] for retrieve the stored `Channel`s */
-    private val channelGroupsViewModel by viewModel<TvChannelGroupsViewModel>()
+    /** A reference to [MovieChannelGroupsViewModel] for retrieve the stored `Channel`s */
+    private val channelGroupsViewModel by viewModel<MovieChannelGroupsViewModel>()
 
     /** Reference to [TabLayout] */
     private val tabLayout get() = requireView().findViewById<TabLayout>( R.id.tabLayout )
@@ -50,7 +50,7 @@ internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pag
         }
     }
 
-    /** When the [TvChannelGroupsFragment]s [View] is created */
+    /** When the [MovieChannelGroupsFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
         viewPager.adapter = adapter
@@ -77,10 +77,10 @@ internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pag
         override fun getCount() = groups.size
 
         /**
-         * @return a new instance of [TvChannelsFragment], with [ChannelGroupUiModel.name] of item at the given
-         * [position], in [TvChannelsFragment.mArguments]
+         * @return a new instance of [MovieChannelsFragment], with [ChannelGroupUiModel.name] of item at the given
+         * [position], in [MovieChannelsFragment.mArguments]
          */
-        override fun getItem( position: Int ) = TvChannelsFragment( groups[position].name )
+        override fun getItem( position: Int ) = MovieChannelsFragment( groups[position].name )
 
         /** @return [ChannelGroupUiModel.name] for item at the given [position] */
         override fun getPageTitle( position: Int ) = groups[position].name

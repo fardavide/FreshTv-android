@@ -57,7 +57,6 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
         super.onCreate( savedInstanceState )
-        if ( Android.MARSHMALLOW ) window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         setDrawer()
         setSupportActionBar( bottomAppBar )
         // bottomAppBar.setupWithNavController( navController ) TODO: navigationIcon not showing
@@ -106,6 +105,7 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
             if ( channelsAvailability.hasMovies )
                 primaryItem( R.string.menu_movie_channels ) {
                     iconResource = R.drawable.ic_movie
+                    navDirections = MovieChannelGroupsFragment.directions()
                 }
 
             // Divider

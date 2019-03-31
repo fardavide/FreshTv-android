@@ -43,8 +43,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="443" />
-                            <option name="y" value="637" />
+                            <option name="x" value="437" />
+                            <option name="y" value="578" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -55,8 +55,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="448" />
-                            <option name="y" value="296" />
+                            <option name="x" value="433" />
+                            <option name="y" value="273" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -67,8 +67,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="225" />
-                            <option name="y" value="634" />
+                            <option name="x" value="249" />
+                            <option name="y" value="584" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -86,13 +86,37 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="movieChannelGroupsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="241" />
+                            <option name="y" value="-45" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="movieChannelsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="437" />
+                            <option name="y" value="-44" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="playerFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="653" />
-                            <option name="y" value="-366" />
+                            <option name="x" value="631" />
+                            <option name="y" value="-362" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -103,8 +127,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="234" />
-                            <option name="y" value="291" />
+                            <option name="x" value="246" />
+                            <option name="y" value="272" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -115,8 +139,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="222" />
-                            <option name="y" value="958" />
+                            <option name="x" value="250" />
+                            <option name="y" value="888" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -148,8 +172,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="435" />
-                            <option name="y" value="-363" />
+                            <option name="x" value="443" />
+                            <option name="y" value="-360" />
                           </Point>
                         </option>
                       </LayoutPositions>

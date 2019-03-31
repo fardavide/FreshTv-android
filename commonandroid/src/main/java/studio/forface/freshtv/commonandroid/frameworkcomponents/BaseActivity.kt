@@ -1,5 +1,6 @@
 package studio.forface.freshtv.commonandroid.frameworkcomponents
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -18,8 +19,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
+import studio.forface.freshtv.commonandroid.utils.Android
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
+import studio.forface.freshtv.commonandroid.utils.postDelayed
 import studio.forface.freshtv.domain.gateways.Notifier
 import studio.forface.freshtv.domain.utils.optWith
 import studio.forface.materialbottombar.doOnPanelClose
@@ -69,6 +72,7 @@ abstract class BaseActivity(
     /** @return the `Activity`s [FloatingActionButton] */
     abstract val fab: FloatingActionButton
 
+    /** Keep track whether the drawer is open */
     private var isDrawerOpen = false
 
     /** @return the `Activity`s [NavController] */
@@ -82,6 +86,10 @@ abstract class BaseActivity(
 
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
+        if ( Android.OREO )
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        else if ( Android.MARSHMALLOW ) window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
         super.onCreate( savedInstanceState )
         setFragmentLifecycleListener()
         setContentView( layoutRes )
@@ -119,7 +127,7 @@ abstract class BaseActivity(
 
             // Bars
             fun setBars() {
-                toggleBars( fragment.hasBars )
+                postDelayed(300 ) { toggleBars( fragment.hasBars ) }
             }
 
             // Title

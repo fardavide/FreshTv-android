@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
+import studio.forface.freshtv.PlayerFragment
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
-import studio.forface.freshtv.ui.TvChannelGroupsFragmentDirections.Companion.actionTvChannelsFragmentToPlayerFragment
+import studio.forface.freshtv.domain.utils.invoke
 import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
 import studio.forface.freshtv.viewmodels.TvChannelsViewModel
 
@@ -35,7 +36,7 @@ internal class TvChannelsFragment: NestedFragment<TvChannelGroupsFragment>( R.la
 
     /** A reference to [TvChannelsAdapter] for `recyclerView` */
     private val adapter = TvChannelsAdapter().apply {
-        onItemClick = { navController.navigate( actionTvChannelsFragmentToPlayerFragment( it.id ) ) }
+        onItemClick = { navController.navigate( PlayerFragment { directions( it.id ) } ) }
         onItemFavoriteChange = { channelsViewModel.setFavoriteChannel( it ) }
     }
 
@@ -44,6 +45,9 @@ internal class TvChannelsFragment: NestedFragment<TvChannelGroupsFragment>( R.la
 
     /** An OPTIONAL [String] received from [getArguments] for filter elements by their `groupName` */
     private val groupName by lazy { requireArguments().getString( ARG_GROUP_NAME )!! }
+
+    /** A reference to the [ContentLoadingProgressBar] */
+    private val progressBar get() = requireView().findViewById<ContentLoadingProgressBar>( R.id.progressBar )
 
     /** When the `Activity` is created */
     override fun onActivityCreated( savedInstanceState: Bundle? ) {
@@ -65,7 +69,6 @@ internal class TvChannelsFragment: NestedFragment<TvChannelGroupsFragment>( R.la
 
     /** Update the loading state */
     private fun onLoading( loading: Boolean ) {
-        val progressBar = requireView().findViewById<ContentLoadingProgressBar>( R.id.progressBar )
         if ( loading ) progressBar.show() else progressBar.hide()
     }
 }

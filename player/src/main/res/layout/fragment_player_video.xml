@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
 
     <TextView
         android:id="@+id/videoPlayerUrlTextView"
@@ -18,12 +19,13 @@ android:layout_height="match_parent">
         android:textColor="@android:color/primary_text_dark"
         android:elevation="999dp"/>
 
-    <com.google.android.exoplayer2.ui.PlayerView
+    <studio.forface.freshtv.player.exoplayercomponents.FreshPlayerView
         android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         app:auto_show="false"
-        app:show_buffering="when_playing">
-    </com.google.android.exoplayer2.ui.PlayerView>
+        app:show_buffering="when_playing"
+        android:fitsSystemWindows="false"/>
 
 </FrameLayout>
