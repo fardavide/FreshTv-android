@@ -168,8 +168,11 @@ interface LocalData {
     /** @return the [ChannelGroup] with [ChannelGroup.Type.TV] */
     fun tvGroups() : List<ChannelGroup>
 
+    /** @return the [TvGuide] with the given [guideId] */
+    fun tvGuide( guideId: String ): TvGuide
+
     /** @return the [TvGuide] from Local Source matching the given [channelId] and [time] */
-    fun tvGuides( channelId: String, time: LocalDateTime? = null ): TvGuide
+    fun tvGuideForChannel( channelId: String, time: LocalDateTime? = null ): TvGuide
 
     /** @return all the [TvGuide]s from Local Source matching the given [channelId], [from] and [to] */
     fun tvGuidesRanged( channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<TvGuide>

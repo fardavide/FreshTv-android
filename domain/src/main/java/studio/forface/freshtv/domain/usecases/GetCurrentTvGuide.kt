@@ -14,5 +14,5 @@ class GetCurrentTvGuide( private val localData: LocalData ) {
      * It will query from `now` to 10 seconds later and pick the last result, for avoid to pick
      * a [TvGuide] near to finish
      */
-    operator fun invoke( channelId: String ) = localData.tvGuides( channelId )
+    operator fun invoke( channelId: String ) = localData.tvGuideForChannel( channelId )
 }

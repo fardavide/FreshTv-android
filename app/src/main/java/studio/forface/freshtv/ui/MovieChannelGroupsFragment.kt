@@ -36,7 +36,7 @@ internal class MovieChannelGroupsFragment: RootFragment( R.layout.fragment_view_
     private val tabLayout get() = requireView().findViewById<TabLayout>( R.id.tabLayout )
 
     /** Reference to [ViewPager] */
-    private val viewPager get() = requireView().findViewById<ViewPager>( R.id.viewPager )
+    private val viewPager get() = requireView().findViewById<ViewPager>( R.id.playerInfoViewPager )
 
     /** @see RootFragment.titleRes */
     override val titleRes get() = R.string.title_tv_channels

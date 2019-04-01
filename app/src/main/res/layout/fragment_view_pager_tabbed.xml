@@ -9,10 +9,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:tabIndicatorFullWidth="false"
-        app:tabRippleColor="?attr/colorPrimary"/>
+        android:layout_height="wrap_content"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

@@ -315,11 +315,14 @@ abstract class AbsLocalData<
     override fun tvGroups(): List<ChannelGroup> =
             channelGroups.allTv().map { channelGroupMapper { it.toEntity() } }
 
+    /** @return the [TvGuide] with the given [guideId] */
+    override fun tvGuide( guideId: String ) = tvGuideMapper { tvGuides.guide( guideId ).toEntity() }
+
     /**
      * @return the [TvGuide] from [TvGuidesLocalSource] matching the given [channelId] and [time]
      * @see TvGuidesLocalSource.guideForChannel for parameters details.
      */
-    override fun tvGuides( channelId: String, time: LocalDateTime? ): TvGuide =
+    override fun tvGuideForChannel(channelId: String, time: LocalDateTime? ): TvGuide =
             tvGuideMapper { tvGuides.guideForChannel( channelId, time ).toEntity() }
 
     /**

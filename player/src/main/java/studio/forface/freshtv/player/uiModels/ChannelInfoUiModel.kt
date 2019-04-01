@@ -1,5 +1,15 @@
 package studio.forface.freshtv.player.uiModels
 
+import android.content.Context
+import android.graphics.Typeface.BOLD
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
+import androidx.annotation.StringRes
+import androidx.core.text.toSpannable
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import studio.forface.freshtv.commonandroid.utils.append
 import studio.forface.freshtv.player.uiModels.ChannelInfoUiModel.Tv.Program
 
 /**
@@ -25,15 +35,46 @@ sealed class ChannelInfoUiModel {
             val title: String,
             val description: String,
             val image: String?,
-            val category: String?,
-            val year: String?,
-            val country: String?,
+            val optionalInformations: OptionalInformations,
             val director: String?,
-            val actors: List<String>,
-            val rating: String?,
-            val startTime: String?,
+            val actors: String?,
+            val startTime: String,
             val endTime: String
-        )
-    }
+        ) {
+            /** A data class containing [OptInfo]s for [Program] */
+            data class OptionalInformations(
+                val category: OptInfo?,
+                val year: OptInfo?,
+                val country: OptInfo?,
+                val rating: OptInfo?
+            ) {
+                /** @return a [List] of all NOT NULL [OptInfo] for this element */
+                fun list() = listOfNotNull( category, year, country, rating )
+            }
 
+            /** A data class for an optional info, containing its name and value */
+            data class OptInfo( @StringRes val name: Int, val value: String ) {
+
+                /** @return a [Spannable] String from test of [name] and *bold* [value] */
+                fun stringify( context: Context ) = SpannableStringBuilder( context.getText( name ) )
+                    .append( ": " )
+                    .append( value, StyleSpan( BOLD ) )
+                    .toSpannable()
+            }
+        }
+    }
+}
+
+/** Set a [Program.OptionalInformations] inside a [ChipGroup] */
+internal fun ChipGroup.setOptionalInformations( informations: Program.OptionalInformations ) {
+    informations.list().forEach {
+        val chip = Chip( context )
+        chip.setOptInfo( it )
+        this.addView( chip )
+    }
+}
+
+/** Set a [Program.OptInfo] inside a [Chip.setText] */
+internal fun Chip.setOptInfo( info: Program.OptInfo ) {
+    text = info.stringify( context )
 }

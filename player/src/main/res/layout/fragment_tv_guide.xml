@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvGuideTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintStart_toEndOf="@+id/tvGuideImageView"
+            app:layout_constraintTop_toTopOf="@id/tvGuideTitleImageTopBarrier"
+            tools:text="Otto sotto un tetto" />
+
+        <TextView
+            android:id="@+id/tvGuideDescriptionTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvGuideImageView"
+            app:layout_constraintTop_toBottomOf="@+id/tvGuideTitleTextView"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus ligula, ultricies at nisl facilisis, tempor blandit sem. Ut iaculis tristique nulla ac rutrum. Donec nec mauris dui. Proin sed orci sit amet nisi egestas finibus. Cras vel tristique ante, sit amet mattis ipsum. Suspendisse vitae dapibus enim, eget rutrum dolor. Morbi fringilla sed tortor eget eleifend. Duis placerat quam nec urna vehicula tempor. Suspendisse bibendum sapien quam. Cras id libero ullamcorper, eleifend nunc sit amet, tincidunt neque. Maecenas tempus." />
+
+        <ImageView
+            android:id="@+id/tvGuideImageView"
+            android:layout_width="92dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGuideDescriptionTextView"
+            app:layout_constraintDimensionRatio="h,10:13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvGuideTitleImageTopBarrier"
+            tools:srcCompat="@drawable/ic_favorite"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/tvGuideTitleImageTopBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="tvGuideTitleTextView, tvGuideImageView" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/tvGuideImageDescriptionBottomBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvGuideImageView, tvGuideDescriptionTextView"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tvGuideOptionalInformationsChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvGuideImageDescriptionBottomBarrier"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvGuideDirectorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/directed_by"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGuideOptionalInformationsChipGroup"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvGuideDirectorValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvGuideDirectorTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvGuideDirectorTextView"
+            tools:text="Idunno Anydirectorname"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvGuideActorsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/actors"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGuideDirectorTextView"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvGuideActorsValueTextViewew6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGuideActorsTextView"
+            tools:text="Some Actor, Another Actor, Just Another Actor, Iaboslutelydunno Anyactorname"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

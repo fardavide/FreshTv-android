@@ -11,4 +11,12 @@
     <string name="unsupported_rtsp_stream">Rtsp streams are <i>currently</i> not supported</string>
     <string name="unsupported_stream_format">Unsupported stream format</string>
 
+    <!-- Others -->
+    <string name="actors">Actors:</string>
+    <string name="category">Category</string>
+    <string name="country">Country</string>
+    <string name="directed_by">Directed by:</string>
+    <string name="rating">Rating</string>
+    <string name="year">Year</string>
+
 </resources>

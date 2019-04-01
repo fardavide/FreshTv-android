@@ -16,8 +16,9 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
-        <!-- Edit text -->
+        <!-- Components -->
         <item name="textInputStyle">@style/AppTextInput</item>
+        <item name="tabStyle">@style/AppTabLayout</item>
 
         <!-- Other -->
         <item name="fontFamily">@font/champagne_limousines</item>
@@ -25,5 +26,12 @@
 
     <!-- TextInputLayout -->
     <style name="AppTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+    <!-- TabLayout -->
+    <style name="AppTabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabRippleColor">?attr/colorPrimary</item>
+    </style>
 
 </resources>

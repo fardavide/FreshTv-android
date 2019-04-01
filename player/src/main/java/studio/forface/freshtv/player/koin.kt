@@ -8,6 +8,8 @@ import studio.forface.freshtv.player.interactors.UpdateChannelSourceFailureInter
 import studio.forface.freshtv.player.mappers.*
 import studio.forface.freshtv.player.presenters.ChannelPresenter
 import studio.forface.freshtv.player.presenters.ChannelSourcePresenter
+import studio.forface.freshtv.player.presenters.TvGuidePresenter
+import studio.forface.freshtv.player.presenters.TvGuidesPresenter
 import studio.forface.freshtv.player.viewmodels.ChannelSourceViewModel
 import studio.forface.freshtv.player.viewmodels.VideoPlayerViewModel
 
@@ -27,6 +29,8 @@ val playerModule = module {
     /* Presenters */
     factory { ChannelPresenter( getChannel = get(), mapper = get() ) }
     factory { ChannelSourcePresenter( getChannel = get(), mapper = get() ) }
+    factory { TvGuidePresenter( getTvGuide = get(), mapper = get() ) }
+    factory { TvGuidesPresenter( getTvGuides = get(), mapper = get() ) }
 
     /* View Models */
     viewModel { (channelId: String) -> ChannelSourceViewModel( channelId, presenter = get(), interactor = get() ) }

@@ -4,10 +4,13 @@ import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.commonandroid.mappers.UiModelMapper
 import studio.forface.freshtv.commonandroid.mappers.map
 import studio.forface.freshtv.commonandroid.utils.defaultDateTimeFormatter
+import studio.forface.freshtv.commonandroid.utils.joinToString
 import studio.forface.freshtv.domain.Unsupported
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.unsupported
+import studio.forface.freshtv.player.R
 import studio.forface.freshtv.player.uiModels.ChannelInfoUiModel
+import studio.forface.freshtv.player.uiModels.ChannelInfoUiModel.Tv.Program.OptInfo
 
 /**
  * A Mapper of [ChannelInfoUiModel]
@@ -65,17 +68,22 @@ internal class TvChannelInfoUiModelMapper(
 internal class TvChannelInfoProgramUiModelMapper : ChannelInfoUiModelMapper<TvGuide, ChannelInfoUiModel.Tv.Program>() {
 
     /** @see UiModelMapper.toUiModel */
-    override fun TvGuide.toUiModel() = ChannelInfoUiModel.Tv.Program (
-            title =         title,
-            description =   description,
-            image =         imageUrl?.s,
-            category =      category,
-            year =          year.toString(),
-            country =       country,
-            director =      credits?.director,
-            actors =        credits?.actors ?: listOf(),
-            rating =        rating,
-            startTime =     startTime.format( defaultDateTimeFormatter ),
-            endTime =       endTime.format( defaultDateTimeFormatter )
-    )
+    override fun TvGuide.toUiModel(): ChannelInfoUiModel.Tv.Program {
+        val optionalInformations = ChannelInfoUiModel.Tv.Program.OptionalInformations(
+            category =  category    ?.let { OptInfo( R.string.category, it              ) },
+            year =      year        ?.let { OptInfo( R.string.year,     it.toString()   ) },
+            country =   country     ?.let { OptInfo( R.string.country,  it              ) },
+            rating =    rating      ?.let { OptInfo( R.string.rating,   it              ) }
+        )
+        return ChannelInfoUiModel.Tv.Program (
+            title =                 title,
+            description =           description,
+            image =                 imageUrl?.s,
+            optionalInformations =  optionalInformations,
+            director =              credits?.director,
+            actors =                credits?.actors?.joinToString(),
+            startTime =             startTime.format( defaultDateTimeFormatter ),
+            endTime =               endTime.format( defaultDateTimeFormatter )
+        )
+    }
 }

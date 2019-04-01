@@ -74,7 +74,7 @@ object Versions {
     val android_paging =                "2.1.0"
     val android_robolectric =           "4.2"
     val android_room =                  "2.1.0-alpha04"
-    val android_support =               "1.0.0-beta01"
+    val android_support =               "1.0.2"
     val android_test_core =             "1.0.0"
     val android_test_fragment =         "1.1.0-alpha03"
     val android_test_runner =           "1.1.0"
