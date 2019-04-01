@@ -30,8 +30,8 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
     FullscreenEnabledFragment by FullscreenEnabledFragmentDelegate(),
     RotationEnabledFragment by RotationEnabledFragmentDelegate() {
 
-    /** @return [String] Channel id from [rootFragment] */
-    private val channelId by lazy { rootFragment.channelId }
+    /** @return [String] Channel id from [parentBaseFragment] */
+    private val channelId by lazy { parentBaseFragment.channelId }
 
     /** A reference to [VideoPlayerViewModel] */
     private val playerViewModel by viewModel<VideoPlayerViewModel>()

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
+import org.threeten.bp.Duration
+import studio.forface.freshtv.domain.utils.seconds
 import studio.forface.viewstatestore.paging.ViewStateStoreScope
 import kotlin.coroutines.CoroutineContext
 
@@ -18,7 +20,8 @@ import kotlin.coroutines.CoroutineContext
 abstract class ScopedViewModel: ViewModel(), CoroutineScope, ViewStateStoreScope {
 
     companion object {
-        const val DEFAULT_ERROR_DELAY = 30_000L
+        /** A [Duration] representing the delay to another try after an error occurred */
+        val DEFAULT_ERROR_DELAY = 5.seconds
     }
 
     /** An instance of [Job] for [CoroutineContext] */

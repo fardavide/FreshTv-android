@@ -330,7 +330,8 @@ abstract class AbsLocalData<
      * @see TvGuidesLocalSource.guidesForChannelRanged for parameters details.
      */
     override fun tvGuidesRanged(channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<TvGuide> =
-            tvGuides.guidesForChannelRanged( channelId, from, to ).map { tvGuideMapper { it.toEntity() } }
+        // tvGuides.all().map { tvGuideMapper { it.toEntity() } }
+        tvGuides.guidesForChannelRanged( channelId, from, to ).map { tvGuideMapper { it.toEntity() } }
 
     /** Update a [IChannel] in the appropriate [ChannelsLocalSource] */
     override fun updateChannel( channel: IChannel ) {

@@ -37,8 +37,14 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
 
     /** On [onCreateView] we inflate the [layoutRes] into the [container] */
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = inflater.inflate( layoutRes, container,false )
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = try {
+        inflater.inflate( layoutRes, container,false )
+    } catch ( e: InflateException ) {
+        throw InflateException( "Cannot inflate ${this::class.qualifiedName}", e )
+    }
 
     /** The [Fragment]'s [NavController] */
     val navController: NavController by lazy { findNavController() }
@@ -182,9 +188,9 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
  * A base class for a [Fragment] that is nested inside another [RootFragment]
  * Inherit from [BaseFragment]
  */
-abstract class NestedFragment<ParentFragment: RootFragment>( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes ) {
+abstract class NestedFragment<ParentFragment: BaseFragment>( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes ) {
 
     /** @return the [getParentFragment] casted as [ParentFragment] */
     @Suppress("UNCHECKED_CAST")
-    val rootFragment get() = requireParentFragment() as ParentFragment
+    val parentBaseFragment get() = requireParentFragment() as ParentFragment
 }

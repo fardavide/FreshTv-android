@@ -19,6 +19,9 @@ class DelightTvGuidesLocalSource(
     private val queries: TvGuideQueries
 ) : TvGuidesLocalSource<TvGuidePojo> {
 
+    /** @return all the stored Guides [TvGuidePojo] */
+    override fun all(): List<TvGuidePojo> = queries.selectAll().executeAsList()
+
     /** @return the [Int] count of the stored channels [TvGuidePojo] */
     override fun count(): Int = queries.count().executeAsOne().toInt()
 
@@ -29,7 +32,7 @@ class DelightTvGuidesLocalSource(
     override suspend fun observeCount() = queries.count().asChannel().mapToOne().map { it.toInt() }
 
     /** Create a new guide [TvGuidePojo] */
-    override fun createGuide( guide: TvGuidePojo) {
+    override fun createGuide( guide: TvGuidePojo ) {
         with( guide ) {
             queries.insert(
                     id =                id,

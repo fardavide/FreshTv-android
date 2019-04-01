@@ -10,6 +10,9 @@ import org.threeten.bp.LocalDateTime
  */
 interface TvGuidesLocalSource<Pojo> {
 
+    /** @return all the stored Guides [Pojo] */
+    fun all(): List<Pojo>
+
     /** @return the [Int] count of the stored channels [Pojo] */
     fun count(): Int
 

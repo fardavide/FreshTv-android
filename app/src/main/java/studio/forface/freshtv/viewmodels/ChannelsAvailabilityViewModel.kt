@@ -2,9 +2,9 @@ package studio.forface.freshtv.viewmodels
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
+import studio.forface.freshtv.domain.utils.delay
 import studio.forface.freshtv.presenters.ChannelsAvailabilityPresenter
 import studio.forface.freshtv.presenters.invoke
 import studio.forface.freshtv.uimodels.ChannelsAvailabilityUiModel

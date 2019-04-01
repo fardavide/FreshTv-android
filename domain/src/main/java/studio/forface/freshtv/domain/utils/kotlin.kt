@@ -1,5 +1,7 @@
 package studio.forface.freshtv.domain.utils
 
+import org.threeten.bp.Duration
+
 /**
  * A shortcut for a try/catch block, as expression or statement, with an optional return value.
  * @param default the value that will be returned if an exception is thrown. Default is null.
@@ -42,6 +44,11 @@ infix fun <T: Any> T?.or( other: T ) : T = this ?: other
  * @return NOT NULL [T].
  */
 inline infix fun <T: Any> T?.or( block: () -> T ) : T = this ?: block()
+
+/** Call [kotlinx.coroutines.delay] with [Duration] */
+suspend fun delay( duration: Duration ) {
+    kotlinx.coroutines.delay( duration.toMillis() )
+}
 
 /** Wait until [evaluation] is true */
 inline fun wait( evaluation: () -> Boolean ) {

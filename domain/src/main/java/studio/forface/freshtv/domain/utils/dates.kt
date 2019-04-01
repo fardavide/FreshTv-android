@@ -33,6 +33,9 @@ val Number.days: Duration get() = Duration.ofDays( toLong() )
 /** @return a [Duration] equivalent to the given [Int] of hours */
 val Number.hours: Duration get() = Duration.ofHours( toLong() )
 
+/** @return a [Duration] equivalent to the given [Int] of hours */
+val Number.mins: Duration get() = Duration.ofMinutes( toLong() )
+
 /** @return a [Duration] equivalent to the given [Int] of seconds */
 val Number.seconds: Duration get() = Duration.ofSeconds( toLong() )
 

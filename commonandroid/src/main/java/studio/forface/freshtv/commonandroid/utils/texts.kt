@@ -11,6 +11,12 @@ import android.text.style.StyleSpan
 fun CharSequence.bold() = SpannableString(this )
     .setSpan( StyleSpan( BOLD ),0, lastIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE )
 
+/** @return `null` if [CharSequence.isNullOrBlank], else the same [CharSequence] */
+fun CharSequence?.nullIfBlank() = if ( isNullOrBlank() ) null else this
+
+/** @return `null` if [String.isNullOrBlank], else the same [String] */
+fun String?.nullIfBlank() = if ( isNullOrBlank() ) null else this
+
 /** @see SpannableStringBuilder.append */
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER")
 fun SpannableStringBuilder.append(
