@@ -7,6 +7,7 @@ import org.junit.Test
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
+import studio.forface.freshtv.domain.entities.TvGuide
 
 /**
  * @author Davide Giuseppe Farella
@@ -93,21 +94,43 @@ internal class ParsersImplTest {
 
     @Test // test only manually due to http call
     fun `epg realTest`() {
-        val source = ParsersImpl()
+        val source = ParsersImpl( FileContentResolver( mockLocal, FileContentResolver.Remote() ) )
 
         runBlocking {
             source.readFrom(
                 Epg("http://www.epgitalia.tv/xml/guide.gzip", SourceFile.Type.REMOTE ),
-                { println( it ) },
-                { println( "${it.reason.name} - ${it.rawChannel}" ) },
-                { println( "progress: $it" ) }
+                onTvGuide = { println( it ) },
+                onError = { println( "${it.reason.name} - ${it.rawChannel}" ) },
+                onProgress = { println( "progress: $it" ) }
             )
         }
     }
 
     @Test // test only manually due to http call
+    fun `epg dates realTest`() {
+        val source = ParsersImpl( FileContentResolver( mockLocal, FileContentResolver.Remote() ) )
+
+        val guides = mutableListOf<TvGuide>()
+
+        runBlocking {
+            source.readFrom(
+                Epg("http://www.epgitalia.tv/xml/guide.gzip", SourceFile.Type.REMOTE ),
+                onTvGuide = { guides += it }
+            )
+        }
+
+        val count = guides.size
+        val result = guides.sortedByDescending { it.startTime }
+            .take(20 )
+            .joinToString( separator = "\n" ) { "${it.startTime} - ${it.endTime} " }
+
+        println( "count: $count" )
+        println( result )
+    }
+
+    @Test // test only manually due to http call
     fun `playlist realTest`() {
-        val source = ParsersImpl()
+        val source = ParsersImpl( FileContentResolver( mockLocal, FileContentResolver.Remote() ) )
 
         runBlocking {
             source.readFrom(

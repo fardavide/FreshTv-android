@@ -18,17 +18,17 @@ interface Parsers {
     /** Obtain [TvGuide]s and eventual [ParsingEpgError]s from the given [Epg] */
     suspend fun readFrom(
         epg: Epg,
-        onTvGuide: suspend (TvGuide) -> Unit,
-        onError: suspend (ParsingEpgError) -> Unit,
-        onProgress: (Int) -> Unit
+        onTvGuide: suspend (TvGuide) -> Unit = {},
+        onError: suspend (ParsingEpgError) -> Unit = {},
+        onProgress: (Int) -> Unit = {}
     )
 
     /** Obtain [IChannel]s, [ChannelGroup]s and eventual [ParsingChannelError]s from the given [Playlist] */
     suspend fun readFrom(
         playlist: Playlist,
-        onChannel: suspend (IChannel) -> Unit,
-        onGroup: suspend (ChannelGroup) -> Unit,
-        onError: suspend (ParsingChannelError) -> Unit
+        onChannel: suspend (IChannel) -> Unit = {},
+        onGroup: suspend (ChannelGroup) -> Unit = {},
+        onError: suspend (ParsingChannelError) -> Unit = {}
     )
 }
 

@@ -3,9 +3,13 @@ package studio.forface.freshtv.domain.usecases
 import kotlinx.coroutines.coroutineScope
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Epg
+import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.gateways.Parsers
+import studio.forface.freshtv.domain.utils.ago
+import studio.forface.freshtv.domain.utils.compareTo
+import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.reduceOrDefault
 
 /**
@@ -41,7 +45,7 @@ class RefreshTvGuides(
         val errors = mutableListOf<ParsingEpgError>()
         parsers.readFrom(
             epg = epg,
-            onTvGuide = { localData.storeTvGuide( it ) },
+            onTvGuide = { storeTvGuide( it ) },
             onError = { errors += it },
             onProgress = { progressCallback( it ) }
         )
@@ -54,6 +58,13 @@ class RefreshTvGuides(
      */
     suspend operator fun invoke( epgPath: String ) =
             this( localData.epg( epgPath ) )
+
+    /** Store the given [TvGuide] in local database. It will also filter old guides */
+    private fun storeTvGuide( guide: TvGuide ) {
+        if ( guide.endTime > 1 days ago )
+            localData.storeTvGuide( guide )
+    }
+
 
     /** A sealed class for wrapping [ParsingEpgError]s */
     sealed class Error {

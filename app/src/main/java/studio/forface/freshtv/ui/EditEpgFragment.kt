@@ -39,8 +39,7 @@ internal class EditEpgFragment : AbsEditSourceFileFragment<EditEpgViewModel>() {
     override val confirmDeletionMessageRes get() = R.string.prompt_delete_epg
 
     /** A reference to [EditEpgViewModel] for edit an `EPG` element */
-    override val editViewModel
-            by viewModel<EditEpgViewModel> { parametersOf( filePath ) }
+    override val editViewModel by viewModel<EditEpgViewModel> { parametersOf( filePath ) }
 
     /** @return an OPTIONAL [String] File Path from [EditEpgFragmentArgs.epgPath] */
     override val filePath get() = args.epgPath
@@ -61,9 +60,9 @@ internal class EditEpgFragment : AbsEditSourceFileFragment<EditEpgViewModel>() {
 
     /** A function called when [AbsEditSourceFileViewModel.state] is [AbsEditSourceFileFragment.State.SaveCompleted] */
     override fun onSaveComplete() {
-        showDialog( R.string.refresh_tv_guides_delayed_title, R.string.refresh_tv_guides_delayed_message ) {
-            dismissPanel()
+        //showDialog( R.string.refresh_tv_guides_delayed_title, R.string.refresh_tv_guides_delayed_message ) {
+        //    dismissPanel()
             navController.popBackStack()
-        }
+        //}
     }
 }

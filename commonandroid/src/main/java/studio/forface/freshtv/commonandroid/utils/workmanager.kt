@@ -20,7 +20,7 @@ inline fun <reified W: ListenableWorker> WorkManager.enqueueUniquePeriodicWork(
     uniqueWorkName: String,
     repeatInterval: Duration,
     flexTimeInterval: Duration? = null,
-    replace: Boolean = false,
+    replace: Boolean = true,
     exponentialBackoff: Boolean = true,
     backoffDelay: Duration = 30.seconds,
     constraints: Constraints = Constraints.NONE,

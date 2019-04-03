@@ -45,14 +45,14 @@ class RefreshTvGuidesWorker(
 
         /** Enqueue [RefreshTvGuidesWorker] for refresh from a single `EPG`s with the given [epgPath] */
         fun enqueue( epgPath: String ) {
-            val constraints = WorkConstraints {
-                if ( Android.MARSHMALLOW ) setRequiresDeviceIdle( true )
-            }
+            //val constraints = WorkConstraints {
+            //    if ( Android.MARSHMALLOW ) setRequiresDeviceIdle( true )
+            //}
             workManager.enqueueUniqueWork<RefreshTvGuidesWorker>(
                 uniqueWorkName = "$WORKER_NAME$epgPath",
                 replacePolicy = ExistingWorkPolicy.REPLACE,
-                workData = workDataOf( ARG_EPG_PATH to epgPath ),
-                constraints = constraints
+                workData = workDataOf( ARG_EPG_PATH to epgPath )//,
+            //    constraints = constraints
             )
         }
 

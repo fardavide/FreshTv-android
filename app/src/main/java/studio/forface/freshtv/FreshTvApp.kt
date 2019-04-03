@@ -62,8 +62,8 @@ class FreshTvApp: Application() {
         }
 
         // Enqueue Works
-        DeleteOldGuidesWorker.enqueue( 12.hours )
         RefreshChannelsWorker.enqueue( 1.days )
-        RefreshTvGuidesWorker.enqueue( 3.days )
+        RefreshTvGuidesWorker.enqueue( 3.hours )
+        DeleteOldGuidesWorker.enqueue( 12.hours )
     }
 }

@@ -60,6 +60,9 @@ class BackDuration internal constructor( private val duration: Duration ) {
     operator fun invoke(): LocalDateTime = LocalDateTime.now().minus( duration )
 }
 
+/** Overloading of [LocalDateTime.compareTo] [BackDuration] */
+operator fun LocalDateTime.compareTo( backDuration: BackDuration ) = compareTo( backDuration() )
+
 /**
  * Serialize a [LocalDate] into a [String].
  * @return [String].
