@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_source_file_edit.*
@@ -136,6 +137,15 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
         }
     }
 
+    /** When the Fragment is resumed */
+    override fun onResume() {
+        super.onResume()
+        filePath?.let {
+            // Cancel notification for filePath
+            NotificationManagerCompat.from( requireContext() ).cancel( it.hashCode() )
+        }
+    }
+
     /**
      * When a [MenuItem] is selected from Options Menu.
      * @see menuRes
@@ -166,18 +176,28 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
     }
 
     /** When [startActivityForResult] return its result */
-    override fun onActivityResult( requestCode: Int, resultCode: Int, resultData: Intent? ) {
+    override fun onActivityResult( requestCode: Int, resultCode: Int, intent: Intent? ) {
 
         // The ACTION_OPEN_DOCUMENT intent was sent with the request code PICK_FILE_REQUEST_CODE.
         // If the request code seen here doesn't match, it's the response to some other intent, and
         // the code below shouldn't run at all.
 
         if ( requestCode == PICK_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK ) {
+            @Suppress("NAME_SHADOWING") val intent = intent!! // At this point intent cannot be null
+
             // The document selected by the user won't be returned in the intent.
             // Instead, a URI to that document will be contained in the return intent provided to
             // this method as a parameter.
-            // Pull that URI using resultData.getData().
-            resultData?.data?.let { onFileSelected( it ) }
+            // Pull that URI using intent.getData().
+            val uri = intent.data!!
+
+            // Apply persistable permissions to the picked file's Uri, for make the permission persist
+            // across device's reboots.
+            val takeFlags: Int = intent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION
+            requireContext().contentResolver.takePersistableUriPermission( uri, takeFlags )
+
+            // Notify with the picked file.
+            intent.data?.let { onFileSelected( it ) }
         }
     }
 

@@ -23,7 +23,7 @@ internal class ChannelUiModelMapper : UiModelMapper<IChannel, ChannelUiModel, Un
             image =         imageUrl?.s,
             favorite =      favorite,
             favoriteImage = if ( favorite ) R.drawable.ic_favorite else R.drawable.ic_favorite_white,
-            type =          if ( this is MovieChannel ) ChannelUiModel.Type.MOVIE else ChannelUiModel.Type.TV
+            type =          type
     )
 
     /** @see UiModelMapper.toEntity */

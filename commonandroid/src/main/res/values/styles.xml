@@ -1,7 +1,10 @@
 <resources>
 
+    <!-- Base Theme containing API-aware items -->
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="BaseTheme">
 
         <!-- Colors -->
         <item name="colorPrimary">@color/colorPrimary</item>

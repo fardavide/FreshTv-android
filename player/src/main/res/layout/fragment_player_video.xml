@@ -11,9 +11,7 @@
         android:id="@+id/videoPlayerUrlTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="@dimen/small_margin"
         android:layout_gravity="top|center_horizontal"
         android:visibility="visible"
         android:textColor="@android:color/primary_text_dark"
@@ -24,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
+        app:controller_layout_id="@layout/view_player_controller"
         app:auto_show="false"
         app:show_buffering="when_playing"
         android:fitsSystemWindows="false"/>

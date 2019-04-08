@@ -32,11 +32,8 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
     /** A [LockedViewStateStore] of [Nothing] delivering only [player]s errors via [ViewState.Error] */
     val errors = ViewStateStore<Nothing>().lock
 
-    /**
-     * A [LockedViewStateStore] of [Boolean] for rules whether the screen need to be locked ( prevents the screen from
-     * getting dim / turned off )
-     */
-    val screenLock = ViewStateStore<Boolean>().lock
+    /** A [LockedViewStateStore] of [Boolean] representing whether the player is currently playing */
+    val playingState = ViewStateStore<Boolean>().lock
 
     /** A [LockedViewStateStore] of [SourceState] */
     val sourceState = ViewStateStore<SourceState>().lock
@@ -68,9 +65,9 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
             if ( state == Player.STATE_READY )
                 sourceState.setData( SourceState.Success( currentUrl ) )
 
-            // Update the screenLock
-            val canTurnOff = state == Player.STATE_IDLE || state == Player.STATE_ENDED || ! playWhenReady
-            screenLock.setData( ! canTurnOff )
+            // Update playingState
+            val running = ! ( state == Player.STATE_IDLE || state == Player.STATE_ENDED || ! playWhenReady )
+            playingState.setData( running )
         }
     }
 

@@ -21,9 +21,13 @@ import studio.forface.freshtv.viewmodels.EditPlaylistViewModel
 internal class EditPlaylistFragment : AbsEditSourceFileFragment<EditPlaylistViewModel>() {
 
     companion object {
+
         /** @return `NavDirections` to this `Fragment` */
         fun directions( playlistPath: String? = null ) =
                 HomeFragmentDirections.actionToEditPlaylistFragment( playlistPath )
+
+        /** The name of [EditPlaylistFragmentArgs.playlistPath] */
+        const val ARG_PLAYLIST_PATH = "playlistPath"
     }
 
     /**

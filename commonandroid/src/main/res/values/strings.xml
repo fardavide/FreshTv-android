@@ -27,4 +27,15 @@
 
     <!-- Messages -->
      <string name="permission_denied">Permission denied</string>
+
+    <!-- Notifications -->
+    <string name="notification_error_channel_id">notification_errors</string>
+    <string name="notification_error_channel_name">Error</string>
+    <string name="notification_error_channel_description">
+        Receive a notification when a background process fails. The notification will include an action for resolve the problem.
+    </string>
+    <string name="notification_error_action_resolve">Resolve</string>
+    <string name="notification_success_channel_id">notification_successes</string>
+    <string name="notification_success_channel_name">Success</string>
+    <string name="notification_success_channel_description">Receive a notification when a background process succeed.</string>
 </resources>

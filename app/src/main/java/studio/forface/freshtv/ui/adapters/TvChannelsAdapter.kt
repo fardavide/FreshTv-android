@@ -33,7 +33,7 @@ internal class TvChannelsAdapter:
      * An invoker for [onItemLongClick], we use it so the `ViewHolder` will always use the updated
      * [onItemLongClick] even if it changes after the `ViewHolder` is created.
      */
-    val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
+    private val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): TvChannelViewHolder {
@@ -61,7 +61,7 @@ internal class TvChannelsAdapter:
      * A `ViewHolder` for [TvChannelsAdapter]
      * Inherit from [ClickableAdapter.ViewHolder]
      */
-    class TvChannelViewHolder( itemView: View): ClickableAdapter.ViewHolder<TvChannelUiModel>( itemView ) {
+    class TvChannelViewHolder( itemView: View ): ClickableAdapter.ViewHolder<TvChannelUiModel>( itemView ) {
 
         internal var itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit = {}
 

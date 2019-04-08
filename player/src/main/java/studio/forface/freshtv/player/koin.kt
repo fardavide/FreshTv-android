@@ -31,6 +31,7 @@ val playerModule = module {
     factory { TvGuidesPresenter( getTvGuides = get(), mapper = get() ) }
 
     /* View Models */
+    viewModel { (channelId: String) -> ChannelViewModel( channelId, presenter = get(), interactor = get() ) }
     viewModel { (channelId: String) -> ChannelInfoViewModel( channelId, typePresenter = get(), tvPresenter = get() ) }
     viewModel { (channelId: String) -> ChannelTypeViewModel( channelId, presenter = get() ) }
     viewModel { (channelId: String) -> ChannelSourceViewModel( channelId, presenter = get(), interactor = get() ) }

@@ -23,6 +23,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_to_movieChannelGroupsFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_to_playlistsFragment">
                     <value>
                       <LayoutPositions />
@@ -58,6 +63,15 @@
                             <option name="x" value="433" />
                             <option name="y" value="273" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="deepLink">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -95,6 +109,15 @@
                             <option name="y" value="-45" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_movieChannelsFragment_to_playerFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -115,8 +138,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="631" />
-                            <option name="y" value="-362" />
+                            <option name="x" value="637" />
+                            <option name="y" value="-198" />
                           </Point>
                         </option>
                       </LayoutPositions>

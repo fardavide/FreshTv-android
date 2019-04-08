@@ -45,14 +45,24 @@ interface RotationEnabled : AndroidComponent {
      */
     fun setInitialRotation()
 
+    /** Toggle between [Rotation.PORTRAIT] and [Rotation.SENSOR_LANDSCAPE] */
+    fun toggleRotation( withSensorLandscape: Boolean = true ) {
+        val portrait = Rotation.PORTRAIT
+        val landscape = if ( withSensorLandscape ) Rotation.SENSOR_LANDSCAPE else Rotation.LANDSCAPE
+        rotate( if ( isLandscape() ) portrait else landscape )
+    }
+
     /**
      * An enum that wraps [ActivityInfo] rotation [Int] values.
      */
     enum class Rotation( val value: Int ) {
-        LANDSCAPE(          ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ),
         PORTRAIT(           ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ),
-        REVERSE_LANDSCAPE(  ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE ),
         REVERSE_PORTRAIT(   ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT ),
+
+        LANDSCAPE(          ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ),
+        REVERSE_LANDSCAPE(  ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE ),
+        SENSOR_LANDSCAPE(   ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE ),
+
         UNSPECIFIED(        ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED ),
         USER(               ActivityInfo.SCREEN_ORIENTATION_USER );
 

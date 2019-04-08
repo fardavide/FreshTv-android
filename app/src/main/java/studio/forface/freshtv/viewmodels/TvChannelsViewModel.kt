@@ -3,17 +3,17 @@ package studio.forface.freshtv.viewmodels
 import androidx.lifecycle.ViewModel
 import studio.forface.freshtv.commonandroid.frameworkcomponents.ScopedViewModel
 import studio.forface.freshtv.domain.usecases.FavoritedChannel
-import studio.forface.freshtv.interactors.ChannelChangeFavoriteInteractor
+import studio.forface.freshtv.commonandroid.interactors.ChannelChangeFavoriteInteractor
 import studio.forface.freshtv.presenters.TvChannelsPresenter
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 import studio.forface.viewstatestore.paging.LockedPagedViewStateStore
 import studio.forface.viewstatestore.paging.PagedViewStateStore
 
 /**
- * @author Davide Giuseppe Farella
  * A [ViewModel] that get `TvChannel`s
- *
  * Inherit from [ScopedViewModel]
+ *
+ * @author Davide Giuseppe Farella
  */
 internal class TvChannelsViewModel(
         private val groupName: String,

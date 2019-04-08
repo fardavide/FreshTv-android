@@ -1,27 +1,30 @@
 package studio.forface.freshtv.services
 
 import android.content.Context
+import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.*
-import androidx.work.ListenableWorker.Result.retry
-import androidx.work.ListenableWorker.Result.success
 import kotlinx.coroutines.runBlocking
 import org.koin.core.inject
 import org.threeten.bp.Duration
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
+import studio.forface.freshtv.commonandroid.frameworkcomponents.NotifiableWorker
 import studio.forface.freshtv.commonandroid.utils.*
 import studio.forface.freshtv.domain.usecases.RefreshChannels
 import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.Multi
 import studio.forface.freshtv.domain.usecases.RefreshChannels.Error.Single
+import studio.forface.freshtv.ui.EditPlaylistFragment
 
 /**
- * @author Davide Giuseppe Farella.
  * A [Worker] for refresh `Channel`s
+ * Inherit from [NotifiableWorker]
+ *
+ * @author Davide Giuseppe Farella
  */
 class RefreshChannelsWorker(
     context: Context,
     params: WorkerParameters
-): Worker( context, params ), AndroidComponent {
+): NotifiableWorker( context, params ) {
 
     companion object {
         /** An unique name for the [RefreshChannelsWorker] */
@@ -35,7 +38,7 @@ class RefreshChannelsWorker(
                 setRequiredNetworkType( NetworkType.CONNECTED )
             }
             workManager.enqueueUniquePeriodicWork<RefreshChannelsWorker>(
-                    WORKER_NAME, repeatInterval, flexInterval, constraints = constraints
+                WORKER_NAME, repeatInterval, flexInterval, constraints = constraints
             )
         }
 
@@ -57,18 +60,24 @@ class RefreshChannelsWorker(
         }
     }
 
+    /** @see NotifiableWorker.notificationFailureTitle */
+    override val notificationFailureTitle: Int = R.string.notification_refresh_channels_failure_title
+
+    /** @see NotifiableWorker.notificationSuccessTitle */
+    override val notificationSuccessTitle: Int = R.string.notification_refresh_channels_success_title
+
     /** An instance of [RefreshChannels] */
     private val refreshChannels by inject<RefreshChannels>()
 
     /**
-     * @see Worker.doWork
-     * @return [success] if [refreshChannels] completes without exceptions, else [retry]
+     * @see NotifiableWorker.doNotifiableWork
+     * @return [onWorkSucceed] if [refreshChannels] completes without exceptions, else [onWorkFailed]
      */
-    override fun doWork(): Result {
-        val playlistPath = inputData.getString( ARG_PLAYLIST_PATH )
+    override fun doNotifiableWork(): NotifiableResult {
+        val playlistPathArg = inputData.getString( ARG_PLAYLIST_PATH )
         val catching = runCatching {
             runBlocking {
-                playlistPath?.let { refreshChannels( it ) } ?: refreshChannels()
+                playlistPathArg?.let { refreshChannels( it ) } ?: refreshChannels()
             }
         }
 
@@ -76,20 +85,27 @@ class RefreshChannelsWorker(
 
         catching
             .onSuccess { error ->
-                showResult( error )
-                return success()
+                return showResult( error )
             }
             .onFailure {
-                notifier.error( it )
-                return retry()
+                val playlistPath = ( it as RefreshChannels.FatalException ).playlist.path
+                val resolution = NavDeepLinkBuilder( applicationContext )
+                    .setGraph( R.navigation.nav_graph )
+                    .setDestination( R.id.editPlaylistFragment )
+                    .setArguments( bundleOf(EditPlaylistFragment.ARG_PLAYLIST_PATH to playlistPath ) )
+                    .createPendingIntent()
+                return onWorkFailed( playlistPath, it, resolution)
             }
 
         throw AssertionError("Unreachable code" )
     }
 
-    /** Show the result to the user */
-    private fun showResult( error: RefreshChannels.Error ) {
-        if ( error.hasError ) {
+    /**
+     * Show the result to the user
+     * @return [onWorkSucceed]
+     */
+    private fun showResult( error: RefreshChannels.Error ): NotifiableResult {
+        return if ( error.hasError ) {
             val errorMessage = when ( error ) {
                 is Single -> getString(
                     R.string.read_single_playlist_error_count_args,
@@ -102,8 +118,8 @@ class RefreshChannelsWorker(
                     error.all.size
                 )
             }
-            notifier.warn( errorMessage )
+            onWorkSucceed( WORKER_NAME, errorMessage, SuccessLevel.PARTIAL)
 
-        } else notifier.info( getString( R.string.refresh_channels_completed ) )
+        } else onWorkSucceed( WORKER_NAME, getString( R.string.refresh_channels_completed ), SuccessLevel.FULL)
     }
 }

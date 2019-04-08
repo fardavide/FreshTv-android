@@ -16,17 +16,19 @@ import timber.log.Timber
  * @author Davide Giuseppe Farella.
  * Android implementation of [Notifier].
  */
-class AndroidNotifier(
+class AndroidNotifier internal constructor(
     private val resources: Resources,
     private val toast: Toast
 ): Notifier<AndroidNotifier.ActionBuilder> {
 
     /**
      * A reference to [SnackbarManager] for show a [Snackbar] if app is in foreground
-     * The value will be set on [Activity.onStart] and removed ( null ) on [Activity.onStart]
+     * The value will be set on [Activity.onStart] and removed ( null ) on [Activity.onStop]
      */
     internal var snackbarManager: SnackbarManager? = null
 
+
+    /* = = = = = = = = ERROR = = = = = = = = */
 
     /** Show an error event though a [ViewState.Error] */
     fun error( error: ViewState.Error, optionalAction: AndroidOptionalAction = null ) {
@@ -52,6 +54,7 @@ class AndroidNotifier(
         this( Type.Error, message, optionalAction )
     }
 
+    /* = = = = = = = = INFO = = = = = = = = */
 
     /** Show an info event though a [ViewState.Error] */
     fun info( error: ViewState.Error, optionalAction: AndroidOptionalAction = null ) {
@@ -77,6 +80,7 @@ class AndroidNotifier(
         this( Type.Info, message, optionalAction )
     }
 
+    /* = = = = = = = = WARN = = = = = = = = */
 
     /** Show a warn event though a [ViewState.Error] */
     fun warn( error: ViewState.Error, optionalAction: AndroidOptionalAction = null ) {
@@ -103,10 +107,11 @@ class AndroidNotifier(
     }
 
 
+    /* = = = = = = = = PRIVATE METHODS = = = = = = = = */
+
     /** Handle an event of the given [Type] though [Timber] and [SnackbarManager] or [Toast] */
     private operator fun invoke( type: Type, error: ViewState.Error, optionalAction: AndroidOptionalAction ) {
-        val message = error.customMessageRes?.let { resources.getText( it ) } ?: error.baseMessage
-        this( type, error.throwable, message.toString(), optionalAction )
+        this( type, error.throwable, error.getMessage( resources ), optionalAction )
     }
 
     /** Handle an event of the given [Type] though [Timber] and [SnackbarManager] or [Toast] */
@@ -117,7 +122,7 @@ class AndroidNotifier(
         optionalAction: AndroidOptionalAction
     ) {
         Timber.log( type.logLevel, throwable, message.toString() )
-        snackBarOrToast( type, message, optionalAction )
+        publish( type, message, optionalAction )
     }
 
     /** Handle an event of the given [Type] though [Timber] and [SnackbarManager] or [Toast] */
@@ -138,11 +143,11 @@ class AndroidNotifier(
             optionalAction: AndroidOptionalAction
     ) {
         Timber.log( type.logLevel, message.toString() )
-        snackBarOrToast( type, message, optionalAction )
+        publish( type, message, optionalAction )
     }
 
     /** Create a [Snackbar] if possible, else a [Toast] */
-    private fun snackBarOrToast(
+    private fun publish(
             type: Type,
             message: CharSequence,
             optionalAction: AndroidOptionalAction
@@ -153,7 +158,8 @@ class AndroidNotifier(
             builder.build()
         }
 
-        snackbarManager?.showSnackbar( type.snackbarType, message, action ) ?: toast.show( type.toastType, message )
+        snackbarManager?.showSnackbar( type.snackbarType, message, action )
+            ?: toast.show( type.toastType, message )
     }
 
 
@@ -168,16 +174,17 @@ class AndroidNotifier(
         Warn ( Log.WARN, SnackbarType.Warn, Toast.Type.Warn )
     }
 
+
     /**
-     * A builder for create [Action] within a DSL style
-     * Inherit from [Notifier.ActionBuilder] and add the possibility to set the [Action.name] from a [StringRes]
+     * A builder for create [Notifier.Action] within a DSL style
+     * Inherit from [Notifier.ActionBuilder] and add the possibility to set the [Notifier.Action.name] from a [StringRes]
      */
     class ActionBuilder( private val resources: Resources ): Notifier.ActionBuilder() {
         /** @see Action.name */
         @StringRes var actionNameRes: Int? = null
 
         /**
-         * @return [Action] created from [actionName] ( or [actionNameRes] ) and [actionBlock]
+         * @return [Notifier.Action] created from [actionName] ( or [actionNameRes] ) and [actionBlock]
          * @throws KotlinNullPointerException if both [actionNameRes] and [actionName] have not been set.
          */
         override fun build(): Notifier.Action {

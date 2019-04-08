@@ -31,35 +31,30 @@ val playerErrorStateGenerator: ErrorStateGenerator = { throwable ->
 }
 
 /** A [ViewState.Error] for [HttpDataSource.InvalidResponseCodeException.responseCode] 400 */
-private class BadRequestError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = R.string.bad_request
-}
+private class BadRequestError( throwable: Throwable ) :
+    ViewState.Error( throwable, R.string.bad_request )
 
 /** A [ViewState.Error] for [HttpDataSource.InvalidResponseCodeException.responseCode] 403 */
-private class ForbiddenAccessError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = R.string.forbidden_access
-}
+private class ForbiddenAccessError( throwable: Throwable ) :
+    ViewState.Error( throwable, R.string.forbidden_access )
 
 /** A [ViewState.Error] for [MalformedURLException] */
-private class MalformedUrlError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = when( throwable.cause?.cause?.message ) {
+private class MalformedUrlError( throwable: Throwable ):
+    ViewState.Error( throwable, when( throwable.cause?.cause?.message ) {
         "unknown protocol: rtmp" -> R.string.unsupported_rtmp_stream
         "unknown protocol: rtsp" -> R.string.unsupported_rtsp_stream
         else -> R.string.malformed_url
     }
-}
+)
 
 /** A [ViewState.Error] for [HttpDataSource.InvalidResponseCodeException.responseCode] 404 */
-private class StreamNotFoundError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = R.string.stream_not_found
-}
+private class StreamNotFoundError( throwable: Throwable ) :
+    ViewState.Error( throwable, R.string.stream_not_found )
 
 /** A [ViewState.Error] for [UnknownHostException] */
-private class UnknownHostError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = R.string.unknown_host
-}
+private class UnknownHostError( throwable: Throwable ) :
+    ViewState.Error( throwable, R.string.unknown_host )
 
 /** A [ViewState.Error] for [UnrecognizedInputFormatException] */
-private class UnsupportedStreamFormatError( throwable: Throwable ): ViewState.Error( throwable ) {
-    override val customMessageRes get() = R.string.unsupported_stream_format
-}
+private class UnsupportedStreamFormatError( throwable: Throwable ) :
+    ViewState.Error( throwable, R.string.unsupported_stream_format )

@@ -80,7 +80,7 @@ object Versions {
     val android_test_runner =           "1.1.0"
     val android_theia =                 "0.3-alpha-1"
     val android_view_pager2 =           "1.0.0-alpha02"
-    val android_view_state_store =      "1.2-alpha-3"
+    val android_view_state_store =      "1.2-alpha-6"
     val android_work =                  "1.0.0"
 }
 

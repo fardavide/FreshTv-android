@@ -15,8 +15,9 @@ import studio.forface.freshtv.commonandroid.utils.dp
 import studio.forface.freshtv.domain.gateways.Notifier
 
 /**
- * @author Davide Giuseppe Farella
  * A class for show a [Snackbar]
+ *
+ * @author Davide Giuseppe Farella
  */
 internal interface SnackbarManager {
 
@@ -92,9 +93,9 @@ internal interface SnackbarManager {
     )
 
     /** An infix function for create a [ColorPair] from 2 [Int]s */
-    private infix fun Int.c( other: Int ) = ColorPair(this, other )
+    private infix fun Int.c( border: Int ) = ColorPair(this, border )
     /** An infix function for create a [ColorSet] from a [ColorPair] and an [Int] */
-    private infix fun ColorPair.c( other: Int ) = ColorSet( background, border, other )
+    private infix fun ColorPair.c( text: Int ) = ColorSet( background, border, text )
 }
 
 /** An enum class for the types of the [Snackbar] */

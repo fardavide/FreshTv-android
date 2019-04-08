@@ -16,8 +16,8 @@ import studio.forface.freshtv.domain.utils.ago
 import studio.forface.freshtv.domain.utils.days
 
 /**
- * @author Davide Giuseppe Farella.
  * A [Worker] for delete old Tv guides
+ * @author Davide Giuseppe Farella
  */
 class DeleteOldGuidesWorker(
     context: Context,

@@ -1,6 +1,7 @@
 package studio.forface.freshtv.player.uiModels
 
 import androidx.annotation.DrawableRes
+import studio.forface.freshtv.domain.entities.IChannel
 
 /**
  * An Ui Model representing a `Channel`
@@ -13,7 +14,7 @@ internal data class ChannelUiModel(
         val image: String?,
         val favorite: Boolean,
         @DrawableRes val favoriteImage: Int,
-        val type: Type
+        val type: IChannel.Type
 ) {
 
     enum class Type { MOVIE, TV }

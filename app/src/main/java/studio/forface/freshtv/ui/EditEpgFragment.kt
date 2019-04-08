@@ -1,6 +1,7 @@
 package studio.forface.freshtv.ui
 
 import androidx.annotation.StringRes
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_source_file_edit.*
 import org.koin.androidx.viewmodel.ext.viewModel
@@ -21,9 +22,13 @@ import studio.forface.freshtv.viewmodels.EditEpgViewModel
 internal class EditEpgFragment : AbsEditSourceFileFragment<EditEpgViewModel>() {
 
     companion object {
+
         /** @return `NavDirections` to this `Fragment` */
         fun directions( epgPath: String? = null ) =
                 HomeFragmentDirections.actionToEditEpgFragment( epgPath )
+
+        /** The name of [EditEpgFragmentArgs.epgPath] */
+        const val ARG_EPG_PATH = "epgPath"
     }
 
     /**

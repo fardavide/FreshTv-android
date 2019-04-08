@@ -31,7 +31,10 @@ class RefreshTvGuides(
 
     /**
      * Refresh the playlists previously added
+     *
      * @return a [RefreshTvGuides.Error.Multi] of [Epg]s and [ParsingEpgError]s
+     *
+     * @throws RefreshTvGuides.FatalException
      */
     suspend operator fun invoke() = localData.epgs()
         .map { invoke( it ) } // Invoke for every Playlist
@@ -39,22 +42,32 @@ class RefreshTvGuides(
 
     /**
      * Refresh the given [Epg]
+     *
      * @return a [RefreshChannels.Error.Single] of [Epg] and [ParsingEpgError]
+     *
+     * @throws RefreshTvGuides.FatalException
      */
     suspend operator fun invoke( epg: SourceFile.Epg ) = coroutineScope {
         val errors = mutableListOf<ParsingEpgError>()
-        parsers.readFrom(
-            epg = epg,
-            onTvGuide = { storeTvGuide( it ) },
-            onError = { errors += it },
-            onProgress = { progressCallback( it ) }
-        )
-        Error.Single( epg, errors )
+        try {
+            parsers.readFrom(
+                epg = epg,
+                onTvGuide = { storeTvGuide( it ) },
+                onError = { errors += it },
+                onProgress = { progressCallback( it ) }
+            )
+            Error.Single( epg, errors )
+        } catch ( t: Throwable ) {
+            throw FatalException( epg, t )
+        }
     }
 
     /**
      * Refresh the [Epg] with the given [epgPath]
+     *
      * @return a [List] of [ParsingEpgError]
+     *
+     * @throws RefreshTvGuides.FatalException
      */
     suspend operator fun invoke( epgPath: String ) =
             this( localData.epg( epgPath ) )
@@ -65,6 +78,9 @@ class RefreshTvGuides(
             localData.storeTvGuide( guide )
     }
 
+
+    /** An exception that contains the [Epg] that causes the failure */
+    class FatalException( val epg: Epg, cause: Throwable ): Exception( cause )
 
     /** A sealed class for wrapping [ParsingEpgError]s */
     sealed class Error {

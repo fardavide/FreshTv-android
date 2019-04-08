@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/white">
+
+    <!-- Top -->
+    <View
+        android:id="@+id/playerControllerTopBar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/playerController_barsHeight"
+        android:background="@color/player_controller_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/playerControllerFavoriteButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/playerController_buttonsEndMargin"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_channel_favorite"
+        android:padding="@dimen/playerController_buttonsPadding"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/playerControllerTopBar"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playerControllerTopBar"
+        app:srcCompat="@drawable/ic_favorite_white" />
+
+    <!-- Center -->
+    <View
+        android:id="@+id/playerControllerPlayPauseCircle"
+        android:layout_width="@dimen/playerController_playPauseCircleSize"
+        android:layout_height="@dimen/playerController_playPauseCircleSize"
+        android:background="@drawable/shape_circle_black_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@id/exo_play"
+        android:layout_width="@dimen/playerController_playPauseButtonSize"
+        android:layout_height="@dimen/playerController_playPauseButtonSize"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_controller_play"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/playerControllerPlayPauseCircle"
+        app:layout_constraintEnd_toEndOf="@id/playerControllerPlayPauseCircle"
+        app:layout_constraintStart_toStartOf="@id/playerControllerPlayPauseCircle"
+        app:layout_constraintTop_toTopOf="@id/playerControllerPlayPauseCircle"
+        app:srcCompat="@drawable/ic_play_white" />
+
+    <ImageButton
+        android:id="@id/exo_pause"
+        android:layout_width="@dimen/playerController_playPauseButtonSize"
+        android:layout_height="@dimen/playerController_playPauseButtonSize"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_controller_pause"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/playerControllerPlayPauseCircle"
+        app:layout_constraintEnd_toEndOf="@id/playerControllerPlayPauseCircle"
+        app:layout_constraintStart_toStartOf="@id/playerControllerPlayPauseCircle"
+        app:layout_constraintTop_toTopOf="@id/playerControllerPlayPauseCircle"
+        app:srcCompat="@drawable/ic_pause_white" />
+
+    <!-- Bottom -->
+    <View
+        android:id="@+id/playerControllerBottomBar"
+        android:layout_width="0dp"
+        android:background="@color/player_controller_background"
+        android:layout_height="@dimen/playerController_barsHeight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/playerControllerRotateButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/playerController_buttonsEndMargin"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/image_controller_rotate"
+        android:padding="@dimen/playerController_buttonsPadding"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/playerControllerBottomBar"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playerControllerBottomBar"
+        app:srcCompat="@drawable/ic_rotate_white" />
+
+    <com.google.android.exoplayer2.ui.DefaultTimeBar
+        android:id="@id/exo_progress"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/playerController_timeBarHeight"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/playerControllerBottomBar"
+        app:layout_constraintEnd_toStartOf="@+id/playerControllerRotateButton"
+        app:layout_constraintStart_toStartOf="@+id/playerControllerBottomBar"
+        app:layout_constraintTop_toTopOf="@+id/playerControllerBottomBar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

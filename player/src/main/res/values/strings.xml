@@ -11,6 +11,14 @@
     <string name="unsupported_rtsp_stream">Rtsp streams are <i>currently</i> not supported</string>
     <string name="unsupported_stream_format">Unsupported stream format</string>
 
+    <!-- Images description -->
+    <string name="image_controller_play">Play media</string>
+    <string name="image_controller_pause">Pause media</string>
+    <string name="image_controller_rotate">Rotate the screen</string>
+
+    <!-- Messages -->
+    <string name="message_no_guide_for_channel">No Tv Guide for this channel</string>
+
     <!-- Others -->
     <string name="actors">Actors:</string>
     <string name="category">Category</string>

@@ -2,6 +2,7 @@ package studio.forface.freshtv.player.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.fragment_tv_info.*
@@ -47,8 +48,12 @@ internal class TvInfoFragment : NestedFragment<PlayerFragment>( R.layout.fragmen
     /** When [ChannelInfoUiModel]s are received */
     private fun onInfo( info: ChannelInfoUiModel ) {
         if ( info !is ChannelInfoUiModel.Tv ) throw AssertionError()
+        tvInfoNoGuideTextView.isVisible = info.programs.isEmpty()
         adapter.programs = info.programs
-        tvInfoViewPager.currentItem = info.currentIndex
+        tvInfoViewPager.apply {
+            isVisible = info.programs.isNotEmpty()
+            currentItem = info.currentIndex
+        }
     }
 
     /** A [FragmentStatePagerAdapter] for `TvGuide`s */

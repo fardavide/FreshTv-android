@@ -39,10 +39,10 @@ interface Notifier<B : Notifier.ActionBuilder> {
     fun warn( message: CharSequence, optionalAction: OptionalAction<B> = null )
 
     /** A data class that represent an action that could be appended to the message to show */
-    data class Action( val name: CharSequence, val block: () -> Unit )
+    data class Action ( val name: CharSequence, val block: () -> Unit )
 
     /** A builder for create [Action] within a DSL style */
-    open class ActionBuilder {
+    abstract class ActionBuilder {
         /** @see Action.name */
         var actionName: CharSequence? = null
         /** @see Action.block */
@@ -52,7 +52,7 @@ interface Notifier<B : Notifier.ActionBuilder> {
          * @return [Action] created from [actionName] and [actionBlock]
          * @throws KotlinNullPointerException if [actionName] has not been set.
          */
-        open fun build() = Action( actionName!!, actionBlock )
+        abstract fun build(): Action
     }
 }
 

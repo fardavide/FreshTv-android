@@ -31,6 +31,12 @@
     </string>
     <string name="refresh_tv_guides_completed">Tv Guides updated</string>
 
+    <!-- Notifications -->
+    <string name="notification_refresh_channels_failure_title">Problem while updating Channels</string>
+    <string name="notification_refresh_channels_success_title">Channels have been updated</string>
+    <string name="notification_refresh_tv_guide_failure_title">Problem while updating Guides</string>
+    <string name="notification_refresh_tv_guide_success_title">Tv Guides have been updated</string>
+
     <!-- Prompt -->
     <string name="prompt_delete_epg">Do you really want to delete this EPG?</string>
     <string name="prompt_delete_playlist">Do you really want to delete this Playlist?</string>

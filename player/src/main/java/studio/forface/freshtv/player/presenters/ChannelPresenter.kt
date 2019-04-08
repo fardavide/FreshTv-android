@@ -1,6 +1,6 @@
 package studio.forface.freshtv.player.presenters
 
-import studio.forface.freshtv.commonandroid.mappers.invoke
+import studio.forface.freshtv.commonandroid.mappers.map
 import studio.forface.freshtv.domain.usecases.GetChannel
 import studio.forface.freshtv.player.mappers.ChannelUiModelMapper
 import studio.forface.freshtv.player.uiModels.ChannelUiModel
@@ -16,5 +16,5 @@ internal class ChannelPresenter(
 ) {
 
     /** @return [ChannelUiModel] for the given [id] */
-    operator fun invoke( id: String ) = mapper { getChannel.invoke( id ).toUiModel() }
+    suspend operator fun invoke( id: String ) = getChannel.observe( id ).map( mapper ) { it.toUiModel() }
 }

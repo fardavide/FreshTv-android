@@ -5,18 +5,22 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.core.view.postDelayed
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.*
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIT
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH
 import kotlinx.android.synthetic.main.fragment_player_video.*
+import kotlinx.android.synthetic.main.view_player_controller.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.commonandroid.frameworkcomponents.*
+import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.player.R
 import studio.forface.freshtv.player.exoplayercomponents.FreshPlayerView
 import studio.forface.freshtv.player.uiModels.ChannelSourceUiModel
 import studio.forface.freshtv.player.viewmodels.ChannelSourceViewModel
+import studio.forface.freshtv.player.viewmodels.ChannelViewModel
 import studio.forface.freshtv.player.viewmodels.VideoPlayerViewModel
-
 
 /**
  * A [NestedFragment] for the player of [PlayerFragment]
@@ -32,6 +36,9 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
 
     /** @return [String] Channel id from [parentBaseFragment] */
     private val channelId by lazy { parentBaseFragment.channelId }
+
+    /** A reference to [ChannelViewModel] */
+    private val channelViewModel by viewModel<ChannelViewModel> { parametersOf( channelId ) }
 
     /** A reference to [VideoPlayerViewModel] */
     private val playerViewModel by viewModel<VideoPlayerViewModel>()
@@ -49,8 +56,11 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
             doOnError { notifier.error( it ) }
         }
 
-        // screenLock from PlayerViewModel
-        playerViewModel.screenLock.observeData( playerView::setKeepScreenOn )
+        // favorite from channelViewModel
+        channelViewModel.favoriteIcon.observeData( playerControllerFavoriteButton::setImageResource )
+
+        // playingState from PlayerViewModel
+        playerViewModel.playingState.observeData( ::onPlayingState )
 
         // sourceState from PlayerViewModel
         playerViewModel.sourceState.observeData {
@@ -71,6 +81,11 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
         super.onViewCreated( view, savedInstanceState )
         playerViewModel.setPlayerView( playerView )
 
+        // Controls
+        playerControllerFavoriteButton.setOnClickListener { channelViewModel.toggleFavorite() }
+        playerControllerRotateButton.setOnClickListener { toggleRotation() }
+
+        // Gestures
         val gestureListener = PlayerViewGestureListener(
             onClick = { playerView.toggleController() },
             onPinchIn = { playerView.resizeMode = RESIZE_MODE_FIXED_WIDTH },
@@ -94,9 +109,16 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
         else exitFullscreen()
     }
 
+    /** When the playing state is received from [VideoPlayerViewModel] */
+    private fun onPlayingState( isPlaying: Boolean ) {
+        playerView.keepScreenOn = isPlaying
+        exo_play.isVisible = ! isPlaying
+        exo_pause.isVisible = isPlaying
+    }
+
     /** When a [ChannelSourceUiModel] is received from [ChannelSourceViewModel] */
     private fun onSourceReady( source: ChannelSourceUiModel ) {
-        // TODO set playerView controls regarding source.type
+        exo_progress.isVisible = source.type == IChannel.Type.MOVIE
         playerViewModel.currentUrl = source.url
 
         videoPlayerUrlTextView.apply {

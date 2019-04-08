@@ -35,9 +35,6 @@ internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pag
     /** Reference to [TabLayout] */
     private val tabLayout get() = requireView().findViewById<TabLayout>( R.id.tabLayout )
 
-    /** Reference to [ViewPager] */
-    private val viewPager get() = requireView().findViewById<ViewPager>( R.id.viewPager )
-
     /** @see RootFragment.titleRes */
     override val titleRes get() = R.string.title_tv_channels
 
@@ -53,6 +50,7 @@ internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pag
     /** When the [TvChannelGroupsFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
+        val viewPager = view.findViewById<ViewPager>( R.id.viewPager )
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager( viewPager )
     }

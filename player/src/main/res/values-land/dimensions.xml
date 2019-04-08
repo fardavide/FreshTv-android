@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Video -->
+    <dimen name="playerController_playPauseButtonSize">72dp</dimen>
+    <dimen name="playerController_playPauseCircleSize">144dp</dimen>
+    <dimen name="playerController_barsHeight">48dp</dimen>
+    <dimen name="playerController_buttonsPadding">@dimen/small_margin</dimen>
+    <dimen name="playerController_buttonsEndMargin">@dimen/tiny_margin</dimen>
+
+</resources>

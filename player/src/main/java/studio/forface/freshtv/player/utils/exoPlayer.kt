@@ -3,8 +3,10 @@ package studio.forface.freshtv.player.utils
 import android.content.Context
 import androidx.core.net.toUri
 import com.google.android.exoplayer2.ext.rtmp.RtmpDataSourceFactory
+import com.google.android.exoplayer2.source.BaseMediaSource
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.upstream.TransferListener
@@ -43,13 +45,17 @@ internal val VideoPlayerViewModel.mediaSource get() = MediaSourceFactory( contex
 /** A class for create [MediaSource] for `Exo Player` */
 internal class MediaSourceFactory( private val context: Context ) {
 
-    /** @return an [ExtractorMediaSource] from the given [url] */
-    internal infix fun fromUrl( url: String ): ExtractorMediaSource? {
+    /** @return an [BaseMediaSource] from the given [url] */
+    internal infix fun fromUrl( url: String ): BaseMediaSource? {
         val dataSourceFactory = when {
             url.startsWith("rtmp" ) || url.startsWith("rtsp" ) -> rtmpDataSourceFactory
             else -> context.httpDataSourceFactory
         }
-        return ExtractorMediaSource.Factory( dataSourceFactory )
-            .createMediaSource( url.toUri() )
+        return if ( url.endsWith(".m3u8") )
+            HlsMediaSource.Factory( dataSourceFactory )
+                .createMediaSource( url.toUri() )
+        else
+            ExtractorMediaSource.Factory( dataSourceFactory )
+                .createMediaSource( url.toUri() )
     }
 }

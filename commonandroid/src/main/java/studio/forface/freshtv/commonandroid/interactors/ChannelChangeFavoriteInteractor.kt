@@ -1,13 +1,14 @@
-package studio.forface.freshtv.interactors
+package studio.forface.freshtv.commonandroid.interactors
 
 import studio.forface.freshtv.domain.usecases.FavoritedChannel
 import studio.forface.freshtv.domain.usecases.UpdateChannelFavoriteState
 
 /**
- * @author Davide Giuseppe Farella
  * An Interactor for Change the Favorite state of a `Channel`
+ *
+ * @author Davide Giuseppe Farella
  */
-internal class ChannelChangeFavoriteInteractor(
+class ChannelChangeFavoriteInteractor(
         private val updateChannelFavoriteState: UpdateChannelFavoriteState
 ) {
     /** Change the Favorite state of a `Channel` */

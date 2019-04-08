@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import com.google.android.exoplayer2.ui.PlayerView
-import studio.forface.freshtv.domain.entities.IChannel
 
 /**
  * A custom implementation of [PlayerView]
@@ -17,8 +16,6 @@ import studio.forface.freshtv.domain.entities.IChannel
 internal class FreshPlayerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : PlayerView( context, attrs, defStyleAttr ) {
-
-    lateinit var mediaType : IChannel.Type
 
     /** Override [onTouchEvent] for avoid the spamming of [performClick] */
     @SuppressLint("ClickableViewAccessibility")
