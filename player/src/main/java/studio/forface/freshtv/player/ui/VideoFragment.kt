@@ -109,12 +109,6 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
         else exitFullscreen()
     }
 
-    /** When [VideoFragment] is paused */
-    override fun onPause() {
-        restoreInitialRotation()
-        super.onPause()
-    }
-
     /** When the playing state is received from [VideoPlayerViewModel] */
     private fun onPlayingState( isPlaying: Boolean ) {
         playerView.keepScreenOn = isPlaying

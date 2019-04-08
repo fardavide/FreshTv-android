@@ -115,7 +115,7 @@ abstract class BaseActivity(
 
     /** Called when a [BaseFragment] is resumed */
     @Suppress("MemberVisibilityCanBePrivate", "UNUSED_PARAMETER")
-    protected fun onFragmentResumed( fragment: BaseFragment ) {
+    protected open fun onFragmentResumed( fragment: BaseFragment ) {
         if ( fragment is RootFragment ) {
 
             // If fabParams is null, hide and reset fab. We call it now for avoid glitches

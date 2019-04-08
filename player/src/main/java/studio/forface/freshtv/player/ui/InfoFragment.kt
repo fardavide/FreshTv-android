@@ -37,7 +37,7 @@ internal class InfoFragment : NestedFragment<PlayerFragment>( R.layout.fragment_
     /** When [IChannel.Type] is received from [ChannelTypeViewModel] */
     private fun onType( info: IChannel.Type ) {
         val fragment = when( info ) {
-            MOVIE -> TODO(" create Fragment" )
+            MOVIE -> MovieInfoFragment()
             TV -> TvInfoFragment()
         }
         requireFragmentManager().beginTransaction()

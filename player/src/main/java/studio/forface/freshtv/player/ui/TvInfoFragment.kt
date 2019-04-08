@@ -14,7 +14,7 @@ import studio.forface.freshtv.player.uiModels.ChannelInfoUiModel
 import studio.forface.freshtv.player.viewmodels.ChannelInfoViewModel
 
 /**
- * A [NestedFragment] for the info for [PlayerFragment]
+ * A [NestedFragment] for the info of Tv for [PlayerFragment]
  *
  * @author Davide Giuseppe Farella
  */
