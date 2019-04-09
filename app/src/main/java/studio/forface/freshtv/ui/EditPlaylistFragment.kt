@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.fragment_source_file_edit.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.ui.AbsEditSourceFileFragment.Mode.CREATE
 import studio.forface.freshtv.ui.AbsEditSourceFileFragment.Mode.EDIT
 import studio.forface.freshtv.viewmodels.AbsEditSourceFileViewModel
@@ -49,7 +49,7 @@ internal class EditPlaylistFragment : AbsEditSourceFileFragment<EditPlaylistView
     /** @return an OPTIONAL [String] File Path from [EditPlaylistFragmentArgs.playlistPath] */
     override val filePath get() = args.playlistPath
 
-    /** @see RootFragment.titleRes */
+    /** @see ParentFragment.titleRes */
     override val titleRes: Int? get() = when ( mode ) {
         CREATE -> R.string.title_add_playlist
         EDIT ->   R.string.title_edit_playlist

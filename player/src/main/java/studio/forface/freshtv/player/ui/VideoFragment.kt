@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_player_video.*
 import kotlinx.android.synthetic.main.view_player_controller.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
-import studio.forface.freshtv.commonandroid.frameworkcomponents.*
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.player.R
 import studio.forface.freshtv.player.exoplayercomponents.FreshPlayerView
@@ -23,19 +22,11 @@ import studio.forface.freshtv.player.viewmodels.ChannelViewModel
 import studio.forface.freshtv.player.viewmodels.VideoPlayerViewModel
 
 /**
- * A [NestedFragment] for the player of [PlayerFragment]
- *
- * Implements [FullscreenEnabledFragment]
- * Implements [RotationEnabledFragment]
+ * A `Fragment` for the player of [PlayerFragment]
  *
  * @author Davide Giuseppe Farella
  */
-internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment_player_video ),
-    FullscreenEnabledFragment by FullscreenEnabledFragmentDelegate(),
-    RotationEnabledFragment by RotationEnabledFragmentDelegate() {
-
-    /** @return [String] Channel id from [parentBaseFragment] */
-    private val channelId by lazy { parentBaseFragment.channelId }
+internal class VideoFragment : PlayerFragment( R.layout.fragment_player_video ) {
 
     /** A reference to [ChannelViewModel] */
     private val channelViewModel by viewModel<ChannelViewModel> { parametersOf( channelId ) }
@@ -83,7 +74,7 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
 
         // Controls
         playerControllerFavoriteButton.setOnClickListener { channelViewModel.toggleFavorite() }
-        playerControllerRotateButton.setOnClickListener { toggleRotation() }
+        playerControllerRotateButton.setOnClickListener { playerActivity?.toggleRotation() }
 
         // Gestures
         val gestureListener = PlayerViewGestureListener(
@@ -97,16 +88,6 @@ internal class VideoFragment : NestedFragment<PlayerFragment>( R.layout.fragment
             scaleGestureDetector.onTouchEvent( event )
             otherGestureDetector.onTouchEvent( event )
         }
-    }
-
-    /** When [VideoFragment] is resumed */
-    override fun onResume() {
-        initFullscreenEnabledFragmentDelegate(this )
-        initRotationEnabledFragmentDelegate(this )
-        super.onResume()
-
-        if ( isLandscape() ) enterFullscreen()
-        else exitFullscreen()
     }
 
     /** When the playing state is received from [VideoPlayerViewModel] */

@@ -15,7 +15,7 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_source_file_edit.*
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.commonandroid.utils.*
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Type.LOCAL
@@ -33,10 +33,10 @@ import studio.forface.materialbottombar.panels.params.*
  * @author Davide Giuseppe Farella
  * A `Fragment` for Edit or Create a Source File
  *
- * Inherit from [RootFragment]
+ * Inherit from [ParentFragment]
  */
 internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFileViewModel>
-    : RootFragment( R.layout.fragment_source_file_edit ) {
+    : ParentFragment( R.layout.fragment_source_file_edit ) {
 
     /** A reference to [NavArgs] for get the File Path of the current editing Source File from [navArgs] */
     protected abstract val args: NavArgs
@@ -50,7 +50,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
     /** A reference to [EditViewModel] for edit a Source File element */
     protected abstract val editViewModel: EditViewModel
 
-    /** @see RootFragment.fabParams */
+    /** @see ParentFragment.fabParams */
     override val fabParams: FabParams get() = FabParams(
             R.drawable.ic_save_black,
             R.string.action_save,
@@ -65,7 +65,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
     /** @return a NULLABLE [getView] casted as [ConstraintLayout] */
     private val layout get() = view as? ConstraintLayout
 
-    /** @see RootFragment.menuRes */
+    /** @see ParentFragment.menuRes */
     override val menuRes: Int? get() = ( mode == EDIT ) { R.menu.menu_delete }
 
     /** The [AbsEditSourceFileFragment.Mode] */

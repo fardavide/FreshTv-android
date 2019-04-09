@@ -1,19 +1,15 @@
-package studio.forface.freshtv.commonandroid.frameworkcomponents
+package studio.forface.freshtv.commonandroid.ui
 
 import android.view.View
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RotationEnabled.Rotation
 
 /**
- * A Delegate for a [Fragment] that implements [FullscreenEnabledFragment]
+ * A Delegate for an UI element that implements [FullscreenEnabledComponent]
  * 
  * @author Davide Giuseppe Farella
  */
-class FullscreenEnabledFragmentDelegate : FullscreenEnabledFragment {
+class FullscreenEnabledDelegate : FullscreenEnabledComponent {
 
     /** A strong reference to the [FragmentActivity] */
     private lateinit var activity : FragmentActivity
@@ -40,12 +36,12 @@ class FullscreenEnabledFragmentDelegate : FullscreenEnabledFragment {
     override var isFullscreen: Boolean = false
 
     /**
-     * Initialize this delegate
+     * Initialize this delegate with [FragmentActivity]
      *
-     * NOTE: To call when [Fragment] is resumed!
+     * NOTE: To call when UI Element is resumed!
      */
-    override fun initFullscreenEnabledFragmentDelegate( fragment: Fragment ) {
-        activity = fragment.requireActivity()
+    override fun initFullscreenEnabledDelegate( activity: FragmentActivity ) {
+        this.activity = activity
         initialFlags = activity.window.decorView.systemUiVisibility
     }
 

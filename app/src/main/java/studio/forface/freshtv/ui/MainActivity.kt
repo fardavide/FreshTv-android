@@ -12,14 +12,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.PreferencesFragment
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseActivity
-import studio.forface.freshtv.commonandroid.frameworkcomponents.BaseFragment
-import studio.forface.freshtv.commonandroid.utils.Android
+import studio.forface.freshtv.commonandroid.ui.NavActivity
+import studio.forface.freshtv.commonandroid.ui.BaseActivity
+import studio.forface.freshtv.commonandroid.ui.BaseFragment
 import studio.forface.freshtv.uimodels.*
 import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.navigation.dsl.MaterialNavDrawer
 import studio.forface.materialbottombar.navigation.dsl.navDrawer
+import studio.forface.materialbottombar.navigation.setupWithNavController
 import studio.forface.materialbottombar.panels.params.*
 import kotlinx.android.synthetic.main.activity_main.appBar as syntheticAppBar
 import kotlinx.android.synthetic.main.activity_main.fab as syntheticFab
@@ -29,29 +30,29 @@ import kotlinx.android.synthetic.main.activity_main.titleTextView as syntheticTi
  * @author Davide Giuseppe Farella
  * The Main `Activity` of the app
  *
- * Inherit from [BaseActivity]
+ * Inherit from [NavActivity]
  */
-internal class MainActivity: BaseActivity( R.layout.activity_main ) {
+internal class MainActivity: NavActivity( R.layout.activity_main ) {
 
-    /** @see BaseActivity.appBar */
+    /** @see NavActivity.appBar */
     override val appBar: AppBarLayout get() = syntheticAppBar
 
-    /** @see BaseActivity.drawerLayout */
+    /** @see NavActivity.drawerLayout */
     override val drawerLayout: MaterialBottomDrawerLayout get() = root
 
     /** A `ViewModel` for check the availability of Channels */
     private val channelsAvailabilityViewModel by viewModel<ChannelsAvailabilityViewModel>()
 
-    /** @see BaseActivity.fab */
+    /** @see NavActivity.fab */
     override val fab: FloatingActionButton get() = syntheticFab
 
-    /** @see BaseActivity.navController */
+    /** @see NavActivity.navController */
     override val navController: NavController get() = findNavController( R.id.nav_host )
 
     /** @see BaseActivity.rootView */
     override val rootView: CoordinatorLayout get() = root
 
-    /** @see BaseActivity.titleTextView */
+    /** @see NavActivity.titleTextView */
     override val titleTextView: TextView get() = syntheticTitleTextView
 
     /** When the `Activity` is Created */
@@ -59,7 +60,6 @@ internal class MainActivity: BaseActivity( R.layout.activity_main ) {
         super.onCreate( savedInstanceState )
         setDrawer()
         setSupportActionBar( bottomAppBar )
-        // bottomAppBar.setupWithNavController( navController ) TODO: navigationIcon not showing
 
         channelsAvailabilityViewModel.channelsAvailability.observe {
             doOnError { notifier.error( it ) }

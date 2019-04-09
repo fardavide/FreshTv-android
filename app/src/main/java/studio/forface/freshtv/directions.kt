@@ -10,13 +10,13 @@ import studio.forface.freshtv.ui.TvChannelsFragment
 @Suppress("unused")
 object PlayerFragment : Invokable {
 
-    /** @return `NavDirections` to `PlayerFragment` `Fragment` from [TvChannelsFragment] */
+    /** @return `NavDirections` to `PlayerActivity` from [TvChannelsFragment] */
     internal fun TvChannelsFragment.directions( channelId: String ) =
-        TvChannelGroupsFragmentDirections.actionTvChannelsFragmentToPlayerFragment( channelId )
+        TvChannelGroupsFragmentDirections.actionTvChannelsFragmentToPlayerActivity( channelId )
 
-    /** @return `NavDirections` to `PlayerFragment` `Fragment` from [MovieChannelsFragment] */
+    /** @return `NavDirections` to `PlayerActivity` from [MovieChannelsFragment] */
     internal fun MovieChannelsFragment.directions(channelId: String ) =
-        MovieChannelGroupsFragmentDirections.actionMovieChannelsFragmentToPlayerFragment( channelId )
+        MovieChannelGroupsFragmentDirections.actionMovieChannelsFragmentToPlayerActivity( channelId )
 }
 
 /** Shadow of [studio.forface.freshtv.preferences.ui.PreferencesFragment] */

@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.PlayerFragment
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
+import studio.forface.freshtv.commonandroid.ui.NestedFragment
 import studio.forface.freshtv.domain.utils.invoke
 import studio.forface.freshtv.ui.adapters.TvChannelsAdapter
 import studio.forface.freshtv.viewmodels.TvChannelsViewModel

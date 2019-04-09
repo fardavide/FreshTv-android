@@ -1,16 +1,15 @@
-package studio.forface.freshtv.commonandroid.frameworkcomponents
+package studio.forface.freshtv.commonandroid.ui
 
 import android.content.res.Configuration
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RotationEnabled.Rotation
+import studio.forface.freshtv.commonandroid.ui.RotationEnabled.Rotation
 
 /**
- * A Delegate for a [Fragment] that implements [RotationEnabledFragment]
+ * A Delegate for an UI Element that implements [RotationEnabledComponent]
  * 
  * @author Davide Giuseppe Farella
  */
-class RotationEnabledFragmentDelegate : RotationEnabledFragment {
+class RotationEnabledDelegate : RotationEnabledComponent {
 
     /** A strong reference to the [FragmentActivity] */
     lateinit var activity : FragmentActivity
@@ -38,12 +37,12 @@ class RotationEnabledFragmentDelegate : RotationEnabledFragment {
     override var lastRotation: RotationEnabled.Rotation? = null
 
     /**
-     * Initialize this delegate
+     * Initialize this delegate with [FragmentActivity]
      *
-     * NOTE: To call when [Fragment] is resumed!
+     * NOTE: To call when the UI Element is resumed!
      */
-    override fun initRotationEnabledFragmentDelegate( fragment: Fragment ) {
-        activity = fragment.requireActivity()
+    override fun initRotationEnabledDelegate( activity: FragmentActivity ) {
+        this.activity = activity
         setInitialRotation()
     }
 

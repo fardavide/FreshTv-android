@@ -1,6 +1,7 @@
-package studio.forface.freshtv.commonandroid.frameworkcomponents
+package studio.forface.freshtv.commonandroid.ui
 
 import android.content.pm.ActivityInfo
+import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidComponent
 
 /**
  * An interface for an UI item that can be rotated.
@@ -37,7 +38,7 @@ interface RotationEnabled : AndroidComponent {
     }
 
     /** Rotate the UI item if the [rotation] is different from [lastRotation] */
-    fun rotate( rotation: Rotation )
+    fun rotate( rotation: Rotation)
 
     /**
      * Set [initialRotation] by getting the actual rotation of the UI item and match to

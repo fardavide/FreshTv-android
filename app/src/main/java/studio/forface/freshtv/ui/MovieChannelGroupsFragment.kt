@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_view_pager_tabbed.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.uimodels.ChannelGroupUiModel
 import studio.forface.freshtv.viewmodels.MovieChannelGroupsViewModel
 
@@ -17,9 +17,9 @@ import studio.forface.freshtv.viewmodels.MovieChannelGroupsViewModel
  * @author Davide Giuseppe Farella
  * A `Fragment` for see the stored `MovieChannel`s Groups
  *
- * Inherit from [RootFragment]
+ * Inherit from [ParentFragment]
  */
-internal class MovieChannelGroupsFragment: RootFragment( R.layout.fragment_view_pager_tabbed ) {
+internal class MovieChannelGroupsFragment: ParentFragment( R.layout.fragment_view_pager_tabbed ) {
 
     companion object {
         /** @return `NavDirections` to this `Fragment` */
@@ -32,14 +32,17 @@ internal class MovieChannelGroupsFragment: RootFragment( R.layout.fragment_view_
     /** A reference to [MovieChannelGroupsViewModel] for retrieve the stored `Channel`s */
     private val channelGroupsViewModel by viewModel<MovieChannelGroupsViewModel>()
 
+    /** @see ParentFragment.isRootFragment */
+    override val isRootFragment = true
+
     /** Reference to [TabLayout] */
     private val tabLayout get() = requireView().findViewById<TabLayout>( R.id.tabLayout )
 
     /** Reference to [ViewPager] */
     private val viewPager get() = requireView().findViewById<ViewPager>( R.id.viewPager )
 
-    /** @see RootFragment.titleRes */
-    override val titleRes get() = R.string.title_tv_channels
+    /** @see ParentFragment.titleRes */
+    override val titleRes get() = R.string.title_movie_channels
 
     /** When the `Activity` is created */
     override fun onActivityCreated( savedInstanceState: Bundle? ) {

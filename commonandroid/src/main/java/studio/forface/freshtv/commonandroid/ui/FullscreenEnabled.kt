@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid.frameworkcomponents
+package studio.forface.freshtv.commonandroid.ui
 
 /**
  * An interface for a UI item that can have a fullscreen state.

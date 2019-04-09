@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.ui.adapters.SourceFilesAdapter
 import studio.forface.freshtv.viewmodels.EpgsViewModel
 
@@ -14,9 +14,9 @@ import studio.forface.freshtv.viewmodels.EpgsViewModel
  * @author Davide Giuseppe Farella
  * A `Fragment` for see the stored `EPG`
  *
- * Inherit from [RootFragment]
+ * Inherit from [ParentFragment]
  */
-class EpgsFragment: RootFragment( R.layout.fragment_recycler_view ) {
+class EpgsFragment: ParentFragment( R.layout.fragment_recycler_view ) {
 
     companion object {
         /** @return `NavDirections` to this `Fragment` */
@@ -28,16 +28,19 @@ class EpgsFragment: RootFragment( R.layout.fragment_recycler_view ) {
         onItemClick = { navController.navigate( EditEpgFragment.directions( it.fullPath ) ) }
     }
 
-    /** @see RootFragment.fabParams */
+    /** A reference to [EpgsViewModel] for retrieve the stored `Playlist`s */
+    private val epgsViewModel by viewModel<EpgsViewModel>()
+
+    /** @see ParentFragment.fabParams */
     override val fabParams: FabParams get() = FabParams(
         R.drawable.ic_new_black,
         R.string.action_add_epg
     ) { navController.navigate( EditEpgFragment.directions() ) }
 
-    /** A reference to [EpgsViewModel] for retrieve the stored `Playlist`s */
-    private val epgsViewModel by viewModel<EpgsViewModel>()
+    /** @see ParentFragment.isRootFragment */
+    override val isRootFragment = true
 
-    /** @see RootFragment.titleRes */
+    /** @see ParentFragment.titleRes */
     override val titleRes get() = R.string.menu_my_epgs
 
     /** When the `Activity` is created */

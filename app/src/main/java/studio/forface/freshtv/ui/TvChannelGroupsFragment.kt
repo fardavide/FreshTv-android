@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_view_pager_tabbed.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.uimodels.ChannelGroupUiModel
 import studio.forface.freshtv.viewmodels.TvChannelGroupsViewModel
 
@@ -17,9 +17,9 @@ import studio.forface.freshtv.viewmodels.TvChannelGroupsViewModel
  * @author Davide Giuseppe Farella
  * A `Fragment` for see the stored `TvChannel`s Groups
  *
- * Inherit from [RootFragment]
+ * Inherit from [ParentFragment]
  */
-internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pager_tabbed ) {
+internal class TvChannelGroupsFragment: ParentFragment( R.layout.fragment_view_pager_tabbed ) {
 
     companion object {
         /** @return `NavDirections` to this `Fragment` */
@@ -32,10 +32,13 @@ internal class TvChannelGroupsFragment: RootFragment( R.layout.fragment_view_pag
     /** A reference to [TvChannelGroupsViewModel] for retrieve the stored `Channel`s */
     private val channelGroupsViewModel by viewModel<TvChannelGroupsViewModel>()
 
+    /** @see ParentFragment.isRootFragment */
+    override val isRootFragment = true
+
     /** Reference to [TabLayout] */
     private val tabLayout get() = requireView().findViewById<TabLayout>( R.id.tabLayout )
 
-    /** @see RootFragment.titleRes */
+    /** @see ParentFragment.titleRes */
     override val titleRes get() = R.string.title_tv_channels
 
     /** When the `Activity` is created */

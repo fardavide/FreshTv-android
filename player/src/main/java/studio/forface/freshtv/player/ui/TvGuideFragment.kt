@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_tv_guide.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
-import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
 import studio.forface.freshtv.player.R
 import studio.forface.freshtv.player.uiModels.TvProgramUiModel
 import studio.forface.freshtv.player.uiModels.setOptionalInformations
@@ -16,11 +15,11 @@ import studio.forface.theia.dsl.invoke
 import studio.forface.theia.dsl.theia
 
 /**
- * A [NestedFragment] for the info for [PlayerFragment]
+ * A [PlayerFragment] for the info for [PlayerActivity]
  *
  * @author Davide Giuseppe Farella
  */
-internal class TvGuideFragment : NestedFragment<InfoFragment>( R.layout.fragment_tv_guide ) {
+internal class TvGuideFragment : PlayerFragment( R.layout.fragment_tv_guide ) {
 
     companion object {
         /** @return a new instance of [TvGuideFragment] with [groupName] in [TvGuideFragment.mArguments] */

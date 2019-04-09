@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.viewModel
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.ui.adapters.SourceFilesAdapter
 import studio.forface.freshtv.viewmodels.PlaylistsViewModel
 
@@ -14,9 +14,9 @@ import studio.forface.freshtv.viewmodels.PlaylistsViewModel
  * @author Davide Giuseppe Farella
  * A `Fragment` for see the stored `Playlists`
  *
- * Inherit from [RootFragment]
+ * Inherit from [ParentFragment]
  */
-class PlaylistsFragment: RootFragment( R.layout.fragment_recycler_view ) {
+class PlaylistsFragment: ParentFragment( R.layout.fragment_recycler_view ) {
 
     companion object {
         /** @return `NavDirections` to this `Fragment` */
@@ -28,16 +28,19 @@ class PlaylistsFragment: RootFragment( R.layout.fragment_recycler_view ) {
         onItemClick = { navController.navigate( EditPlaylistFragment.directions( it.fullPath ) ) }
     }
 
-    /** @see RootFragment.fabParams */
+    /** @see ParentFragment.fabParams */
     override val fabParams: FabParams get() = FabParams(
         R.drawable.ic_new_black,
         R.string.action_add_playlist
     ) { navController.navigate( EditPlaylistFragment.directions(null ) ) }
 
+    /** @see ParentFragment.isRootFragment */
+    override val isRootFragment = true
+
     /** A reference to [PlaylistsViewModel] for retrieve the stored `Playlist`s */
     private val playlistsViewModel by viewModel<PlaylistsViewModel>()
 
-    /** @see RootFragment.titleRes */
+    /** @see ParentFragment.titleRes */
     override val titleRes get() = R.string.menu_my_playlists
 
     /** When the `Activity` is created */

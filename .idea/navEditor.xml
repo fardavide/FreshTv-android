@@ -64,15 +64,6 @@
                             <option name="y" value="273" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="deepLink">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -111,7 +102,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_movieChannelsFragment_to_playerFragment">
+                            <entry key="action_movieChannelsFragment_to_playerActivity">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -133,13 +124,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="playerFragment">
+                  <entry key="playerActivity">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="637" />
-                            <option name="y" value="-198" />
+                            <option name="x" value="635" />
+                            <option name="y" value="-205" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -180,7 +171,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_tvChannelsFragment_to_playerFragment">
+                            <entry key="action_tvChannelsFragment_to_playerActivity">
                               <value>
                                 <LayoutPositions />
                               </value>

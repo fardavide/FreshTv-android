@@ -25,7 +25,22 @@ class AndroidNotifier internal constructor(
      * A reference to [SnackbarManager] for show a [Snackbar] if app is in foreground
      * The value will be set on [Activity.onStart] and removed ( null ) on [Activity.onStop]
      */
-    internal var snackbarManager: SnackbarManager? = null
+    private var snackbarManager: SnackbarManager? = null
+
+    /** Set [AndroidNotifier.snackbarManager] to the given [SnackbarManager] */
+    internal fun setSnackbarManager( snackbarManager: SnackbarManager ) {
+        this.snackbarManager = snackbarManager
+    }
+
+    /**
+     * If [AndroidNotifier.snackbarManager] is same as the given [SnackbarManager] set it to `null`
+     * This is for avoid that an `Activity` remove the [AndroidNotifier.snackbarManager] that has been set from
+     * another `Activity`
+     */
+    internal fun removeSnackbarManager( snackbarManager: SnackbarManager ) {
+        if ( this.snackbarManager === snackbarManager )
+            this.snackbarManager = null
+    }
 
 
     /* = = = = = = = = ERROR = = = = = = = = */

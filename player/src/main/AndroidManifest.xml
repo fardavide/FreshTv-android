@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="studio.forface.freshtv.player">
+    package="studio.forface.freshtv.player">
+
+    <application>
+        <activity android:name=".ui.PlayerActivity"/>
+    </application>
 
 </manifest>

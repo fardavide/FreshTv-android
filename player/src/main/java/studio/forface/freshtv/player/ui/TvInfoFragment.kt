@@ -8,23 +8,19 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.fragment_tv_info.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
-import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
 import studio.forface.freshtv.player.R
 import studio.forface.freshtv.player.uiModels.ChannelInfoUiModel
 import studio.forface.freshtv.player.viewmodels.ChannelInfoViewModel
 
 /**
- * A [NestedFragment] for the info of Tv for [PlayerFragment]
+ * A [PlayerFragment] for the info of Tv for [PlayerActivity]
  *
  * @author Davide Giuseppe Farella
  */
-internal class TvInfoFragment : NestedFragment<PlayerFragment>( R.layout.fragment_tv_info ) {
+internal class TvInfoFragment : PlayerFragment( R.layout.fragment_tv_info ) {
 
     /** A reference to [TvProgramsAdapter] from [tvInfoViewPager] */
     private val adapter by lazy { TvProgramsAdapter( requireFragmentManager() ) }
-
-    /** @return [String] Channel id from [InfoFragment] */
-    private val channelId by lazy { parentBaseFragment.channelId }
 
     /** A reference to [ChannelInfoViewModel] */
     private val viewModel by viewModel<ChannelInfoViewModel> { parametersOf( channelId ) }

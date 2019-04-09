@@ -15,18 +15,15 @@
     <!-- Global actions -->
     <action
         android:id="@+id/action_to_tvChannelGroupsFragment"
-        app:destination="@id/tvChannelGroupsFragment"
-        app:popUpToInclusive="true"/>
+        app:destination="@id/tvChannelGroupsFragment"/>
 
     <action
         android:id="@+id/action_to_movieChannelGroupsFragment"
-        app:destination="@id/movieChannelGroupsFragment"
-        app:popUpToInclusive="true"/>
+        app:destination="@id/movieChannelGroupsFragment"/>
 
     <action
         android:id="@+id/action_to_playlistsFragment"
-        app:destination="@id/playlistsFragment"
-        app:popUpToInclusive="true"/>
+        app:destination="@id/playlistsFragment"/>
 
     <action
         android:id="@+id/action_to_editPlaylistFragment"
@@ -34,13 +31,11 @@
 
     <action
         android:id="@+id/action_to_epgsFragment"
-        app:destination="@id/epgsFragment"
-        app:popUpToInclusive="true"/>
+        app:destination="@id/epgsFragment"/>
 
     <action
         android:id="@+id/action_to_editEpgFragment"
         app:destination="@id/editEpgFragment"/>
-
 
     <action
         android:id="@+id/action_to_preferencesFragment"
@@ -56,8 +51,8 @@
         android:label="TvChannelGroupsFragment"
         tools:layout="@layout/fragment_view_pager_tabbed">
         <action
-            android:id="@+id/action_tvChannelsFragment_to_playerFragment"
-            app:destination="@id/playerFragment"/>
+            android:id="@+id/action_tvChannelsFragment_to_playerActivity"
+            app:destination="@id/playerActivity"/>
     </fragment>
 
     <!-- Tv Channels -->
@@ -74,8 +69,8 @@
         android:label="MovieChannelGroupsFragment"
         tools:layout="@layout/fragment_view_pager_tabbed">
         <action
-            android:id="@+id/action_movieChannelsFragment_to_playerFragment"
-            app:destination="@id/playerFragment"/>
+            android:id="@+id/action_movieChannelsFragment_to_playerActivity"
+            app:destination="@id/playerActivity"/>
     </fragment>
 
     <!-- Movie Channels -->
@@ -124,16 +119,16 @@
     </fragment>
 
     <!-- Player -->
-    <fragment
-        android:id="@+id/playerFragment"
-        android:name="studio.forface.freshtv.player.ui.PlayerFragment"
-        android:label="PlayerFragment"
-        tools:layout="@layout/fragment_player">
+    <activity
+        android:id="@+id/playerActivity"
+        android:name="studio.forface.freshtv.player.ui.PlayerActivity"
+        android:label="PlayerActivity"
+        tools:layout="@layout/activity_player_content">
         <argument
             android:name="channelId"
             app:argType="string"
             app:nullable="false" />
-    </fragment>
+    </activity>
 
     <!-- Preferences -->
     <fragment

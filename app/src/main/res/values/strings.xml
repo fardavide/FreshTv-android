@@ -52,6 +52,7 @@
     <string name="title_add_playlist">Add Playlist</string>
     <string name="title_edit_epg">Edit EPG</string>
     <string name="title_edit_playlist">Edit Playlist</string>
+    <string name="title_movie_channels">Movie Channels</string>
     <string name="title_tv_channels">TV Channels</string>
 
 </resources>

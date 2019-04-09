@@ -1,7 +1,6 @@
-package studio.forface.freshtv.commonandroid.frameworkcomponents
+package studio.forface.freshtv.commonandroid.ui
 
 import android.graphics.Color
-import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
@@ -10,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import studio.forface.freshtv.commonandroid.R
+import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiComponent
 import studio.forface.freshtv.commonandroid.utils.getColor
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.inflate
@@ -20,43 +20,31 @@ import studio.forface.materialbottombar.panels.params.titleColorRes
 import studio.forface.materialbottombar.panels.params.titleSpSize
 import studio.forface.materialbottombar.panels.params.titleTextRes
 import studio.forface.theia.dsl.TheiaFragment
-import studio.forface.viewstatestore.ViewStateFragment
 
 /**
- * @author Davide Giuseppe Farella.
- * A base class for [Fragment]'s.
+ * A base class for [Fragment]'s with navigation
  * The class is sealed since we don't want other implementation that the ones declared here.
  *
  * @param layoutRes The [LayoutRes] of the Layout we will inflate in our [Fragment]
  *
  * Inherit from [TheiaFragment].
  * Implements [AndroidUiComponent]
+ *
+ * @author Davide Giuseppe Farella
  */
-sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
-    TheiaFragment(), AndroidUiComponent, ViewStateFragment {
-
-    /** On [onCreateView] we inflate the [layoutRes] into the [container] */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = try {
-        inflater.inflate( layoutRes, container,false )
-    } catch ( e: InflateException ) {
-        throw InflateException( "Cannot inflate ${this::class.qualifiedName}", e )
-    }
+sealed class NavFragment( @LayoutRes layoutRes: Int ) : BaseFragment( layoutRes ) {
 
     /** The [Fragment]'s [NavController] */
     val navController: NavController by lazy { findNavController() }
 
     /** Close a [MaterialPanel] and remove it */
     fun dismissAndRemovePanel( panelId: Int ) {
-        baseActivity?.dismissAndRemovePanel( panelId )
+        navActivity?.dismissAndRemovePanel( panelId )
     }
 
     /** Close a [MaterialPanel] */
     fun dismissPanel() {
-        baseActivity?.dismissPanel()
+        navActivity?.dismissPanel()
     }
 
     /** Shortcut for show a dialog [MaterialPanel] with a static id */
@@ -94,12 +82,12 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
             }
             customBody( body )
         }
-        showPanel( DIALOG_PANEL_ID, panel )
+        showPanel(DIALOG_PANEL_ID, panel )
     }
 
     /** Add the given [MaterialPanel] and open it. */
     fun showPanel( panelId: Int, panel: MaterialPanel ) {
-        baseActivity?.showPanel( panelId, panel )
+        navActivity?.showPanel( panelId, panel )
     }
 
     /** Add the [MaterialPanel] created through [builder] and open it. */
@@ -108,14 +96,14 @@ sealed class BaseFragment( @LayoutRes private val layoutRes: Int ) :
     }
 }
 
-/** An [Int] ID for [BaseFragment.showPanel] for a generic dialog [MaterialPanel] */
+/** An [Int] ID for [NavFragment.showPanel] for a generic dialog [MaterialPanel] */
 private const val DIALOG_PANEL_ID = 909
 
 /**
  * A base class for a [Fragment] that have an `Activity` as parent
- * Inherit from [BaseFragment]
+ * Inherit from [NavFragment]
  */
-abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes ) {
+abstract class ParentFragment( @LayoutRes layoutRes: Int ): NavFragment( layoutRes ) {
     /**
      * This value will contain a [ColorInt] for the background of the app.
      * If this value is not overridden, we call [getColor] on [backgroundColorRes].
@@ -131,14 +119,20 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
      */
     @get:ColorRes open val backgroundColorRes: Int? get() = null
 
-    /** @return OPTIONAL [BaseActivity.fab] */
-    protected val fab get() = baseActivity?.fab
+    /** @return OPTIONAL [NavActivity.fab] */
+    protected val fab get() = navActivity?.fab
 
     /** The OPTIONAL [FabParams] for setup a `FloatingActionButton` in the `Activity` */
     open val fabParams: FabParams? = null
 
     /** A [Boolean] representing whether AppBars must be visible for this [Fragment] */
     open val hasBars = true
+
+    /**
+     * A [Boolean] representing whether this [ParentFragment] is a root Fragment
+     * If `true`, when navigating back, the [NavActivity] will be closed.
+     */
+    open val isRootFragment = false
 
     /** The OPTIONAL [MenuRes] of the Options Menu for our [Fragment] */
     @get: MenuRes open val menuRes: Int? = null
@@ -185,12 +179,12 @@ abstract class RootFragment( @LayoutRes layoutRes: Int ): BaseFragment( layoutRe
 }
 
 /**
- * A base class for a [Fragment] that is nested inside another [RootFragment]
- * Inherit from [BaseFragment]
+ * A base class for a [Fragment] that is nested inside another [ParentFragment]
+ * Inherit from [NavFragment]
  */
-abstract class NestedFragment<ParentFragment: BaseFragment>( @LayoutRes layoutRes: Int ): BaseFragment( layoutRes ) {
+abstract class NestedFragment<ParentFragment: NavFragment>(@LayoutRes layoutRes: Int ): NavFragment( layoutRes ) {
 
     /** @return the [getParentFragment] casted as [ParentFragment] */
     @Suppress("UNCHECKED_CAST")
-    val parentBaseFragment get() = requireParentFragment() as ParentFragment
+    val parentNavFragment get() = requireParentFragment() as ParentFragment
 }

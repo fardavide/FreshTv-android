@@ -4,22 +4,22 @@ import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_preferences.*
 import org.koin.androidx.viewmodel.ext.viewModel
-import studio.forface.freshtv.commonandroid.frameworkcomponents.RootFragment
+import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.preferences.R
 import studio.forface.freshtv.preferences.viewmodels.PreferencesViewModel
 
 /**
  * A `Fragment` for set preferences
- * Inherit from [RootFragment]
+ * Inherit from [ParentFragment]
  *
  * @author Davide Giuseppe Farella
  */
-class PreferencesFragment: RootFragment( R.layout.fragment_preferences ) {
+class PreferencesFragment: ParentFragment( R.layout.fragment_preferences ) {
 
     /** An instance of [PreferencesViewModel] */
     private val preferencesViewModel by viewModel<PreferencesViewModel>()
 
-    /** @see RootFragment.titleRes */
+    /** @see ParentFragment.titleRes */
     override val titleRes get() = R.string.title_preferences
 
     /** When `Activity` is created for [PreferencesFragment] */

@@ -1,10 +1,8 @@
 package studio.forface.freshtv.player.ui
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.fragment_player_info.*
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.parameter.parametersOf
-import studio.forface.freshtv.commonandroid.frameworkcomponents.NestedFragment
 import studio.forface.freshtv.domain.entities.IChannel
 import studio.forface.freshtv.domain.entities.IChannel.Type.MOVIE
 import studio.forface.freshtv.domain.entities.IChannel.Type.TV
@@ -13,14 +11,11 @@ import studio.forface.freshtv.player.viewmodels.ChannelInfoViewModel
 import studio.forface.freshtv.player.viewmodels.ChannelTypeViewModel
 
 /**
- * A [NestedFragment] for the info for [PlayerFragment]
+ * A [PlayerFragment] for the info for [PlayerActivity]
  *
  * @author Davide Giuseppe Farella
  */
-internal class InfoFragment : NestedFragment<PlayerFragment>( R.layout.fragment_player_info ) {
-
-    /** @return [String] Channel id from [parentBaseFragment] */
-    val channelId: String by lazy { parentBaseFragment.channelId }
+internal class InfoFragment : PlayerFragment( R.layout.fragment_player_info ) {
 
     /** A reference to [ChannelInfoViewModel] */
     private val viewModel by viewModel<ChannelTypeViewModel> { parametersOf( channelId ) }
