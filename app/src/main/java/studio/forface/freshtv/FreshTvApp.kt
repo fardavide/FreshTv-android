@@ -1,11 +1,12 @@
 package studio.forface.freshtv
 
 import android.app.Application
+import com.crashlytics.android.Crashlytics
 import com.jakewharton.threetenabp.AndroidThreeTen
+import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import studio.forface.freshtv.dimodules.Database
 import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
@@ -21,8 +22,9 @@ import studio.forface.viewstatestore.invoke
 import timber.log.Timber
 
 /**
- * @author Davide Giuseppe Farella.
  * The [Application]
+ *
+ * @author Davide Giuseppe Farella
  */
 @Suppress("unused")
 class FreshTvApp: Application() {
@@ -32,7 +34,7 @@ class FreshTvApp: Application() {
         super.onCreate()
 
         // Init Crashlytics.
-        // Fabric.with(this, Crashlytics() ) TODO register on Firebase
+        Fabric.with(this, Crashlytics() )
 
         // Init ThreeTen Android backport.
         AndroidThreeTen.init( this )
@@ -42,7 +44,7 @@ class FreshTvApp: Application() {
             // declare used Android context
             androidContext( this@FreshTvApp )
             // declare modules
-            modules( otherModules( Database.SqlDelight ) + appModule )
+            modules( otherModules() + appModule )
         }
 
         // Init Timber

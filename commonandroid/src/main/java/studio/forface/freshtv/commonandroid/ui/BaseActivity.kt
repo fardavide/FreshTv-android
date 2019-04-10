@@ -9,6 +9,7 @@ import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
+import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiComponent
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
@@ -46,6 +47,7 @@ abstract class BaseActivity(
 
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
+        setTheme( R.style.AppTheme )
         super.onCreate( savedInstanceState )
         setFragmentLifecycleListener()
         setContentView( layoutRes )

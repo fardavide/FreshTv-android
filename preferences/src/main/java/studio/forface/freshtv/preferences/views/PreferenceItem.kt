@@ -1,4 +1,4 @@
-package studio.forface.freshtv.preferences.entries
+package studio.forface.freshtv.preferences.views
 
 /**
  * An interface for a `Preference Item`

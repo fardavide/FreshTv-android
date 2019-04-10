@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Actions -->
+    <string name="action_collapse">Collapse</string>
+    <string name="action_expand">Expand</string>
+
+    <!-- Changes TODO update before release -->
+    <string name="roadmap">Roadmap</string>
+    <string-array name="roadmap_values">
+        <item>Restore last position in Channel\'s list</item>
+        <item>Fix EPG</item>
+        <item>Don\'t interrupt playing during screen's rotation</item>
+        <item>Store Movies' progress</item>
+        <item>Dark Theme</item>
+        <item>Improvements on Channels deletion in database</item>
+        <item>Floating Player</item>
+        <item>Search feature</item>
+        <item>Edit Groups and Channels</item>
+        <item>Info for Movies</item>
+        <item>Improve visibility of white icons</item>
+    </string-array>
+    <string name="what_new">What\'s new</string>
+    <string-array name="what_new_values">
+        <item>First release</item>
+    </string-array>
+
+    <!-- Menu -->
+    <string name="menu_about">About</string>
+
+    <!-- Others -->
+    <string name="list_bullet_arg">• %s</string>
+    <string name="designer_information">Designed by Davide Giuseppe Farella ( 4face Studio )</string>
+    <string name="developer_information">Developed by Davide Giuseppe Farella ( 4face Studio )</string>
+    <string name="email_information"><b>Mail</b>: mail@4face.studio</string>
+    <string name="icon_pack_information">Icons from <i>Kawaii</i> icon pack on FlatIcon.com</string>
+    <string name="version_code"><b>Version code</b>:</string>
+    <string name="version_name"><b>Version name</b>:</string>
+    <string name="website_information"><b>Website</b>: http://4face.studio</string>
+
+    <!-- Titles -->
+    <string name="title_about">About</string>
+
+</resources>

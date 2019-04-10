@@ -11,6 +11,4 @@ dependencies {
 
     applyTests()
     applyAndroidTests()
-
-    /* Android */
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base Theme containing API-aware items -->
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- System -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+</resources>

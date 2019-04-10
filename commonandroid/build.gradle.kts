@@ -22,6 +22,7 @@ dependencies {
     api( Libs.coroutines_android )
 
     /* Other */
+    api( Libs.firebase_core_android )
     api( Libs.firebase_crashlytics_android )
     api( Libs.koin_android )
     api( Libs.koin_android_viewmodel )

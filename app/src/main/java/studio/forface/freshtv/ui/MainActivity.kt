@@ -20,7 +20,6 @@ import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
 import studio.forface.materialbottombar.navigation.dsl.MaterialNavDrawer
 import studio.forface.materialbottombar.navigation.dsl.navDrawer
-import studio.forface.materialbottombar.navigation.setupWithNavController
 import studio.forface.materialbottombar.panels.params.*
 import kotlinx.android.synthetic.main.activity_main.appBar as syntheticAppBar
 import kotlinx.android.synthetic.main.activity_main.fab as syntheticFab
@@ -128,9 +127,15 @@ internal class MainActivity: NavActivity( R.layout.activity_main ) {
             divider()
 
             // Settings
-            primaryItem( R.string.menu_settings ) {
+            primaryItem( R.string.menu_preferences ) {
                 iconResource = R.drawable.ic_settings
                 navDirections = PreferencesFragment.directions()
+            }
+
+            // About
+            primaryItem( R.string.menu_about ) {
+                iconResource = R.drawable.ic_information
+                navDirections
             }
         }
     }

@@ -4,6 +4,7 @@ plugins {
     id("kotlin-android-extensions" )
     id("kotlinx-serialization" )
     id("androidx.navigation.safeargs.kotlin" )
+    id("io.fabric" )
 }
 
 android { applyAndroidConfig( Project.id ) }
@@ -19,3 +20,5 @@ dependencies {
     implementation( Libs.Android.lifecycle_viewmodel )
     implementation( Libs.Android.material_bottom_bar_navigation )
 }
+
+apply( plugin = "com.google.gms.google-services" )

@@ -43,7 +43,7 @@ abstract class BaseAdapter<T, ViewHolder: ClickableAdapter.ViewHolder<T>>(
     override fun getItemCount(): Int = items.size
 
     /**
-     * Get the Item for the requested [position], call [ViewHolder.onBind] and set
+     * Get the Item for the requested [position], call [ClickableAdapter.ViewHolder.onBind] and set
      * [clickListenerInvoker] and [longClickListenerInvoker] for the [holder].
      * @see RecyclerView.Adapter.onBindViewHolder
      */
@@ -63,31 +63,21 @@ abstract class BaseAdapter<T, ViewHolder: ClickableAdapter.ViewHolder<T>>(
             private val itemsComparator: ItemsComparator<T>
     ) : DiffUtil.Callback() {
 
-        /**
-         * @see DiffUtil.Callback.getOldListSize
-         */
+        /** @see DiffUtil.Callback.getOldListSize */
         override fun getOldListSize() = oldList.size
 
-        /**
-         * @see DiffUtil.Callback.getNewListSize
-         */
+        /** @see DiffUtil.Callback.getNewListSize */
         override fun getNewListSize(): Int = newList.size
 
-        /**
-         * @see DiffUtil.Callback.areItemsTheSame
-         */
+        /** @see DiffUtil.Callback.areItemsTheSame */
         override fun areItemsTheSame( oldItemPosition: Int, newItemPosition: Int ): Boolean =
                 itemsComparator.areItemsTheSame( oldList[oldItemPosition], newList[newItemPosition] )
 
-        /**
-         * @see DiffUtil.Callback.areContentsTheSame
-         */
+        /** @see DiffUtil.Callback.areContentsTheSame */
         override fun areContentsTheSame( oldItemPosition: Int, newItemPosition: Int ): Boolean =
                 itemsComparator.areContentsTheSame( oldList[oldItemPosition], newList[newItemPosition] )
 
-        /**
-         * @see DiffUtil.Callback.getChangePayload
-         */
+        /** @see DiffUtil.Callback.getChangePayload */
         override fun getChangePayload( oldItemPosition: Int, newItemPosition: Int ): Any? =
                 itemsComparator.getChangePayload( oldList[oldItemPosition], newList[newItemPosition] )
     }

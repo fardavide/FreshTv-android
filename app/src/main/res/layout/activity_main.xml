@@ -11,8 +11,7 @@
 
     tools:context=".ui.MainActivity"
     android:animateLayoutChanges="false"
-    android:fitsSystemWindows="false"
-    android:background="?attr/colorPrimary">
+    android:background="@color/colorBackground">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -36,8 +35,7 @@
                 android:background="@android:color/white"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="24sp"
-                android:textAlignment="center"
-                android:fitsSystemWindows="true"/>
+                android:textAlignment="center"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

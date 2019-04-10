@@ -1,4 +1,4 @@
-package studio.forface.freshtv.preferences.entries
+package studio.forface.freshtv.preferences.views
 
 import android.content.Context
 import android.util.AttributeSet

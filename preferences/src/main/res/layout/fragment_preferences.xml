@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <studio.forface.freshtv.preferences.entries.CleanChannelsView
+        <studio.forface.freshtv.preferences.views.CleanChannelsView
             android:id="@+id/preferencesCleanChannelsView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <studio.forface.freshtv.preferences.entries.CleanGuidesView
+        <studio.forface.freshtv.preferences.views.CleanGuidesView
             android:id="@+id/preferencesCleanGuidesView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

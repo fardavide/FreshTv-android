@@ -22,7 +22,7 @@ object Project {
     private val minor:      Int =       0
     private val channel:    Channel =   Alpha
     private val patch:      Int =       0
-    private val build:      Int =       1
+    private val build:      Int =       2
 
 
     // ====================   S T A T I C   C O D E   ==================== //

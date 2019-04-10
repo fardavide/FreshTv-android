@@ -20,6 +20,7 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
     classpath( kotlin("gradle-plugin", Versions.kotlin) )
     classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}" )
     classpath("com.android.tools.build:gradle:${Versions.android_gradle_plugin}" )
+    classpath("com.google.gms:google-services:${Versions.google_gms_services}" )
     classpath("io.fabric.tools:gradle:${Versions.fabric}")
     classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}" )
     classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.android_navigation}" )
@@ -50,8 +51,10 @@ object Versions {
     val coroutines =                    "1.1.1"
     val serialization =                 "0.10.0"
 
-    val fabric =                        "1.25.4"
-    val firebase_crashlytics_android =  "2.9.8"
+    val fabric =                        "1.26.1"
+    val firebase_core_android =         "16.0.8"
+    val firebase_crashlytics_android =  "2.9.9"
+    val google_gms_services =           "4.0.1"
     val koin =                          "2.0.0-beta-1"
     val ktor =                          "1.1.3"
     val mockk =                         "1.9"
@@ -96,6 +99,7 @@ object Libs {
     val test =                                  "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     val test_junit =                            "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
 
+    val firebase_core_android =                 "com.google.firebase:firebase-core:${Versions.firebase_core_android}"
     val firebase_crashlytics_android =          "com.crashlytics.sdk.android:crashlytics:${Versions.firebase_crashlytics_android}"
     val koin =                                  "org.koin:koin-core:${Versions.koin}"
     val koin_android =                          "org.koin:koin-android:${Versions.koin}"

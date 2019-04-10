@@ -8,16 +8,19 @@ android { applyAndroidConfig() }
 
 dependencies {
     api( project(":domain") )
+
+    api( project(":about" ) )
     api( project(":androiddatabase" ) )
+    api( project(":commonandroid" ) )
+    api( project(":player" ) )
+    api( project(":preferences" ) )
+
     //implementation( project(":androiddatabase:room" ) )
     implementation( project(":androiddatabase:sqldelight" ) )
-    api( project(":commonandroid" ) )
     implementation( project(":localdata" ) )
     //implementation( project(":localdata:room" ) )
     implementation( project(":localdata:sqldelight" ) )
     implementation( project(":parsers" ) )
-    api( project(":player" ) )
-    api( project(":preferences" ) )
     implementation( project(":settings" ) )
 
     applyTests()

@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/colorBackground"/>
+
+    <item
+        android:width="280dp"
+        android:height="280dp"
+        android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="?attr/colorPrimary" />
+        </shape>
+    </item>
+
+    <item
+        android:drawable="@drawable/ic_launcher_foreground"
+        android:height="240dp"
+        android:width="240dp"
+        android:gravity="center"/>
+
+</layer-list>

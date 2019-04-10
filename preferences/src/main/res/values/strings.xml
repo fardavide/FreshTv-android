@@ -27,6 +27,9 @@
         This will delete all the <b>Tv Guides</b> stored in database, eventually they will be added during playlist\'s synchronization.
     </string>
 
+    <!-- Menu -->
+    <string name="menu_preferences">Settings</string>
+
     <!-- Titles -->
     <string name="title_preferences">Settings</string>
 
