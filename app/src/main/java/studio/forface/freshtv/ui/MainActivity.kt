@@ -10,6 +10,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.viewModel
+import studio.forface.freshtv.AboutFragment
 import studio.forface.freshtv.PreferencesFragment
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.ui.NavActivity
@@ -135,7 +136,7 @@ internal class MainActivity: NavActivity( R.layout.activity_main ) {
             // About
             primaryItem( R.string.menu_about ) {
                 iconResource = R.drawable.ic_information
-                navDirections
+                navDirections = AboutFragment.directions()
             }
         }
     }

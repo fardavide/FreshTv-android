@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:nestedScrollingEnabled="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/huge_margin">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/aboutGuidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/large_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/aboutGuidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/large_margin" />
+
+        <!-- About -->
+        <TextView
+            android:id="@+id/aboutCategoryApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_cat_app"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="@style/AboutCategoryTextAppearance"/>
+
+        <ImageView
+            android:id="@+id/aboutVersionImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutCategoryApp"
+            app:srcCompat="@drawable/ic_tag_outline" />
+
+        <TextView
+            android:id="@+id/aboutVersionNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutVersionImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutVersionImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutVersionImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            tools:text="@string/about_version_name_arg" />
+
+        <ImageView
+            android:id="@+id/aboutRateImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutVersionImageView"
+            app:srcCompat="@drawable/ic_star_outline" />
+
+        <TextView
+            android:id="@+id/aboutRateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutRateImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutRateImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutRateImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_rate" />
+
+        <ImageView
+            android:id="@+id/aboutReportImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutRateImageView"
+            app:srcCompat="@drawable/ic_bug_outline" />
+
+        <TextView
+            android:id="@+id/aboutReportTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutReportImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutReportImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutReportImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_report_issue" />
+
+        <!-- Author -->
+        <TextView
+            android:id="@+id/aboutCategoryAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_category_vertical_spacing"
+            android:text="@string/about_cat_author"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/aboutReportImageView"
+            android:textAppearance="@style/AboutCategoryTextAppearance"/>
+
+        <ImageView
+            android:id="@+id/aboutDevImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutCategoryAuthor"
+            app:srcCompat="@drawable/ic_code_outline" />
+
+        <TextView
+            android:id="@+id/aboutDevTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutDevImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutDevImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutDevImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_developer_information" />
+
+        <ImageView
+            android:id="@+id/aboutArtImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutDevImageView"
+            app:srcCompat="@drawable/ic_palette_outline" />
+
+        <TextView
+            android:id="@+id/aboutArtTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutArtImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutArtImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutArtImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_designer_information" />
+
+        <ImageView
+            android:id="@+id/aboutWebsiteImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutArtImageView"
+            app:srcCompat="@drawable/ic_web_outline" />
+
+        <TextView
+            android:id="@+id/aboutWebsiteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutWebsiteImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutWebsiteImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutWebsiteImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_website_information"
+            android:autoLink="web" />
+
+        <ImageView
+            android:id="@+id/aboutEmailImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutWebsiteImageView"
+            app:srcCompat="@drawable/ic_email_outline" />
+
+        <TextView
+            android:id="@+id/aboutEmailTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutEmailImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutEmailImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutEmailImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_email_information"
+            android:autoLink="email"/>
+
+        <!-- Changes -->
+        <TextView
+            android:id="@+id/aboutChangesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_category_vertical_spacing"
+            app:layout_constraintTop_toBottomOf="@+id/aboutEmailImageView"
+            app:layout_constraintStart_toEndOf="@+id/aboutGuidelineStart"
+            android:textAppearance="@style/AboutCategoryTextAppearance"
+            android:text="@string/about_changes" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/aboutChangesGuidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/huge_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/aboutChangesGuidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/huge_margin" />
+
+        <TextView
+            android:id="@+id/aboutRoadmapTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintEnd_toStartOf="@+id/aboutChangesGuidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/aboutChangesGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutChangesTextView"
+            android:textAppearance="@style/AboutChangesItemTextAppearance"
+            android:text="@string/about_roadmap" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/aboutRoadmapRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toEndOf="@id/aboutChangesGuidelineStart"
+            app:layout_constraintEnd_toStartOf="@id/aboutChangesGuidelineEnd"
+            app:layout_constraintTop_toBottomOf="@id/aboutRoadmapTextView"
+            android:nestedScrollingEnabled="false"/>
+
+        <TextView
+            android:id="@+id/aboutWhatsNewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintEnd_toStartOf="@+id/aboutChangesGuidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/aboutChangesGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutRoadmapRecyclerView"
+            android:textAppearance="@style/AboutChangesItemTextAppearance"
+            android:text="@string/about_what_new" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/aboutWhatsNewRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toEndOf="@id/aboutChangesGuidelineStart"
+            app:layout_constraintEnd_toStartOf="@id/aboutChangesGuidelineEnd"
+            app:layout_constraintTop_toBottomOf="@id/aboutWhatsNewTextView"
+            android:nestedScrollingEnabled="false"/>
+
+        <TextView
+            android:id="@+id/aboutIconsTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintTop_toBottomOf="@+id/aboutWhatsNewRecyclerView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/aboutGuidelineStart"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:textAlignment="center"
+            android:text="@string/about_icon_pack_information"
+            android:autoLink="web"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

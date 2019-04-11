@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="about_category_vertical_spacing">@dimen/huge_margin</dimen>
+    <dimen name="about_item_vertical_spacing">@dimen/medium_margin</dimen>
+    <dimen name="about_item_image_text_spacing">@dimen/large_margin</dimen>
+
+</resources>

@@ -21,8 +21,8 @@ object Project {
     private val major:      Int =       2
     private val minor:      Int =       0
     private val channel:    Channel =   Alpha
-    private val patch:      Int =       0
-    private val build:      Int =       2
+    private val patch:      Int =       1
+    private val build:      Int =       0
 
 
     // ====================   S T A T I C   C O D E   ==================== //
@@ -58,8 +58,10 @@ object Project {
     private val versionNameSuffix: String get() {
         preconditions()
 
-        val number = if ( build > 0 ) buildNumber else patch
-        return "${channel.suffix}${channelNumberString( number )}"
+        val ( suffix, number ) =
+            if ( build > 0 ) Build.suffix to buildNumber
+            else channel.suffix to patch
+        return "$suffix${channelNumberString( number )}"
     }
 
     /** @return the [Int] number for the build, needed only if [channel] is [Build] */

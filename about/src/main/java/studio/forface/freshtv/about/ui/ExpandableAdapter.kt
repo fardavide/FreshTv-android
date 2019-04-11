@@ -1,15 +1,22 @@
 package studio.forface.freshtv.about.ui
 
 import android.graphics.PorterDuff
+import android.graphics.Typeface.BOLD
+import android.text.Spannable.SPAN_INCLUSIVE_INCLUSIVE
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import studio.forface.freshtv.about.R
-import studio.forface.freshtv.about.ui.ExpandableAdapter.State.*
+import studio.forface.freshtv.about.ui.ExpandableAdapter.State.COLLAPSED
+import studio.forface.freshtv.about.ui.ExpandableAdapter.State.EXPANDED
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.inflate
+import studio.forface.freshtv.domain.utils.EMPTY_STRING
+import studio.forface.freshtv.domain.utils.handle
 
 /**
  * A [RecyclerView.Adapter] that shows max 3 items when collapsed, else all of them
@@ -17,7 +24,7 @@ import studio.forface.freshtv.commonandroid.utils.inflate
  * @author Davide Giuseppe Farella
  */
 internal class ExpandableAdapter(
-    private val entries: List<String>
+    private val entries: Array<String>
 ): RecyclerView.Adapter<ExpandableAdapter.ViewHolder<*>>() {
 
     /** The [ExpandableAdapter.State] of the Adapter */
@@ -48,7 +55,7 @@ internal class ExpandableAdapter(
         notifyItemChanged(oldCount - 1 )
 
         if ( newCount > oldCount ) {
-            val positionStart = oldCount - 2 // The position before the footer
+            val positionStart = oldCount - 1 // The position before the footer
             val insertionCount = newCount - oldCount
             // Notify insertions
             notifyItemRangeInserted( positionStart, insertionCount )
@@ -103,9 +110,30 @@ internal class ExpandableAdapter(
         /** A [ViewHolder] for [ExpandableAdapter.entries] */
         internal class Entry( itemView: View ) : ViewHolder<String>( itemView ) {
 
+            private companion object {
+                const val START_BOLD = "%1"
+                const val END_BOLD = "%2"
+            }
+
             /** @see ViewHolder.onBind */
             override fun onBind( value: String ) {
-                textView.text = itemView.context.getString( R.string.list_bullet_arg, value )
+                // Get the raw String
+                var rawString = itemView.context.getString( R.string.about_list_bullet_arg, value )
+
+                // Get the index where to start the Bold and remove the identifier
+                val startBold = rawString.indexOf( START_BOLD )
+                rawString = rawString.replace( START_BOLD, EMPTY_STRING )
+
+                // Get the index where to end the Bold and remove the identifier
+                val endBold = rawString.indexOf( END_BOLD )
+                rawString = rawString.replace( END_BOLD, EMPTY_STRING )
+
+                // Build the Spannable
+                val spannable = SpannableString( rawString ).apply {
+                    handle { setSpan( StyleSpan( BOLD ), startBold, endBold, SPAN_INCLUSIVE_INCLUSIVE ) }
+                }
+
+                textView.text = spannable
             }
         }
 
@@ -119,15 +147,15 @@ internal class ExpandableAdapter(
             override fun onBind( value: State ) {
 
                 val text = if ( value == COLLAPSED ) R.string.action_expand else R.string.action_collapse
-                textView.setText(text)
+                textView.setText( text )
 
                 val drawable = with( itemView.context ) {
                     getDrawable( R.drawable.ic_down_arrow_black )!!.apply {
-                        setColorFilter( getThemeColor( android.R.attr.colorPrimary ), PorterDuff.Mode.SRC )
+                        setColorFilter( getThemeColor( android.R.attr.colorPrimary ), PorterDuff.Mode.SRC_ATOP )
                     }
                 }
                 imageView.setImageDrawable( drawable )
-                val rotation = if ( value == EXPANDED ) 180f else 0f
+                val rotation = if ( value == EXPANDED ) 180f else 360f
                 imageView.animate()
                     .rotation(rotation - imageView.rotation )
                     .start()

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tvChannelGroupsFragment">
+    app:startDestination="@id/tvChannelGroupsFragment"
+    tools:theme="@style/AppTheme">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -40,6 +41,10 @@
     <action
         android:id="@+id/action_to_preferencesFragment"
         app:destination="@id/preferencesFragment"/>
+
+    <action
+        android:id="@+id/action_to_aboutFragment"
+        app:destination="@id/aboutFragment"/>
 
 
     <!-- = = = FRAGMENTS = = = -->
@@ -136,5 +141,12 @@
         android:name="studio.forface.freshtv.preferences.ui.PreferencesFragment"
         android:label="PreferencesFragment"
         tools:layout="@layout/fragment_preferences"/>
+
+    <!-- About -->
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="studio.forface.freshtv.about.ui.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about"/>
 
 </navigation>

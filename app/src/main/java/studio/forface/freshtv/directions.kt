@@ -19,7 +19,7 @@ object PlayerFragment : Invokable {
         MovieChannelGroupsFragmentDirections.actionMovieChannelsFragmentToPlayerActivity( channelId )
 }
 
-/** Shadow of [studio.forface.freshtv.about.ui.PreferencesFragment] */
+/** Shadow of [studio.forface.freshtv.about.ui.AboutFragment] */
 object AboutFragment : Invokable {
     /** @return `NavDirections` to `PreferencesFragment` `Fragment` */
     fun directions() = NavGraphDirections.actionToAboutFragment()

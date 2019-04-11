@@ -4,7 +4,13 @@ plugins {
     id("kotlin-android-extensions" )
 }
 
-android { applyAndroidConfig() }
+android {
+    applyAndroidConfig()
+    configurations.all {
+        resolutionStrategy.force( Libs.Android.annotation )
+        resolutionStrategy.force( Libs.Android.androidx_core )
+    }
+}
 
 dependencies {
     api( project(":domain") )

@@ -1,6 +1,6 @@
 import com.android.build.gradle.TestedExtension
 
-fun TestedExtension.applyAndroidConfig(applicationId: String? = null ) {
+fun TestedExtension.applyAndroidConfig( applicationId: String? = null ) {
     compileSdkVersion( Project.targetSdk )
     defaultConfig {
         applicationId?.let { this.applicationId = it }
@@ -12,11 +12,11 @@ fun TestedExtension.applyAndroidConfig(applicationId: String? = null ) {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-        getByName("release" ) {
+        getByName( "release" ) {
             isMinifyEnabled = false
             proguardFiles( getDefaultProguardFile("proguard-android.txt" ), "proguard-rules.pro" )
         }
-        getByName("debug" ) {  }
+        getByName( "debug" ) {  }
     }
     compileOptions {
         sourceCompatibility = Project.jdkVersion
@@ -41,4 +41,5 @@ fun TestedExtension.applyAndroidConfig(applicationId: String? = null ) {
         exclude("META-INF/ktor-client-core.kotlin_module" )
         exclude("org/threeten/bp/format/ChronologyText.properties" )
     }
+
 }

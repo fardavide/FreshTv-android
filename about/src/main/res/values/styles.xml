@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AboutCategoryTextAppearance" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="AboutItemTextAppearance" parent="TextAppearance.MaterialComponents.Subtitle1" />
+
+    <style name="AboutChangesItemTextAppearance" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+</resources>

@@ -63,6 +63,7 @@ object Versions {
     val threeten_bp =                   "1.3.2"
     val timber =                        "4.7.1"
 
+    val android_annotation =            "1.1.0-beta01"
     val android_arch =                  "2.0.0-beta01"
     val android_constraint_layout =     "2.0.0-alpha1"
     val android_cue =                   "1.1"
@@ -85,6 +86,7 @@ object Versions {
     val android_view_pager2 =           "1.0.0-alpha02"
     val android_view_state_store =      "1.2-alpha-6"
     val android_work =                  "1.0.0"
+    val androidx_core =                 "1.0.0"
 }
 
 @Suppress("unused")
@@ -117,6 +119,8 @@ object Libs {
 
     /* Android */
     object Android {
+        val androidx_core =                     "androidx.core:core:${Versions.androidx_core}"
+        val annotation =                        "androidx.annotation:annotation:${Versions.android_annotation}"
         val appcompat =                         "androidx.appcompat:appcompat:${Versions.android_support}"
         val constraint_layout =                 "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
         val cue =                               "com.fxn769:cue:${Versions.android_cue}"

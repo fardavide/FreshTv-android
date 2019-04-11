@@ -8,6 +8,12 @@
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="large_margin">24dp</dimen>
     <dimen name="huge_margin">32dp</dimen>
+    <dimen name="extra_huge_margin">64dp</dimen>
+
+    <!-- Icons -->
+    <dimen name="small_icon_size">24dp</dimen>
+    <dimen name="medium_icon_size">32dp</dimen>
+    <dimen name="large_icon_size">48dp</dimen>
 
     <dimen name="recycler_view_vertical_padding">@dimen/small_margin</dimen>
 

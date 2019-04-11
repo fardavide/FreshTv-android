@@ -11,7 +11,8 @@
 
     tools:context=".ui.MainActivity"
     android:animateLayoutChanges="false"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:theme="@style/AppTheme">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"

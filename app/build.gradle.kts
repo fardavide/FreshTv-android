@@ -7,7 +7,14 @@ plugins {
     id("io.fabric" )
 }
 
-android { applyAndroidConfig( Project.id ) }
+private val appName = "FreshTv"
+
+android {
+    applyAndroidConfig( Project.id )
+    libraryVariants.all {
+
+    }
+}
 
 dependencies {
     implementation( project(":dimodules" ) )

@@ -11,14 +11,17 @@ import androidx.annotation.StringRes
 
 /**
  * @return a [String] from [View]
- *
  * @see Context.getString
  */
 fun View.getString( @StringRes resId: Int ): String = context.getString( resId )
 
 /**
  * @return a [CharSequence] from [View]
- *
  * @see Context.getText
  */
 fun View.getText( @StringRes resId: Int ): CharSequence = context.getText( resId )
+
+/**
+ * Call [View.setOnClickListener] within a lambda without parameters
+ */
+inline fun View.setOnClickListener( crossinline listener: () -> Unit ) = setOnClickListener { listener() }

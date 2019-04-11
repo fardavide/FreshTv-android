@@ -16,6 +16,9 @@ import studio.forface.freshtv.preferences.viewmodels.PreferencesViewModel
  */
 class PreferencesFragment: ParentFragment( R.layout.fragment_preferences ) {
 
+    /** @see ParentFragment.isRootFragment */
+    override val isRootFragment = true
+
     /** An instance of [PreferencesViewModel] */
     private val preferencesViewModel by viewModel<PreferencesViewModel>()
 
