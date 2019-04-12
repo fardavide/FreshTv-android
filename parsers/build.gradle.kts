@@ -8,5 +8,5 @@ dependencies {
     applyTests()
 
     implementation( Libs.ktor )
-    implementation( Libs.ktor_apache )
+    implementation( Libs.ktor_android )
 }

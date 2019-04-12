@@ -9,10 +9,6 @@ plugins {
 
 android { applyAndroidConfig( Project.id ) }
 
-crashlytics {
-    manifestPath = "$buildDir/intermediates/merged_manifests/release/AndroidManifest.xml"
-}
-
 dependencies {
     implementation( project(":dimodules" ) )
 

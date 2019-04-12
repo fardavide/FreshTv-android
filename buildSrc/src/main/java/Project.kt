@@ -21,7 +21,7 @@ object Project {
     private val major:      Int =       2
     private val minor:      Int =       0
     private val channel:    Channel =   Alpha
-    private val patch:      Int =       3
+    private val patch:      Int =       4
     private val build:      Int =       1
 
 
