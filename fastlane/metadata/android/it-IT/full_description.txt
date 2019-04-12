@@ -1,0 +1,24 @@
+Fresh TV è un progetto nato da un singolo sviluppatore, con l'obiettivo di creare una nuova app, semplice per chiunque e con uno stile molto "FRESH"!
+L'app è creata seguendo le linee guida del Material Design® di Google©.
+
+Con Fresh TV puoi guardare i tuoi canali TV preferiti semplicemente importando le tue lista Playlist. ( PLAYLISY NON INCLUSA! )
+
+Puoi anche sfogliare i programmi TV importando i tuoi EPG!
+
+COME GIÀ DETTO, NESSUNA PLAYLIST M3U È INCLUSA.
+
+L'applicazione è attualmente in versione Alpha e molte feature verranno aggiunte.
+Ecco la roadmap per prossime feature:
+- Traduzione in italiano
+- Ripristino dell'ultima posizione nelle liste di canali
+- Correzione del funzionamento delle Guide Tv
+- Il flusso video non verrà interrotto alla rotazione dello schermo
+- Salvataggio del progresso dei Film
+- Tema scuro
+- Migliorament dell'argoritmo di pulizia dei canali alla rimozione di una Playlist dal database
+- Player fluttuante
+- Ricerca
+- Modifica Gruppi e Canali
+- Informazioni sui Film
+- Miglioramento della visibilità delle icone bianche
+- Supporto a Chromecast

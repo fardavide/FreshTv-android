@@ -1,0 +1,2 @@
+Nuovo layout per le informazioni del film con più dettagli
+Alcuni miglioramenti

@@ -7,14 +7,7 @@ plugins {
     id("io.fabric" )
 }
 
-private val appName = "FreshTv"
-
-android {
-    applyAndroidConfig( Project.id )
-    libraryVariants.all {
-
-    }
-}
+android { applyAndroidConfig( Project.id ) }
 
 dependencies {
     implementation( project(":dimodules" ) )
@@ -26,6 +19,9 @@ dependencies {
     implementation( Libs.Android.lifecycle_runtime )
     implementation( Libs.Android.lifecycle_viewmodel )
     implementation( Libs.Android.material_bottom_bar_navigation )
+
+    /* Tools */
+    testCompileOnly( Libs.Android.fastlane_screengrab )
 }
 
 apply( plugin = "com.google.gms.google-services" )

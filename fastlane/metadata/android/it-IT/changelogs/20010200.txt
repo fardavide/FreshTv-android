@@ -1,0 +1,5 @@
+Applicazione completamente ridisegnata e riscritta usando:
+* Clean Architecture
+* Kotlin
+* Coroutines
+* Android Architecture Components

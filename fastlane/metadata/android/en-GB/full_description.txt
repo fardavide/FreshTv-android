@@ -1,0 +1,24 @@
+Fresh TV is a project born from a single developer, with the goal of create a new app, simple for every one and with a very "FRESH" design!
+The app is built following the guidelines of the Google Material Design®.
+
+With Fresh TV you can watch your favorite TV channels simply importing your M3U Playlists. ( PLAYLIST NOT INCLUDED! )
+
+You can also surf the Tv Guide importing your EPGs!
+
+AS ALREADY SAID, NO M3U PLAYLISTS ARE INCLUDED.
+
+The App is currently in Alpha stage and many features will be implemented
+Here's the roadmap:
+- Italian translation
+- Restore last position in Channel's list
+- Fix EPG
+- Don't interrupt playing during screen's rotation
+- Store Movies' progress
+- Dark Theme
+- Improvements on channel's clean up on Playlist deletion in database
+- Floating Player
+- Search feature
+- Edit Groups and Channels
+- Info for Movies
+- Improve visibility of white icons
+- Chromecast support

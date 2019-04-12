@@ -1,0 +1,5 @@
+Complete redesign and code wrote from scratch using:
+* Clean Architecture
+* Kotlin
+* Coroutines
+* Android Architecture Components

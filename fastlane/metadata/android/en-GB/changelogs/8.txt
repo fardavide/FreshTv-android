@@ -1,0 +1,2 @@
+Now developer will be accurately nofied when some playlist can't work properly and he can work to fix the error.
+Some minor graphic and code improvements.

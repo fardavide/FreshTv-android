@@ -29,8 +29,8 @@
         <item>Fix %1EPG%2</item>
         <item>%1Don\'t interrupt playing%2 during screen\'s rotation</item>
         <item>Store %1Movies\' progress%2</item>
-        <item>%1Dark Theme%2</item>
-        <item>%1Improvements%2 on Channels deletion in database</item>
+        <item>%1Dark Theme%2</item>A
+        <item>Improvements on %1channel\'s clean up%2 on Playlist deletion in database</item>
         <item>%1Floating Player%2</item>
         <item>%1Search%2 feature</item>
         <item>%1Edit%2 Groups and Channels</item>
@@ -40,7 +40,7 @@
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
-        <item>%1First release%2</item>
+        <item>%1Complete redesign and refactor%2</item>
     </string-array>
 
     <!-- Menu -->

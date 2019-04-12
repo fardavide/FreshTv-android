@@ -37,7 +37,6 @@ class RefreshTvGuidesWorker(
         /** Enqueue [RefreshTvGuidesWorker] without params, for refresh from all the `EPG`s */
         fun enqueue( repeatInterval: Duration, flexInterval: Duration? = null ) {
             val constraints = WorkConstraints {
-                if ( Android.MARSHMALLOW ) setRequiresDeviceIdle( true )
                 setRequiredNetworkType( NetworkType.UNMETERED )
                 setRequiresCharging( true )
             }
@@ -48,14 +47,10 @@ class RefreshTvGuidesWorker(
 
         /** Enqueue [RefreshTvGuidesWorker] for refresh from a single `EPG`s with the given [epgPath] */
         fun enqueue( epgPath: String ) {
-            //val constraints = WorkConstraints {
-            //    if ( Android.MARSHMALLOW ) setRequiresDeviceIdle( true )
-            //}
             workManager.enqueueUniqueWork<RefreshTvGuidesWorker>(
                 uniqueWorkName = "$WORKER_NAME$epgPath",
                 replacePolicy = ExistingWorkPolicy.REPLACE,
                 workData = workDataOf( ARG_EPG_PATH to epgPath )//,
-            //    constraints = constraints
             )
         }
 

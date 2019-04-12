@@ -2,11 +2,6 @@ plugins {
     id("com.android.library" )
     id("kotlin-android" )
     id("kotlin-android-extensions" )
-    id("io.fabric" )
-}
-
-crashlytics {
-    manifestPath = "$buildDir/intermediates/library_manifest/debug/AndroidManifest.xml"
 }
 
 android { applyAndroidConfig() }

@@ -1,0 +1,2 @@
+Ora lo sviluppatore sarà accuratamente notificato quando una playlist non funziona a dovere, in modo da poter sistemare l'errore.
+Alcune migliorie grafiche ed al codice.

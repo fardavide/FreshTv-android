@@ -1,0 +1,2 @@
+New layout for movie infos with more details
+Minor fixes
