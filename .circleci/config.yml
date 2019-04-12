@@ -1,0 +1,9 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@0.1.0
+
+workflows:
+  "Main":
+    jobs:
+      - android/build
