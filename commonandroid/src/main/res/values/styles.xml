@@ -1,7 +1,12 @@
 <resources>
 
     <!-- Base Theme containing API-aware items -->
-    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar" >
+
+        <!-- System -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+    </style>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="BaseTheme">
@@ -15,10 +20,6 @@
         <item name="colorError">@color/red_700</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:windowBackground">@color/colorBackground</item>
-
-        <!-- System -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <item name="android:navigationBarColor">?attr/colorPrimary</item>
 
         <!-- Components -->
         <item name="textInputStyle">@style/AppTextInput</item>

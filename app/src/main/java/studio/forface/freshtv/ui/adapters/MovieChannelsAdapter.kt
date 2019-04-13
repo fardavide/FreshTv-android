@@ -2,7 +2,6 @@ package studio.forface.freshtv.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import kotlinx.android.synthetic.main.item_channel_movie.view.*
@@ -33,14 +32,15 @@ internal class MovieChannelsAdapter:
      * An invoker for [onItemLongClick], we use it so the `ViewHolder` will always use the updated
      * [onItemLongClick] even if it changes after the `ViewHolder` is created.
      */
-    val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
+    private val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): MovieChannelViewHolder {
         return MovieChannelViewHolder( parent.inflate( item_channel_movie ) )
     }
 
-    override fun prepareClickListeners( holder: MovieChannelsAdapter.MovieChannelViewHolder ) {
+    /** @see ClickableAdapter.prepareClickListeners */
+    override fun prepareClickListeners( holder: MovieChannelViewHolder ) {
         super.prepareClickListeners( holder )
         holder.itemFavoriteChangeInvoker = this.itemFavoriteChangeInvoker
     }
@@ -66,7 +66,7 @@ internal class MovieChannelsAdapter:
         internal var itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit = {}
 
         /** @see ClickableAdapter.ViewHolder.onBind */
-        override fun onBind( item: MovieChannelUiModel ) = with<View, Unit>( itemView ) {
+        override fun onBind( item: MovieChannelUiModel ) = with( itemView ) {
             super.onBind( item )
 
             // Image

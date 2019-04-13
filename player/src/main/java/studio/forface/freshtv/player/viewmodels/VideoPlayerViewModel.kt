@@ -25,15 +25,18 @@ internal class VideoPlayerViewModel( application: Application ): ScopedAndroidVi
         set( value ) {
             field = value
 
-            val videoSource = mediaSource fromUrl currentUrl
-            player.prepare( videoSource )
+            // If player is not currently playing, set the new source
+            if ( playingState.unsafeState().data == false ) {
+                val videoSource = mediaSource fromUrl currentUrl
+                player.prepare( videoSource )
+            }
         }
 
     /** A [LockedViewStateStore] of [Nothing] delivering only [player]s errors via [ViewState.Error] */
     val errors = ViewStateStore<Nothing>().lock
 
     /** A [LockedViewStateStore] of [Boolean] representing whether the player is currently playing */
-    val playingState = ViewStateStore<Boolean>().lock
+    val playingState = ViewStateStore(false ).lock
 
     /** A [LockedViewStateStore] of [SourceState] */
     val sourceState = ViewStateStore<SourceState>().lock
