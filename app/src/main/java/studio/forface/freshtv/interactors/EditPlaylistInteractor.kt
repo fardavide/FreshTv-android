@@ -26,7 +26,7 @@ internal class EditPlaylistInteractor(
         RemovePlaylistWorker.enqueue( path )
     }
 
-    /** Add a `Playlist` with the given [path] and [name] */
+    /** Update a `Playlist` with the given [path] and [name] */
     override fun update( path: String, name: String? ) {
         updatePlaylist( path, name )
     }

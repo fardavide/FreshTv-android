@@ -7,10 +7,11 @@ import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import studio.forface.freshtv.dimodules.otherErrorGenerators
 import studio.forface.freshtv.dimodules.otherModules
+import studio.forface.freshtv.dimodules.plus
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
-import studio.forface.freshtv.player.playerErrorStateGenerator
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
 import studio.forface.freshtv.services.RefreshChannelsWorker
 import studio.forface.freshtv.services.RefreshTvGuidesWorker
@@ -19,6 +20,7 @@ import studio.forface.theia.cache.weeks
 import studio.forface.theia.invoke
 import studio.forface.viewstatestore.ViewStateStoreConfig
 import studio.forface.viewstatestore.invoke
+import studio.forface.viewstatestore.plus
 import timber.log.Timber
 
 /**
@@ -37,14 +39,14 @@ class FreshTvApp: Application() {
         Fabric.with(this, Crashlytics() )
 
         // Init ThreeTen Android backport.
-        AndroidThreeTen.init( this )
+        AndroidThreeTen.init(this )
 
         // Start Koin!
         startKoin {
             // declare used Android context
-            androidContext( this@FreshTvApp )
+            androidContext(this@FreshTvApp )
             // declare modules
-            modules( otherModules() + appModule )
+            modules(appModule + otherModules() )
         }
 
         // Init Timber
@@ -60,7 +62,7 @@ class FreshTvApp: Application() {
         // Configure ViewStateStore
         ViewStateStoreConfig {
             dropOnSame = true
-            errorStateGenerator = playerErrorStateGenerator
+            errorStateGenerator = appErrorStateGenerator + otherErrorGenerators()
         }
 
         // Enqueue Works

@@ -13,7 +13,7 @@ import studio.forface.freshtv.uimodels.SourceFileUiModel.Playlist
  */
 internal class PlaylistPresenter(
         private val getPlaylist: GetPlaylist,
-        override val mapper: SourceFileUiModelMapper
+        private val mapper: SourceFileUiModelMapper
 ) : AbsSourceFilePresenter() {
 
     /** @return [Playlist] with the given [filePath] */

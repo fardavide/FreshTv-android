@@ -13,7 +13,7 @@ import studio.forface.freshtv.uimodels.SourceFileUiModel.Epg
  */
 internal class EpgPresenter(
         private val getEpg: GetEpg,
-        override val mapper: SourceFileUiModelMapper
+        private val mapper: SourceFileUiModelMapper
 ) : AbsSourceFilePresenter() {
 
     /** @return [Epg] with the given [filePath] */

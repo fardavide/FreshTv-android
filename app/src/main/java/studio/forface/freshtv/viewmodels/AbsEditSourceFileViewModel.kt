@@ -1,3 +1,5 @@
+@file:Suppress("LeakingThis")
+
 package studio.forface.freshtv.viewmodels
 
 import android.net.Uri
@@ -26,7 +28,7 @@ import studio.forface.viewstatestore.*
 
 /**
  * @author Davide Giuseppe Farella
- * A [ViewModel] get and edit as Source File
+ * A [ViewModel] get and edit a Source File
  *
  * Inherit from [ScopedViewModel]
  */
@@ -119,19 +121,19 @@ internal abstract class AbsEditSourceFileViewModel(
         form.setData( lastForm.copy( name = name ) )
     }
 
-    /** Create an `EPG` */
+    /** Create an Source File */
     fun create() {
         interactor.add( path.toString(), type!!, name.toString() )
         onSuccess()
     }
 
-    /** Save the edited `EPG` */
+    /** Save the edited Source File */
     fun save() {
         interactor.update( path.toString(), name.toString() )
         onSuccess()
     }
 
-    /** Delete the current `EPG` */
+    /** Delete the current Source File */
     fun delete() {
         interactor.remove( path.toString() )
         cancelWorker( path.toString() )

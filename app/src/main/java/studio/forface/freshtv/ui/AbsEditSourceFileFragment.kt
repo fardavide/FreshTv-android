@@ -181,7 +181,6 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
         // The ACTION_OPEN_DOCUMENT intent was sent with the request code PICK_FILE_REQUEST_CODE.
         // If the request code seen here doesn't match, it's the response to some other intent, and
         // the code below shouldn't run at all.
-
         if ( requestCode == PICK_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK ) {
             @Suppress("NAME_SHADOWING") val intent = intent!! // At this point intent cannot be null
 

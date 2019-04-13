@@ -27,7 +27,7 @@ internal class EditEpgInteractor(
         removeEpg( path )
     }
 
-    /** Add an `EPG` with the given [path] and [name] */
+    /** Update an `EPG` with the given [path] and [name] */
     override fun update( path: String, name: String? ) {
         updateEpg( path, name )
     }

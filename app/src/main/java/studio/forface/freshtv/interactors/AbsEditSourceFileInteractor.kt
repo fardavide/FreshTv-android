@@ -17,6 +17,6 @@ internal interface AbsEditSourceFileInteractor {
     /** Remove the Source File with the given [path] */
     fun remove( path: String )
 
-    /** Add a Source File with the given [path] and [name] */
+    /** Update a Source File with the given [path] and [name] */
     fun update( path: String, name: String? )
 }
