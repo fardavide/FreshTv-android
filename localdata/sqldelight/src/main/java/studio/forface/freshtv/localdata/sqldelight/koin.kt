@@ -1,6 +1,7 @@
 package studio.forface.freshtv.localdata.sqldelight
 
 import org.koin.core.module.Module
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.localdata.sqldelight.mappers.*
@@ -43,15 +44,19 @@ val sqlDelightLocalDataModule = module {
     factory { DelightTvGuidePojoMapper() }
 
     /* Pojo adapters */
-    factory { MovieChannelPojo.Adapter( get( CA_MAP_STRING_INT ), get( CA_SET_STRING ) ) }
-    factory { TvChannelPojo.Adapter( get( CA_MAP_STRING_INT ), get( CA_SET_STRING ) ) }
-    factory { TvGuidePojo.Adapter( get( CA_LIST_STRING ), get( CA_LOCAL_DATE_TIME ), get( CA_LOCAL_DATE_TIME ) ) }
+    factory { MovieChannelPojo.Adapter( get( named( CA_MAP_STRING_INT ) ), get( named( CA_SET_STRING ) ) ) }
+    factory { TvChannelPojo.Adapter( get( named( CA_MAP_STRING_INT ) ), get( named( CA_SET_STRING ) ) ) }
+    factory { TvGuidePojo.Adapter(
+        get( named( CA_LIST_STRING ) ),
+        get( named( CA_LOCAL_DATE_TIME ) ),
+        get( named( CA_LOCAL_DATE_TIME ) )
+    ) }
 
     /* Column adapters */
-    factory( CA_LIST_STRING ) { StringListColumnAdapter }
-    factory( CA_LOCAL_DATE_TIME ) { DateTimeColumnAdapter }
-    factory( CA_MAP_STRING_INT ) { StringIntMapColumnAdapter }
-    factory( CA_SET_STRING ) { StringSetColumnAdapter }
+    factory( named( CA_LIST_STRING ) ) { StringListColumnAdapter }
+    factory( named( CA_LOCAL_DATE_TIME ) ) { DateTimeColumnAdapter }
+    factory( named( CA_MAP_STRING_INT ) ) { StringIntMapColumnAdapter }
+    factory( named( CA_SET_STRING ) ) { StringSetColumnAdapter }
 }
 
 private const val CA_LIST_STRING = "column_adapter-list_string"

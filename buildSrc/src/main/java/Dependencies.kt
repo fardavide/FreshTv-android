@@ -55,7 +55,7 @@ object Versions {
     val firebase_core_android =         "16.0.8"
     val firebase_crashlytics_android =  "2.9.9"
     val google_gms_services =           "4.0.1"
-    val koin =                          "2.0.0-beta-1"
+    val koin =                          "2.0.0-rc-2"
     val ktor =                          "1.1.3"
     val mockk =                         "1.9"
     val sqldelight =                    "1.1.1"

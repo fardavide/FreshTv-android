@@ -3,7 +3,7 @@ package studio.forface.freshtv.ui
 import androidx.annotation.StringRes
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_source_file_edit.*
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.ui.ParentFragment

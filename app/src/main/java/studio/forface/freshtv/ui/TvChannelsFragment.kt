@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.PlayerFragment
 import studio.forface.freshtv.R

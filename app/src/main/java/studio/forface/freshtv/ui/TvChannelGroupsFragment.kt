@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_view_pager_tabbed.*
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.uimodels.ChannelGroupUiModel

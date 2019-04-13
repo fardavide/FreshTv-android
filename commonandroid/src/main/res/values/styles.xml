@@ -17,8 +17,8 @@
         <item name="android:windowBackground">@color/colorBackground</item>
 
         <!-- System -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
 
         <!-- Components -->
         <item name="textInputStyle">@style/AppTextInput</item>

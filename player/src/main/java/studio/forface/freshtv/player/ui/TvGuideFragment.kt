@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_tv_guide.*
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import studio.forface.freshtv.player.R
 import studio.forface.freshtv.player.uiModels.TvProgramUiModel

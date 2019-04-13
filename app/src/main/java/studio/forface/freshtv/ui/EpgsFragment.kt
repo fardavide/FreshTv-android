@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.ui.adapters.SourceFilesAdapter

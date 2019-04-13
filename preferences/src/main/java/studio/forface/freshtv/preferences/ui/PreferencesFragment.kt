@@ -3,7 +3,7 @@ package studio.forface.freshtv.preferences.ui
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_preferences.*
-import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.preferences.R
 import studio.forface.freshtv.preferences.viewmodels.PreferencesViewModel
