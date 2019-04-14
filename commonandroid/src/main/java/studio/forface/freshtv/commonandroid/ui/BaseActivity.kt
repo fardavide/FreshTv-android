@@ -3,6 +3,7 @@ package studio.forface.freshtv.commonandroid.ui
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.getSystemService
@@ -13,6 +14,7 @@ import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiComponent
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
+import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
 import studio.forface.freshtv.domain.gateways.Notifier
 import studio.forface.theia.dsl.TheiaActivity
@@ -44,6 +46,9 @@ abstract class BaseActivity(
 
     /** @return the `Activity`s root [View] */
     protected abstract val rootView: CoordinatorLayout
+
+    /** @return [ColorInt] of `colorPrimary` from theme's attributes */
+    protected val primaryColor get() = getThemeColor( android.R.attr.colorPrimary )
 
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {

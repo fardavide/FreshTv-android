@@ -23,7 +23,7 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
     classpath("com.google.gms:google-services:${Versions.google_gms_services}" )
     classpath("io.fabric.tools:gradle:${Versions.fabric}")
     classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}" )
-    classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.android_navigation}" )
+    classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.android_navigation}" )
 }
 
 fun DependencyHandler.applyTests() = Libs.run {
@@ -58,7 +58,7 @@ object Versions {
     val koin =                          "2.0.0-rc-2"
     val ktor =                          "1.1.3"
     val mockk =                         "1.9"
-    val sqldelight =                    "1.1.1"
+    val sqldelight =                    "1.1.2"
     val threeten_android_bp =           "1.1.1"
     val threeten_bp =                   "1.3.2"
     val timber =                        "4.7.1"
@@ -74,8 +74,8 @@ object Versions {
     val android_ktx =                   "1.1.0-alpha03"
     val android_lifecycle =             "2.1.0-alpha02"
     val android_material =              "1.0.0"
-    val android_material_bottom_bar =   "1.1-beta-11"
-    val android_navigation =            "1.0.0"
+    val android_material_bottom_bar =   "1.2-beta-1"
+    val android_navigation =            "2.0.0"
     val android_paging =                "2.1.0"
     val android_robolectric =           "4.2"
     val android_room =                  "2.1.0-alpha04"
@@ -86,7 +86,7 @@ object Versions {
     val android_theia =                 "0.3-alpha-2"
     val android_view_pager2 =           "1.0.0-alpha02"
     val android_view_state_store =      "1.2-alpha-6"
-    val android_work =                  "1.0.0"
+    val android_work =                  "2.0.0"
     val androidx_core =                 "1.0.0"
 }
 
@@ -139,8 +139,8 @@ object Libs {
         val material =                          "com.google.android.material:material:${Versions.android_material}"
         val material_bottom_bar =               "studio.forface.materialbottombar:materialbottombar:${Versions.android_material_bottom_bar}"
         val material_bottom_bar_navigation =    "studio.forface.materialbottombar:materialbottombar-navigation:${Versions.android_material_bottom_bar}"
-        val navigation_fragment =               "android.arch.navigation:navigation-fragment-ktx:${Versions.android_navigation}"
-        val navigation_ui =                     "android.arch.navigation:navigation-ui-ktx:${Versions.android_navigation}"
+        val navigation_fragment =               "androidx.navigation:navigation-fragment-ktx:${Versions.android_navigation}"
+        val navigation_ui =                     "androidx.navigation:navigation-ui-ktx:${Versions.android_navigation}"
         val paging =                            "androidx.paging:paging-runtime-ktx:${Versions.android_paging}"
         val robolectric =                       "org.robolectric:robolectric:${Versions.android_robolectric}"
         val room =                              "androidx.room:room-runtime:${Versions.android_room}"
@@ -156,6 +156,6 @@ object Libs {
         val view_pager2 =                       "androidx.viewpager2:viewpager2:${Versions.android_view_pager2}"
         val view_state_store =                  "studio.forface.viewstatestore:viewstatestore:${Versions.android_view_state_store}"
         val view_state_store_paging =           "studio.forface.viewstatestore:viewstatestore-paging:${Versions.android_view_state_store}"
-        val work =                              "android.arch.work:work-runtime-ktx:${Versions.android_work}"
+        val work =                              "androidx.work:work-runtime-ktx:${Versions.android_work}"
     }
 }

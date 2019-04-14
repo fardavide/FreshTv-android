@@ -39,6 +39,7 @@
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
+        <item>Nicer %1Drawer%2</item>
         <item>%1Don\'t interrupt playing%2 during screen\'s rotation</item>
         <item>%1Complete redesign and refactor%2</item>
     </string-array>

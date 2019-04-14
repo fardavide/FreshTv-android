@@ -1,5 +1,6 @@
 package studio.forface.freshtv.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -13,9 +14,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import studio.forface.freshtv.AboutFragment
 import studio.forface.freshtv.PreferencesFragment
 import studio.forface.freshtv.R
-import studio.forface.freshtv.commonandroid.ui.NavActivity
 import studio.forface.freshtv.commonandroid.ui.BaseActivity
 import studio.forface.freshtv.commonandroid.ui.BaseFragment
+import studio.forface.freshtv.commonandroid.ui.NavActivity
 import studio.forface.freshtv.uimodels.*
 import studio.forface.freshtv.viewmodels.ChannelsAvailabilityViewModel
 import studio.forface.materialbottombar.layout.MaterialBottomDrawerLayout
@@ -81,6 +82,11 @@ internal class MainActivity: NavActivity( R.layout.activity_main ) {
             titleBold = true
         }
         body {
+            selectionBackgroundColor = Color.TRANSPARENT
+            primaryColor.let {
+                selectionRippleColor = it
+                selectionTitleColor = it
+            }
             allPrimary {
                 titleBold = false
                 titleSpSize = 14f
