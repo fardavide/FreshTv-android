@@ -1,0 +1,3 @@
+• Video playing don't interrupt during screen's rotation
+• Nicer drawer menu
+• EPG partially fixed
