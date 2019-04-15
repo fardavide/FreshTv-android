@@ -47,7 +47,7 @@ fun DependencyHandler.applyAndroidTests() {
 }
 
 object Versions {
-    val kotlin =                        "1.3.21"
+    val kotlin =                        "1.3.30"
     val coroutines =                    "1.1.1"
     val serialization =                 "0.10.0"
 

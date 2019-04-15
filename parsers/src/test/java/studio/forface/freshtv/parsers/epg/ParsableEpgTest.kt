@@ -2,7 +2,7 @@ package studio.forface.freshtv.parsers.epg
 
 import studio.forface.freshtv.parsers.mockEpgContent
 import kotlin.test.Test
-import kotlin.test.assertNotNull
+import kotlin.test.assertEquals
 
 /**
  * @author Davide Giuseppe Farella
@@ -11,9 +11,18 @@ import kotlin.test.assertNotNull
 class ParsableEpgTest {
 
     @Test
-    fun extractItems() {
+    fun `extractItems returnsRightSize`() {
         val result = ParsableStringEpg( mockEpgContent ).extractItems()
-        assertNotNull( result.first() )
-        assert( result.isNotEmpty() )
+        assertEquals(3, result.size )
+    }
+
+    @Test
+    fun `extractItems hasRightIds`() {
+        val firstResult = ParsableStringEpg( mockEpgContent )
+            .extractItems()
+            .first()
+            .run { invoke() as ParsableEpgItem.Result.Guide }
+            .run { content }
+        assertEquals("Rai Uno", firstResult.channelId )
     }
 }

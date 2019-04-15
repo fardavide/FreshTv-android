@@ -1,7 +1,6 @@
 package studio.forface.freshtv.parsers
 
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -18,8 +17,9 @@ import studio.forface.freshtv.parsers.epg.EpgParser
 import studio.forface.freshtv.parsers.playlist.PlaylistParser
 
 /**
- * @author Davide Giuseppe Farella.
  * Implementation of [Parsers]
+ *
+ * @author Davide Giuseppe Farella
  */
 internal class ParsersImpl(
     private val contentResolver: FileContentResolver,

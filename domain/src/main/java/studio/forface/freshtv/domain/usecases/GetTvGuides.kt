@@ -12,6 +12,10 @@ import studio.forface.freshtv.domain.gateways.LocalData
 class GetTvGuides( private val localData: LocalData ) {
 
     /** @return all the [TvGuide]s for the given [channelId], included between [from] and [to] */
-    operator fun invoke( channelId: String, from: LocalDateTime = MIN, to: LocalDateTime = MAX ) =
+    operator fun invoke( channelId: String, from: LocalDateTime /* = MIN */, to: LocalDateTime /* = MAX */ ) =
         localData.tvGuidesRanged( channelId, from, to )
+
+    /** @return all the [TvGuide]s for the given [channelId] */
+    operator fun invoke( channelId: String ) =
+        localData.tvGuidesForChannel( channelId )
 }

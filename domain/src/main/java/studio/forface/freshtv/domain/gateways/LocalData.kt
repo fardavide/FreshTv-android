@@ -174,6 +174,9 @@ interface LocalData {
     /** @return the [TvGuide] from Local Source matching the given [channelId] and [time] */
     fun tvGuideForChannel( channelId: String, time: LocalDateTime? = null ): TvGuide
 
+    /** @return all the [TvGuide]s from Local Source matching the given [channelId] */
+    fun tvGuidesForChannel( channelId: String ): List<TvGuide>
+
     /** @return all the [TvGuide]s from Local Source matching the given [channelId], [from] and [to] */
     fun tvGuidesRanged( channelId: String, from: LocalDateTime?, to: LocalDateTime? ): List<TvGuide>
 

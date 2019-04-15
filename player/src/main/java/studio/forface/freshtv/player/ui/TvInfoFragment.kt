@@ -37,6 +37,7 @@ internal class TvInfoFragment : PlayerFragment( R.layout.fragment_tv_info ) {
     /** When the [TvInfoFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
+        tvInfoNoGuideTextView.text = getString( R.string.message_no_guide_for_channel_arg, channelId )
         tvInfoViewPager.adapter = adapter
         tvInfoTabLayout.setupWithViewPager( tvInfoViewPager )
     }
@@ -44,6 +45,7 @@ internal class TvInfoFragment : PlayerFragment( R.layout.fragment_tv_info ) {
     /** When [ChannelInfoUiModel]s are received */
     private fun onInfo( info: ChannelInfoUiModel ) {
         if ( info !is ChannelInfoUiModel.Tv ) throw AssertionError()
+
         tvInfoNoGuideTextView.isVisible = info.programs.isEmpty()
         adapter.programs = info.programs
         tvInfoViewPager.apply {

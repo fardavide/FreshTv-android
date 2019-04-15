@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/huge_margin"
         android:layout_marginBottom="@dimen/small_margin"
-        android:text="@string/message_no_guide_for_channel"
+        tools:text="@string/message_no_guide_for_channel_arg"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         android:visibility="gone"

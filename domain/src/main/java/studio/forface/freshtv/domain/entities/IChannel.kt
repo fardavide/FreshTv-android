@@ -66,6 +66,7 @@ interface IChannel {
 
     /** A functions for copy an [IChannel] using the copy method of data class */
     fun copyObj(
+        id:             String =            this.id,
         name:           String =            this.name,
         groupName:      String =            this.groupName,
         imageUrl:       Url? =              this.imageUrl,
@@ -75,6 +76,7 @@ interface IChannel {
     ): IChannel {
         return when( this ) {
             is MovieChannel -> this.copy(
+                id =            id,
                 name =          name,
                 groupName =     groupName,
                 imageUrl =      imageUrl,
@@ -83,6 +85,7 @@ interface IChannel {
                 favorite =      favorite
             )
             is TvChannel -> this.copy(
+                id =            id,
                 name =          name,
                 groupName =     groupName,
                 imageUrl =      imageUrl,

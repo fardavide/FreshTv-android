@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.testImplementation
+
 plugins {
     id("java-library" )
     id("kotlin" )
@@ -15,4 +17,7 @@ dependencies {
     /* Other */
     api( Libs.koin )
     api( Libs.threeten_android_bp )
+    testImplementation( Libs.threeten_bp ) {
+        exclude( group = "com.jakewharton.threetenabp", module = "threetenabp" )
+    }
 }

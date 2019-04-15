@@ -3,6 +3,7 @@ package studio.forface.freshtv.parsers
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.response.HttpResponse
+import kotlinx.io.core.use
 import studio.forface.freshtv.domain.entities.SourceFile
 import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
@@ -80,6 +81,9 @@ internal class FileContentResolver(
     class Remote( private val client: HttpClient = HttpClient() ): Source {
 
         /** @return a [InputStream] from [HttpResponse] */
-        override suspend fun readStream( path: String ) = client.get<InputStream>( path )
+        override suspend fun readStream( path: String ): InputStream {
+
+            return client.get<InputStream>( path )
+        }
     }
 }

@@ -1,6 +1,9 @@
 package studio.forface.freshtv.parsers
 
-import io.mockk.*
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockk
+import io.mockk.spyk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -98,7 +101,7 @@ internal class ParsersImplTest {
 
         runBlocking {
             source.readFrom(
-                Epg("http://www.epgitalia.tv/xml/guide.gzip", SourceFile.Type.REMOTE ),
+                realEpgSource,
                 onTvGuide = { println( it ) },
                 onError = { println( "${it.reason.name} - ${it.rawChannel}" ) },
                 onProgress = { println( "progress: $it" ) }
@@ -114,7 +117,7 @@ internal class ParsersImplTest {
 
         runBlocking {
             source.readFrom(
-                Epg("http://www.epgitalia.tv/xml/guide.gzip", SourceFile.Type.REMOTE ),
+                Epg("http://iptv-epg.com/c77e-hnfzcd.xml", SourceFile.Type.REMOTE),
                 onTvGuide = { guides += it }
             )
         }

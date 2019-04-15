@@ -17,7 +17,7 @@
     <string name="image_controller_rotate">Rotate the screen</string>
 
     <!-- Messages -->
-    <string name="message_no_guide_for_channel">No Tv Guide for this channel</string>
+    <string name="message_no_guide_for_channel_arg">No Tv Guide for this channel (%s)</string>
 
     <!-- Others -->
     <string name="actors">Actors:</string>

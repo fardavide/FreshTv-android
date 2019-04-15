@@ -74,7 +74,12 @@ class DelightTvGuidesLocalSource(
      * [TvGuidePojo.endTime]
      */
     override fun guideForChannel( channelId: String, time: LocalDateTime? ) =
-            queries.selectByChannelId( channelId, time ?: LocalDateTime.now() ).executeAsOne()
+            queries.selectFirstByChannelId( channelId, time ?: LocalDateTime.now() ).executeAsOne()
+
+    /** @return all the stored Guides [TvGuidePojo] with [TvGuidePojo.channelId] as the given [channelId] */
+    override fun guidesForChannel( channelId: String ): List<TvGuidePojo> {
+        return queries.selectByChannelId( channelId ).executeAsList()
+    }
 
     /**
      * @return all the stored Guides [TvGuidePojo] with [TvGuidePojo.channelId] as the given [channelId]

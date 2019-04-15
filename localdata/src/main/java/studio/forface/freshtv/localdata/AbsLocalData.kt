@@ -325,6 +325,10 @@ abstract class AbsLocalData<
     override fun tvGuideForChannel(channelId: String, time: LocalDateTime? ): TvGuide =
             tvGuideMapper { tvGuides.guideForChannel( channelId, time ).toEntity() }
 
+    /** @return all the [TvGuide]s from Local Source matching the given [channelId] */
+    override fun tvGuidesForChannel( channelId: String ): List<TvGuide> =
+        tvGuides.guidesForChannel( channelId ).map( tvGuideMapper ) { it.toEntity() }
+
     /**
      * @return all the [TvGuide]s from [TvGuidesLocalSource] matching the given [channelId], [from] and [to]
      * @see TvGuidesLocalSource.guidesForChannelRanged for parameters details.

@@ -13,8 +13,9 @@ import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.reduceOrDefault
 
 /**
- * @author Davide Giuseppe Farella
  * A class for refresh the stored epg
+ *
+ * @author Davide Giuseppe Farella
  */
 class RefreshTvGuides(
     private val localData: LocalData,
@@ -47,7 +48,7 @@ class RefreshTvGuides(
      *
      * @throws RefreshTvGuides.FatalException
      */
-    suspend operator fun invoke( epg: SourceFile.Epg ) = coroutineScope {
+    suspend operator fun invoke( epg: Epg ) = coroutineScope {
         val errors = mutableListOf<ParsingEpgError>()
         try {
             parsers.readFrom(

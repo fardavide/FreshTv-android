@@ -70,28 +70,35 @@ selectById:
   WHERE id = ?
   LIMIT 1;
 
+selectFirstByChannelId:
+  SELECT *
+  FROM tvGuidePojo
+  WHERE UPPER( channelId ) LIKE UPPER( ? )
+  AND :time BETWEEN startTime AND endTime
+  LIMIT 1;
+
 selectByChannelId:
   SELECT *
   FROM tvGuidePojo
-  WHERE channelId = ?
-  AND :time BETWEEN startTime AND endTime
-  LIMIT 1;
+  WHERE UPPER( channelId ) LIKE UPPER( ? );
 
 selectByChannelIdRanged:
   SELECT *
   FROM tvGuidePojo
-  WHERE channelId = ?
+  WHERE UPPER( channelId ) LIKE UPPER( ? )
   AND (
     ( startTime = :from AND endTime = :to ) -- Workaround for infer type of :from and :to
-    OR (
-      startTime BETWEEN :from AND :to
-      OR
-      endTime BETWEEN :from AND :to
-      OR
-      :from BETWEEN startTime AND endTime
-      OR
-      :to BETWEEN startTime AND endTime
-    )
+    OR endTime BETWEEN :from AND :to -- semplification of below
+
+    -- OR ( TODO semplified as now
+    --   startTime BETWEEN :from AND :to
+    --   OR
+    --   endTime BETWEEN :from AND :to
+    --   OR
+    --   :from BETWEEN startTime AND endTime
+    --   OR
+    --   :to BETWEEN startTime AND endTime
+    -- )
   );
 
 selectByTitle:

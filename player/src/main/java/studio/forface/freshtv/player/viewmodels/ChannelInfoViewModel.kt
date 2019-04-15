@@ -16,7 +16,6 @@ import studio.forface.viewstatestore.ViewStateStore
 
 /**
  * A `ViewModel` for get Channel's Info
- *
  * Inherit from [ScopedViewModel]
  *
  * @author Davide Giuseppe Farella

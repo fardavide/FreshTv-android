@@ -41,6 +41,9 @@ interface TvGuidesLocalSource<Pojo> {
      */
     fun guideForChannel( channelId: String, time: LocalDateTime? ): Pojo
 
+    /** @return all the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId] */
+    fun guidesForChannel( channelId: String ): List<Pojo>
+
     /**
      * @return all the stored Guides [Pojo] with [Pojo]'s channelId as the given [channelId]
      *

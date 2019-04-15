@@ -26,7 +26,7 @@
     <string-array name="about_roadmap_values">
         <item>%1Italian%2 translation</item>
         <item>%1Restore last position%2 in Channel\'s list</item>
-        <item>Fix %1EPG%2</item>
+        <item>Built-in %1EPG%2</item>
         <item>Store %1Movies\' progress%2</item>
         <item>%1Dark Theme%2</item>A
         <item>Improvements on %1channel\'s clean up%2 on Playlist deletion in database</item>
@@ -39,7 +39,8 @@
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
-        <item>Nicer %1Drawer%2</item>
+        <item>%1EPG%2 partially fixed</item>
+        <item>Nicer %1Drawer%2 menu</item>
         <item>%1Don\'t interrupt playing%2 during screen\'s rotation</item>
         <item>%1Complete redesign and refactor%2</item>
     </string-array>
