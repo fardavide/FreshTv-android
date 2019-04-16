@@ -1,5 +1,7 @@
 package studio.forface.freshtv.commonandroid.ui
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -14,9 +16,11 @@ import studio.forface.freshtv.commonandroid.R
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiComponent
 import studio.forface.freshtv.commonandroid.notifier.SnackbarManager
 import studio.forface.freshtv.commonandroid.notifier.SnackbarType
+import studio.forface.freshtv.commonandroid.utils.colorOnSurface
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.onFragmentLifecycle
 import studio.forface.freshtv.domain.gateways.Notifier
+import studio.forface.materialbottombar.utils.getColorCompat
 import studio.forface.theia.dsl.TheiaActivity
 import studio.forface.viewstatestore.ViewStateActivity
 import kotlin.contracts.ExperimentalContracts
@@ -114,6 +118,12 @@ abstract class BaseActivity(
         action?.let { snackBar.setAction( action.name ) { action.block() } }
         snackBar.show( type )
     }
+
+    /**
+     * Apply [Drawable.setTint] with [R.color.colorOnSurface] to the receiver [Drawable]
+     * @return OPTIONAL [Drawable], `null` if the receiver is `null`
+     */
+    fun Drawable?.colorOnSurface() = colorOnSurface(this@BaseActivity )
 }
 
 /** Assert that the given [Fragment] is a [BaseFragment] */

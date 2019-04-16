@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import studio.forface.freshtv.commonandroid.R
-import studio.forface.freshtv.commonandroid.utils.Android
+import studio.forface.freshtv.commonandroid.utils.colorOnSurface
 import studio.forface.freshtv.commonandroid.utils.getThemeColor
 import studio.forface.freshtv.commonandroid.utils.postDelayed
 import studio.forface.freshtv.domain.utils.optWith
@@ -55,12 +55,6 @@ abstract class NavActivity( @LayoutRes layoutRes: Int ): BaseActivity( layoutRes
 
     /** When the `Activity` is Created */
     override fun onCreate( savedInstanceState: Bundle? ) {
-        window.decorView.systemUiVisibility = when {
-            Android.OREO -> View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            Android.MARSHMALLOW -> View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            else -> window.decorView.systemUiVisibility
-        }
-
         super.onCreate( savedInstanceState )
 
         drawerLayout.doOnPanelState { _, state ->
@@ -95,12 +89,12 @@ abstract class NavActivity( @LayoutRes layoutRes: Int ): BaseActivity( layoutRes
             @Suppress("RedundantLambdaArrow") // Needed for Click Listener
             fun setNavigationIcon() {
                 val ( icon, action ) = if ( isAtRoot ) {
-                    R.drawable.ic_hamburger to { _: View -> drawerLayout.openDrawer() }
+                    getDrawable( R.drawable.ic_hamburger ) to { _: View -> drawerLayout.openDrawer() }
                 } else {
-                    R.drawable.ic_left_arrow_black to { _: View -> onBackPressed() }
+                    getDrawable( R.drawable.ic_left_arrow_black ).colorOnSurface() to { _: View -> onBackPressed() }
                 }
                 drawerLayout.bottomAppBar?.apply {
-                    setNavigationIcon( icon )
+                    navigationIcon = icon
                     setNavigationOnClickListener( action )
                 }
             }

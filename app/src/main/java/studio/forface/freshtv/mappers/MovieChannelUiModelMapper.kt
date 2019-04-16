@@ -24,13 +24,14 @@ internal class MovieChannelUiModelMapper :
         val favoriteImage = if ( favorite ) favoriteDrawable else notFavoriteDrawable
 
         return MovieChannelUiModel(
-            id =                id,
-            name =              name,
-            description =       null,
-            image =             image,
-            imagePlaceHolder =  tvDrawable,
-            favorite =          favorite,
-            favoriteImage =     favoriteImage
+            id =                    id,
+            name =                  name,
+            description =           null,
+            image =                 image,
+            imagePlaceHolder =      tvDrawable,
+            favorite =              favorite,
+            favoriteImage =         favoriteImage,
+            favoriteImageNeedTint = ! favorite
         )
     }
 

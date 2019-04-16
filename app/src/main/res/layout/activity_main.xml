@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:background="@android:color/white"
+                android:background="?attr/colorSurface"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="24sp"
                 android:textAlignment="center"/>
@@ -56,11 +56,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:navigationIcon="@drawable/ic_hamburger"
-        app:backgroundTint="@android:color/white"
         app:hideFabOnScroll="false"
         app:hideOnScroll="true"
-        app:leftCornerRadius="24dp"
-        app:rightCornerRadius="24dp"/>
+        app:leftCornerRadius="@dimen/largeComponent_cornerRadius"
+        app:rightCornerRadius="@dimen/largeComponent_cornerRadius"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

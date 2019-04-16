@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <color name="colorPrimary">#03a9f4</color>
     <color name="colorPrimaryLight">#29b6f6</color>
     <color name="colorPrimaryDark">#039be5</color>
     <color name="colorSecondary">#ffb74d</color>
-    <color name="colorBackground">#fcfcfc</color>
+    <color name="colorError">@color/red_700</color>
 
+    <color name="colorSurface">@android:color/white</color>
+    <color name="colorOnSurface">@color/black_alpha_80</color>
+    <color name="colorBackground">#fcfcfc</color>
+    <color name="colorOnBackground">@color/black_alpha_80</color>
+    <bool name="useLightSystemBar">true</bool>
+
+    <color name="colorTextPrimary">@color/black_alpha_80</color>
+    <color name="colorTextSecondary">@color/black_alpha_60</color>
+    <color name="colorTextTertiary">@color/black_alpha_70</color>
+
+    <!-- Raw colors -->
+    <color name="grey_860">#282828</color>
+    <color name="grey_900">#212121</color>
     <color name="red_500">#f44336</color>
     <color name="red_700">#d32f2f</color>
+
+    <color name="black_alpha_50">#80000000</color>
+    <color name="black_alpha_60">#99000000</color>
+    <color name="black_alpha_70">#B3000000</color>
+    <color name="black_alpha_80">#E6000000</color>
+
+    <color name="white_alpha_40">#66FFFFFF</color>
+    <color name="white_alpha_60">#99FFFFFF</color>
+    <color name="white_alpha_70">#B3FFFFFF</color>
+    <color name="white_alpha_80">#CCFFFFFF</color>
 </resources>

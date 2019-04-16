@@ -8,13 +8,11 @@ import kotlinx.android.synthetic.main.item_channel_movie.view.*
 import studio.forface.freshtv.R.layout.item_channel_movie
 import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
+import studio.forface.freshtv.commonandroid.utils.colorOnSurface
 import studio.forface.freshtv.commonandroid.utils.inflate
 import studio.forface.freshtv.domain.usecases.FavoritedChannel
 import studio.forface.freshtv.uimodels.MovieChannelUiModel
-import studio.forface.theia.dsl.imageDrawableRes
-import studio.forface.theia.dsl.imageUrl
-import studio.forface.theia.dsl.invoke
-import studio.forface.theia.dsl.placeholderDrawableRes
+import studio.forface.theia.dsl.*
 
 /**
  * @author Davide Giuseppe Farella.
@@ -86,8 +84,11 @@ internal class MovieChannelsAdapter:
             movieChannelFavorite.setOnClickListener {
                 itemFavoriteChangeInvoker( item.id to ! item.favorite )
             }
+            val favoriteDrawable = getDrawable( item.favoriteImage ).apply {
+                if ( item.favoriteImageNeedTint ) colorOnSurface( context )
+            }
             theia {
-                imageDrawableRes = item.favoriteImage
+                imageDrawable = favoriteDrawable
                 target = movieChannelFavorite
             }
         }

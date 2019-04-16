@@ -8,7 +8,10 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
+import studio.forface.freshtv.domain.utils.ago
+import studio.forface.freshtv.domain.utils.compareTo
 import studio.forface.freshtv.domain.utils.forEachAsync
+import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.parsers.epg.ParsableEpgItem.Result
 import java.io.InputStream
 
@@ -26,12 +29,8 @@ internal class EpgParser {
     ) = coroutineScope<Unit> {
 
         val epg = ParsableStringEpg( epgContent )
-        epg.extractItems().forEachAsync {
-            when ( val result = it() ) {
-                is Result.Guide -> guides.send( result.content )
-                is Result.Error -> errors.send( result.error )
-            }
-        }
+        epg.extractItems()
+            .forEachAsync { handleResult( it(), guides, errors ) }
 
         guides.close()
         errors.close()
@@ -48,19 +47,29 @@ internal class EpgParser {
         val epg = ParsableEpg( epgStream )
 
         launch {
-            for ( item in items ) {
-                when ( val result = item() ) {
-                    is Result.Guide -> guides.send( result.content )
-                    is Result.Error -> errors.send( result.error )
-                }
-            }
+            for ( item in items ) { handleResult( item(), guides, errors ) }
         }
 
         launch {
-            epg.extractItems(items)
+            epg.extractItems( items )
 
             guides.close()
             errors.close()
+        }
+    }
+
+    /** Handle [ParsableEpgItem.Result] and send to the correct [SendChannel] */
+    private suspend fun handleResult(
+        result: Result,
+        guides: SendChannel<TvGuide>,
+        errors: SendChannel<ParsingEpgError>
+    ) {
+        when ( result ) {
+            is Result.Guide -> {
+                if ( result.content.endTime > 12 hours ago )
+                    guides.send( result.content )
+            }
+            is Result.Error -> errors.send( result.error )
         }
     }
 }

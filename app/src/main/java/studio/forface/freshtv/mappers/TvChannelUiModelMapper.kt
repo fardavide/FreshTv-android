@@ -29,13 +29,14 @@ internal class TvChannelUiModelMapper :
         val currentProgram = program?.toUiModel()
 
         return TvChannelUiModel(
-            id =                id,
-            name =              name,
-            image =             image,
-            imagePlaceHolder =  tvDrawable,
-            favorite =          favorite,
-            favoriteImage =     favoriteImage,
-            currentProgram =    currentProgram
+            id =                    id,
+            name =                  name,
+            image =                 image,
+            imagePlaceHolder =      tvDrawable,
+            favorite =              favorite,
+            favoriteImage =         favoriteImage,
+            favoriteImageNeedTint = !favorite,
+            currentProgram =        currentProgram
         )
     }
 

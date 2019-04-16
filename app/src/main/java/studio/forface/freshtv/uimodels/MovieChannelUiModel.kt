@@ -14,5 +14,6 @@ internal data class MovieChannelUiModel(
         val image: String?,
         @DrawableRes val imagePlaceHolder: Int,
         val favorite: Boolean,
-        @DrawableRes val favoriteImage: Int
+        @DrawableRes val favoriteImage: Int,
+        val favoriteImageNeedTint: Boolean
 )

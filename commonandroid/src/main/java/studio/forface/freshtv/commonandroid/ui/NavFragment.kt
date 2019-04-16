@@ -1,7 +1,9 @@
 package studio.forface.freshtv.commonandroid.ui
 
 import android.graphics.Color
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.*
@@ -77,7 +79,7 @@ sealed class NavFragment( @LayoutRes layoutRes: Int ) : BaseFragment( layoutRes 
             // Set Title
             header {
                 titleTextRes = titleRes
-                titleColorRes = R.color.colorPrimary
+                titleColorRes = R.color.colorTextPrimary
                 titleSpSize = 16f
             }
             customBody( body )

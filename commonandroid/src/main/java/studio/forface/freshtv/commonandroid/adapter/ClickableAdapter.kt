@@ -1,6 +1,9 @@
 package studio.forface.freshtv.commonandroid.adapter
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import studio.forface.freshtv.commonandroid.frameworkcomponents.AndroidUiComponent
 import studio.forface.theia.dsl.TheiaViewHolder
@@ -43,6 +46,9 @@ interface ClickableAdapter<T, VH: ClickableAdapter.ViewHolder<T>> {
     /** A base [RecyclerView.ViewHolder] for [ClickableAdapter] implementations */
     abstract class ViewHolder<T>( itemView: View): TheiaViewHolder( itemView ), AndroidUiComponent {
 
+        /** @return [Context] from [itemView]  */
+        protected val context: Context get() = itemView.context
+
         internal var clickListenerInvoker: (T) -> Unit = {}
         internal var longClickListenerInvoker: (T) -> Unit = {}
 
@@ -56,5 +62,8 @@ interface ClickableAdapter<T, VH: ClickableAdapter.ViewHolder<T>> {
                 true
             }
         }
+
+        /** @return a [Drawable] from [context] */
+        protected fun getDrawable( @DrawableRes resId: Int ) = context.getDrawable( resId )!!
     }
 }

@@ -1,14 +1,14 @@
 <resources>
 
     <!-- Base Theme containing API-aware items -->
-    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar" >
+    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar" >
 
         <!-- System -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="BaseTheme">
 
         <!-- Colors -->
@@ -17,26 +17,42 @@
         <item name="colorOnPrimary">@android:color/white</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@android:color/black</item>
-        <item name="colorError">@color/red_700</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorSurface">@color/colorSurface</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:windowBackground">@color/colorBackground</item>
 
         <!-- Components -->
+        <item name="shapeAppearanceLargeComponent">@style/AppLargeComponent</item>
         <item name="textInputStyle">@style/AppTextInput</item>
         <item name="tabStyle">@style/AppTabLayout</item>
 
-        <!-- Other -->
+        <!-- Text -->
         <item name="fontFamily">@font/champagne_limousines</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:textColorTertiary">@color/colorTextTertiary</item>
+
+        <item name="android:textColorLink">@color/colorPrimary</item>
+    </style>
+
+    <!-- ShapeAppearance Large -->
+    <style name="AppLargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/largeComponent_cornerRadius</item>
     </style>
 
     <!-- TextInputLayout -->
-    <style name="AppTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+    <style name="AppTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/colorSurface</item>
+        <item name="helperTextTextColor">@color/colorTextPrimary</item> <!--Text below the box-->
+    </style>
 
     <!-- TabLayout -->
     <style name="AppTabLayout" parent="Widget.MaterialComponents.TabLayout">
-        <item name="tabTextAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="tabTextAppearance">?textAppearanceSubtitle1</item>
         <item name="tabIndicatorFullWidth">false</item>
-        <item name="tabRippleColor">?attr/colorPrimary</item>
+        <item name="tabRippleColor">?colorPrimary</item>
     </style>
 
 </resources>

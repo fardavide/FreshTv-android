@@ -14,6 +14,7 @@ internal data class TvChannelUiModel(
         @DrawableRes val imagePlaceHolder: Int,
         val favorite: Boolean,
         @DrawableRes val favoriteImage: Int,
+        val favoriteImageNeedTint: Boolean,
         val currentProgram: CurrentProgram?
 ) {
     /** A data class containing info of the current Program of `TvChannel` */

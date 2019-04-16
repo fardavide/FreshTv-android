@@ -28,17 +28,18 @@
         <item>%1Restore last position%2 in Channel\'s list</item>
         <item>Built-in %1EPG%2</item>
         <item>Store %1Movies\' progress%2</item>
-        <item>%1Dark Theme%2</item>A
         <item>Improvements on %1channel\'s clean up%2 on Playlist deletion in database</item>
         <item>%1Floating Player%2</item>
         <item>%1Search%2 feature</item>
         <item>%1Edit%2 Groups and Channels</item>
         <item>%1Info%2 for Movies</item>
         <item>Improve visibility of %1white icons%2</item>
+        <item>Automatic %1Night mode%2</item>
         <item>%1Chromecast%2 support</item>
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
+        <item>%1Dark Theme%2</item>A
         <item>%1EPG%2 partially fixed</item>
         <item>Nicer %1Drawer%2 menu</item>
         <item>%1Don\'t interrupt playing%2 during screen\'s rotation</item>

@@ -1,15 +1,20 @@
 package studio.forface.freshtv
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import com.crashlytics.android.Crashlytics
 import com.jakewharton.threetenabp.AndroidThreeTen
 import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import studio.forface.freshtv.dimodules.otherErrorGenerators
 import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.dimodules.plus
+import studio.forface.freshtv.domain.gateways.AppSettings
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
@@ -31,6 +36,8 @@ import timber.log.Timber
 @Suppress("unused")
 class FreshTvApp: Application() {
 
+    private val settings by inject<AppSettings>()
+
     /** When the app is created */
     override fun onCreate() {
         super.onCreate()
@@ -51,6 +58,11 @@ class FreshTvApp: Application() {
 
         // Init Timber
         Timber.plant( get() )
+
+        // Set night mode
+        AppCompatDelegate.setDefaultNightMode(
+            if ( settings.nightMode ) MODE_NIGHT_YES else MODE_NIGHT_NO
+        )
 
         // Configure Theia
         TheiaConfig {

@@ -9,7 +9,6 @@
         <item name="android:windowLightStatusBar">@bool/useLightSystemBar</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightNavigationBar">@bool/useLightSystemBar</item>
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
 
 </resources>

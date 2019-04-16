@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/recycler_view_vertical_padding"
-        android:paddingBottom="@dimen/recycler_view_vertical_padding"/>
+        android:paddingTop="@dimen/recyclerView_vertical_padding"
+        android:paddingBottom="@dimen/recyclerView_vertical_padding"/>
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progressBar"

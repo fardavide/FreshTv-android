@@ -15,8 +15,11 @@
     <dimen name="medium_icon_size">32dp</dimen>
     <dimen name="large_icon_size">48dp</dimen>
 
-    <dimen name="recycler_view_vertical_padding">@dimen/small_margin</dimen>
+    <!-- Shape Appearance -->
+    <dimen name="largeComponent_cornerRadius">24dp</dimen>
 
+    <!-- Others -->
+    <dimen name="recyclerView_vertical_padding">@dimen/small_margin</dimen>
     <dimen name="rounded_corners_content_padding">0dp</dimen>
 
 </resources>
