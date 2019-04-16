@@ -12,7 +12,6 @@ import studio.forface.viewstatestore.ViewStateStore
 
 /**
  * A `ViewModel` for get and edit Preferences
- *
  * Inherit from [ScopedViewModel]
  *
  * @author Davide Giuseppe Farella
@@ -28,6 +27,9 @@ internal class PreferencesViewModel(
     /** A [LockedViewStateStore] for [GuidesDatabaseStateUiModel] */
     val guidesDatabaseState = ViewStateStore<GuidesDatabaseStateUiModel>().lock
 
+    /** A [LockedViewStateStore] for [Boolean] */
+    val nightModeEnabled = ViewStateStore<Boolean>().lock
+
     init {
         // Observe Channels
         launch {
@@ -39,6 +41,11 @@ internal class PreferencesViewModel(
             for ( state in presenter.observeGuidesDatabaseState() )
                 guidesDatabaseState.postData( state )
         }
+        // Observe Night Mode
+        launch {
+            for( state in presenter.observeNightModeEnabled() )
+                nightModeEnabled.postData( state )
+        }
     }
 
     /** Clean all the stored `Channel`s and `Group`s */
@@ -49,5 +56,16 @@ internal class PreferencesViewModel(
     /** Clean all the stored `Tv Guide`s */
     fun cleanGuides() {
         launch { interactor.cleanAllGuides() }
+    }
+
+    /** Toggle the Nighe Mode */
+    fun toggleNigheMode() {
+        interactor.toggleNightMode()
+    }
+
+    /** When the `ViewModel` is cleared */
+    override fun onCleared() {
+        presenter.clean()
+        super.onCleared()
     }
 }

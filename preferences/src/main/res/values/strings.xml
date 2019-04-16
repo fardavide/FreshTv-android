@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Categories -->
+    <string name="preferences_cat_design">Design</string>
+    <string name="preferences_cat_database">Database</string>
+
     <!-- Clean Channels -->
     <string name="clean_channels_title">Clean all Channels</string>
     <string name="clean_channels_description_can_clear">
@@ -26,6 +30,11 @@
     <string name="clean_guides_confirmation_dialog_description">
         This will delete all the <b>Tv Guides</b> stored in database, eventually they will be added during playlist\'s synchronization.
     </string>
+
+    <!-- Toggle Night Mode -->
+    <string name="toggle_night_mode_title">Night Mode</string>
+    <string name="toggle_night_mode_description_enabled">Night Mode enabled</string>
+    <string name="toggle_night_mode_description_disabled">Night Mode disabled</string>
 
     <!-- Menu -->
     <string name="menu_preferences">Settings</string>

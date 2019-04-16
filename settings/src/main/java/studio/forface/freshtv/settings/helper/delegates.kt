@@ -1,5 +1,6 @@
 package studio.forface.freshtv.settings.helper
 
+import studio.forface.freshtv.domain.gateways.AppSettings
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -10,7 +11,7 @@ import kotlin.reflect.KProperty
 internal inline operator fun <reified V: Any> Settings.invoke(
     defaultValue: V,
     key: String? = null
-): ReadWriteProperty<Any?, V> = SettingsDelegate( key, defaultValue , getter(), setter() )
+): OptKeyDelegate<V> = SettingsDelegate( key, defaultValue , getter(), setter() )
 
 /**
  * Returns a nullable [V] property delegate, backed by this [Settings] instance using the provided [key], with initial

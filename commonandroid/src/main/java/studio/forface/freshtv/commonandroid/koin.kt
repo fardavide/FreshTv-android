@@ -11,7 +11,6 @@ import studio.forface.freshtv.commonandroid.log.TheiaLibLogger
 import studio.forface.freshtv.commonandroid.log.TimberTree
 import studio.forface.freshtv.commonandroid.notifier.AndroidNotifier
 import studio.forface.freshtv.commonandroid.notifier.Toast
-import studio.forface.freshtv.commonandroid.utils.UriResolverImpl
 import studio.forface.freshtv.domain.gateways.UriResolver
 import studio.forface.theia.log.TheiaLogger
 import timber.log.Timber
@@ -26,7 +25,7 @@ val commonAndroidModule = module {
     /* Module */
     single { AndroidNotifier( resources = get(), toast = get() ) }
     factory { Toast( androidContext() ) }
-    factory<UriResolver> { UriResolverImpl( androidContext() ) }
+    factory<UriResolver> { UriResolverImpl(androidContext()) }
 
     /* Interactors */
     factory { ChannelChangeFavoriteInteractor( updateChannelFavoriteState = get() ) }

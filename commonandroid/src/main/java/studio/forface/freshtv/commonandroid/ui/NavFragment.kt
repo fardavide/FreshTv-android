@@ -184,7 +184,7 @@ abstract class ParentFragment( @LayoutRes layoutRes: Int ): NavFragment( layoutR
  * A base class for a [Fragment] that is nested inside another [ParentFragment]
  * Inherit from [NavFragment]
  */
-abstract class NestedFragment<ParentFragment: NavFragment>(@LayoutRes layoutRes: Int ): NavFragment( layoutRes ) {
+abstract class NestedFragment<ParentFragment: NavFragment>( @LayoutRes layoutRes: Int ): NavFragment( layoutRes ) {
 
     /** @return the [getParentFragment] casted as [ParentFragment] */
     @Suppress("UNCHECKED_CAST")

@@ -20,6 +20,7 @@ val preferencesModule = module {
         )
     }
     factory<CleanGuidesInteractor> { CleanGuidesInteractorImpl( removeAllGuides = get() ) }
+    factory<ToggleNightModeInteractor> { ToggleNightModeInteractorImpl( appSettings = get() ) }
 
     /* Mappers */
     factory { ChannelsDatabaseStateUiModelMapper() }
@@ -33,6 +34,7 @@ val preferencesModule = module {
         )
     }
     factory<CleanGuidesPresenter> { CleanGuidesPresenterImpl( hasTvGuides = get(), mapper = get() ) }
+    factory<ToggleNightModePresenter> { ToggleNightModePresenterImpl( appSettings = get() ) }
 
     /* View Models */
     viewModel { PreferencesViewModel( presenter = get(), interactor = get() ) }

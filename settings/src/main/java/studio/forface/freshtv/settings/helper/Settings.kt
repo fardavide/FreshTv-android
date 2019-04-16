@@ -2,10 +2,11 @@ package studio.forface.freshtv.settings.helper
 
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import studio.forface.freshtv.domain.gateways.AppSettings
+import studio.forface.freshtv.domain.gateways.SettingsListener
 import studio.forface.freshtv.domain.utils.EMPTY_STRING
 
 /**
- * @author Davide Giuseppe Farella.
  * A collection of storage-backed key-value data
  *
  * This class allows storage of values with the [Int], [Long], [String], [Float], [Double], or [Boolean] types, using a
@@ -13,6 +14,9 @@ import studio.forface.freshtv.domain.utils.EMPTY_STRING
  *
  * Operator extensions are defined in order to simplify usage. In addition, property delegates are provided for cleaner
  * syntax and better type-safety when interacting with values stored in a `Settings` instance.
+ *
+ *
+ * @author Davide Giuseppe Farella.
  */
 internal class Settings( private val preferences: SharedPreferences ) {
 
@@ -108,7 +112,7 @@ internal class Settings( private val preferences: SharedPreferences ) {
      *
      * @return [Settings.Listener]
      */
-    fun addListener( key: String, callback: () -> Unit ): Listener {
+    fun <T> addListener( key: String, callback: (T) -> Unit ): SettingsListener  {
         val cache = Listener.Cache( preferences.all[key] )
 
         val prefsListener =
@@ -123,24 +127,30 @@ internal class Settings( private val preferences: SharedPreferences ) {
                 val prev = cache.value
                 val current = preferences.all[key]
                 if ( prev != current ) {
-                    callback()
+                    @Suppress("UNCHECKED_CAST")
+                    callback( current as T )
                     cache.value = current
                 }
             }
         preferences.registerOnSharedPreferenceChangeListener( prefsListener )
-        return Listener(prefsListener)
+        return Listener( prefsListener )
     }
 
     /** Unsubscribes the [listener] from receiving updates to the value at the key it monitors */
-    fun removeListener( listener: Listener) {
+    fun removeListener( listener: SettingsListener ) {
+        listener as Listener
         preferences.unregisterOnSharedPreferenceChangeListener( listener.delegate )
     }
 
     /**
      * A handle to a listener instance created in [addListener] so it can be passed to [removeListener], wrapper around
      * [SharedPreferences.OnSharedPreferenceChangeListener].
+     *
+     * Inherit from [AppSettings.Listener]
      */
-    class Listener internal constructor( internal val delegate: SharedPreferences.OnSharedPreferenceChangeListener ) {
+    class Listener internal constructor(
+        delegate: SharedPreferences.OnSharedPreferenceChangeListener
+    ) : AppSettings.Listener<SharedPreferences.OnSharedPreferenceChangeListener>( delegate ) {
         internal class Cache( var value: Any? )
     }
 

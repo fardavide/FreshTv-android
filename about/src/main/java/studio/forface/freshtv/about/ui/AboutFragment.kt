@@ -1,6 +1,8 @@
 package studio.forface.freshtv.about.ui
 
+import android.content.Intent
 import android.graphics.Typeface.BOLD
+import android.net.Uri
 import android.os.Bundle
 import android.text.Spannable.SPAN_INCLUSIVE_EXCLUSIVE
 import android.text.SpannableString
@@ -48,6 +50,10 @@ class AboutFragment : ParentFragment( R.layout.fragment_about ) {
         aboutReportImageView.setOnClickListener( ::showComingSoon )
         aboutReportTextView.setOnClickListener( ::showComingSoon )
 
+        // Telegram
+        aboutTelegramImageView.setOnClickListener( ::openTelegramGroup )
+        aboutTelegramTextView.setOnClickListener( ::openTelegramGroup )
+
         // Roadmap
         aboutRoadmapRecyclerView.apply {
             adapter = ExpandableAdapter( context.resources.getStringArray( R.array.about_roadmap_values ) )
@@ -58,6 +64,15 @@ class AboutFragment : ParentFragment( R.layout.fragment_about ) {
         aboutWhatsNewRecyclerView.apply {
             adapter = ExpandableAdapter( context.resources.getStringArray( R.array.about_what_new_values ) )
             layoutManager = LinearLayoutManager( requireContext() )
+        }
+    }
+
+    /** Deep-link to Telegram Group */
+    private fun openTelegramGroup() {
+        val uri = Uri.parse( getString( R.string.about_telegram_group_link ) )
+        with( Intent( Intent.ACTION_VIEW ) ) {
+            data = uri
+            startActivity(this )
         }
     }
 

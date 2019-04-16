@@ -13,7 +13,14 @@ import org.koin.core.get
  */
 internal class PreferencesPresenter :
     CleanChannelsPresenter by Delegates.get(),
-    CleanGuidesPresenter by Delegates.get()
+    CleanGuidesPresenter by Delegates.get(),
+    ToggleNightModePresenter by Delegates.get() {
+
+    /** Clean the presenter */
+    fun clean() {
+        removeNightModeListener()
+    }
+}
 
 /** Invoke operator for [PreferencesPresenter] */
 internal suspend operator fun <T> PreferencesPresenter.invoke( block: suspend PreferencesPresenter.() -> T ) =

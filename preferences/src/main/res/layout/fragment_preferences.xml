@@ -12,6 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/aboutCategoryDesign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:text="@string/preferences_cat_design"
+            android:textAppearance="@style/PreferencesCategoryTextAppearance"/>
+
+        <studio.forface.freshtv.preferences.views.ToggleNightModeView
+            android:id="@+id/preferencesToggleNightModeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/aboutCategoryDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginTop="@dimen/preferences_category_vertical_spacing"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:text="@string/preferences_cat_database"
+            android:textAppearance="@style/PreferencesCategoryTextAppearance"/>
+
         <studio.forface.freshtv.preferences.views.CleanChannelsView
             android:id="@+id/preferencesCleanChannelsView"
             android:layout_width="match_parent"

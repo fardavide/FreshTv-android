@@ -10,7 +10,8 @@
     <bool name="useLightSystemBar">false</bool>
 
     <color name="colorTextPrimary">@color/white_alpha_80</color>
-    <color name="colorTextSecondary">@color/white_alpha_60</color>
-    <color name="colorTextTertiary">@color/white_alpha_70</color>
+    <color name="colorTextSecondary">@color/white_alpha_70</color>
+    <color name="colorTextTertiary">@color/white_alpha_60</color>
+    <color name="colorTextDisabled">@color/white_alpha_30</color>
 
 </resources>

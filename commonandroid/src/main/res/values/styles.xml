@@ -19,8 +19,10 @@
         <item name="colorOnSecondary">@android:color/black</item>
         <item name="colorError">@color/colorError</item>
         <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
 
         <!-- Components -->
         <item name="shapeAppearanceLargeComponent">@style/AppLargeComponent</item>
@@ -29,11 +31,11 @@
 
         <!-- Text -->
         <item name="fontFamily">@font/champagne_limousines</item>
-        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
-        <item name="android:textColorTertiary">@color/colorTextTertiary</item>
-
+        <item name="android:textColorPrimary">@drawable/c_text_primary</item>
+        <item name="android:textColorSecondary">@drawable/c_text_secondary</item>
+        <item name="android:textColorTertiary">@drawable/c_text_tertiary</item>
         <item name="android:textColorLink">@color/colorPrimary</item>
+
     </style>
 
     <!-- ShapeAppearance Large -->

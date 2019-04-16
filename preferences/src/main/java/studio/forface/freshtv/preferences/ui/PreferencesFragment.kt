@@ -34,9 +34,9 @@ class PreferencesFragment: ParentFragment( R.layout.fragment_preferences ) {
             channelsDatabaseState.observeData( preferencesCleanChannelsView::updateValue )
             // Observe Tv Guides
             guidesDatabaseState.observeData( preferencesCleanGuidesView::updateValue )
+            // Observe Night Mode
+            nightModeEnabled.observeData( preferencesToggleNightModeView::updateValue )
         }
-
-
     }
 
     /** When [View] is created for [PreferencesFragment] */
@@ -54,5 +54,11 @@ class PreferencesFragment: ParentFragment( R.layout.fragment_preferences ) {
             R.string.clean_guides_confirmation_dialog_title,
             R.string.clean_guides_confirmation_dialog_description
         ) { preferencesViewModel.cleanGuides() } }
+
+        // Toggle Night Mode
+        preferencesToggleNightModeView.doOnAction {
+            preferencesViewModel.toggleNigheMode()
+            activity?.recreate()
+        }
     }
 }

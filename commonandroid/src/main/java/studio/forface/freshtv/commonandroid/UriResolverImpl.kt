@@ -1,4 +1,4 @@
-package studio.forface.freshtv.commonandroid.utils
+package studio.forface.freshtv.commonandroid
 
 import android.content.Context
 import android.content.ContentResolver

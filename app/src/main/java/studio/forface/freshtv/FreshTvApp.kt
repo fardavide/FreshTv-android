@@ -15,6 +15,7 @@ import studio.forface.freshtv.dimodules.otherErrorGenerators
 import studio.forface.freshtv.dimodules.otherModules
 import studio.forface.freshtv.dimodules.plus
 import studio.forface.freshtv.domain.gateways.AppSettings
+import studio.forface.freshtv.domain.gateways.SettingsListener
 import studio.forface.freshtv.domain.utils.days
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.services.DeleteOldGuidesWorker
@@ -36,7 +37,11 @@ import timber.log.Timber
 @Suppress("unused")
 class FreshTvApp: Application() {
 
+    /** A reference to [AppSettings] */
     private val settings by inject<AppSettings>()
+
+    /** A reference to the active [SettingsListener]s */
+    private val settingsListeners = mutableListOf<SettingsListener>()
 
     /** When the app is created */
     override fun onCreate() {
@@ -60,9 +65,8 @@ class FreshTvApp: Application() {
         Timber.plant( get() )
 
         // Set night mode
-        AppCompatDelegate.setDefaultNightMode(
-            if ( settings.nightMode ) MODE_NIGHT_YES else MODE_NIGHT_NO
-        )
+        setDefaultNightMode( settings.nightMode )
+        settingsListeners += settings.addListener( AppSettings::nightMode, ::setDefaultNightMode )
 
         // Configure Theia
         TheiaConfig {
@@ -81,5 +85,18 @@ class FreshTvApp: Application() {
         RefreshChannelsWorker.enqueue( 1.days )
         RefreshTvGuidesWorker.enqueue( 3.hours )
         DeleteOldGuidesWorker.enqueue( 12.hours )
+    }
+
+    /** When the app is terminated */
+    override fun onTerminate() {
+        settingsListeners.forEach( settings::removeListener )
+        super.onTerminate()
+    }
+
+    /** Enable or disable night mode regarding [enabled] param */
+    private fun setDefaultNightMode( enabled: Boolean ) {
+        AppCompatDelegate.setDefaultNightMode(
+            if ( enabled ) MODE_NIGHT_YES else MODE_NIGHT_NO
+        )
     }
 }

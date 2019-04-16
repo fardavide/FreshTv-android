@@ -1,5 +1,6 @@
 package studio.forface.freshtv.commonandroid.ui
 
+import android.animation.LayoutTransition
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -80,6 +81,12 @@ abstract class BaseActivity(
         super.onStop()
     }
 
+    /** Enable or disable layout animation changes */
+    fun animateLayoutChanges( enable: Boolean ) {
+        if ( enable ) rootView.layoutTransition = LayoutTransition()
+        else rootView.layoutTransition = null
+    }
+
     /** Close the Soft Keyboard */
     fun closeKeyboard() {
         val inputMethodManager = getSystemService<InputMethodManager>() ?: return
@@ -143,4 +150,4 @@ private fun Fragment.assertIsBaseFragment() : BaseFragment {
  * @return OPTIONAL [BaseActivity] from a [BaseFragment] ( optional since the [BaseFragment.getActivity] is also
  * nullable ).
  */
-internal val BaseFragment.baseActivity get() = activity as? BaseActivity
+val BaseFragment.baseActivity get() = activity as? BaseActivity

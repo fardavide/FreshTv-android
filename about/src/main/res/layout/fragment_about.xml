@@ -103,6 +103,28 @@
             android:textAppearance="@style/AboutItemTextAppearance"
             android:text="@string/about_report_issue" />
 
+        <ImageView
+            android:id="@+id/aboutTelegramImageView"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_marginTop="@dimen/about_item_vertical_spacing"
+            app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/aboutReportImageView"
+            app:srcCompat="@drawable/ic_telegram_outline" />
+
+        <TextView
+            android:id="@+id/aboutTelegramTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/about_item_image_text_spacing"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutTelegramImageView"
+            app:layout_constraintEnd_toStartOf="@+id/aboutGuidelineEnd"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aboutTelegramImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutTelegramImageView"
+            android:textAppearance="@style/AboutItemTextAppearance"
+            android:text="@string/about_telegram_group" />
+
         <!-- Author -->
         <TextView
             android:id="@+id/aboutCategoryAuthor"
@@ -111,7 +133,7 @@
             android:layout_marginTop="@dimen/about_category_vertical_spacing"
             android:text="@string/about_cat_author"
             app:layout_constraintStart_toStartOf="@+id/aboutGuidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/aboutReportImageView"
+            app:layout_constraintTop_toBottomOf="@id/aboutTelegramImageView"
             android:textAppearance="@style/AboutCategoryTextAppearance"/>
 
         <ImageView

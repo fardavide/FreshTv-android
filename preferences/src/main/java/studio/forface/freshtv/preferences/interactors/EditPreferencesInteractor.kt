@@ -8,12 +8,14 @@ import org.koin.core.get
  *
  * Implements [CleanChannelsInteractor]
  * Implements [CleanGuidesInteractor]
+ * Implements [ToggleNightModeInteractor]
  *
  * @author Davide Giuseppe Farella
  */
 internal class EditPreferencesInteractor :
     CleanChannelsInteractor by Delegates.get(),
-    CleanGuidesInteractor by Delegates.get()
+    CleanGuidesInteractor by Delegates.get(),
+    ToggleNightModeInteractor by Delegates.get()
 
 /** A [KoinComponent] for get Delegates for [EditPreferencesInteractor] */
 private object Delegates : KoinComponent
