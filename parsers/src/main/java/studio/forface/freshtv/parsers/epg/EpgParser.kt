@@ -6,10 +6,10 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.TvGuide
 import studio.forface.freshtv.domain.errors.ParsingEpgError
 import studio.forface.freshtv.domain.utils.ago
-import studio.forface.freshtv.domain.utils.compareTo
 import studio.forface.freshtv.domain.utils.forEachAsync
 import studio.forface.freshtv.domain.utils.hours
 import studio.forface.freshtv.parsers.epg.ParsableEpgItem.Result
@@ -20,6 +20,9 @@ import java.io.InputStream
  * A class that parse a [String] EPG
  */
 internal class EpgParser {
+
+    /** A [LocalDateTime] representing the time before that the Guides will be skipped */
+    private val timeFilter by lazy { ( 12 hours ago ).invoke() }
 
     /** Parse the [epgContent] and submit items via the given [SendChannel]s */
     suspend operator fun invoke(
@@ -66,7 +69,7 @@ internal class EpgParser {
     ) {
         when ( result ) {
             is Result.Guide -> {
-                if ( result.content.endTime > 12 hours ago )
+                if ( result.content.endTime > timeFilter )
                     guides.send( result.content )
             }
             is Result.Error -> errors.send( result.error )

@@ -153,7 +153,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
     override fun onOptionsItemSelected( item: MenuItem ): Boolean {
         when ( item.itemId ) {
 
-            R.id.action_delete -> showPanel( item.itemId , panel {
+            R.id.action_delete -> showPanel( item.itemId, panel {
                 header {
                     titleTextRes = confirmDeletionMessageRes
                     titleSpSize = 18f

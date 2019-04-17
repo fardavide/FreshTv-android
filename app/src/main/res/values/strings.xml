@@ -3,6 +3,7 @@
     <!-- Actions -->
     <string name="action_add_playlist">Add a playlist</string>
     <string name="action_add_epg">Add an EPG</string>
+    <string name="action_channels_groups">Groups</string>
 
     <!-- Errors -->
     <string name="read_single_epg_error_count_args">Cannot read %d Guides from EPG: %s</string>
@@ -49,6 +50,7 @@
     <!-- Titles -->
     <string name="title_add_epg">Add EPG</string>
     <string name="title_add_playlist">Add Playlist</string>
+    <string name="title_channels_groups">Channel\'s groups</string>
     <string name="title_edit_epg">Edit EPG</string>
     <string name="title_edit_playlist">Edit Playlist</string>
     <string name="title_movie_channels">Movie Channels</string>

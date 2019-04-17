@@ -4,7 +4,7 @@
     <color name="colorError">@color/red_500</color>
 
     <color name="colorSurface">@color/grey_860</color>
-    <color name="colorOnSurface">@color/white_alpha_60</color>
+    <color name="colorOnSurface">@color/white_alpha_70</color>
     <color name="colorBackground">@color/grey_900</color>
     <color name="colorOnBackground">@color/white_alpha_60</color>
     <bool name="useLightSystemBar">false</bool>

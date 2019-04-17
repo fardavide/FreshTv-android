@@ -55,7 +55,7 @@ infix fun Int.seconds( ago: ago ) = BackDuration( this.seconds )
 object ago
 
 /** A class that holds a [Duration] and can be invoked for retrieve the current time `minus` the [Duration] */
-class BackDuration internal constructor( private val duration: Duration ) {
+inline class BackDuration( private val duration: Duration ) {
     /** @return a [LocalDateTime] represented by the current time `minus` [duration] */
     operator fun invoke(): LocalDateTime = LocalDateTime.now().minus( duration )
 }
