@@ -112,7 +112,7 @@ internal class Settings( private val preferences: SharedPreferences ) {
      *
      * @return [Settings.Listener]
      */
-    fun <T> addListener( key: String, callback: (T) -> Unit ): SettingsListener  {
+    fun <T> addListener( key: String, callback: (T) -> Unit ): SettingsListener {
         val cache = Listener.Cache( preferences.all[key] )
 
         val prefsListener =

@@ -19,31 +19,17 @@ import studio.forface.theia.dsl.invoke
 import studio.forface.theia.dsl.placeholderDrawableRes
 
 /**
- * @author Davide Giuseppe Farella.
  * A [PagedListAdapter] for [TvChannelUiModel]
+ * Inherit from [AbsChannelsAdapter]
  *
- * Inherit from [ClickableAdapter]
+ * @author Davide Giuseppe Farella.
  */
 internal class TvChannelsAdapter:
-        BasePagedAdapter<TvChannelUiModel, TvChannelsAdapter.TvChannelViewHolder>( DiffCallback ) {
-
-    /** A callback that will be triggered when an item is long clicked */
-    var onItemFavoriteChange: (FavoritedChannel) -> Unit = {}
-
-    /**
-     * An invoker for [onItemLongClick], we use it so the `ViewHolder` will always use the updated
-     * [onItemLongClick] even if it changes after the `ViewHolder` is created.
-     */
-    private val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
+    AbsChannelsAdapter<TvChannelUiModel, TvChannelsAdapter.TvChannelViewHolder>( DiffCallback ) {
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): TvChannelViewHolder {
         return TvChannelViewHolder( parent.inflate( item_channel_tv ) )
-    }
-
-    override fun prepareClickListeners( holder: TvChannelsAdapter.TvChannelViewHolder ) {
-        super.prepareClickListeners( holder )
-        holder.itemFavoriteChangeInvoker = this.itemFavoriteChangeInvoker
     }
 
     /** A [DiffUtil.ItemCallback] for [TvChannelsAdapter] */
@@ -60,11 +46,9 @@ internal class TvChannelsAdapter:
 
     /**
      * A `ViewHolder` for [TvChannelsAdapter]
-     * Inherit from [ClickableAdapter.ViewHolder]
+     * Inherit from [AbsChannelsAdapter.ViewHolder]
      */
-    class TvChannelViewHolder( itemView: View ): ClickableAdapter.ViewHolder<TvChannelUiModel>( itemView ) {
-
-        internal var itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit = {}
+    class TvChannelViewHolder( itemView: View ): AbsChannelsAdapter.ViewHolder<TvChannelUiModel>( itemView ) {
 
         /** @see ClickableAdapter.ViewHolder.onBind */
         override fun onBind( item: TvChannelUiModel ) = with<View, Unit>( itemView ) {

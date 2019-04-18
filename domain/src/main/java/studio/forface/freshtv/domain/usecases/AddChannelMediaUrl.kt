@@ -2,7 +2,7 @@ package studio.forface.freshtv.domain.usecases
 
 import studio.forface.freshtv.domain.gateways.LocalData
 import studio.forface.freshtv.domain.entities.IChannel
-import studio.forface.freshtv.domain.gateways.invoke
+import studio.forface.freshtv.domain.utils.invoke
 import studio.forface.freshtv.domain.utils.plus
 
 /**

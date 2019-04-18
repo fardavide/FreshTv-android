@@ -27,7 +27,6 @@
     <string name="about_roadmap">Roadmap</string>
     <string-array name="about_roadmap_values">
         <item>%1Italian%2 translation</item>
-        <item>%1Restore last position%2 in Channel\'s list</item>
         <item>Store %1Movies\' progress%2</item>
         <item>Improvements on %1channel\'s clean up%2 on Playlist deletion in database</item>
         <item>%1Floating Player%2</item>
@@ -40,6 +39,7 @@
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
+        <item>Restore %1last open Group%2</item>
         <item>Channel\'s %1Groups shortcut%2 on bottom bar</item>
         <item>Bug-fix for %1Samsung Galaxy S4%2</item>
         <item>Link to %1Telegram group%2 in About screen</item>

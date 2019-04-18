@@ -59,13 +59,7 @@ internal class PreferencesViewModel(
     }
 
     /** Toggle the Nighe Mode */
-    fun toggleNigheMode() {
+    fun toggleNightMode() {
         interactor.toggleNightMode()
-    }
-
-    /** When the `ViewModel` is cleared */
-    override fun onCleared() {
-        presenter.clean()
-        super.onCleared()
     }
 }

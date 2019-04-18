@@ -4,6 +4,7 @@ package studio.forface.freshtv.localdata
 
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.map
 import kotlinx.coroutines.coroutineScope
 import org.threeten.bp.LocalDateTime
 import studio.forface.freshtv.domain.entities.*
@@ -263,7 +264,12 @@ abstract class AbsLocalData<
 
     /** @return the [ChannelGroup] with [ChannelGroup.Type.MOVIE] */
     override fun movieGroups(): List<ChannelGroup> =
-        channelGroups.allMovie().map { channelGroupMapper { it.toEntity() } }
+        channelGroups.allMovie().map( channelGroupMapper ) { it.toEntity() }
+
+    /** @return [ReceiveChannel] of [List] of the [ChannelGroup] with [ChannelGroup.Type.MOVIE] */
+    override suspend fun observeMovieGroups() : ReceiveChannel<List<ChannelGroup>> =
+        channelGroups.observeAllMovie().map { it.map( channelGroupMapper ) { pojo -> pojo.toEntity() } }
+
 
     /** @return [Playlist] with the given [playlistPath] */
     override fun playlist( playlistPath: String ) : Playlist =
@@ -314,6 +320,10 @@ abstract class AbsLocalData<
     /** @return the [ChannelGroup] with [ChannelGroup.Type.TV] */
     override fun tvGroups(): List<ChannelGroup> =
             channelGroups.allTv().map { channelGroupMapper { it.toEntity() } }
+
+    /** @return [ReceiveChannel] of [List] of the [ChannelGroup] with [ChannelGroup.Type.TV] */
+    override suspend fun observeTvGroups() : ReceiveChannel<List<ChannelGroup>> =
+        channelGroups.observeAllTv().map { it.map( channelGroupMapper ) { pojo -> pojo.toEntity() } }
 
     /** @return the [TvGuide] with the given [guideId] */
     override fun tvGuide( guideId: String ) = tvGuideMapper { tvGuides.guide( guideId ).toEntity() }

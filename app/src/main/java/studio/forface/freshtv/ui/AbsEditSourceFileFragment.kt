@@ -28,6 +28,7 @@ import studio.forface.freshtv.uimodels.SourceFileUiModel
 import studio.forface.freshtv.viewmodels.AbsEditSourceFileViewModel
 import studio.forface.materialbottombar.dsl.panel
 import studio.forface.materialbottombar.panels.params.*
+import java.io.Serializable
 
 /**
  * @author Davide Giuseppe Farella
@@ -46,6 +47,9 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
      * @see onOptionsItemSelected
      */
     @get:StringRes protected abstract val confirmDeletionMessageRes: Int
+
+    /** A backup value of the current [State] to save on [onSaveInstanceState] */
+    private var currentState: State? = null
 
     /** A reference to [EditViewModel] for edit a Source File element */
     protected abstract val editViewModel: EditViewModel
@@ -85,25 +89,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
         super.onActivityCreated( savedInstanceState )
 
         // Observe to a State for the Fragment
-        editViewModel.state.observeData { state ->
-            when ( state ) {
-                is SaveCompleted -> onSaveComplete()
-                is ReadyToSave -> fab?.show()
-                else -> fab?.hide()
-            }
-
-            // Choose a layout to apply, according to the current state
-            val layoutRes = when ( state ) {
-                is ChooseType -> R.layout.fragment_source_file_edit_state_choose_type
-                is Editing -> when( state.type ) {
-                    LOCAL -> R.layout.fragment_source_file_edit_state_editing_file
-                    REMOTE -> R.layout.fragment_source_file_edit_state_editing_web
-                }
-                else -> null
-            }
-            // Create ConstraintSet with layoutRes and apply to ConstraintLayout
-            layoutRes?.let { layout?.applyWithTransition( it ) }
-        }
+        editViewModel.state.observeData( ::onStateChange )
 
         // Observe to Form for the Fragment
         editViewModel.form.observeData {
@@ -125,7 +111,12 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
         super.onViewCreated( view, savedInstanceState )
 
         setupViewTexts()
+        // If a State is present in savedInstanceState, restore it
+        savedInstanceState?.getSerializable( State.ARG_KEY )
+            ?.let { it as State }
+            ?.let( ::onStateRestored )
 
+        // Disable url change in Mode.EDIT
         editSourceFileUrlEditText.isEnabled = mode == CREATE
 
         with( editViewModel ) {
@@ -212,7 +203,7 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
                     pickFile()
                 } else {
                     // permission denied, boo!
-                    val ex = Exception( "Permissions denies: ${permissions.joinToString()}" )
+                    val ex = Exception( "Permissions denied: ${permissions.joinToString()}" )
                     notifier.error( ex, R.string.permission_denied ) {
                         actionNameRes = R.string.action_grant
                         actionBlock = { pickFileWithPermissions() }
@@ -220,6 +211,12 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
                 }
             }
         }
+    }
+
+    /** When the current state of this `Fragment` is saved */
+    override fun onSaveInstanceState( outState: Bundle ) {
+        currentState?.let { outState.putSerializable( State.ARG_KEY, it ) }
+        super.onSaveInstanceState( outState )
     }
 
     /** When a File is selected as Source path */
@@ -232,6 +229,35 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
         editSourceFileNameEditText.setText( sourceFile.shownName )
         editSourceFilePathEditText.setText( sourceFile.fullPath )
         editSourceFileUrlEditText.setText( sourceFile.fullPath )
+    }
+
+    /** When [State] changed for this `Fragment` */
+    private fun onStateChange( newState: State ) {
+        currentState = newState
+        when ( newState ) {
+            is SaveCompleted -> onSaveComplete()
+            is ReadyToSave -> fab?.show()
+            else -> fab?.hide()
+        }
+
+        // Choose a layout to apply, according to the current state
+        val layoutRes = when ( newState ) {
+            is ChooseType -> R.layout.fragment_source_file_edit_state_choose_type
+            is Editing -> when( newState.type ) {
+                LOCAL -> R.layout.fragment_source_file_edit_state_editing_file
+                REMOTE -> R.layout.fragment_source_file_edit_state_editing_web
+            }
+            else -> null
+        }
+        // Create ConstraintSet with layoutRes and apply to ConstraintLayout
+        layoutRes?.let { layout?.applyWithTransition( it ) }
+    }
+
+    /** When a [State] is restored from `savedInstanceState` */
+    private fun onStateRestored( restoredState: State ) {
+        onStateChange( restoredState )
+        // If restoredState is Editing, update the type to editViewModel
+        if ( restoredState is Editing ) editViewModel.type = restoredState.type
     }
 
     /** Pick a File to be used as `Playlist`s path */
@@ -267,7 +293,12 @@ internal abstract class AbsEditSourceFileFragment<EditViewModel: AbsEditSourceFi
     enum class Mode { CREATE, EDIT }
 
     /** An enum for the current state of the [EditEpgFragment] */
-    sealed class State {
+    sealed class State : Serializable {
+        companion object {
+            /** A [String] key for store and retrieve [State] into `Fragment`s arguments */
+            const val ARG_KEY = "state"
+        }
+
         object ChooseType : State()
         class Editing( val type: SourceFile.Type ) : State()
         object ReadyToSave : State()

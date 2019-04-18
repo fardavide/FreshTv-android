@@ -1,13 +1,23 @@
 package studio.forface.freshtv.domain.entities
 
+import java.io.Serializable
+
 /**
  * @author Davide Giuseppe Farella
  * An entity for a File Source
  */
 sealed class SourceFile {
 
+    /**
+     * A [String] representing the identifier path of the this [SourceFile]
+     * It will be an url if [type] is [Type.REMOTE] or a path to the Uri if [type] is [Type.LOCAL]
+     */
     abstract val path: String
+
+    /** The [Type] for this [SourceFile]. [Type.LOCAL] or [Type.REMOTE] */
     abstract val type: Type
+
+    /** An OPTIONAL [String] name for this [SourceFile] */
     abstract val name: String?
 
     data class Epg(
@@ -43,5 +53,5 @@ sealed class SourceFile {
     }
 
     /** An enum for the types of Playlist */
-    enum class Type { LOCAL, REMOTE }
+    enum class Type : Serializable { LOCAL, REMOTE }
 }

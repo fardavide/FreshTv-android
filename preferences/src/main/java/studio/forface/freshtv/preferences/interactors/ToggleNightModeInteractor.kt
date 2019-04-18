@@ -7,7 +7,7 @@ import studio.forface.freshtv.domain.gateways.AppSettings
  *
  * @author Davide Giuseppe Farella
  */
-internal interface ToggleNightModeInteractor {
+internal interface ToggleNightModeInteractor { // TODO use case
 
     /** Toggle the Night Mode */
     fun toggleNightMode()

@@ -57,7 +57,7 @@ class PreferencesFragment: ParentFragment( R.layout.fragment_preferences ) {
 
         // Toggle Night Mode
         preferencesToggleNightModeView.doOnAction {
-            preferencesViewModel.toggleNigheMode()
+            preferencesViewModel.toggleNightMode()
             activity?.recreate()
         }
     }

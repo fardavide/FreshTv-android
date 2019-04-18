@@ -18,8 +18,8 @@ import studio.forface.freshtv.domain.entities.Validable
 import studio.forface.freshtv.domain.utils.EMPTY_STRING
 import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.entities.SourceFilePath
-import studio.forface.freshtv.interactors.AbsEditSourceFileInteractor
-import studio.forface.freshtv.presenters.AbsSourceFilePresenter
+import studio.forface.freshtv.interactors.EditSourceFileInteractor
+import studio.forface.freshtv.presenters.SourceFilePresenter
 import studio.forface.freshtv.ui.AbsEditSourceFileFragment
 import studio.forface.freshtv.ui.AbsEditSourceFileFragment.State.*
 import studio.forface.freshtv.uimodels.SourceFileEditFormUiModel
@@ -33,9 +33,9 @@ import studio.forface.viewstatestore.*
  * Inherit from [ScopedViewModel]
  */
 internal abstract class AbsEditSourceFileViewModel(
-        private val interactor: AbsEditSourceFileInteractor,
-        private val presenter: AbsSourceFilePresenter,
-        private val filePath: String?
+    private val interactor: EditSourceFileInteractor,
+    private val presenter: SourceFilePresenter,
+    private val filePath: String?
 ): ScopedViewModel() {
 
     /** A [LockedViewStateStore] of [SourceFileEditFormUiModel] */
@@ -145,7 +145,7 @@ internal abstract class AbsEditSourceFileViewModel(
         state.postData( SaveCompleted )
     }
 
-    /** When [SourceFileUiModel] is received from [AbsSourceFilePresenter] */
+    /** When [SourceFileUiModel] is received from [SourceFilePresenter] */
     private fun onSourceFileReceived( uiModel: SourceFileUiModel ) {
         with( uiModel ) {
             type = sourceType
@@ -157,7 +157,7 @@ internal abstract class AbsEditSourceFileViewModel(
 
     /** When [path] has changed */
     private fun onPathChange() {
-        val isValid = when ( type!! ) {
+        val isValid = when ( type!! ) { // TODO NPE on Fragment restored
             SourceFile.Type.LOCAL -> SourceFilePath( path ).valid
             SourceFile.Type.REMOTE -> {
                 val result = Url( path ).validate()

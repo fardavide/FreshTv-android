@@ -3,6 +3,7 @@ package studio.forface.freshtv.ui
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.postDelayed
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -14,6 +15,8 @@ import studio.forface.freshtv.commonandroid.ui.ParentFragment
 import studio.forface.freshtv.commonandroid.utils.onPageChange
 import studio.forface.freshtv.ui.AbsChannelGroupsFragment.GroupsAdapter
 import studio.forface.freshtv.uimodels.ChannelGroupUiModel
+import studio.forface.freshtv.uimodels.ChannelGroupsUiModel
+import studio.forface.freshtv.viewmodels.ChannelGroupsViewModel
 import studio.forface.materialbottombar.dsl.panel
 import studio.forface.materialbottombar.panels.AbsMaterialPanel
 import studio.forface.materialbottombar.panels.items.PrimaryPanelItem
@@ -21,20 +24,23 @@ import studio.forface.materialbottombar.panels.params.titleColorRes
 import studio.forface.materialbottombar.panels.params.titleTextRes
 
 /**
- * A abstract `Fragment` for see the stored `Channel`s Groups
+ * An abstract `Fragment` for see the stored `Channel`s Groups
  * Inherit from [ParentFragment]
  *
- * @param createChildFragment a lambda that creates the required [NestedFragment] for the [GroupsAdapter.getItem]
+ * @param createChildFragment a lambda that creates the required [ChannelsFragment] for the [GroupsAdapter.getItem]
  *
  *
  * @author Davide Giuseppe Farella
  */
 internal abstract class AbsChannelGroupsFragment(
-    createChildFragment: (groupName: String) -> NestedFragment<*>
+    createChildFragment: (groupName: String) -> ChannelsFragment<*>
 ) : ParentFragment( R.layout.fragment_view_pager_tabbed ) {
 
     /** A reference to [GroupsAdapter] for [viewPager] */
     private val adapter by lazy { GroupsAdapter( requireFragmentManager(), createChildFragment ) }
+
+    /** A reference to [ChannelGroupsViewModel] for retrieve the stored `Channel`s */
+    protected abstract val channelGroupsViewModel: ChannelGroupsViewModel
 
     /** A `MaterialPanel` for show the list of available `Groups` */
     private val groupsPanel by lazy {
@@ -69,12 +75,21 @@ internal abstract class AbsChannelGroupsFragment(
     /** Reference to [ViewPager] */
     private val viewPager get() = requireView().findViewById<ViewPager>( R.id.viewPager )
 
+    /** When the `Activity` is created */
+    override fun onActivityCreated( savedInstanceState: Bundle? ) {
+        super.onActivityCreated( savedInstanceState )
+        channelGroupsViewModel.groups.observe {
+            doOnData( ::onGroups )
+            doOnError { notifier.error( it ) }
+        }
+    }
+
     /** When the [AbsChannelGroupsFragment]s [View] is created */
     override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated( view, savedInstanceState )
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager( viewPager )
-        viewPager.onPageChange { position -> groupsPanelBody.setSelected( position ) }
+        viewPager.onPageChange( ::onViewPagerPageChange )
     }
 
     /**
@@ -94,11 +109,28 @@ internal abstract class AbsChannelGroupsFragment(
         super.onDestroy()
     }
 
-    /** When [ChannelGroupUiModel]s are received */
-    protected fun onGroups( groups: List<ChannelGroupUiModel> ) {
+    /** When [ChannelGroupsUiModel]s are received */
+    private fun onGroups( groupsUiModel: ChannelGroupsUiModel ) {
+        val ( groups, savedPosition ) = groupsUiModel
+
+        // Set the tabMode to tabLayout
         tabLayout.tabMode = if ( groups.size >= 4 ) TabLayout.MODE_SCROLLABLE else TabLayout.MODE_FIXED
+        // Update the adapter for viewPager
         adapter.groups = groups
+        // Update the currentItem of ViewPager if savedPosition is not null.
+        // The action will be executed with a delay of 100 ms for let the viewPager and relative tabLayout asset first
+        if ( savedPosition != null )
+            viewPager.postDelayed(100 ) { viewPager.currentItem = savedPosition }
+
+        // Update the panel
         updatePanelGroups( groups )
+    }
+
+    /** When the current page is changed for [viewPager] */
+    private fun onViewPagerPageChange( position: Int ) {
+        groupsPanelBody.setSelected( position )
+        val currentGroupName = adapter.groups[position].name
+        channelGroupsViewModel.saveLastGroupName( currentGroupName )
     }
 
     /** Update the groups for [groupsPanel] */

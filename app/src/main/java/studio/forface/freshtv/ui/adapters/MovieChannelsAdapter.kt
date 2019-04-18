@@ -6,41 +6,27 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import kotlinx.android.synthetic.main.item_channel_movie.view.*
 import studio.forface.freshtv.R.layout.item_channel_movie
-import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
 import studio.forface.freshtv.commonandroid.utils.colorOnSurface
 import studio.forface.freshtv.commonandroid.utils.inflate
-import studio.forface.freshtv.domain.usecases.FavoritedChannel
 import studio.forface.freshtv.uimodels.MovieChannelUiModel
-import studio.forface.theia.dsl.*
+import studio.forface.theia.dsl.imageDrawable
+import studio.forface.theia.dsl.imageUrl
+import studio.forface.theia.dsl.invoke
+import studio.forface.theia.dsl.placeholderDrawableRes
 
 /**
- * @author Davide Giuseppe Farella.
  * A [PagedListAdapter] for [MovieChannelUiModel]
+ * Inherit from [AbsChannelsAdapter]
  *
- * Inherit from [ClickableAdapter]
+ * @author Davide Giuseppe Farella.
  */
 internal class MovieChannelsAdapter:
-        BasePagedAdapter<MovieChannelUiModel, MovieChannelsAdapter.MovieChannelViewHolder>( DiffCallback ) {
-
-    /** A callback that will be triggered when an item is long clicked */
-    var onItemFavoriteChange: (FavoritedChannel) -> Unit = {}
-
-    /**
-     * An invoker for [onItemLongClick], we use it so the `ViewHolder` will always use the updated
-     * [onItemLongClick] even if it changes after the `ViewHolder` is created.
-     */
-    private val itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit get() = { onItemFavoriteChange( it ) }
+        AbsChannelsAdapter<MovieChannelUiModel, MovieChannelsAdapter.MovieChannelViewHolder>( DiffCallback ) {
 
     /** @see PagedListAdapter.onCreateViewHolder */
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): MovieChannelViewHolder {
         return MovieChannelViewHolder( parent.inflate( item_channel_movie ) )
-    }
-
-    /** @see ClickableAdapter.prepareClickListeners */
-    override fun prepareClickListeners( holder: MovieChannelViewHolder ) {
-        super.prepareClickListeners( holder )
-        holder.itemFavoriteChangeInvoker = this.itemFavoriteChangeInvoker
     }
 
     /** A [DiffUtil.ItemCallback] for [MovieChannelsAdapter] */
@@ -57,11 +43,9 @@ internal class MovieChannelsAdapter:
 
     /**
      * A `ViewHolder` for [MovieChannelsAdapter]
-     * Inherit from [ClickableAdapter.ViewHolder]
+     * Inherit from [AbsChannelsAdapter.ViewHolder]
      */
-    class MovieChannelViewHolder( itemView: View): ClickableAdapter.ViewHolder<MovieChannelUiModel>( itemView ) {
-
-        internal var itemFavoriteChangeInvoker: (FavoritedChannel) -> Unit = {}
+    class MovieChannelViewHolder( itemView: View): AbsChannelsAdapter.ViewHolder<MovieChannelUiModel>( itemView ) {
 
         /** @see ClickableAdapter.ViewHolder.onBind */
         override fun onBind( item: MovieChannelUiModel ) = with( itemView ) {

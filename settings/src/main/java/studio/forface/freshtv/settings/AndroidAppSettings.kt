@@ -13,6 +13,30 @@ import kotlin.reflect.KProperty
 internal class AndroidAppSettings( private val settings: Settings ): AppSettings {
 
     /**
+     * An OPTIONAL [String] representing the name of the last selected `MovieChannel`s `Group`
+     * Default is `null`
+     */
+    override var lastMovieChannelGroupName by settings<String?>()
+
+    /**
+     * An OPTIONAL [String] representing the id of the last `MovieChannel` shown in the center of the screen
+     * Default is `null`
+     */
+    override var lastMovieChannelId by settings<String?>()
+
+    /**
+     * An OPTIONAL [String] representing the name of the last selected `TvChannel`s `Group`
+     * Default is `null`
+     */
+    override var lastTvChannelGroupName by settings<String?>()
+
+    /**
+     * An OPTIONAL [String] representing the id of the last `TvChannel` shown in the center of the screen
+     * Default is `null`
+     */
+    override var lastTvChannelId by settings<String?>()
+
+    /**
      * A [Boolean] representing whether the night mode is enabled
      * Default is `true`
      */
@@ -28,7 +52,7 @@ internal class AndroidAppSettings( private val settings: Settings ): AppSettings
      * Add a listener for the given [KProperty]
      * @return [SettingsListener]
      */
-    override fun <T> addListener( property: KProperty<T>, block: (T) -> Unit ) =
+    override fun <T : Any> addListener( property: KProperty<T>, block: (T) -> Unit ) =
         settings.addListener( property.name, block )
 
     /** Remove the given [SettingsListener] */

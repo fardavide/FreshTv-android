@@ -1,6 +1,5 @@
 package studio.forface.freshtv.ui
 
-import android.os.Bundle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import studio.forface.freshtv.R
 import studio.forface.freshtv.commonandroid.ui.ParentFragment
@@ -21,20 +20,11 @@ internal class TvChannelGroupsFragment :
     }
 
     /** A reference to [TvChannelGroupsViewModel] for retrieve the stored `Channel`s */
-    private val channelGroupsViewModel by viewModel<TvChannelGroupsViewModel>()
+    override val channelGroupsViewModel by viewModel<TvChannelGroupsViewModel>()
 
     /** An id for [groupsPanel] */
     override val groupPanelId = 476878
 
     /** @see ParentFragment.titleRes */
     override val titleRes get() = R.string.title_tv_channels
-
-    /** When the `Activity` is created */
-    override fun onActivityCreated( savedInstanceState: Bundle? ) {
-        super.onActivityCreated( savedInstanceState )
-        channelGroupsViewModel.groups.observe {
-            doOnData( ::onGroups )
-            doOnError { notifier.error( it ) }
-        }
-    }
 }

@@ -18,7 +18,7 @@ internal class FreshPlayerView @JvmOverloads constructor(
 ) : PlayerView( context, attrs, defStyleAttr ) {
 
     /** Override [onTouchEvent] for avoid the spamming of [performClick] */
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility") // performClick not needed on this View
     override fun onTouchEvent( event: MotionEvent ): Boolean {
         return true
     }

@@ -1,9 +1,12 @@
 package studio.forface.freshtv.localdata.sqldelight.sources
 
+import kotlinx.coroutines.channels.ReceiveChannel
 import studio.forface.freshtv.domain.entities.ChannelGroup.Type
 import studio.forface.freshtv.localdata.sources.ChannelGroupsLocalSource
 import studio.forface.freshtv.localdata.sqldelight.ChannelGroupPojo
 import studio.forface.freshtv.localdata.sqldelight.ChannelGroupQueries
+import studio.forface.freshtv.localdata.sqldelight.utils.asChannel
+import studio.forface.freshtv.localdata.sqldelight.utils.mapToList
 
 /**
  * @author Davide Giuseppe Farella.
@@ -16,8 +19,14 @@ class DelightChannelGroupsLocalSource(
     /** @return all the stored [ChannelGroupPojo] of [Type.MOVIE] */
     override fun allMovie() = queries.selectMovie().executeAsList()
 
+    /** @return a [ReceiveChannel] of all the stored [ChannelGroupPojo] of [Type.MOVIE] */
+    override suspend fun observeAllMovie() = queries.selectMovie().asChannel().mapToList()
+
     /** @return all the stored [ChannelGroupPojo] of [Type.TV] */
     override fun allTv() = queries.selectTv().executeAsList()
+
+    /** @return a [ReceiveChannel] of all the stored [ChannelGroupPojo] of [Type.TV] */
+    override suspend fun observeAllTv() = queries.selectTv().asChannel().mapToList()
 
     /** Create a new [ChannelGroupPojo] */
     override fun createChannelGroup( group: ChannelGroupPojo) {

@@ -9,12 +9,15 @@ import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.domain.utils.or
 import studio.forface.freshtv.domain.entities.SourceFile.Epg
 import studio.forface.freshtv.domain.entities.SourceFile.Playlist
+import studio.forface.freshtv.domain.utils.Invokable
 
 /**
- * @author Davide Giuseppe Farella.
  * A repository for retrieve and store [IChannel]s and EPG info locally.
+ * Inherit from [Invokable]
+ *
+ * @author Davide Giuseppe Farella
  */
-interface LocalData {
+interface LocalData : Invokable {
 
     /**
      * @return all the [IChannel]s from Local Source
@@ -110,6 +113,9 @@ interface LocalData {
     /** @return the [ChannelGroup] with [ChannelGroup.Type.MOVIE] */
     fun movieGroups() : List<ChannelGroup>
 
+    /** @return [ReceiveChannel] of [List] of the [ChannelGroup] with [ChannelGroup.Type.MOVIE] */
+    suspend fun observeMovieGroups() : ReceiveChannel<List<ChannelGroup>>
+
     /** @return the stored [Playlist] with the given [playlistPath] */
     fun playlist( playlistPath: String ) : Playlist
 
@@ -168,6 +174,9 @@ interface LocalData {
     /** @return the [ChannelGroup] with [ChannelGroup.Type.TV] */
     fun tvGroups() : List<ChannelGroup>
 
+    /** @return [ReceiveChannel] of [List] of the [ChannelGroup] with [ChannelGroup.Type.TV] */
+    suspend fun observeTvGroups() : ReceiveChannel<List<ChannelGroup>>
+
     /** @return the [TvGuide] with the given [guideId] */
     fun tvGuide( guideId: String ): TvGuide
 
@@ -204,12 +213,6 @@ interface LocalData {
         val isFailed get() = this == FAILURE
     }
 }
-
-/**
- * An invoke function for execute a [block] within a [LocalData]
- * @return [T]
- */
-operator fun <T> LocalData.invoke( block: LocalData.() -> T ) = block()
 
 /** Update a [IChannel] in the appropriate Local Source, by its [IChannel.id] and a lambda [block] */
 inline fun LocalData.updateChannel( channelId: String, block: (IChannel) -> IChannel ) {

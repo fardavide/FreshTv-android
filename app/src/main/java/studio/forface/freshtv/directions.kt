@@ -1,22 +1,16 @@
 package studio.forface.freshtv
 
 import studio.forface.freshtv.domain.utils.Invokable
-import studio.forface.freshtv.ui.MovieChannelGroupsFragmentDirections
-import studio.forface.freshtv.ui.MovieChannelsFragment
-import studio.forface.freshtv.ui.TvChannelGroupsFragmentDirections
-import studio.forface.freshtv.ui.TvChannelsFragment
+import studio.forface.freshtv.ui.*
+import studio.forface.freshtv.ui.ChannelsFragment
 
 /** Shadow of [studio.forface.freshtv.player.ui.PlayerFragment] */
 @Suppress("unused")
 object PlayerFragment : Invokable {
 
-    /** @return `NavDirections` to `PlayerActivity` from [TvChannelsFragment] */
-    internal fun TvChannelsFragment.directions( channelId: String ) =
+    /** @return `NavDirections` to `PlayerActivity` from [ChannelsFragment] */
+    internal fun ChannelsFragment<*>.directions(channelId: String ) =
         TvChannelGroupsFragmentDirections.actionTvChannelsFragmentToPlayerActivity( channelId )
-
-    /** @return `NavDirections` to `PlayerActivity` from [MovieChannelsFragment] */
-    internal fun MovieChannelsFragment.directions(channelId: String ) =
-        MovieChannelGroupsFragmentDirections.actionMovieChannelsFragmentToPlayerActivity( channelId )
 }
 
 /** Shadow of [studio.forface.freshtv.about.ui.AboutFragment] */
