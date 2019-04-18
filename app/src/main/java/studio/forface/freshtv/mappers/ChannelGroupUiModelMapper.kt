@@ -34,10 +34,10 @@ internal class ChannelGroupUiModelMapper : UiModelMapper<ChannelGroup, ChannelGr
  */
 internal class ChannelGroupsUiModelMapper(
     private val subMapper: ChannelGroupUiModelMapper
-): UiModelMapper<GroupsWithLastChannelName, ChannelGroupsUiModel, Unsupported>() {
+): UiModelMapper<GroupsWithLastGroupName, ChannelGroupsUiModel, Unsupported>() {
 
     /** @see UiModelMapper.toUiModel */
-    override fun GroupsWithLastChannelName.toUiModel(): ChannelGroupsUiModel {
+    override fun GroupsWithLastGroupName.toUiModel(): ChannelGroupsUiModel {
         val groupsUiModel: List<ChannelGroupUiModel> = groups.map( subMapper ) { it.toUiModel() }
         // Find the index ( position ) for lastGroupName, if not null; if the result is less than 0 ( item not found ),
         // set it as null
@@ -55,10 +55,10 @@ internal class ChannelGroupsUiModelMapper(
  * A typealias for a [Pair] of a [List] of [ChannelGroup] and an OPTIONAL [String] representing the name of the last
  * [ChannelGroup]
  */
-private typealias GroupsWithLastChannelName = Pair<List<ChannelGroup>, String?>
+private typealias GroupsWithLastGroupName = Pair<List<ChannelGroup>, String?>
 
-/** @return a [List] of [ChannelGroup] from [GroupsWithLastChannelName] */
-private val GroupsWithLastChannelName.groups get() = first
+/** @return a [List] of [ChannelGroup] from [GroupsWithLastGroupName] */
+private val GroupsWithLastGroupName.groups get() = first
 
-/** @return an OPTIONAL [String] representing the name of the last [ChannelGroup] from [GroupsWithLastChannelName] */
-private val GroupsWithLastChannelName.lastGroupName get() = second
+/** @return an OPTIONAL [String] representing the name of the last [ChannelGroup] from [GroupsWithLastGroupName] */
+private val GroupsWithLastGroupName.lastGroupName get() = second

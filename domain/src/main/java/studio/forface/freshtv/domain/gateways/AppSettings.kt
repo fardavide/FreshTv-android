@@ -19,11 +19,17 @@ interface AppSettings {
     /** An OPTIONAL [String] representing the id of the last `MovieChannel` shown in the center of the screen */
     var lastMovieChannelId: String?
 
+    /** An OPTIONAL [Int] representing the position of the last `MovieChannel` shown on the screen */
+    var lastMovieChannelPosition: Int?
+
     /** An OPTIONAL [String] representing the name of the last selected `TvChannel`s `Group` */
     var lastTvChannelGroupName: String?
 
     /** An OPTIONAL [String] representing the id of the last `TvChannel` shown in the center of the screen */
     var lastTvChannelId: String?
+
+    /** An OPTIONAL [Int] representing the position of the last `TvChannel` shown on screen */
+    var lastTvChannelPosition: Int?
 
     /** A [Boolean] representing whether the night mode is enabled */
     var nightMode: Boolean // TODO Build use case

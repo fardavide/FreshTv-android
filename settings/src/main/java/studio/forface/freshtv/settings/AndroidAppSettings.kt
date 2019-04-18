@@ -25,6 +25,12 @@ internal class AndroidAppSettings( private val settings: Settings ): AppSettings
     override var lastMovieChannelId by settings<String?>()
 
     /**
+     * An OPTIONAL [Int] representing the position of the last `MovieChannel` shown on the screen
+     * Default is `null`
+     */
+    override var lastMovieChannelPosition by settings<Int?>()
+
+    /**
      * An OPTIONAL [String] representing the name of the last selected `TvChannel`s `Group`
      * Default is `null`
      */
@@ -35,6 +41,12 @@ internal class AndroidAppSettings( private val settings: Settings ): AppSettings
      * Default is `null`
      */
     override var lastTvChannelId by settings<String?>()
+
+    /**
+     * An OPTIONAL [Int] representing the position of the last `TvChannel` shown on screen
+     * Default is `null`
+     */
+    override var lastTvChannelPosition by settings<Int?>()
 
     /**
      * A [Boolean] representing whether the night mode is enabled

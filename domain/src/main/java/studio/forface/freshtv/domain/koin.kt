@@ -20,9 +20,9 @@ val useCasesModule = module {
     factory { GetCurrentTvGuide( localData = get() ) }
     factory { GetEpg( localData = get() ) }
     factory { GetLastMovieChannelGroupName( appSettings = get() ) }
-    factory { GetLastMovieChannelId( appSettings = get() ) }
+    factory { GetLastMovieChannelIdAndPosition( appSettings = get() ) }
     factory { GetLastTvChannelGroupName( appSettings = get() ) }
-    factory { GetLastTvChannelId( appSettings = get() ) }
+    factory { GetLastTvChannelIdAndPosition( appSettings = get() ) }
     factory { GetMovieChannelGroups( localData = get() ) }
     factory { GetMovieChannels( localData = get() ) }
     factory { GetPlaylist( localData = get() ) }
@@ -60,9 +60,9 @@ val useCasesModule = module {
 
     /* Save */
     factory { SaveLastMovieChannelGroupName( appSettings = get() ) }
-    factory { SaveLastMovieChannelId( appSettings = get() ) }
+    factory { SaveLastMovieChannelIdAndPosition( appSettings = get() ) }
     factory { SaveLastTvChannelGroupName( appSettings = get() ) }
-    factory { SaveLasTvChannelId( appSettings = get() ) }
+    factory { SaveLastTvChannelIdAndPosition( appSettings = get() ) }
 
     /* Update */
     factory { UpdateChannelFavoriteState( localData = get() ) }

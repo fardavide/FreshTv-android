@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
 import studio.forface.freshtv.domain.usecases.FavoritedChannel
+import studio.forface.freshtv.domain.utils.handle
 import studio.forface.freshtv.uimodels.ChannelUiModel
 import studio.forface.freshtv.uimodels.MovieChannelUiModel
 
@@ -36,6 +37,9 @@ internal abstract class AbsChannelsAdapter<
         super.prepareClickListeners( holder )
         holder.itemFavoriteChangeInvoker = this.itemFavoriteChangeInvoker
     }
+
+    /** @return OPTIONAL [String] representing the [ChannelUiModel.id] for item at the given [position] */
+    fun getChannelId( position: Int ) = handle { getItem( position )?.id }
 
     /**
      * An abstract `ViewHolder` for [AbsChannelsAdapter]
