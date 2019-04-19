@@ -1,0 +1,3 @@
+• Performace improved
+• Italian translation
+• Restore the last open Group and Channels' position

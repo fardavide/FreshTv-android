@@ -83,7 +83,7 @@ object Versions {
     val android_test_core =             "1.0.0"
     val android_test_fragment =         "1.1.0-alpha03"
     val android_test_runner =           "1.1.0"
-    val android_theia =                 "0.3-alpha-2"
+    val android_theia =                 "0.3-alpha-5"
     val android_view_pager2 =           "1.0.0-alpha02"
     val android_view_state_store =      "1.2-alpha-6"
     val android_work =                  "2.0.1"

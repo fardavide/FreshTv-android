@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Errors -->
+    <string name="bad_request">400: Richiesta incorretta</string>
+    <string name="forbidden_access">403: Accesso proibuto</string>
+    <string name="malformed_url">Url mal formattato</string>
+    <string name="stream_not_found">404: Flusso non trovato</string>
+    <string name="unknown_host">Impossibile risolvere l\'hostname</string>
+    <string name="unsupported_rtmp_stream">I flussi Rtmp non sono <i>attualmente</i> supportati</string>
+    <string name="unsupported_rtsp_stream">I flussi Rtsp non sono <i>attualmente</i> supportati</string>
+    <string name="unsupported_stream_format">Formato flusso non supportato</string>
+
+    <!-- Images description -->
+    <string name="image_controller_play">Riproduci media</string>
+    <string name="image_controller_pause">Pausa media</string>
+    <string name="image_controller_rotate">Ruota lo schermo</string>
+
+    <!-- Messages -->
+    <string name="message_no_guide_for_channel_arg">Nessuna Guida Tv per questo canale (%s)</string>
+
+    <!-- Others -->
+    <string name="actors">Attori:</string>
+    <string name="category">Categoria</string>
+    <string name="country">Paese</string>
+    <string name="directed_by">Diretto da:</string>
+    <string name="rating">Valutazione</string>
+    <string name="year">Anno</string>
+
+</resources>

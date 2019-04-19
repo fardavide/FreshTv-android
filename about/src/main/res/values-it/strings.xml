@@ -1,0 +1,62 @@
+<resources>
+
+    <!-- About categories -->
+    <string name="about_cat_app">App</string>
+    <string name="about_cat_author">Autore</string>
+
+    <!-- About Items -->
+    <string name="about_changes">Caratteristiche</string>
+    <string name="about_designer_information">Disegnata da <b>Davide Giuseppe Farella ( 4face Studio )</b></string>
+    <string name="about_developer_information">Sviluppata da <b>Davide Giuseppe Farella ( 4face Studio )</b></string>
+    <string name="about_email_information"><b>Mail</b>\nmail@4face.studio</string>
+    <string name="about_icon_pack_information">Icone dal pacchetto <i>Kawaii</i> su FlatIcon.com</string>
+    <string name="about_list_bullet_arg">• %s</string>
+    <string name="about_rate"><u>Vota l\'App</u></string>
+    <string name="about_report_issue"><u>Segnala un problema</u></string>
+    <string name="about_telegram_group"><u>Gruppo Telegram</u></string>
+    <string name="about_telegram_group_link">https://t.me/androidFreshTv</string>
+    <string name="about_version_code_arg"><b>Codice versione</b>\n%d</string>
+    <string name="about_version_name_arg"><b>Nome versione</b>\n%s</string>
+    <string name="about_website_information"><b>Website</b>\nhttp://4face.studio</string>
+
+    <!-- Actions -->
+    <string name="action_collapse">Chiudi</string>
+    <string name="action_expand">Espandi</string>
+
+    <!-- Changes TODO update before release -->
+    <string name="about_roadmap">Piani futuri</string>
+    <string-array name="about_roadmap_values">
+        <item>Memorizzazione del %1progresso per i Film%2</item>
+        <item>Miglioramenti nella %1pulizia dei Canali%2 alla rimozione di una Playlist</item>
+        <item>%1Player fluttuante%2</item>
+        <item>Opzioni di %Ricerca%2</item>
+        <item>Possibilità di %1Modificare%2 Gruppi e Canali</item>
+        <item>%1Info%2 per i Film</item>
+        <item>Miglioramento della visibilità per le %1icone poco visibili%2</item>
+        <item>Schedulazione della %1Night mode%2</item>
+        <item>Supporto a %1Chromecast%2</item>
+    </string-array>
+    <string name="about_what_new">Novità</string>
+    <string-array name="about_what_new_values">
+        <item>Migliorie sulla %1Performance%2</item>
+        <item>Traduzione in %1Italiano%2</item>
+        <item>Ripristino dell\'%1ultimo Grouppo aperto e posizione dei Canali%2</item>
+        <item>%1Scorciatoia ai Gruppi%2 sulla bottom bar</item>
+        <item>Risolto crash su %1Samsung Galaxy S4%2</item>
+        <item>Link al %1Gruppo Telegram%2 nella schermata Informazioni</item>
+        <item>%1Tema Scuro%2</item>A
+        <item>%1EPG%2 parzialmente sistemato</item>
+        <item>Migliorato esteticamente il %1Drawer%2 menu</item>
+        <item>%1Riproduzione continua%2 durante la rotazione dello schermo</item>
+    </string-array>
+
+    <!-- Menu -->
+    <string name="menu_about">Informazioni</string>
+
+    <!-- Others -->
+    <string name="coming_soon">Prossimamente</string>
+
+    <!-- Titles -->
+    <string name="title_about">Informazioni</string>
+
+</resources>

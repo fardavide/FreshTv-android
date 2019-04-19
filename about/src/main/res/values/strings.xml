@@ -26,19 +26,20 @@
     <!-- Changes TODO update before release -->
     <string name="about_roadmap">Roadmap</string>
     <string-array name="about_roadmap_values">
-        <item>%1Italian%2 translation</item>
         <item>Store %1Movies\' progress%2</item>
         <item>Improvements on %1channel\'s clean up%2 on Playlist deletion in database</item>
         <item>%1Floating Player%2</item>
         <item>%1Search%2 feature</item>
         <item>%1Edit%2 Groups and Channels</item>
         <item>%1Info%2 for Movies</item>
-        <item>Improve visibility of %1white icons%2</item>
+        <item>Improve visibility of %barely visible icons%2</item>
         <item>Schedule %1Night mode%2</item>
         <item>%1Chromecast%2 support</item>
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
+        <item>%1Performance%2 improvements</item>
+        <item>%1Italian%2 translation</item>
         <item>Restore %1last open Group and Channel%2\'s position</item>
         <item>Channel\'s %1Groups shortcut%2 on bottom bar</item>
         <item>Bug-fix for %1Samsung Galaxy S4%2</item>

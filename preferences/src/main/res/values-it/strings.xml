@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Categories -->
+    <string name="preferences_cat_design">Design</string>
+    <string name="preferences_cat_database">Database</string>
+
+    <!-- Clean Channels -->
+    <string name="clean_channels_title">Elimina tutti i Canali</string>
+    <string name="clean_channels_description_can_clear">
+        Elimina tutti i <b>Canali</b> salvati nel database, saranno poi aggiunti nuovamente durante la sincronizzazione delle Playlist.
+        Tutte i valori addizionali, come i <b>preferiti</b> ed i <b>fallimenti per i media url</b>, saranno rimossi.
+        Tutti i <b>Gruppi</b> saranno rimossi.
+    </string>
+    <string name="clean_channels_description_empty">Il database dei Canali è già vuoto.</string>
+    <string name="clean_channels_confirmation_dialog_title">Vuoi davvero eliminare <b>tutti</b> i Canali?</string>
+    <string name="clean_channels_confirmation_dialog_description">
+        Questa operazione eliminerà utti i <b>Canali</b> salvati nel database, saranno poi aggiunti nuovamente durante la sincronizzazione delle Playlist.
+        Tutte i valori addizionali, come i <b>preferiti</b> ed i <b>fallimenti per i media url</b>, saranno rimossi.
+        Tutti i <b>Gruppi</b> saranno rimossi.
+    </string>
+
+    <!-- Clean Guides -->
+    <string name="clean_guides_title">Elimina tutte le Guide Tv</string>
+    <string name="clean_guides_description_can_clear">
+        Elimina tutte le <b>Guide Tv</b> salvate nel database, saranno poi aggiunte nuovamente durante la sincronizzazione degli EPG.
+    </string>
+    <string name="clean_guides_description_empty">Il database delle Guide Tv è già vuoto.</string>
+    <string name="clean_guides_confirmation_dialog_title">Vuoi davvero eliminare <b>tuttel</b> le Guide Tv?</string>
+    <string name="clean_guides_confirmation_dialog_description">
+        Questa operazione eliminerà tutte le <b>Guide Tv</b> salvate nel database, saranno poi aggiunte nuovamente durante la sincronizzazione degli EPG.
+    </string>
+
+    <!-- Toggle Night Mode -->
+    <string name="toggle_night_mode_title">Night Mode</string>
+    <string name="toggle_night_mode_description_enabled">Night Mode abilitata</string>
+    <string name="toggle_night_mode_description_disabled">Night Mode disabilitata</string>
+
+    <!-- Menu -->
+    <string name="menu_preferences">Impostazioni</string>
+
+    <!-- Titles -->
+    <string name="title_preferences">Impostazioni</string>
+
+</resources>

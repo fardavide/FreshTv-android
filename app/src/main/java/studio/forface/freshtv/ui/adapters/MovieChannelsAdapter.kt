@@ -45,7 +45,7 @@ internal class MovieChannelsAdapter:
      * A `ViewHolder` for [MovieChannelsAdapter]
      * Inherit from [AbsChannelsAdapter.ViewHolder]
      */
-    class MovieChannelViewHolder( itemView: View): AbsChannelsAdapter.ViewHolder<MovieChannelUiModel>( itemView ) {
+    class MovieChannelViewHolder( itemView: View ): AbsChannelsAdapter.ViewHolder<MovieChannelUiModel>( itemView ) {
 
         /** @see ClickableAdapter.ViewHolder.onBind */
         override fun onBind( item: MovieChannelUiModel ) = with( itemView ) {
@@ -71,6 +71,7 @@ internal class MovieChannelsAdapter:
             val favoriteDrawable = getDrawable( item.favoriteImage ).apply {
                 if ( item.favoriteImageNeedTint ) colorOnSurface( context )
             }
+            //movieChannelFavorite.setImageDrawable( favoriteDrawable )
             theia {
                 imageDrawable = favoriteDrawable
                 target = movieChannelFavorite

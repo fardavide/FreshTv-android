@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Actions -->
+    <string name="action_add_playlist">Aggiungi una Playlist</string>
+    <string name="action_add_epg">Aggiungi un EPG</string>
+    <string name="action_channels_groups">Gruppi</string>
+
+    <!-- Errors -->
+    <string name="read_single_epg_error_count_args">Impossibile leggere %d Guide dall\'EPG: %s</string>
+    <string name="read_single_playlist_error_count_args">Impossibile leggere %d Canali dalla Playlist: %s</string>
+    <string name="read_multi_epg_error_count_args">Impossibile leggere %d Guide da %d EPGs</string>
+    <string name="read_multi_playlist_error_count_args">Impossibile leggere %d Canali da %d Playlist</string>
+
+    <!-- Menu -->
+    <string name="menu_movie_channels">Canali Film</string>
+    <string name="menu_my_epgs">I miei EPG</string>
+    <string name="menu_my_playlists">Le mie Playlist</string>
+    <string name="menu_tv_channels">Canali Tv</string>
+
+    <!-- Images description -->
+    <string name="image_load_from_file">Carica da file</string>
+    <string name="image_load_from_web">Carica da web</string>
+
+    <!-- Messages -->
+    <string name="load_epg_from">Carica EPG da…</string>
+    <string name="load_playlist_from">Carica Playlist da…</string>
+    <string name="refresh_channels_completed">Canali aggiornati</string>
+    <string name="refresh_tv_guides_delayed_title">Aggiornamento delle Guide Tv rimandato</string>
+    <string name="refresh_tv_guides_delayed_message">
+        Dato che l\'aggiornamento delle Guide Tv è un processo impegnativo, verrà rimandato a quando il dispositivo sarà a riposo, per non rallentare le altre operazioni del database
+    </string>
+    <string name="refresh_tv_guides_completed">Guide Tv aggiornate</string>
+
+    <!-- Notifications -->
+    <string name="notification_refresh_channels_failure_title">Problema durante l\'aggiornamento dei Canali</string>
+    <string name="notification_refresh_channels_success_title">Channels have been updated</string>
+    <string name="notification_refresh_tv_guide_failure_title">Problema durante l\'aggiornamento delle Guide Tv</string>
+    <string name="notification_refresh_tv_guide_success_title">Tv Guides have been updated</string>
+
+    <!-- Prompt -->
+    <string name="prompt_delete_epg">Vuoi davvero eliminare questo EPG?</string>
+    <string name="prompt_delete_playlist">Vuoi davvero eliminare questa Playlist?</string>
+    <string name="prompt_epg_name">Nome EPG</string>
+    <string name="prompt_playlist_name">Nome Playlist</string>
+    <string name="prompt_epg_path">Percorso EPG</string>
+    <string name="prompt_playlist_path">Percorso Playlist</string>
+    <string name="prompt_epg_url">Url EPG</string>
+    <string name="prompt_playlist_url">Url Playlist</string>
+
+    <!-- Titles -->
+    <string name="title_add_epg">Aggiungi EPG</string>
+    <string name="title_add_playlist">Aggiungi Playlist</string>
+    <string name="title_channels_groups">Gruppi Canali</string>
+    <string name="title_edit_epg">Modifica EPG</string>
+    <string name="title_edit_playlist">Modifica Playlist</string>
+    <string name="title_movie_channels">Canali Film</string>
+    <string name="title_tv_channels">Canali Tv</string>
+
+</resources>

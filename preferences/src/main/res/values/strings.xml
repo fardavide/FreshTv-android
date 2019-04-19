@@ -8,7 +8,7 @@
     <!-- Clean Channels -->
     <string name="clean_channels_title">Clean all Channels</string>
     <string name="clean_channels_description_can_clear">
-        Delete all the <b>Channels</b> stored in database, eventually they will be added during playlist\'s synchronization.
+        Delete all the <b>Channels</b> stored in database, eventually they will be added during Playlist\'s synchronization.
         All the additional values, like <i>favorite</i> and <i>failures for media urls</i>, will be erased.
         Also all the <b>Groups</b> will be erased.
     </string>

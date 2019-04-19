@@ -1,0 +1,3 @@
+• Performance migliorate
+• Traduzione Italiana
+• Ripristina l'ultimo Gruppo aperto e la posizione dei Canali

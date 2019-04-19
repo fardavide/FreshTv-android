@@ -22,4 +22,9 @@ class TheiaLibLogger: TheiaLogger {
     override fun info( ex: TheiaException ) {
         if ( logEnabled ) Timber.i( ex.actualMessage )
     }
+
+    /** @see TheiaLogger.info */
+    override fun info( message: CharSequence ) {
+        if ( logEnabled ) Timber.i( message.toString() )
+    }
 }

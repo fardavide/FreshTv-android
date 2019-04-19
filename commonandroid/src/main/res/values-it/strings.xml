@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Fresh Tv</string>
+    <string name="empty"/>
+
+    <!-- Actions -->
+    <string name="action_add">Aggiungi</string>
+    <string name="action_cancel">Cancella</string>
+    <string name="action_delete">Elimina</string>
+    <string name="action_edit">Modifica</string>
+    <string name="action_filter">Filtra</string>
+    <string name="action_ok">OK</string>
+    <string name="action_grant">Concedi</string>
+    <string name="action_save">Salva</string>
+
+    <!-- Errors -->
+    <string name="url_bad_format">L\'url ha un formato sbagliato</string>
+    <string name="url_empty">L\'url è richiesto</string>
+    <string name="url_no_schema">"Http://" o "Https://" è richiesto prima dell\'url</string>
+
+    <!-- Hints -->
+    <string name="hint_optional">Opzionale</string>
+    <string name="hint_required">Richiesto</string>
+
+    <!-- Images description -->
+    <string name="image_channel_logo">Logo Canale</string>
+    <string name="image_channel_favorite">Canale Preferito</string>
+
+    <!-- Messages -->
+    <string name="permission_denied">Permesso negato</string>
+
+    <!-- Notifications -->
+    <string name="notification_error_channel_id">notification_errors</string>
+    <string name="notification_error_channel_name">Errori</string>
+    <string name="notification_error_channel_description">
+        Ricevi una notifica quando un processo in background fallisce. Insieme alla notifica sarà inclusa un azione per risolvere il problema.
+    </string>
+    <string name="notification_error_action_resolve">Risolvi</string>
+    <string name="notification_success_channel_id">notification_successes</string>
+    <string name="notification_success_channel_name">Successi</string>
+    <string name="notification_success_channel_description">Ricevi una notifica quando un processo in background termina correttamente.</string>
+</resources>

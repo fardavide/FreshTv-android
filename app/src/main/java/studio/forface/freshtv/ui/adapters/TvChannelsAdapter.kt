@@ -7,11 +7,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import kotlinx.android.synthetic.main.item_channel_tv.view.*
 import studio.forface.freshtv.R.layout.item_channel_tv
-import studio.forface.freshtv.commonandroid.adapter.BasePagedAdapter
 import studio.forface.freshtv.commonandroid.adapter.ClickableAdapter
 import studio.forface.freshtv.commonandroid.utils.colorOnSurface
 import studio.forface.freshtv.commonandroid.utils.inflate
-import studio.forface.freshtv.domain.usecases.FavoritedChannel
 import studio.forface.freshtv.uimodels.TvChannelUiModel
 import studio.forface.theia.dsl.imageDrawable
 import studio.forface.theia.dsl.imageUrl
@@ -71,6 +69,7 @@ internal class TvChannelsAdapter:
             val favoriteDrawable = getDrawable( item.favoriteImage ).apply {
                 if ( item.favoriteImageNeedTint ) colorOnSurface( context )
             }
+            //tvChannelFavorite.setImageDrawable( favoriteDrawable )
             theia {
                 imageDrawable = favoriteDrawable
                 target = tvChannelFavorite

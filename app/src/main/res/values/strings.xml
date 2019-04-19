@@ -34,7 +34,7 @@
     <!-- Notifications -->
     <string name="notification_refresh_channels_failure_title">Problem while updating Channels</string>
     <string name="notification_refresh_channels_success_title">Channels have been updated</string>
-    <string name="notification_refresh_tv_guide_failure_title">Problem while updating Guides</string>
+    <string name="notification_refresh_tv_guide_failure_title">Problem while updating Tv Guides</string>
     <string name="notification_refresh_tv_guide_success_title">Tv Guides have been updated</string>
 
     <!-- Prompt -->
