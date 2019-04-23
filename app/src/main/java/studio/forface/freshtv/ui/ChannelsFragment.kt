@@ -34,7 +34,7 @@ import studio.forface.freshtv.viewmodels.TvChannelsViewModel
  *
  * @author Davide Giuseppe Farella
  */
-internal abstract class ChannelsFragment<UiModel : ChannelUiModel> :
+internal sealed class ChannelsFragment<UiModel : ChannelUiModel> :
     NestedFragment<MovieChannelGroupsFragment>( R.layout.fragment_recycler_view ) {
 
     protected companion object {

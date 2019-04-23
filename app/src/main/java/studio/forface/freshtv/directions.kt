@@ -9,8 +9,12 @@ import studio.forface.freshtv.ui.ChannelsFragment
 object PlayerFragment : Invokable {
 
     /** @return `NavDirections` to `PlayerActivity` from [ChannelsFragment] */
-    internal fun ChannelsFragment<*>.directions(channelId: String ) =
-        TvChannelGroupsFragmentDirections.actionTvChannelsFragmentToPlayerActivity( channelId )
+    internal fun ChannelsFragment<*>.directions( channelId: String ) = when( this ) {
+        is MovieChannelsFragment ->
+            MovieChannelGroupsFragmentDirections.actionMovieChannelsFragmentToPlayerActivity( channelId )
+        is TvChannelsFragment ->
+            TvChannelGroupsFragmentDirections.actionTvChannelsFragmentToPlayerActivity( channelId )
+    }
 }
 
 /** Shadow of [studio.forface.freshtv.about.ui.AboutFragment] */

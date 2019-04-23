@@ -38,6 +38,8 @@
     </string-array>
     <string name="about_what_new">Novità</string>
     <string-array name="about_what_new_values">
+        <item>%1Sistemata la navigazione%2 dai Film al Player</item>
+        <item>Sistemati %1altri problemi%2</item>
         <item>Migliorie sulla %1Performance%2</item>
         <item>Traduzione in %1Italiano%2</item>
         <item>Ripristino dell\'%1ultimo Grouppo aperto e posizione dei Canali%2</item>

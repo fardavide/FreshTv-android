@@ -38,6 +38,8 @@
     </string-array>
     <string name="about_what_new">What\'s new</string>
     <string-array name="about_what_new_values">
+        <item>%1Fixed navigation%2 to Player from Movies</item>
+        <item>Other %1bugs fixed%2</item>
         <item>%1Performance%2 improvements</item>
         <item>%1Italian%2 translation</item>
         <item>Restore %1last open Group and Channel%2\'s position</item>

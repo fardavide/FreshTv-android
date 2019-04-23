@@ -40,6 +40,33 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+        <LinearLayout
+            android:id="@+id/headerLoadingView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/headerLoadingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                tools:text="Updating Channels"
+                android:textAppearance="?textAppearanceCaption"
+                android:textColor="?attr/colorSecondary"
+                android:layout_weight="1"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingEnd="@dimen/small_margin"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment android:id="@+id/nav_host"
