@@ -47,47 +47,46 @@ fun DependencyHandler.applyAndroidTests() {
 }
 
 object Versions {
-    val kotlin =                        "1.3.30"
-    val coroutines =                    "1.1.1"
-    val serialization =                 "0.10.0"
+    val kotlin =                        "1.3.31"        // Updated: Apr 25, 2019
+    val coroutines =                    "1.2.1"         // Updated: Apr 26, 2019
+    val serialization =                 "0.11.0"        // Updated: Apr 25, 2019
 
-    val fabric =                        "1.26.1"
-    val firebase_core_android =         "16.0.8"
-    val firebase_crashlytics_android =  "2.9.9"
-    val google_gms_services =           "4.0.1"
-    val koin =                          "2.0.0-rc-2"
-    val ktor =                          "1.1.3"
-    val mockk =                         "1.9"
-    val sqldelight =                    "1.1.2"
-    val threeten_android_bp =           "1.1.1"
-    val threeten_bp =                   "1.3.2"
-    val timber =                        "4.7.1"
+    val fabric =                        "1.29.0"        // Updated:
+    val firebase_core_android =         "16.0.9"        // Updated:
+    val firebase_crashlytics_android =  "2.10.1"        // Updated:
+    val google_gms_services =           "4.2.0"         // Updated:
+    val koin =                          "2.0.1"         // Updated:
+    val ktor =                          "1.2.1"         // Updated:
+    val mockk =                         "1.9.3"         // Updated:
+    val sqldelight =                    "1.1.3"         // Updated:
+    val threeten_android_bp =           "1.2.0"         // Updated:
+    val threeten_bp =                   "1.4.0"         // Updated:
+    val timber =                        "4.7.1"         // Updated:
 
-    val android_annotation =            "1.1.0-beta01"
-    val android_arch =                  "2.0.0-beta01"
-    val android_constraint_layout =     "2.0.0-alpha1"
-    val android_cue =                   "1.1"
-    val android_espresso =              "3.1.1"
-    val android_exo_player =            "2.9.6"
-    val android_fastlane_screengrab =   "1.2.0"
-    val android_gradle_plugin =         "3.3.0"
-    val android_ktx =                   "1.1.0-alpha03"
-    val android_lifecycle =             "2.1.0-alpha02"
-    val android_material =              "1.1.0-alpha05"
-    val android_material_bottom_bar =   "1.2-beta-6"
-    val android_navigation =            "2.0.0"
-    val android_paging =                "2.1.0"
-    val android_robolectric =           "4.2"
-    val android_room =                  "2.1.0-alpha04"
-    val android_support =               "1.0.2"
-    val android_test_core =             "1.0.0"
-    val android_test_fragment =         "1.1.0-alpha03"
-    val android_test_runner =           "1.1.0"
-    val android_theia =                 "0.3-alpha-7"
-    val android_view_pager2 =           "1.0.0-alpha02"
-    val android_view_state_store =      "1.2-alpha-6"
-    val android_work =                  "2.0.1"
-    val androidx_core =                 "1.0.0"
+    val android_annotation =            "1.1.0-rc01"    // Updated: May 7, 2019
+    val android_constraint_layout =     "2.0.0-beta1"   // Updated: May 8, 2019
+    val android_cue =                   "1.1"           // Updated: Jan 28, 2018
+    val android_espresso =              "3.2.0"         // Updated: May 30, 2019
+    val android_exo_player =            "2.10.1"        // Updated: May 20, 2019
+    val android_fastlane_screengrab =   "1.2.0"         // Updated:
+    val android_gradle_plugin =         "3.5.0-beta03"  // Updated: May 28, 2019
+    val android_ktx =                   "1.1.0-beta01"  // Updated: May 8, 2019
+    val android_lifecycle =             "2.1.0-beta01"  // Updated: May 8, 2019
+    val android_material =              "1.1.0-alpha07" // Updated: May 31, 2019
+    val android_material_bottom_bar =   "1.2-beta-6"    // Updated: Apr 23, 2019
+    val android_navigation =            "2.1.0-alpha04" // Updated: May 18, 2019
+    val android_paging =                "2.1.0"         // Updated: Jan 26, 2019
+    val android_robolectric =           "4.3"           // Updated: May 30, 2019
+    val android_room =                  "2.1.0-rc01"    // Updated: May 30, 2019
+    val android_support =               "1.0.2"         // Updated: Nov 17, 2018
+    val android_test_core =             "1.2.0"         // Updated: May 31, 2019
+    val android_test_fragment =         "1.1.0-alpha09" // Updated: May 18, 2019
+    val android_theia =                 "0.3-alpha-7"   // Updated: Apr 23, 2019
+    val android_view_pager2 =           "1.0.0-alpha04" // Updated: May 8, 2019
+    val android_view_state_store =      "1.3-beta-1"    // Updated: May 22, 2019
+    val android_work =                  "2.1.0-alpha02" // Updated: May 18, 2019
+    val androidx_core =                 "1.1.0-beta01"  // Updated: May 08, 2019
+    val androidx_test =                 "1.2.0"         // Updated: May 31, 2019
 }
 
 @Suppress("unused")
@@ -150,8 +149,8 @@ object Libs {
         val support_annotations =               "com.android.support:support-annotations:28.0.0"
         val test_core =                         "androidx.test:core:${Versions.android_test_core}"
         val test_fragment =                     "androidx.fragment:fragment-testing:${Versions.android_test_fragment}"
-        val test_rules =                        "androidx.test:rules:${Versions.android_test_runner}"
-        val test_runner =                       "androidx.test:runner:${Versions.android_test_runner}"
+        val test_rules =                        "androidx.test:rules:${Versions.androidx_test}"
+        val test_runner =                       "androidx.test:runner:${Versions.androidx_test}"
         val theia =                             "studio.forface.theia:theia:${Versions.android_theia}"
         val view_pager2 =                       "androidx.viewpager2:viewpager2:${Versions.android_view_pager2}"
         val view_state_store =                  "studio.forface.viewstatestore:viewstatestore:${Versions.android_view_state_store}"
